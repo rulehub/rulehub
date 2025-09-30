@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.license_check_anj_fr
+name: <Policy Title>
+path:
+  - policies/betting/license_check_anj_fr/policy.rego
+  - policies/betting/license_check_anj_fr/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://anj.fr/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

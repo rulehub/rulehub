@@ -1,0 +1,163 @@
+## Python / Local virtual env & cache
+.venv/
+## -----------------------------
+## Standard ignores by category
+## -----------------------------
+
+### OS / Editor
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+# Vim swap files
+*.swp
+*.swo
+# Backup / orig
+*.orig
+
+### IDEs
+# JetBrains / IntelliJ
+*.iml
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/shelf/
+.idea/**/deployment.xml
+.idea/**/dictionaries/
+# VS Code
+.vscode/
+.vscode/*.code-workspace
+.vscode/.history/
+*.code-workspace
+
+### Workspace / docs
+*.docx
+
+### Python - virtual envs, caches, compiled files
+.venv/
+venv/
+.venv313/
+__pycache__/
+*.pyc
+.python-version
+.ruff_cache/
+
+### Python - tooling / test artifacts
+*.pyo
+*.pyd
+*.cover
+.coverage*
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+.nox/
+htmlcov/
+coverage.xml
+.benchmarks/
+__pypackages__/
+pip-wheel-metadata/
+wheelhouse/
+
+### Packaging / distribution
+dist/*
+!dist/index.json
+!dist/references-index.json
+dist/*.sig
+dist/*.cert
+dist/*.pem
+*.egg-info/
+.eggs/
+
+### Build outputs / site
+site/
+build/
+
+### Node / JS
+node_modules/
+**/node_modules/
+**/dist/
+**/build/
+.npmrc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.eslintcache
+.nyc_output/
+coverage/  # JS coverage dir (python uses htmlcov/)
+.parcel-cache/
+.turbo/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+### Charts / Helm
+charts/**/tmp/
+charts/**/.helmignore
+
+### Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+crash.log
+
+### Docker
+.dockerignore
+docker-compose.override.yml
+docker-compose.*.yml
+**/Dockerfile.*
+docker-temp-*
+
+### Go
+vendor/
+*.exe
+*.test
+*.out
+
+### Container / Compose env files
+*.env.local
+.envrc
+.env
+.env.production
+.env.development
+.env.test
+.secrets
+
+### CI / GitHub Actions
+actions-runner/_work/
+.github/actions-runner/_work/
+.github/workflows/*.local
+_temp/
+**/_temp/
+_tool/
+**/_tool/
+artifacts/
+*.artifact
+
+### Misc
+*.log
+*.tmp
+*.bak
+*.local
+/_*.md
+*.zip
+*.tgz
+
+### Project-specific generated/export artifacts
+links_export.json
+links_audit_review.json
+links_audit_history.csv
+.github/workflows/*.local
+
+_temp/
+**/_temp/
+.tmp-*.sh
+/tmp-*.sh
+
+# Local runner secret/env files (never commit real values)
+.github/act.secrets
+.github/act.env

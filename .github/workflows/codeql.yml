@@ -1,0 +1,44 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 3 * * 1" # Every Monday at 03:00 UTC
+  workflow_dispatch:
+
+# Minimal permissions required for CodeQL to upload SARIF results
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze (Python, JavaScript)
+    # Skip CodeQL when running under nektos/act locally; requires GitHub services
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Initialize CodeQL
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: github/codeql-action/init@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          languages: python, javascript
+
+      # For JavaScript/TypeScript projects, this attempts a best-effort build.
+      # For Python, no build is required.
+      - name: Autobuild
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: github/codeql-action/autobuild@528ca598d956c91826bd742262cdfc5d02b77710
+
+      - name: Perform CodeQL Analysis
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: github/codeql-action/analyze@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          category: "/language:multi"

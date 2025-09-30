@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: edtech.ca_sopipa_no_targeted_advertising
+name: <Policy Title>
+path:
+  - policies/edtech/ca_sopipa_no_targeted_advertising/policy.rego
+  - policies/edtech/ca_sopipa_no_targeted_advertising/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

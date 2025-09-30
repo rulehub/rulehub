@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: medtech-iec_62366_usability_summative_eval
+  annotations:
+    rulehub.id: medtech.iec_62366_usability_summative_eval
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  crd:
+    spec:
+      names:
+        kind: MedtechIec_62366_usability_summative_evalConstraint
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            # add schema for parameters
+            enabled:
+              type: boolean
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package rulehub.medtech.iec_62366_usability_summative_eval
+      import future.keywords.if
+
+      default deny = []
+
+      # Example: deny with a message
+      deny[msg] {
+        input.review.kind.kind == "Deployment"
+        msg := "medtech.iec_62366_usability_summative_eval: example violation"
+      }

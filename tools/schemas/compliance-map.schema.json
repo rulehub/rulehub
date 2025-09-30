@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/schemas/compliance-map.schema.json",
+  "title": "Compliance Map",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+  "schema_version": { "type": ["integer", "string"], "description": "Schema format version for compliance map; optional for forward compatibility" },
+    "regulation": { "type": "string" },
+    "version": { "type": ["string", "number"] },
+    "sections": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": ["string", "null"] },
+          "policies": {
+            "type": ["array", "null"],
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$" }
+          }
+        },
+        "required": ["policies"]
+      }
+    }
+  },
+  "required": ["regulation", "version", "sections"]
+}

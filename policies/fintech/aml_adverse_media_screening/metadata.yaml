@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.aml_adverse_media_screening
+name: AML Adverse Media Screening
+path:
+  - policies/fintech/aml_adverse_media_screening/policy.rego
+  - policies/fintech/aml_adverse_media_screening/policy_test.rego
+description: Adverse media checks on onboarding and ongoing
+standard:
+  name: EU AMLD / FATF
+  version: current
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

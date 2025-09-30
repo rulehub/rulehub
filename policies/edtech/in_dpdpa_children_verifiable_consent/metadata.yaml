@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: edtech.in_dpdpa_children_verifiable_consent
+name: <Policy Title>
+path:
+  - policies/edtech/in_dpdpa_children_verifiable_consent/policy.rego
+  - policies/edtech/in_dpdpa_children_verifiable_consent/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://egazette.nic.in/WriteReadData/2023/248775.pdf
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

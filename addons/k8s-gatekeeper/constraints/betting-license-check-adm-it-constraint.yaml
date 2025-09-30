@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckAdmIt
+metadata:
+  name: betting-license-check-adm-it
+  annotations:
+    rulehub.id: betting.license_check_adm_it
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: edtech-edtech_retention_after_course_completion
+  annotations:
+    rulehub.id: edtech.edtech_retention_after_course_completion
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

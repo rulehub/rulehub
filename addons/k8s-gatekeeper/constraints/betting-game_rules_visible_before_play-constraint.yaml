@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: betting-game_rules_visible_before_play
+  annotations:
+    rulehub.id: betting.game_rules_visible_before_play
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

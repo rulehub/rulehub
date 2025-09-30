@@ -1,0 +1,24 @@
+id: pci.logging_enabled
+name: Logging enabled
+standard: PCI DSS
+version: '4.0'
+path:
+  - policies/pci/logging_enabled/policy.rego
+  - policies/pci/logging_enabled/policy_test.rego
+description: Placeholder rule to ensure logging and monitoring are enabled.
+framework: other
+tags:
+- pci
+owner: compliance
+severity: medium
+links:
+  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
+  - https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

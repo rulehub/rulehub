@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-iso_27001_isms_scope_and_controls
+  annotations:
+    rulehub.id: medtech.iso_27001_isms_scope_and_controls
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.iso_27001_isms_scope_and_controls: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

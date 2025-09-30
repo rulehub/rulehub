@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.withdrawal_address_whitelist
+name: Withdrawal Address Whitelist
+path:
+  - policies/fintech/withdrawal_address_whitelist/policy.rego
+  - policies/fintech/withdrawal_address_whitelist/policy_test.rego
+description: Whitelist withdrawal addresses
+standard:
+  name: Security
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

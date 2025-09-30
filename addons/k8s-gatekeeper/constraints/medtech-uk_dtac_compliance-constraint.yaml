@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechUk_dtac_complianceConstraint
+metadata:
+  name: medtech-uk_dtac_compliance
+  annotations:
+    rulehub.id: medtech.uk_dtac_compliance
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

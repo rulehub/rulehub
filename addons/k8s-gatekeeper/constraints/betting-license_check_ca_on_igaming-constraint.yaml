@@ -1,0 +1,13 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckCAONIGaming
+metadata:
+  name: betting-license-check-ca-on-igaming
+  annotations:
+    rulehub.id: betting.license_check_ca_on_igaming
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+  parameters:
+    requiredLabel: jurisdiction

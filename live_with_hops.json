@@ -1,0 +1,882 @@
+{
+  "https://egazette.nic.in/WriteReadData/2023/248775.pdf": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='egazette.nic.in', port=443): Max retries exceeded with url: /WriteReadData/2023/248775.pdf (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0xffff84925810>: Failed to resolve 'egazette.nic.in' ([Errno -2] Name or service not known)\"))",
+    "hops": null
+  },
+  "https://datatracker.ietf.org/doc/html/rfc8705": {
+    "status": 200,
+    "final": "https://datatracker.ietf.org/doc/html/rfc8705",
+    "hops": 0
+  },
+  "https://cruksregister.nl/": {
+    "status": 200,
+    "final": "https://cruksregister.nl/",
+    "hops": 0
+  },
+  "https://datatracker.ietf.org/doc/html/rfc7636": {
+    "status": 200,
+    "final": "https://datatracker.ietf.org/doc/html/rfc7636",
+    "hops": 0
+  },
+  "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en": {
+    "status": 200,
+    "final": "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en",
+    "hops": 0
+  },
+  "https://anj.fr/": {
+    "status": 200,
+    "final": "https://anj.fr/",
+    "hops": 0
+  },
+  "https://datatracker.ietf.org/doc/html/rfc7519": {
+    "status": 200,
+    "final": "https://datatracker.ietf.org/doc/html/rfc7519",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/",
+    "hops": 0
+  },
+  "https://ec.europa.eu/health/medical-devices-eudamed/overview_en": {
+    "status": 200,
+    "final": "https://health.ec.europa.eu/medical-devices-eudamed/overview_en",
+    "hops": 1
+  },
+  "https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final": {
+    "status": 404,
+    "final": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
+    "hops": 1
+  },
+  "https://csrc.nist.gov/publications/detail/sp/800-92/final": {
+    "status": 404,
+    "final": "https://csrc.nist.gov/pubs/sp/800/92/final",
+    "hops": 1
+  },
+  "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final": {
+    "status": 404,
+    "final": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "hops": 1
+  },
+  "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg/2014/910/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg/2014/910/oj",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/dir/2002/58/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/dir/2002/58/oj",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX%3A32015L0849": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX%3A32015L0849",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg/2016/679/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj",
+    "hops": 0
+  },
+  "https://gamingcontrolboard.pa.gov/": {
+    "status": 200,
+    "final": "https://gamingcontrolboard.pa.gov/",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg/2017/746/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg/2017/746/oj",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018L0843": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32018L0843",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-12-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-12-gdpr/",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-30-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-30-gdpr/",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg/2023/1114/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-33-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-33-gdpr/",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32015L2366": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32015L2366",
+    "hops": 0
+  },
+  "https://gaminglabs.com/gli-standards/": {
+    "status": 200,
+    "final": "https://gaminglabs.com/gli-standards/",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-35-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-35-gdpr/",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-6-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-6-gdpr/",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/eli/reg/2017/745/oj": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/eli/reg/2017/745/oj",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-7-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-7-gdpr/",
+    "hops": 0
+  },
+  "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en": {
+    "status": 404,
+    "final": "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en",
+    "hops": 0
+  },
+  "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366": {
+    "status": 200,
+    "final": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-9-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-9-gdpr/",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-8-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-8-gdpr/",
+    "hops": 0
+  },
+  "https://kansspelautoriteit.nl/": {
+    "status": 200,
+    "final": "https://kansspelautoriteit.nl/",
+    "hops": 0
+  },
+  "https://ico.org.uk/": {
+    "status": 200,
+    "final": "https://ico.org.uk/",
+    "hops": 0
+  },
+  "https://gdpr-info.eu/art-5-gdpr/": {
+    "status": 200,
+    "final": "https://gdpr-info.eu/art-5-gdpr/",
+    "hops": 0
+  },
+  "https://ibia.bet/": {
+    "status": 200,
+    "final": "https://ibia.bet/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+    "hops": 0
+  },
+  "https://ico.org.uk/for-organisations/childrens-code-design-guidance/": {
+    "status": 404,
+    "final": "https://ico.org.uk/for-organisations/childrens-code-design-guidance/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/concepts/containers/images/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/containers/images/",
+    "hops": 0
+  },
+  "https://gaming.nv.gov/": {
+    "status": 200,
+    "final": "https://www.gaming.nv.gov/",
+    "hops": 1
+  },
+  "https://kubernetes.io/docs/concepts/storage/volumes/#hostpath": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
+    "hops": 0
+  },
+  "https://cppa.ca.gov/": {
+    "status": 200,
+    "final": "https://cppa.ca.gov/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/concepts/security/pod-security-standards/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/concepts/security/security-checklist/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/security/security-checklist/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+    "hops": 0
+  },
+  "https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/": {
+    "status": 200,
+    "final": "https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/",
+    "hops": 0
+  },
+  "https://hl7.org/fhir/smart-app-launch/": {
+    "status": 200,
+    "final": "https://hl7.org/fhir/smart-app-launch/",
+    "hops": 0
+  },
+  "https://nt.gov.au/": {
+    "status": 403,
+    "final": "https://nt.gov.au/",
+    "hops": 0
+  },
+  "https://igamingontario.ca/": {
+    "status": 200,
+    "final": "https://igamingontario.ca/en",
+    "hops": 1
+  },
+  "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/": {
+    "status": 200,
+    "final": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
+    "hops": 0
+  },
+  "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v4-0-SAQ-D-Merchant.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v4-0-SAQ-D-Merchant.pdf",
+    "hops": 0
+  },
+  "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=": {
+    "status": 200,
+    "final": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=",
+    "hops": 0
+  },
+  "https://listings.pcisecuritystandards.org/pdfs/Migrating_from_SSL_and_Early_TLS_-v12.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/pdfs/Migrating_from_SSL_and_Early_TLS_-v12.pdf",
+    "hops": 0
+  },
+  "https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy": {
+    "status": 403,
+    "final": "https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy",
+    "hops": 0
+  },
+  "https://ofac.treasury.gov/sanctions-programs-and-country-information": {
+    "status": 200,
+    "final": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+    "hops": 0
+  },
+  "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v4-0-SAQ-D-Service-Provider.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v4-0-SAQ-D-Service-Provider.pdf",
+    "hops": 0
+  },
+  "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list": {
+    "status": 403,
+    "final": "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list",
+    "hops": 0
+  },
+  "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v3-2-1-to-v4-0-Summary-of-Changes-r1.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/documents/PCI-DSS-v3-2-1-to-v4-0-Summary-of-Changes-r1.pdf",
+    "hops": 0
+  },
+  "https://popia.co.za/": {
+    "status": 200,
+    "final": "https://popia.co.za/",
+    "hops": 0
+  },
+  "https://sportradar.com/": {
+    "status": 200,
+    "final": "https://sportradar.com/",
+    "hops": 0
+  },
+  "https://sso.agc.gov.sg/Act/PDPA2012": {
+    "status": 403,
+    "final": "https://sso.agc.gov.sg/Act/PDPA2012",
+    "hops": 0
+  },
+  "https://sso.agc.gov.sg/Act/HCSA2020": {
+    "status": 403,
+    "final": "https://sso.agc.gov.sg/Act/HCSA2020",
+    "hops": 0
+  },
+  "https://openid.net/specs/": {
+    "status": 200,
+    "final": "https://openid.net/specs/",
+    "hops": 0
+  },
+  "https://openid.net/specs/openid-connect-core-1_0.html": {
+    "status": 200,
+    "final": "https://openid.net/specs/openid-connect-core-1_0.html",
+    "hops": 0
+  },
+  "https://sbg.colorado.gov/": {
+    "status": 200,
+    "final": "https://sbg.colorado.gov/",
+    "hops": 0
+  },
+  "https://sumsub.com/blog/igaming-regulations-around-the-world/": {
+    "status": 200,
+    "final": "https://sumsub.com/blog/igaming-regulations-around-the-world/",
+    "hops": 0
+  },
+  "https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/": {
+    "status": 403,
+    "final": "https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/",
+    "hops": 0
+  },
+  "https://www.anj.fr/": {
+    "status": 200,
+    "final": "https://www.anj.fr/",
+    "hops": 0
+  },
+  "https://sanctionssearch.ofac.treas.gov/": {
+    "status": 200,
+    "final": "https://sanctionssearch.ofac.treas.gov/",
+    "hops": 0
+  },
+  "https://webstore.iec.ch/publication/26023": {
+    "status": 200,
+    "final": "https://webstore.iec.ch/en/publication/26023",
+    "hops": 1
+  },
+  "https://studentprivacy.ed.gov/": {
+    "status": 200,
+    "final": "https://studentprivacy.ed.gov/",
+    "hops": 0
+  },
+  "https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses": {
+    "status": 403,
+    "final": "https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses",
+    "hops": 0
+  },
+  "https://studentprivacy.ed.gov/resources/ppra-general-guidance": {
+    "status": 404,
+    "final": "https://studentprivacy.ed.gov/resources/ppra-general-guidance",
+    "hops": 0
+  },
+  "https://sdaia.gov.sa/": {
+    "status": 200,
+    "final": "https://sdaia.gov.sa/",
+    "hops": 0
+  },
+  "https://www.adm.gov.it/": {
+    "status": 200,
+    "final": "https://www.adm.gov.it/portale/",
+    "hops": 1
+  },
+  "https://webstore.iec.ch/publication/24950": {
+    "status": 404,
+    "final": "https://webstore.iec.ch/en/publication/24950",
+    "hops": 1
+  },
+  "https://www.dicomstandard.org/": {
+    "status": 200,
+    "final": "https://www.dicomstandard.org/",
+    "hops": 0
+  },
+  "https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law": {
+    "status": 200,
+    "final": "https://u.ae/error-pages/404?item=%2fabout-the-uae%2fdigital-uae%2fdata%2fdata-protection-law&user=extranet%5cAnonymous&site=website",
+    "hops": 1
+  },
+  "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf": {
+    "status": 404,
+    "final": "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf",
+    "hops": 0
+  },
+  "https://www.dlapiperdataprotection.com/?c=VN&t=law": {
+    "status": 200,
+    "final": "https://www.dlapiperdataprotection.com/?c=VN&t=law",
+    "hops": 0
+  },
+  "https://www.dlapiperdataprotection.com/?c=ID&t=law": {
+    "status": 200,
+    "final": "https://www.dlapiperdataprotection.com/?c=ID&t=law",
+    "hops": 0
+  },
+  "https://www.eeas.europa.eu/_en": {
+    "status": 200,
+    "final": "https://www.eeas.europa.eu/_en",
+    "hops": 0
+  },
+  "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11": {
+    "status": 200,
+    "final": "https://unblock.federalregister.gov",
+    "hops": 1
+  },
+  "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html": {
+    "status": 403,
+    "final": "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+    "hops": 0
+  },
+  "https://www.fatf-gafi.org/": {
+    "status": 403,
+    "final": "https://www.fatf-gafi.org/",
+    "hops": 0
+  },
+  "https://www.asa.org.uk/codes-and-rulings/advertising-codes.html": {
+    "status": 200,
+    "final": "https://www.asa.org.uk/codes-and-rulings/advertising-codes.html",
+    "hops": 0
+  },
+  "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803": {
+    "status": 200,
+    "final": "https://unblock.federalregister.gov",
+    "hops": 1
+  },
+  "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html": {
+    "status": 403,
+    "final": "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html",
+    "hops": 0
+  },
+  "https://www.ecfr.gov/current/title-34/part-99/subpart-D": {
+    "status": 200,
+    "final": "https://unblock.federalregister.gov",
+    "hops": 1
+  },
+  "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html": {
+    "status": 403,
+    "final": "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html",
+    "hops": 0
+  },
+  "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Bpp-finsanctions-tf-r6.html": {
+    "status": 403,
+    "final": "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Bpp-finsanctions-tf-r6.html",
+    "hops": 0
+  },
+  "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity": {
+    "status": 200,
+    "final": "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity",
+    "hops": 0
+  },
+  "https://www.ecfr.gov/current/title-34/subtitle-A/part-99": {
+    "status": 200,
+    "final": "https://unblock.federalregister.gov",
+    "hops": 1
+  },
+  "https://www.fedlex.admin.ch/eli/cc/2022/491/en": {
+    "status": 200,
+    "final": "https://www.fedlex.admin.ch/eli/cc/2022/491/en",
+    "hops": 0
+  },
+  "https://www.fincen.gov/msb-state-law-regulatory-framework": {
+    "status": 404,
+    "final": "https://www.fincen.gov/msb-state-law-regulatory-framework",
+    "hops": 0
+  },
+  "https://www.fingerlakes1.com/2025/01/27/online-gaming-license-laws-and-casino-regulations-worldwide/": {
+    "status": 200,
+    "final": "https://www.fingerlakes1.com/2025/01/27/online-gaming-license-laws-and-casino-regulations-worldwide/",
+    "hops": 0
+  },
+  "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa": {
+    "status": 200,
+    "final": "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa",
+    "hops": 0
+  },
+  "https://www.gamblingcommission.gov.uk/": {
+    "status": 200,
+    "final": "https://www.gamblingcommission.gov.uk/",
+    "hops": 0
+  },
+  "https://www.coljuegos.gov.co/": {
+    "status": 200,
+    "final": "https://www.coljuegos.gov.co/",
+    "hops": 0
+  },
+  "https://www.gov.uk/government/organisations/competition-and-markets-authority": {
+    "status": 200,
+    "final": "https://www.gov.uk/government/organisations/competition-and-markets-authority",
+    "hops": 0
+  },
+  "https://www.gamstop.co.uk/for-operators": {
+    "status": 403,
+    "final": "https://www.gamstop.co.uk/for-operators",
+    "hops": 0
+  },
+  "https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis": {
+    "status": 404,
+    "final": "https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis",
+    "hops": 0
+  },
+  "https://www.gra.gov.sg/": {
+    "status": 200,
+    "final": "https://www.gra.gov.sg/",
+    "hops": 0
+  },
+  "https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr": {
+    "status": 200,
+    "final": "https://www.gamblingcommission.gov.uk/licensees-and-businesses",
+    "hops": 1
+  },
+  "https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements": {
+    "status": 404,
+    "final": "https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements",
+    "hops": 0
+  },
+  "https://www.hhs.gov/hipaa/": {
+    "status": 403,
+    "final": "https://www.hhs.gov/hipaa/",
+    "hops": 0
+  },
+  "https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html": {
+    "status": 403,
+    "final": "https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html",
+    "hops": 0
+  },
+  "https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html": {
+    "status": 403,
+    "final": "https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html",
+    "hops": 0
+  },
+  "https://www.gluecksspiel-behoerde.de/": {
+    "status": 200,
+    "final": "https://www.gluecksspiel-behoerde.de/de/",
+    "hops": 1
+  },
+  "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html": {
+    "status": 403,
+    "final": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html",
+    "hops": 0
+  },
+  "https://www.hhs.gov/hipaa/for-professionals/security/index.html": {
+    "status": 403,
+    "final": "https://www.hhs.gov/hipaa/for-professionals/security/index.html",
+    "hops": 0
+  },
+  "https://www.iso.org/standard/27001.html": {
+    "status": 404,
+    "final": "https://www.iso.org/standard/27001.html",
+    "hops": 0
+  },
+  "https://www.iso.org/standard/44379.html": {
+    "status": 200,
+    "final": "https://www.iso.org/standard/44379.html",
+    "hops": 0
+  },
+  "https://www.iso.org/standard/59752.html": {
+    "status": 200,
+    "final": "https://www.iso.org/standard/59752.html",
+    "hops": 0
+  },
+  "https://www.iso.org/standard/62542.html": {
+    "status": 200,
+    "final": "https://www.iso.org/standard/62542.html",
+    "hops": 0
+  },
+  "https://www.agco.ca/igaming": {
+    "status": 404,
+    "final": "https://www.agco.ca/igaming",
+    "hops": 0
+  },
+  "https://www.iso.org/standard/72704.html": {
+    "status": 200,
+    "final": "https://www.iso.org/standard/72704.html",
+    "hops": 0
+  },
+  "https://www.emvco.com/emv-technologies/3d-secure/": {
+    "status": 200,
+    "final": "https://www.emvco.com/emv-technologies/3-d-secure/",
+    "hops": 1
+  },
+  "https://www.healthit.gov/curesrule/": {
+    "status": null,
+    "final": "HTTPConnectionPool(host='www.healthit.gov', port=80): Max retries exceeded with url: /topic/information-blocking (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffff84a07e00>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+    "hops": null
+  },
+  "https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi": {
+    "status": null,
+    "final": "HTTPConnectionPool(host='www.healthit.gov', port=80): Max retries exceeded with url: /isp/united-states-core-data-interoperability-uscdi (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffff84925810>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+    "hops": null
+  },
+  "https://www.legislation.gov.uk/eudr/2015/849/article/13": {
+    "status": 200,
+    "final": "https://www.legislation.gov.uk/eudr/2015/849/article/13",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2015/849/article/18a": {
+    "status": 200,
+    "final": "https://www.legislation.gov.uk/eudr/2015/849/article/18a",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2015/849/article/33": {
+    "status": 200,
+    "final": "https://www.legislation.gov.uk/eudr/2015/849/article/33",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2015/849/article/3": {
+    "status": 200,
+    "final": "https://www.legislation.gov.uk/eudr/2015/849/article/3",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2015/849/article/20": {
+    "status": 200,
+    "final": "https://www.legislation.gov.uk/eudr/2015/849/article/20",
+    "hops": 0
+  },
+  "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&ChapterID=17": {
+    "status": 200,
+    "final": "https://www.ilga.gov/Legislation/ILCS/Articles?ActID=4015&ChapterID=17",
+    "hops": 1
+  },
+  "https://www.law.cornell.edu/rules/frcp/rule_26": {
+    "status": 200,
+    "final": "https://www.law.cornell.edu/rules/frcp/rule_26",
+    "hops": 0
+  },
+  "https://www.law.cornell.edu/rules/frcp/rule_37": {
+    "status": 200,
+    "final": "https://www.law.cornell.edu/rules/frcp/rule_37",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2016/679/article/5": {
+    "status": 404,
+    "final": "https://www.legislation.gov.uk/eu-exit/eur-lex.europa.eu/legal-content/EN/TXT?uri=CELEX:32016L0679",
+    "hops": 2
+  },
+  "https://www.legislation.gov.uk/eudr/2016/679/article/6": {
+    "status": 404,
+    "final": "https://www.legislation.gov.uk/eu-exit/eur-lex.europa.eu/legal-content/EN/TXT?uri=CELEX:32016L0679",
+    "hops": 2
+  },
+  "https://www.mga.org.mt/": {
+    "status": 200,
+    "final": "https://www.mga.org.mt/",
+    "hops": 0
+  },
+  "https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars": {
+    "status": 403,
+    "final": "https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars",
+    "hops": 0
+  },
+  "https://www.legislation.gov.uk/eudr/2016/679/article/7": {
+    "status": 404,
+    "final": "https://www.legislation.gov.uk/eu-exit/eur-lex.europa.eu/legal-content/EN/TXT?uri=CELEX:32016L0679",
+    "hops": 2
+  },
+  "https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1": {
+    "status": 200,
+    "final": "https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1",
+    "hops": 0
+  },
+  "https://www.malaysia.gov.my/portal/content/654": {
+    "status": 200,
+    "final": "https://www.malaysia.gov.my/portal/content/654",
+    "hops": 0
+  },
+  "https://www.middlebury.edu/sites/default/files/2025-01/PCI-DSS-v4_0_1.pdf": {
+    "status": 200,
+    "final": "https://www.middlebury.edu/sites/default/files/2025-01/PCI-DSS-v4_0_1.pdf",
+    "hops": 0
+  },
+  "https://www.nysed.gov/data-privacy-security/laws-regulations": {
+    "status": 404,
+    "final": "https://www.nysed.gov/data-privacy-security/laws-regulations",
+    "hops": 0
+  },
+  "https://www.oaic.gov.au/privacy/notifiable-data-breaches": {
+    "status": 200,
+    "final": "https://www.oaic.gov.au/privacy/notifiable-data-breaches",
+    "hops": 0
+  },
+  "https://www.oaic.gov.au/privacy/australian-privacy-principles": {
+    "status": 200,
+    "final": "https://www.oaic.gov.au/privacy/australian-privacy-principles",
+    "hops": 0
+  },
+  "https://www.nj.gov/oag/ge/": {
+    "status": 200,
+    "final": "https://www.nj.gov/oag/ge/",
+    "hops": 0
+  },
+  "https://www.ordenacionjuego.es/en": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.ordenacionjuego.es', port=443): Max retries exceeded with url: /en (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))",
+    "hops": null
+  },
+  "https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf": {
+    "status": 404,
+    "final": "https://www.nysed.gov/sites/default/files/programs/student-data-privacy/2d-law-text.pdf",
+    "hops": 2
+  },
+  "https://www.openbanking.org.uk/": {
+    "status": 200,
+    "final": "https://www.openbanking.org.uk/",
+    "hops": 0
+  },
+  "https://www.ontario.ca/laws/statute/04p03": {
+    "status": 403,
+    "final": "https://www.ontario.ca/laws/statute/04p03",
+    "hops": 0
+  },
+  "https://www.ordenacionjuego.es/en/rgiaj": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.ordenacionjuego.es', port=443): Max retries exceeded with url: /en/rgiaj (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))",
+    "hops": null
+  },
+  "https://www.legislation.gov.au/Series/C2012A00063": {
+    "status": 200,
+    "final": "https://www.legislation.gov.au/Series/C2012A00063",
+    "hops": 0
+  },
+  "https://www.pdpc.or.th/en/home/": {
+    "status": 403,
+    "final": "https://www.pdpc.or.th/en/home/",
+    "hops": 0
+  },
+  "https://coag.gov/office-sections/consumer-protection/student-data-privacy/": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='coag.gov', port=443): Max retries exceeded with url: /office-sections/consumer-protection/student-data-privacy/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0xffff84924cd0>, 'Connection to coag.gov timed out. (connect timeout=8)'))",
+    "hops": null
+  },
+  "https://www.pcisecuritystandards.org/document_library": {
+    "status": 200,
+    "final": "https://www.pcisecuritystandards.org/document_library/",
+    "hops": 1
+  },
+  "https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/": {
+    "status": 200,
+    "final": "https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/",
+    "hops": 0
+  },
+  "https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf",
+    "hops": 1
+  },
+  "https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf": {
+    "status": 200,
+    "final": "https://listings.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf",
+    "hops": 1
+  },
+  "https://www.servers.com/news/blog/igaming-compliance-and-how-it-impacts-hosting/": {
+    "status": 404,
+    "final": "https://www.servers.com/news/blog/igaming-compliance-and-how-it-impacts-hosting/",
+    "hops": 0
+  },
+  "https://www.spelpaus.se/": {
+    "status": 200,
+    "final": "https://www.spelpaus.se/",
+    "hops": 0
+  },
+  "https://www.spelinspektionen.se/": {
+    "status": 200,
+    "final": "https://www.spelinspektionen.se/",
+    "hops": 0
+  },
+  "https://www.spillemyndigheden.dk/": {
+    "status": 200,
+    "final": "https://www.spillemyndigheden.dk/",
+    "hops": 0
+  },
+  "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm": {
+    "status": null,
+    "final": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+    "hops": null
+  },
+  "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm": {
+    "status": null,
+    "final": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+    "hops": null
+  },
+  "https://www.pipc.go.kr/eng/": {
+    "status": 200,
+    "final": "https://www.pipc.go.kr/eng/",
+    "hops": 0
+  },
+  "https://www.spillemyndigheden.dk/en/rofus": {
+    "status": 200,
+    "final": "https://www.spillemyndigheden.dk/en/rofus",
+    "hops": 0
+  },
+  "https://www.styra.com/opa-rego-style-guide/": {
+    "status": 404,
+    "final": "https://www.styra.com/opa-rego-style-guide/",
+    "hops": 0
+  },
+  "https://www.rbi.org.in/": {
+    "status": 200,
+    "final": "https://www.rbi.org.in/",
+    "hops": 0
+  },
+  "https://www.upguard.com/blog/cybersecurity-regulations-financial-industry": {
+    "status": 200,
+    "final": "https://www.upguard.com/blog/cybersecurity-regulations-financial-industry",
+    "hops": 0
+  },
+  "https://www.privacy.org.nz/your-rights/privacy-principles/": {
+    "status": 404,
+    "final": "https://www.privacy.org.nz/your-rights/privacy-principles/",
+    "hops": 0
+  },
+  "https://oag.ca.gov/privacy/ccpa": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='oag.ca.gov', port=443): Max retries exceeded with url: /privacy/ccpa (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0xffff849c2850>: Failed to resolve 'oag.ca.gov' ([Errno -2] Name or service not known)\"))",
+    "hops": null
+  },
+  "https://www.privacy.org.nz/for-organisations/privacy-breaches/": {
+    "status": 404,
+    "final": "https://www.privacy.org.nz/for-organisations/privacy-breaches/",
+    "hops": 0
+  },
+  "https://www.acma.gov.au/interactive-gambling": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.acma.gov.au', port=443): Read timed out. (read timeout=8)",
+    "hops": null
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.diputados.gob.mx', port=443): Max retries exceeded with url: /LeyesBiblio/pdf/LFPDPPP.pdf (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0xffff849c2490>, 'Connection to www.diputados.gob.mx timed out. (connect timeout=8)'))",
+    "hops": null
+  },
+  "https://www.health.gov.au/initiatives-and-programs/my-health-record": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.health.gov.au', port=443): Read timed out. (read timeout=8)",
+    "hops": null
+  },
+  "https://www.npc.gov.cn/englishnpc/": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='www.npc.gov.cn', port=443): Max retries exceeded with url: /englishnpc/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0xffff84925bd0>, 'Connection to www.npc.gov.cn timed out. (connect timeout=8)'))",
+    "hops": null
+  },
+  "https://www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-criteria-dtac/": {
+    "status": null,
+    "final": "HTTPSConnectionPool(host='transform.england.nhs.uk', port=443): Read timed out. (read timeout=8)",
+    "hops": null
+  },
+  "https://verbis.kvkk.gov.tr/": {
+    "status": null,
+    "final": "Exceeded 30 redirects.",
+    "hops": null
+  }
+}

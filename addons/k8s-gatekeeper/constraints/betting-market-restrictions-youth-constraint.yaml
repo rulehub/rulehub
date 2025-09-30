@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingMarketRestrictionsYouth
+metadata:
+  name: betting-market-restrictions-youth
+  annotations:
+    rulehub.id: betting.market_restrictions_youth
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

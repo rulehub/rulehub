@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: betting-au_iga_no_prohibited_services
+  annotations:
+    rulehub.id: betting.au_iga_no_prohibited_services
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

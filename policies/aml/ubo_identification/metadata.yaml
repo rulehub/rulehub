@@ -1,0 +1,24 @@
+id: aml.ubo_identification
+name: Ultimate Beneficial Owner identification
+standard: EU AMLD
+version: 5/6
+path:
+    - policies/aml/ubo_identification/policy.rego
+    - policies/aml/ubo_identification/policy_test.rego
+description: Placeholder rule to identify UBOs.
+framework: other
+tags:
+- amld
+owner: compliance
+severity: medium
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html
+  - https://www.legislation.gov.uk/eudr/2015/849/article/13
+  - https://www.legislation.gov.uk/eudr/2015/849/article/3
+geo:
+    regions:
+    - Global
+    countries:
+    - '*'
+    subregions: []
+    scope: Global

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.self_exclusion_dk_rofus
+name: <Policy Title>
+path:
+  - policies/betting/self_exclusion_dk_rofus/policy.rego
+  - policies/betting/self_exclusion_dk_rofus/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.spillemyndigheden.dk/
+  - https://www.spillemyndigheden.dk/en/rofus
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

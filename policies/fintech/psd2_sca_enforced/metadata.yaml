@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.psd2_sca_enforced
+name: PSD2 SCA Enforced
+path:
+  - policies/fintech/psd2_sca_enforced/policy.rego
+  - policies/fintech/psd2_sca_enforced/policy_test.rego
+description: Enforce SCA for electronic payments
+standard:
+  name: PSD2 / EBA RTS
+  version: current
+links:
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366
+  - https://eur-lex.europa.eu/eli/reg_del/2018/389/oj
+geo:
+  regions:
+    - Europe
+  countries:
+    - EU
+    - EEA
+  subregions: []
+  scope: Regional
+jurisdiction:
+  - EU

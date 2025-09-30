@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: edtech-nz_notice_at_collection_edtech
+  annotations:
+    rulehub.id: edtech.nz_notice_at_collection_edtech
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: edtech.nz_notice_at_collection_edtech: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

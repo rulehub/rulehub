@@ -1,0 +1,28 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: betting-self-exclusion-uk-gamstop
+  annotations:
+    rulehub.id: betting.self_exclusion_uk_gamstop
+spec:
+  crd:
+    spec:
+      names:
+        kind: BettingSelfExclusionUkGamstop
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredLabel:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package rulehub.betting.self_exclusion_uk_gamstop
+        import future.keywords.if
+
+        deny[msg] {
+          input.review.kind.kind == "Namespace"
+          not input.review.object.metadata.labels[input.parameters.requiredLabel]
+          msg := "betting.self_exclusion_uk_gamstop: required label missing"
+        }

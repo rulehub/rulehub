@@ -1,0 +1,10 @@
+# Local act configuration (auto-generated)
+-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-22.04
+--reuse
+--pull=false
+--secret-file .secrets
+# Explicitly set architecture (Apple M-series = arm64)
+--container-architecture linux/arm64
+# To force x86 emulation (slower) you could use: --container-architecture linux/amd64
+# Uncomment to skip supply-chain in publish workflow locally
+# --env SKIP_SUPPLYCHAIN=1

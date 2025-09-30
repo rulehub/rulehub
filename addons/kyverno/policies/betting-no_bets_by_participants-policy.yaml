@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-no-bets-by-participants
+  annotations:
+    rulehub.id: betting.no_bets_by_participants
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.no_bets_by_participants: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

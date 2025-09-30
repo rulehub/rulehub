@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-txn-monitoring-anomalies
+  annotations:
+    rulehub.id: betting.txn_monitoring_anomalies
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.txn_monitoring_anomalies: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

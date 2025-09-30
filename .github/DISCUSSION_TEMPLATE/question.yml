@@ -1,0 +1,19 @@
+title: "Question: <brief description>"
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your question! Please provide details below so we can help faster.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What are you trying to do? What is unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Versions, environment, links to docs/code

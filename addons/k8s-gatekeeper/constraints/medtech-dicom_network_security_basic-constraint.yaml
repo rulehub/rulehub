@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechDicom_network_security_basicConstraint
+metadata:
+  name: medtech-dicom_network_security_basic
+  annotations:
+    rulehub.id: medtech.dicom_network_security_basic
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

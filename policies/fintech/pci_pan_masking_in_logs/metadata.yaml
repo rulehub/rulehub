@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_pan_masking_in_logs
+name: PCI DSS — PAN Masking in Logs
+path:
+  - policies/fintech/pci_pan_masking_in_logs/policy.rego
+  - policies/fintech/pci_pan_masking_in_logs/policy_test.rego
+description: Mask PAN in logs
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

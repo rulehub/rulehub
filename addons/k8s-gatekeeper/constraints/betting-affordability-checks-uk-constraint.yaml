@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingAffordabilityChecksUk
+metadata:
+  name: betting-affordability-checks-uk
+  annotations:
+    rulehub.id: betting.affordability_checks_uk
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

@@ -1,0 +1,20 @@
+id: legaltech.gdpr_retention_limit
+name: 'GDPR: Retention Limit'
+path:
+  - policies/legaltech/gdpr_retention_limit/policy.rego
+  - policies/legaltech/gdpr_retention_limit/policy_test.rego
+description: Retention periods not to exceed policy
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.5
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

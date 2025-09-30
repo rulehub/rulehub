@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechSg_hcsa_pdpa_health_dataConstraint
+metadata:
+  name: medtech-sg_hcsa_pdpa_health_data
+  annotations:
+    rulehub.id: medtech.sg_hcsa_pdpa_health_data
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

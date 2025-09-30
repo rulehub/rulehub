@@ -1,0 +1,17 @@
+id: igaming.license_check_dgoj_es
+name: License Check — DGOJ (ES)
+description: Operator licensed by DGOJ
+standard: DGOJ
+version: current
+path:
+  - policies/igaming/license_check_dgoj_es/policy.rego
+  - policies/igaming/license_check_dgoj_es/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.ordenacionjuego.es/en
+geo:
+  regions: [Europe]
+  countries: [ES]
+  scope: National

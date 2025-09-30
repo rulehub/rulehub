@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.slots_no_autoplay_uk
+name: Slots No Autoplay (UK)
+path:
+  - policies/betting/slots_no_autoplay_uk/policy.rego
+  - policies/betting/slots_no_autoplay_uk/policy_test.rego
+description: Autoplay functionality is prohibited for UK slot games per UKGC guidance.
+standard:
+  name: UKGC Slots Design
+  version: current
+links:
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: block-hostpath
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: forbid-hostpath
+      match:
+        resources:
+          kinds: ["Pod"]
+      # Canonical pattern-based validation: ensure each volume item has no hostPath field.
+      # Using foreach + pattern validates every element and avoids brittle deny/AnyIn templates.
+      validate:
+        message: "hostPath volumes are not allowed"
+        foreach:
+          - list: "request.object.spec.volumes[]"
+            pattern:
+              =(hostPath): null

@@ -1,0 +1,17 @@
+id: betting.kyc_onboarding
+name: KYC Onboarding
+description: Complete KYC at registration
+standard: EU AMLD / UKGC
+version: current
+path:
+  - policies/betting/kyc_onboarding/policy.rego
+  - policies/betting/kyc_onboarding/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+links:
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+geo:
+  regions: [Europe]
+  countries: [EU, EEA, UK]
+  scope: Regional

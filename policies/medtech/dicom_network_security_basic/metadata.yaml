@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.dicom_network_security_basic
+name: <Policy Title>
+path:
+  - policies/medtech/dicom_network_security_basic/policy.rego
+  - policies/medtech/dicom_network_security_basic/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.dicomstandard.org/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

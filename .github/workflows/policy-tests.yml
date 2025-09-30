@@ -1,0 +1,318 @@
+name: policy-tests
+
+on:
+  pull_request:
+    paths:
+      - "policies/**"
+      - "tests/kyverno/**"
+      - "tests/gatekeeper/**"
+      - "tools/validate_metadata.py"
+      - "requirements.txt"
+      - ".github/workflows/policy-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "policies/**"
+      - "tests/kyverno/**"
+      - "tests/gatekeeper/**"
+      - "tools/validate_metadata.py"
+      - "requirements.txt"
+      - ".github/workflows/policy-tests.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: policy-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] policy-tests skipped."
+  # changes:
+  #   name: Detect Changes
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     metadata: ${{ steps.filter.outputs.metadata }}
+  #     kyverno: ${{ steps.filter.outputs.kyverno }}
+  #     gatekeeper: ${{ steps.filter.outputs.gatekeeper }}
+  #   steps:
+  #     - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+  #     - id: filter
+  #       uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
+  #       with:
+  #         base: 'main'
+  #         filters: |
+  #           metadata:
+  #             - 'policies/**'
+  #             - 'tools/validate_metadata.py'
+  #             - 'requirements.txt'
+  #             - 'requirements.lock'
+  #           kyverno:
+  #             - 'tests/kyverno/**'
+  #             - 'policies/**'
+  #           gatekeeper:
+  #             - 'tests/gatekeeper/**'
+  #             - 'addons/k8s-gatekeeper/**'
+  #             - 'policies/**'
+
+  metadata:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    name: Metadata Validate
+    # Run for smoke testing - skip change detection
+    # if: >-
+    #   ${{ needs.changes.outputs.metadata == 'true' &&
+    #       needs.changes.outputs.kyverno != 'true' &&
+    #       needs.changes.outputs.gatekeeper != 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: /github/workspace
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Set up Node.js
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+      - name: Set up Python (with pip cache)
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.lock
+            requirements.txt
+      - name: Install Python deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Validate policy metadata
+        run: python tools/validate_metadata.py
+      - name: Enforce policy test coverage thresholds
+        if: ${{ github.actor != 'nektos/act' }}
+        run: python tools/enforce_policy_test_thresholds.py
+
+  kyverno-tests:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    name: Kyverno Tests
+    # Run for smoke testing - skip change detection
+    # needs: changes
+    # if: needs.changes.outputs.kyverno == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: /github/workspace
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Record start time
+        run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
+      - name: Set up Node.js
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+      - name: Set up Python (for metadata validation)
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.lock
+            requirements.txt
+      - name: Install Python deps (metadata validation)
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Validate policy metadata
+        run: python tools/validate_metadata.py
+      - name: Cache Kyverno CLI
+        id: cache-kyverno
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/kyverno
+          key: kyverno-${{ runner.os }}-v1.15.1
+      - name: Install Kyverno CLI (cached)
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.cache/kyverno
+          if [ ! -f ~/.cache/kyverno/kyverno ]; then
+            echo "Downloading Kyverno CLI v1.15.1";
+            curl -sSL -o kyverno.tar.gz https://github.com/kyverno/kyverno/releases/download/v1.15.1/kyverno-cli_v1.15.1_linux_x86_64.tar.gz
+            tar -xzf kyverno.tar.gz kyverno
+            mv kyverno ~/.cache/kyverno/kyverno
+          else
+            echo "Using cached Kyverno CLI";
+          fi
+          sudo cp ~/.cache/kyverno/kyverno /usr/local/bin/kyverno
+          kyverno version
+      - name: Run Kyverno tests
+        run: kyverno test tests/kyverno --v=0
+      - name: Report duration
+        run: |
+          END_TS=$(date +%s)
+          echo "KYVERNO_JOB_DURATION=$((END_TS - JOB_STARTED_TS))s" >> $GITHUB_STEP_SUMMARY
+
+  gatekeeper-tests:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    name: Gatekeeper OPA Tests
+    # Run for smoke testing - skip change detection
+    # needs: changes
+    # if: needs.changes.outputs.gatekeeper == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPA_VERSION: "v1.8.0"
+      PYTHONPATH: /github/workspace
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Record start time
+        run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
+      - name: Set up Node.js
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+      - name: Set up Python (for metadata validation)
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.lock
+            requirements.txt
+      - name: Install Python deps (metadata validation)
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Validate policy metadata
+        run: python tools/validate_metadata.py
+      - name: Cache OPA binary
+        id: cache-opa
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/opa
+          key: opa-${{ runner.os }}-${{ env.OPA_VERSION }}
+      - name: Install OPA (cached)
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.cache/opa
+          if [ ! -f ~/.cache/opa/opa ] || [ ! -s ~/.cache/opa/opa ] || ! ~/.cache/opa/opa version >/dev/null 2>&1; then
+            echo "Downloading OPA ${OPA_VERSION}";
+            rm -f ~/.cache/opa/opa
+            curl -L -o ~/.cache/opa/opa https://github.com/open-policy-agent/opa/releases/download/${OPA_VERSION}/opa_linux_amd64_static;
+            chmod +x ~/.cache/opa/opa;
+          else
+            echo "Using cached OPA";
+          fi
+          sudo cp ~/.cache/opa/opa /usr/local/bin/opa
+          opa version
+      - name: Run Gatekeeper OPA unit tests
+        run: opa test tests/gatekeeper/policies tests/gatekeeper/tests
+      - name: Report duration
+        run: |
+          END_TS=$(date +%s)
+          echo "GATEKEEPER_JOB_DURATION=$((END_TS - JOB_STARTED_TS))s" >> $GITHUB_STEP_SUMMARY
+
+  policy-test-pairs:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    name: Policy Test Pairs
+    # Run for smoke testing - skip change detection
+    # needs: gatekeeper-tests
+    # if: needs.changes.outputs.gatekeeper == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: /github/workspace
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Set up Node.js
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+      - name: Set up Python (with pip cache)
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.lock
+            requirements.txt
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Enforce policy/test file pairing
+        run: make policy-test-pairs
+
+  policy-test-threshold:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    name: Policy Test Threshold
+    # Run for smoke testing - skip change detection
+    # needs: [changes, gatekeeper-tests, policy-test-pairs]
+    # if: needs.changes.outputs.gatekeeper == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PYTHONPATH: /github/workspace
+      ALLOW_MULTI_INADEQUATE: 200
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Set up Node.js
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+      - name: Set up Python (with pip cache)
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.lock
+            requirements.txt
+      - name: Set up Python (act, no cache)
+        if: ${{ github.actor == 'nektos/act' }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install -r requirements.txt
+      - name: Enforce thresholds (dual-direction 100%, no multi gaps)
+        run: |
+          make policy-test-threshold
+      # - name: Upload coverage artifacts
+      #   if: always() && github.repository != ''
+      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      #   with:
+      #     name: policy-test-coverage
+      #     path: |
+      #       dist/policy-test-coverage.json
+      #       dist/policy-test-priorities.md
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f dist/policy-test-coverage.json ]; then
+            dual=$(jq -r '.dual_direction.percent' dist/policy-test-coverage.json)
+            inadequate=$(jq -r '.multi_rule.count_inadequate' dist/policy-test-coverage.json)
+            echo "### Policy Test Threshold\n" >> $GITHUB_STEP_SUMMARY
+            echo "Dual-direction: ${dual}%" >> $GITHUB_STEP_SUMMARY
+            echo "Multi-rule inadequacies: ${inadequate}" >> $GITHUB_STEP_SUMMARY
+            if [ "$inadequate" != "0" ]; then
+              echo '\nFailures (first 10):' >> $GITHUB_STEP_SUMMARY
+              jq -r '.multi_rule.list_inadequate[:10][] | "- \(.policy) deny_rules=\(.deny_rules) tests=\(.deny_test_assertions)"' dist/policy-test-coverage.json >> $GITHUB_STEP_SUMMARY || true
+            fi
+          fi

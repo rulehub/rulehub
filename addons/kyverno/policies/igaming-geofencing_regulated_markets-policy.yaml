@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-geofencing-regulated-markets
+  annotations:
+    rulehub.id: igaming.geofencing_regulated_markets
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "igaming.geofencing_regulated_markets: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

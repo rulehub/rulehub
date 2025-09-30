@@ -1,0 +1,24 @@
+id: pci.storage_encryption
+name: Encrypt stored cardholder data
+standard: PCI DSS
+version: '4.0'
+path:
+  - policies/pci/storage_encryption/policy.rego
+  - policies/pci/storage_encryption/policy_test.rego
+description: Placeholder rule for ensuring storage encryption for cardholder data.
+framework: other
+tags:
+- pci
+owner: compliance
+severity: medium
+links:
+  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
+  - https://www.pcisecuritystandards.org/document_library # SAQ D (canonical library)
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

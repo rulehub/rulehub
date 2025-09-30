@@ -1,0 +1,20 @@
+id: legaltech.encryption_in_transit_enabled
+name: Encryption In Transit Enabled
+path:
+  - policies/legaltech/encryption_in_transit_enabled/policy.rego
+  - policies/legaltech/encryption_in_transit_enabled/policy_test.rego
+description: Encrypt legal data in transit
+standard:
+  name: Best Practice
+  version: current
+links:
+  - https://csrc.nist.gov/pubs/sp/800/52/r2/final
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

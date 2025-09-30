@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: medtech-dicom_network_security_basic
+  annotations:
+    rulehub.id: medtech.dicom_network_security_basic
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  crd:
+    spec:
+      names:
+        kind: MedtechDicom_network_security_basicConstraint
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            # add schema for parameters
+            enabled:
+              type: boolean
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package rulehub.medtech.dicom_network_security_basic
+      import future.keywords.if
+
+      default deny = []
+
+      # Example: deny with a message
+      deny[msg] {
+        input.review.kind.kind == "Deployment"
+        msg := "medtech.dicom_network_security_basic: example violation"
+      }

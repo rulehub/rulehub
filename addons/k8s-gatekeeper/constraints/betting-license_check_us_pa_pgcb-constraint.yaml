@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: betting-license_check_us_pa_pgcb
+  annotations:
+    rulehub.id: betting.license_check_us_pa_pgcb
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

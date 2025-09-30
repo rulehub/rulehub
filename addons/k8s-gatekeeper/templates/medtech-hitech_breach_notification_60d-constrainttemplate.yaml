@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: medtech-hitech_breach_notification_60d
+  annotations:
+    rulehub.id: medtech.hitech_breach_notification_60d
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  crd:
+    spec:
+      names:
+        kind: MedtechHitech_breach_notification_60dConstraint
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            # add schema for parameters
+            enabled:
+              type: boolean
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package rulehub.medtech.hitech_breach_notification_60d
+      import future.keywords.if
+
+      default deny = []
+
+      # Example: deny with a message
+      deny[msg] {
+        input.review.kind.kind == "Deployment"
+        msg := "medtech.hitech_breach_notification_60d: example violation"
+      }

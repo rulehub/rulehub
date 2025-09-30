@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.license_check_ksa_nl
+name: <Policy Title>
+path:
+  - policies/betting/license_check_ksa_nl/policy.rego
+  - policies/betting/license_check_ksa_nl/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://kansspelautoriteit.nl/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

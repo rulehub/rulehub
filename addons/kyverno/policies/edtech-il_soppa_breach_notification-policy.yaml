@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: edtech-il_soppa_breach_notification
+  annotations:
+    rulehub.id: edtech.il_soppa_breach_notification
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: edtech.il_soppa_breach_notification: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

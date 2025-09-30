@@ -1,0 +1,24 @@
+id: gdpr.data_minimization
+name: Data minimization
+standard: GDPR
+version: 2016/679
+path:
+  - policies/gdpr/data_minimization/policy.rego
+  - policies/gdpr/data_minimization/policy_test.rego
+description: Placeholder rule to ensure only necessary data is collected and processed.
+framework: other
+tags:
+- gdpr
+owner: compliance
+severity: medium
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj
+  - https://www.legislation.gov.uk/eudr/2016/679/article/5
+
+geo:
+  regions:
+  - Europe
+  countries:
+  - EU
+  subregions: []
+  scope: EU

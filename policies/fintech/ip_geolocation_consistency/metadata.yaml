@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.ip_geolocation_consistency
+name: IP Geolocation Consistency
+path:
+  - policies/fintech/ip_geolocation_consistency/policy.rego
+  - policies/fintech/ip_geolocation_consistency/policy_test.rego
+description: IP vs BIN/Address consistency
+standard:
+  name: Fraud
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

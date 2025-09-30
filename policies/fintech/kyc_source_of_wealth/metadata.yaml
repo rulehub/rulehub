@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.kyc_source_of_wealth
+name: KYC Source of Wealth
+path:
+  - policies/fintech/kyc_source_of_wealth/policy.rego
+  - policies/fintech/kyc_source_of_wealth/policy_test.rego
+description: Collect and verify SOW
+standard:
+  name: EU AMLD / FATF
+  version: current
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

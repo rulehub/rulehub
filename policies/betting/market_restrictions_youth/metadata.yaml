@@ -1,0 +1,17 @@
+id: betting.market_restrictions_youth
+name: Market Restrictions — Youth/Underage
+description: No markets on youth leagues
+standard: FR/Other EU
+version: current
+path:
+  - policies/betting/market_restrictions_youth/policy.rego
+  - policies/betting/market_restrictions_youth/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://anj.fr/
+geo:
+  regions: [Europe]
+  countries: [EU, EEA, FR]
+  scope: Regional

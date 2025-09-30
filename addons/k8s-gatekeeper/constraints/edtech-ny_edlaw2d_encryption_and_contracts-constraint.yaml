@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: edtech-ny_edlaw2d_encryption_and_contracts
+  annotations:
+    rulehub.id: edtech.ny_edlaw2d_encryption_and_contracts
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

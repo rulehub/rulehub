@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.ob_rate_limits
+name: Open Banking API Rate Limits
+path:
+  - policies/fintech/ob_rate_limits/policy.rego
+  - policies/fintech/ob_rate_limits/policy_test.rego
+description: Rate limiting for TPP APIs
+standard:
+  name: OBIE
+  version: current
+links:
+  - https://www.openbanking.org.uk/
+  - https://openid.net/specs/openid-connect-core-1_0.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - EU/UK

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_secure_coding_practices
+name: PCI DSS — Secure Coding Practices
+path:
+  - policies/fintech/pci_secure_coding_practices/policy.rego
+  - policies/fintech/pci_secure_coding_practices/policy_test.rego
+description: SDLC, code review, SAST
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

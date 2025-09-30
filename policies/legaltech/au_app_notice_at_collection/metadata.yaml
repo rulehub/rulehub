@@ -1,0 +1,20 @@
+id: legaltech.au_app_notice_at_collection
+name: 'AU: APP Notice At Collection'
+path:
+  - policies/legaltech/au_app_notice_at_collection/policy.rego
+  - policies/legaltech/au_app_notice_at_collection/policy_test.rego
+description: Provide notice at/ before collection (APP 5)
+standard:
+  name: Australia Privacy Act (APPs)
+  version: current
+links:
+  - https://www.oaic.gov.au/privacy/australian-privacy-principles
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

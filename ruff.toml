@@ -1,0 +1,24 @@
+line-length = 120
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "I", "W"]
+ignore = [
+	# Allow prints in tools
+	"T201",
+]
+
+[lint.isort]
+known-first-party = ["tools"]
+combine-as-imports = true
+force-single-line = false
+lines-after-imports = 2
+
+[lint.per-file-ignores]
+"tools/*.py" = ["E402"]
+"tests/**/*.py" = ["E402", "I001", "F401"]
+
+[format]
+quote-style = "preserve"
+indent-style = "space"
+line-ending = "auto"

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_ivdr_clinical_performanceConstraint
+metadata:
+  name: medtech-eu_ivdr_clinical_performance
+  annotations:
+    rulehub.id: medtech.eu_ivdr_clinical_performance
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

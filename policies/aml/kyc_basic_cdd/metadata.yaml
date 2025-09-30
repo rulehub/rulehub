@@ -1,0 +1,24 @@
+id: aml.kyc_basic_cdd
+name: Basic customer due diligence (KYC)
+standard: EU AMLD
+version: 5/6
+path:
+    - policies/aml/kyc_basic_cdd/policy.rego
+    - policies/aml/kyc_basic_cdd/policy_test.rego
+description: Placeholder rule for basic CDD requirements.
+framework: other
+tags:
+- amld
+owner: compliance
+severity: medium
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html
+  - https://www.legislation.gov.uk/eudr/2015/849/article/13
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L0849
+geo:
+    regions:
+    - Global
+    countries:
+    - '*'
+    subregions: []
+    scope: Global

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckUkgc
+metadata:
+  name: betting-license-check-ukgc
+  annotations:
+    rulehub.id: betting.license_check_ukgc
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

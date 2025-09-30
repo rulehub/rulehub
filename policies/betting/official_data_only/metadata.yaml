@@ -1,0 +1,17 @@
+id: betting.official_data_only
+name: Official Data Only
+description: Use official sports data feeds
+standard: State/League Rules
+version: current
+path:
+  - policies/betting/official_data_only/policy.rego
+  - policies/betting/official_data_only/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+links:
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions: [Global]
+  countries: ["*"]
+  scope: Global

@@ -1,0 +1,18 @@
+schema_version: 1
+regulation: Kubernetes Security Baseline
+version: "v1"
+sections:
+  "Workload hardening":
+    title: Restrict privileged escalation and root
+    policies:
+      - k8s.no_privileged
+      - k8s.no_run_as_root
+  "Image & supply chain":
+    title: Avoid mutable tags and ensure fresh images
+    policies:
+      - k8s.disallow_latest
+      - k8s.require_imagepullpolicy_always
+  "Resource governance":
+    title: Enforce resource requests and limits
+    policies:
+      - k8s.require_resources

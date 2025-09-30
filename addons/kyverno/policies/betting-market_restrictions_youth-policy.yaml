@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-market-restrictions-youth
+  annotations:
+    rulehub.id: betting.market_restrictions_youth
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.market_restrictions_youth: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-deposit-limit-controls
+  annotations:
+    rulehub.id: igaming.deposit_limit_controls
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "igaming.deposit_limit_controls: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

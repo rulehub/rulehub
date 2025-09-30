@@ -1,0 +1,23 @@
+schema_version: 1
+regulation: iGaming (multi-jurisdiction)
+version: current
+sections:
+  Licensing:
+    title: Licensing checks (per regulator)
+    policies:
+    - igaming.license_check_adm_it
+    - igaming.license_check_anj_fr
+    - igaming.license_check_dgoj_es
+    - igaming.license_check_ukgc
+    - igaming.license_check_us_nj_dge
+    - igaming.license_check_us_nv_ngcb
+    - igaming.license_check_us_pa_pgcb
+  Player Protection:
+    title: Responsible gambling controls
+    policies:
+    - igaming.deposit_limit_controls
+    - igaming.self_exclusion_uk_gamstop
+  Market Access & Geo:
+    title: Regulated market geofencing
+    policies:
+    - igaming.geofencing_regulated_markets

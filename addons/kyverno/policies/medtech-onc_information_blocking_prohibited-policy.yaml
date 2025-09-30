@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-onc_information_blocking_prohibited
+  annotations:
+    rulehub.id: medtech.onc_information_blocking_prohibited
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.onc_information_blocking_prohibited: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

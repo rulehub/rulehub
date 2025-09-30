@@ -1,0 +1,26 @@
+id: k8s.ban_hostnetwork
+name: Disallow hostNetwork in Pods
+standard: Kubernetes
+version: 1.x
+path:
+  - addons/k8s-gatekeeper/templates/ban-hostnetwork.yaml
+  - addons/k8s-gatekeeper/constraints/ban-hostnetwork.yaml
+  - policies/k8s/ban_hostnetwork/policy.rego
+  - policies/k8s/ban_hostnetwork/policy_test.rego
+description: Forbid use of hostNetwork to reduce host exposure.
+framework: gatekeeper
+tags:
+- k8s
+- network
+- security
+owner: platform-security
+links:
+  - https://kubernetes.io/docs/concepts/security/pod-security-standards/
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

@@ -1,0 +1,17 @@
+id: igaming.license_check_anj_fr
+name: License Check — ANJ (FR)
+description: Operator licensed by ANJ
+standard: ANJ
+version: current
+path:
+  - policies/igaming/license_check_anj_fr/policy.rego
+  - policies/igaming/license_check_anj_fr/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://anj.fr/
+geo:
+  regions: [Europe]
+  countries: [FR]
+  scope: National

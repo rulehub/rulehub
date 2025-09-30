@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.mtls_required
+name: mTLS Required For APIs
+path:
+  - policies/fintech/mtls_required/policy.rego
+  - policies/fintech/mtls_required/policy_test.rego
+description: Mutual TLS on sensitive APIs
+standard:
+  name: Security
+  version: current
+links:
+  - https://datatracker.ietf.org/doc/html/rfc8705
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

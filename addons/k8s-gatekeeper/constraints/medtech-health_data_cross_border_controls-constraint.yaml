@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHealth_data_cross_border_controlsConstraint
+metadata:
+  name: medtech-health_data_cross_border_controls
+  annotations:
+    rulehub.id: medtech.health_data_cross_border_controls
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

@@ -1,0 +1,17 @@
+id: betting.license_check_au_nt
+name: License Check — AU Northern Territory
+description: Operator licensed by NT Racing Commission
+standard: NT Racing Commission
+version: current
+path:
+  - policies/betting/license_check_au_nt/policy.rego
+  - policies/betting/license_check_au_nt/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://nt.gov.au/
+geo:
+  regions: [APAC]
+  countries: [AU-NT]
+  scope: State

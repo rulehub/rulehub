@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechIso_13485_document_controlConstraint
+metadata:
+  name: medtech-iso_13485_document_control
+  annotations:
+    rulehub.id: medtech.iso_13485_document_control
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

@@ -1,0 +1,91 @@
+name: Coverage Map
+
+on:
+  pull_request:
+    paths:
+      - "policies/**"
+      - "compliance/maps/**"
+      - "tools/coverage_map.py"
+      - "addons/**"
+  push:
+    paths:
+      - "policies/**"
+      - "compliance/maps/**"
+      - "tools/coverage_map.py"
+      - "addons/**"
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build:
+    # Skip under nektos/act to avoid docker/exec flakiness and missing toolchain locally
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Set up Python
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Generate coverage artifacts
+        run: |
+          python3 tools/coverage_map.py
+
+      - name: Validate plugin index schema
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+          try:
+              import jsonschema
+          except ImportError:
+              print('jsonschema not installed', file=sys.stderr)
+              sys.exit(1)
+          schema = json.load(open('tools/schemas/plugin-index.schema.json'))
+          data = json.load(open('dist/index.json'))
+          jsonschema.validate(data, schema)
+          print('dist/index.json schema validation OK')
+          EOF
+
+      - name: Enforce committed artifacts up-to-date
+        run: |
+          set -euo pipefail
+          if [ "${ACT:-}" = "true" ]; then
+            echo "[act] Skipping artifact enforcement (dist/index.json may be untracked locally)";
+            exit 0;
+          fi
+          # Show git status before diff
+          git status --short || true
+          # If generation changed tracked artifacts, fail with guidance
+          CHANGED=$(git diff --name-only docs/coverage.md dist/index.json || true)
+          if [ -n "$CHANGED" ]; then
+            echo 'ERROR: Generated artifacts are out of date:'
+            echo "$CHANGED"
+            echo 'Run locally: make coverage (or python3 tools/coverage_map.py) and commit updated docs/coverage.md & dist/index.json.'
+            exit 1
+          fi
+          echo 'Artifact check passed: docs/coverage.md and dist/index.json are up to date.'
+
+      - name: Upload artifacts
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coverage-artifacts
+          path: |
+            docs/coverage.md
+            dist/coverage.html
+            dist/policies-index.json
+            dist/coverage.json
+            dist/index.json

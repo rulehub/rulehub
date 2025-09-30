@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: edtech-uk_aadc_privacy_by_default
+  annotations:
+    rulehub.id: edtech.uk_aadc_privacy_by_default
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  crd:
+    spec:
+      names:
+        kind: <Kind>
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            # add schema for parameters
+            <param1>:
+              type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package rulehub.edtech.uk_aadc_privacy_by_default
+      import future.keywords.if
+
+      default deny = []
+
+      # Example: deny with a message
+      deny[msg] {
+        input.review.kind.kind == "Deployment"
+        msg := "edtech.uk_aadc_privacy_by_default: example violation"
+      }

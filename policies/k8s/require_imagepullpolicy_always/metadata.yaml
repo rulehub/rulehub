@@ -1,0 +1,25 @@
+id: k8s.require_imagepullpolicy_always
+name: 'Require imagePullPolicy: Always'
+standard: Kubernetes
+version: 1.x
+path:
+  - addons/k8s-gatekeeper/templates/require-imagepullpolicy-always.yaml
+  - policies/k8s/require_imagepullpolicy_always/policy.rego
+  - policies/k8s/require_imagepullpolicy_always/policy_test.rego
+description: Ensure imagePullPolicy is Always to avoid stale images.
+framework: gatekeeper
+tags:
+- k8s
+- images
+owner: platform-security
+links:
+  - https://kubernetes.io/docs/concepts/containers/images/
+  - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

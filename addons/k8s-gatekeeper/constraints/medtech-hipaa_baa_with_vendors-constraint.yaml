@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHipaa_baa_with_vendorsConstraint
+metadata:
+  name: medtech-hipaa_baa_with_vendors
+  annotations:
+    rulehub.id: medtech.hipaa_baa_with_vendors
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

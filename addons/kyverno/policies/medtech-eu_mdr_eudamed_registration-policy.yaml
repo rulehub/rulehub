@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-eu_mdr_eudamed_registration
+  annotations:
+    rulehub.id: medtech.eu_mdr_eudamed_registration
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.eu_mdr_eudamed_registration: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

@@ -1,0 +1,28 @@
+# Custom accepted terms / capitalization exceptions
+extends: substitution
+message: "Consider consistent capitalization for '%s'."
+level: suggestion
+ignorecase: false
+swap:
+  OPA: OPA
+  Rego: Rego
+  Kyverno: Kyverno
+  Gatekeeper: Gatekeeper
+  OCI: OCI
+  SBOM: SBOM
+  SBOMs: SBOMs
+  Keyless: keyless
+  Geolocation: geolocation
+  Geofencing: geofencing
+  Fintech: fintech
+  Medtech: medtech
+  Edtech: edtech
+  Legaltech: legaltech
+  iGaming: igaming
+  OpenAPI: OpenAPI
+  Sigstore: Sigstore
+  Cosign: Cosign
+  Fulcio: Fulcio
+  Rekor: Rekor
+  FHIR: FHIR
+  DICOM: DICOM

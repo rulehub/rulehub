@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-kyc_on_withdrawal
+  annotations:
+    rulehub.id: betting.kyc_on_withdrawal
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: betting.kyc_on_withdrawal: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

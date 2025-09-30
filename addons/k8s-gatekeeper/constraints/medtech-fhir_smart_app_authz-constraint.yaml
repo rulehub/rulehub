@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechFhir_smart_app_authzConstraint
+metadata:
+  name: medtech-fhir_smart_app_authz
+  annotations:
+    rulehub.id: medtech.fhir_smart_app_authz
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

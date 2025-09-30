@@ -1,0 +1,20 @@
+id: legaltech.cpra_sensitive_data_limited_use
+name: 'CPRA: Sensitive Data Limited Use'
+path:
+  - policies/legaltech/cpra_sensitive_data_limited_use/policy.rego
+  - policies/legaltech/cpra_sensitive_data_limited_use/policy_test.rego
+description: Limit use of sensitive personal information
+standard:
+  name: CPRA (California)
+  version: current
+links:
+  - https://cppa.ca.gov/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

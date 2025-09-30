@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechFda_part11_system_validationConstraint
+metadata:
+  name: medtech-fda_part11_system_validation
+  annotations:
+    rulehub.id: medtech.fda_part11_system_validation
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

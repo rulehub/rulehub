@@ -1,0 +1,17 @@
+id: betting.license_check_brazil_14790
+name: License Check — Brazil 14.790/2023
+description: Comply with Brazilian betting law
+standard: Lei 14.790/2023
+version: current
+path:
+  - policies/betting/license_check_brazil_14790/policy.rego
+  - policies/betting/license_check_brazil_14790/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm
+geo:
+  regions: [LatAm]
+  countries: [BR]
+  scope: National

@@ -1,0 +1,6 @@
+id: example.placeholder
+updated: 2025-08-27
+source_hash: "<sha256-of-base-description>"
+description: Example placeholder English description (base language).
+rationale: Optional rationale text in English.
+remediation: Optional remediation steps in English.

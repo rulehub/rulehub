@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingInPlayDelayControls
+metadata:
+  name: betting-in-play-delay-controls
+  annotations:
+    rulehub.id: betting.in_play_delay_controls
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

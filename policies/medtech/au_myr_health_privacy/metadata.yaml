@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.au_myr_health_privacy
+name: <Policy Title>
+path:
+  - policies/medtech/au_myr_health_privacy/policy.rego
+  - policies/medtech/au_myr_health_privacy/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.health.gov.au/initiatives-and-programs/my-health-record
+  - https://www.legislation.gov.au/Series/C2012A00063
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

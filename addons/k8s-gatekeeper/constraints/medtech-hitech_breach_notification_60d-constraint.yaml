@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHitech_breach_notification_60dConstraint
+metadata:
+  name: medtech-hitech_breach_notification_60d
+  annotations:
+    rulehub.id: medtech.hitech_breach_notification_60d
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

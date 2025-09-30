@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechOnc_information_blocking_prohibitedConstraint
+metadata:
+  name: medtech-onc_information_blocking_prohibited
+  annotations:
+    rulehub.id: medtech.onc_information_blocking_prohibited
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

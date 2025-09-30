@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-hitech_breach_notification_60d
+  annotations:
+    rulehub.id: medtech.hitech_breach_notification_60d
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.hitech_breach_notification_60d: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.slots_no_losses_disguised_as_wins
+name: <Policy Title>
+path:
+  - policies/betting/slots_no_losses_disguised_as_wins/policy.rego
+  - policies/betting/slots_no_losses_disguised_as_wins/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

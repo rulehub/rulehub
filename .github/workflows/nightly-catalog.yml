@@ -1,0 +1,65 @@
+name: Nightly Catalog Build
+
+on:
+  schedule:
+    # Runs daily at 02:00 UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build-catalog:
+    if: ${{ github.actor != 'nektos/act' }}
+    name: Generate catalog index
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Set up Python
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Generate catalog (dist/index.json)
+        run: |
+          make catalog
+          test -f dist/index.json
+
+      - name: Upload index artifact
+        if: ${{ github.actor != 'nektos/act' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nightly-index-json
+          path: dist/index.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Show index summary
+        run: |
+          python3 - <<'EOF'
+          import json, hashlib
+          p = 'dist/index.json'
+          with open(p,'rb') as f:
+              data = f.read()
+          print(f"index.json size={len(data)} bytes sha256={hashlib.sha256(data).hexdigest()[:16]}...")
+          obj = json.loads(data)
+          print("keys:", sorted(obj.keys()))
+          print("packages:", len(obj.get('packages', [])))
+          EOF
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] nightly-catalog skipped."

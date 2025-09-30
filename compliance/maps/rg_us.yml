@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: UIGEA
+version: "31 USC 5361"
+sections:
+  "Payments":
+    title: Payment blocks for unlawful internet gambling
+    policies:
+      - rg.uigea_payment_blocks

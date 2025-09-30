@@ -1,0 +1,28 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: betting-affordability-checks-uk
+  annotations:
+    rulehub.id: betting.affordability_checks_uk
+spec:
+  crd:
+    spec:
+      names:
+        kind: BettingAffordabilityChecksUk
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredLabel:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package rulehub.betting.affordability_checks_uk
+        import future.keywords.if
+
+        deny[msg] {
+          input.review.kind.kind == "Namespace"
+          not input.review.object.metadata.labels[input.parameters.requiredLabel]
+          msg := "betting.affordability_checks_uk: required label missing"
+        }

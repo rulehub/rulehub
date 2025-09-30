@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-license-check-ca-on-igaming
+  annotations:
+    rulehub.id: betting.license_check_ca_on_igaming
+    rulehub.title: License Check (Ontario iGaming)
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.license_check_ca_on_igaming: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

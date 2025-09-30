@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_mfa_required
+name: PCI DSS — MFA Required
+path:
+  - policies/fintech/pci_mfa_required/policy.rego
+  - policies/fintech/pci_mfa_required/policy_test.rego
+description: Multi-factor authentication for admins/users
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

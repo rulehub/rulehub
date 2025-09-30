@@ -1,0 +1,35 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: medtech-iso_13485_document_control
+  annotations:
+    rulehub.id: medtech.iso_13485_document_control
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  crd:
+    spec:
+      names:
+        kind: MedtechIso_13485_document_controlConstraint
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            # add schema for parameters
+            enabled:
+              type: boolean
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package rulehub.medtech.iso_13485_document_control
+      import future.keywords.if
+
+      default deny = []
+
+      # Example: deny with a message
+      deny[msg] {
+        input.review.kind.kind == "Deployment"
+        msg := "medtech.iso_13485_document_control: example violation"
+      }

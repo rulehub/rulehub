@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: <Kind>
+metadata:
+  name: edtech-ca_sopipa_no_sale_of_student_data
+  annotations:
+    rulehub.id: edtech.ca_sopipa_no_sale_of_student_data
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    <param1>: <value>

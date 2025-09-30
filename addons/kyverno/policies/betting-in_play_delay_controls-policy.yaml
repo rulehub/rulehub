@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-in-play-delay-controls
+  annotations:
+    rulehub.id: betting.in_play_delay_controls
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.in_play_delay_controls: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_mdr_clinical_evaluationConstraint
+metadata:
+  name: medtech-eu_mdr_clinical_evaluation
+  annotations:
+    rulehub.id: medtech.eu_mdr_clinical_evaluation
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

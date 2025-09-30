@@ -1,0 +1,17 @@
+id: igaming.license_check_adm_it
+name: License Check — ADM (IT)
+description: Operator licensed by ADM
+standard: ADM
+version: current
+path:
+  - policies/igaming/license_check_adm_it/policy.rego
+  - policies/igaming/license_check_adm_it/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.adm.gov.it/portale/
+geo:
+  regions: [Europe]
+  countries: [IT]
+  scope: National

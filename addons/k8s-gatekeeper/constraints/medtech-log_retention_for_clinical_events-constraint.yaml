@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechLog_retention_for_clinical_eventsConstraint
+metadata:
+  name: medtech-log_retention_for_clinical_events
+  annotations:
+    rulehub.id: medtech.log_retention_for_clinical_events
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

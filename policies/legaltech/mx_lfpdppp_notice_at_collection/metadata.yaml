@@ -1,0 +1,20 @@
+id: legaltech.mx_lfpdppp_notice_at_collection
+name: 'MX: LFPDPPP Notice At Collection'
+path:
+  - policies/legaltech/mx_lfpdppp_notice_at_collection/policy.rego
+  - policies/legaltech/mx_lfpdppp_notice_at_collection/policy_test.rego
+description: Provide privacy notice at/ before collection
+standard:
+  name: LFPDPPP (Mexico)
+  version: current
+links:
+  - https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

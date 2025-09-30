@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_tls_min_version
+name: PCI DSS — TLS Min Version
+path:
+  - policies/fintech/pci_tls_min_version/policy.rego
+  - policies/fintech/pci_tls_min_version/policy_test.rego
+description: TLS 1.2+ required
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

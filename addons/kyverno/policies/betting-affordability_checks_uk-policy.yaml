@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-affordability-checks-uk
+  annotations:
+    rulehub.id: betting.affordability_checks_uk
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.affordability_checks_uk: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

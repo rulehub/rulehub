@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckAnjFr
+metadata:
+  name: betting-license-check-anj-fr
+  annotations:
+    rulehub.id: betting.license_check_anj_fr
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

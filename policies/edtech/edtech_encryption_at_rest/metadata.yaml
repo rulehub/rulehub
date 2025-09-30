@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: edtech.edtech_encryption_at_rest
+name: <Policy Title>
+path:
+  - policies/edtech/edtech_encryption_at_rest/policy.rego
+  - policies/edtech/edtech_encryption_at_rest/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

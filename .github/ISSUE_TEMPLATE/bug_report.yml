@@ -1,0 +1,72 @@
+name: "Bug"
+description: "Bug report"
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight Checks
+      options:
+        - label: I searched existing issues and found no duplicates
+          required: true
+        - label: I am using the latest version
+          required: false
+  - type: input
+    id: version
+    attributes:
+      label: Version / Commit
+      description: Release version, tag or commit SHA where the issue occurs
+      placeholder: v0.2.3 or a1b2c3d
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Python/Node versions, install method, tools
+      placeholder: |
+        OS: Ubuntu 22.04; Python: 3.11; Node: 20; Docker: 24
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Minimal reproducible example. Commands, configs, inputs.
+      placeholder: |
+        1. Run ...
+        2. Apply ...
+        3. Observe ...
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior / Logs
+      render: text
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Artifacts
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - blocker
+        - critical
+        - major
+        - minor
+        - trivial
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional Context
+

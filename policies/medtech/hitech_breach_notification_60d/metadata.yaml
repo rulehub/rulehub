@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.hitech_breach_notification_60d
+name: <Policy Title>
+path:
+  - policies/medtech/hitech_breach_notification_60d/policy.rego
+  - policies/medtech/hitech_breach_notification_60d/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

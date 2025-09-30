@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.transaction_limits_per_risk
+name: Transaction Limits per Risk Tier
+path:
+  - policies/fintech/transaction_limits_per_risk/policy.rego
+  - policies/fintech/transaction_limits_per_risk/policy_test.rego
+description: Limits vary by risk tier
+standard:
+  name: Risk
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3-d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

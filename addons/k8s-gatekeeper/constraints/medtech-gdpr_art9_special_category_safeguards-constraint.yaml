@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechGdpr_art9_special_category_safeguardsConstraint
+metadata:
+  name: medtech-gdpr_art9_special_category_safeguards
+  annotations:
+    rulehub.id: medtech.gdpr_art9_special_category_safeguards
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

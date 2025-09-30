@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingDataIntegrityAudits
+metadata:
+  name: betting-data-integrity-audits
+  annotations:
+    rulehub.id: betting.data_integrity_audits
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

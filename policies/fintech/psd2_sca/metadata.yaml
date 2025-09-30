@@ -1,0 +1,22 @@
+id: fintech.psd2_sca
+name: PSD2 SCA (Strong Customer Authentication)
+standard: PSD2
+version: "2015/2366"
+path:
+  - policies/fintech/psd2_sca/policy.rego
+  - policies/fintech/psd2_sca/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366
+  - https://www.styra.com/opa-rego-style-guide/
+description: Placeholder rule to ensure SCA for EU customers.
+
+geo:
+  regions:
+  - Europe
+  countries:
+  - EU
+  subregions: []
+  scope: EU

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.ob_consent_expiry_90d
+name: Open Banking Consent Expiry 90d
+path:
+  - policies/fintech/ob_consent_expiry_90d/policy.rego
+  - policies/fintech/ob_consent_expiry_90d/policy_test.rego
+description: AISP consent expires in 90 days
+standard:
+  name: OBIE
+  version: current
+links:
+  - https://www.openbanking.org.uk/
+  - https://openid.net/specs/openid-connect-core-1_0.html
+geo:
+  regions:
+    - Europe
+  countries:
+    - UK
+  subregions: []
+  scope: National
+jurisdiction:
+  - UK

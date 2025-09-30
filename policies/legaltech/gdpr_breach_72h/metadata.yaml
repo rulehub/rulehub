@@ -1,0 +1,20 @@
+id: legaltech.gdpr_breach_72h
+name: 'GDPR: Breach 72H'
+path:
+  - policies/legaltech/gdpr_breach_72h/policy.rego
+  - policies/legaltech/gdpr_breach_72h/policy_test.rego
+description: "Notify supervisory authority \u2264 72h"
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.33
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

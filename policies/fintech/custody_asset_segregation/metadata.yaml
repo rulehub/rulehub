@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.custody_asset_segregation
+name: Custody Asset Segregation
+path:
+  - policies/fintech/custody_asset_segregation/policy.rego
+  - policies/fintech/custody_asset_segregation/policy_test.rego
+description: Segregate client assets
+standard:
+  name: Custody
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

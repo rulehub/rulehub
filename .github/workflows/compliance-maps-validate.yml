@@ -1,0 +1,40 @@
+name: Compliance Maps Validate
+
+on:
+  pull_request:
+    paths:
+      - "compliance/maps/*.yml"
+      - "tools/validate_compliance_maps.py"
+      - "tools/schemas/compliance-map.schema.json"
+  push:
+    paths:
+      - "compliance/maps/*.yml"
+      - "tools/validate_compliance_maps.py"
+      - "tools/schemas/compliance-map.schema.json"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    # Skip under nektos/act to avoid setup-python/container exec flakiness locally
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Validate compliance maps
+        run: |
+          python3 tools/validate_compliance_maps.py

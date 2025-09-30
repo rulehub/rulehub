@@ -1,0 +1,18 @@
+id: betting.match_fixing_monitoring
+name: Match-Fixing Monitoring
+description: Monitor suspicious betting patterns
+standard: Integrity
+version: current
+path:
+  - policies/betting/match_fixing_monitoring/policy.rego
+  - policies/betting/match_fixing_monitoring/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+links:
+  - https://ibia.bet/
+  - https://sportradar.com/
+geo:
+  regions: [Global]
+  countries: ["*"]
+  scope: Global

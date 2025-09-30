@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-source-of-funds-thresholds
+  annotations:
+    rulehub.id: betting.source_of_funds_thresholds
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.source_of_funds_thresholds: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

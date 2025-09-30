@@ -1,0 +1,17 @@
+id: betting.no_bets_by_participants
+name: No Bets By Participants
+description: Ban bets by athletes/coaches/referees
+standard: Leagues/Regulators
+version: current
+path:
+  - policies/betting/no_bets_by_participants/policy.rego
+  - policies/betting/no_bets_by_participants/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions: [Global]
+  countries: ["*"]
+  scope: Global

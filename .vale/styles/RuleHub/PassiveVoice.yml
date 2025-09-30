@@ -1,0 +1,7 @@
+extends: existence
+message: "Prefer active voice when possible."
+level: suggestion
+ignorecase: true
+# Simple heuristic patterns (non-exhaustive)
+raw:
+  - '\\b(is|are|was|were|be|been|being)\\s+([a-z]+ed)\\b'

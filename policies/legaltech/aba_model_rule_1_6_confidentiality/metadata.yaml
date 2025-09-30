@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: legaltech.aba_model_rule_1_6_confidentiality
+name: ABA Model Rule 1.6 — Confidentiality
+path:
+  - policies/legaltech/aba_model_rule_1_6_confidentiality/policy.rego
+  - policies/legaltech/aba_model_rule_1_6_confidentiality/policy_test.rego
+description: Confidentiality safeguards disabled
+standard:
+  name: ABA Model Rules
+  version: current
+links:
+  - https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/
+geo:
+  regions:
+    - North America
+  countries:
+    - US
+  subregions: []
+  scope: Federal
+jurisdiction:
+  - US

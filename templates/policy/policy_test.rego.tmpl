@@ -1,0 +1,12 @@
+package rulehub.<domain>.<policy_id>
+import future.keywords.if
+
+# Happy path
+_test_allow_when_compliant {
+  allow with input as {"controls": {"<domain>.<policy_id>": true}}
+}
+
+# Failing path
+_test_deny_when_noncompliant {
+  deny[_] with input as {"controls": {"<domain>.<policy_id>": false}}
+}

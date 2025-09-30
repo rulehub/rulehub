@@ -1,0 +1,23 @@
+dist/
+**/dist/
+node_modules/
+charts/**/templates/**
+# General
+node_modules/
+.venv/
+dist/
+build/
+coverage/
+
+# Yarn/PNPM artifacts
+.pnp.cjs
+.pnp.loader.mjs
+.pnp.data.json
+.pnpm-store/
+
+# Backstage plugin build output
+
+# Helm templates and generated files shouldn't be formatted by Prettier
+charts/**/templates/**
+charts/**/files/**
+addons/**/templates/**

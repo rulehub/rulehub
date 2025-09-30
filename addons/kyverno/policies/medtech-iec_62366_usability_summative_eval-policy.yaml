@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-iec_62366_usability_summative_eval
+  annotations:
+    rulehub.id: medtech.iec_62366_usability_summative_eval
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.iec_62366_usability_summative_eval: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

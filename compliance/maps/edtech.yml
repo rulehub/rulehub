@@ -1,0 +1,48 @@
+schema_version: 1
+regulation: EdTech (multi-jurisdiction)
+version: current
+sections:
+  US Federal:
+    title: US Federal Student Privacy
+    policies:
+    - edtech.coppa_data_minimization
+    - edtech.coppa_delete_on_parent_request
+    - edtech.coppa_parental_consent_under_13
+    - edtech.ferpa_consent_or_exception_for_disclosure
+    - edtech.ferpa_directory_info_optout_respected
+    - edtech.ferpa_parent_access_rights
+    - edtech.ppra_parental_consent_sensitive_surveys
+  US States:
+    title: US State-Level Laws
+    policies:
+    - edtech.ca_sopipa_no_sale_of_student_data
+    - edtech.ca_sopipa_no_targeted_advertising
+    - edtech.co_student_data_transparency
+    - edtech.ct_student_data_privacy
+    - edtech.il_soppa_breach_notification
+    - edtech.ny_edlaw2d_encryption_and_contracts
+  International:
+    title: International and Non-US Regulations
+    policies:
+    - edtech.au_app_11_security_edtech
+    - edtech.au_app_5_notice_edtech
+    - edtech.au_ndb_breach_notification_edtech
+    - edtech.br_lgpd_children_consent_best_interest
+    - edtech.ca_pipeda_consent_edtech
+    - edtech.eu_dpia_high_risk_edtech
+    - edtech.eu_eprivacy_cookie_consent_edtech
+    - edtech.eu_gdpr_minors_consent_education
+    - edtech.eu_scc_transfers_edplatform
+    - edtech.in_dpdpa_children_verifiable_consent
+    - edtech.kr_pipa_guardian_consent_under_14
+    - edtech.nz_notice_at_collection_edtech
+    - edtech.uk_aadc_privacy_by_default
+    - edtech.uk_aadc_profiling_and_geolocation_off
+  Security & Ops:
+    title: Security and Operational Baseline
+    policies:
+    - edtech.edtech_access_least_privilege
+    - edtech.edtech_audit_logs_student_record_access
+    - edtech.edtech_encryption_at_rest
+    - edtech.edtech_encryption_in_transit
+    - edtech.edtech_retention_after_course_completion

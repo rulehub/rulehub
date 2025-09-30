@@ -1,0 +1,23 @@
+title: "Bug discussion: <brief description>"
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are preferred for bugs; use a discussion if you're unsure about the cause or need reproduction help.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happens and why is it a problem?
+      placeholder: Short description
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps if known
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Environment
+      description: Versions, OS, configurations

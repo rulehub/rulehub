@@ -1,0 +1,52 @@
+name: OpenSSF Scorecard
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Every Monday at 04:00 UTC
+  workflow_dispatch:
+
+# Least-privilege permissions for Scorecard to read repo and upload SARIF
+permissions:
+  contents: read
+  id-token: write # needed for uploading results to OSSF metrics via OIDC
+  security-events: write # to upload SARIF to code scanning alerts (optional but recommended)
+
+jobs:
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] openssf-scorecard skipped."
+
+  analysis:
+    if: ${{ github.actor != 'nektos/act' }}
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+
+      - name: Run Scorecard analysis
+        uses: ossf/scorecard-action@05b42c624433fc40578a4040d5cf5e36ddca8cde
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          # Publish results to OSSF Scorecards (public)
+          publish_results: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          sarif_file: results.sarif
+
+      - name: Upload Scorecard results as artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: scorecard-results
+          path: results.sarif
+          if-no-files-found: warn

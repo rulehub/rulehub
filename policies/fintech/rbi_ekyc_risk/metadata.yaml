@@ -1,0 +1,20 @@
+id: fintech.rbi_ekyc_risk
+name: RBI eKYC — High-risk controls
+standard: RBI eKYC
+version: "placeholder"
+path:
+  - policies/fintech/rbi_ekyc_risk/policy.rego
+  - policies/fintech/rbi_ekyc_risk/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+description: Enforces enhanced due diligence and monitoring steps for high‑risk customers under RBI eKYC guidelines.
+links:
+  - https://www.rbi.org.in/
+geo:
+  regions:
+  - APAC
+  countries:
+  - IN
+  subregions: []
+  scope: IN

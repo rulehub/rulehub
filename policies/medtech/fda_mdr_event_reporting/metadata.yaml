@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.fda_mdr_event_reporting
+name: <Policy Title>
+path:
+  - policies/medtech/fda_mdr_event_reporting/policy.rego
+  - policies/medtech/fda_mdr_event_reporting/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

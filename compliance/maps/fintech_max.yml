@@ -1,0 +1,92 @@
+schema_version: 1
+regulation: Fintech Max
+version: '2025-08-17'
+sections:
+  AML/KYC Core:
+    title: Screening, risk, monitoring
+    policies:
+    - fintech.aml_account_freeze_on_hit
+    - fintech.aml_adverse_media_screening
+    - fintech.aml_customer_risk_tiering
+    - fintech.aml_duplicate_account_detection
+    - fintech.aml_geolocation_restrictions
+    - fintech.aml_ongoing_monitoring
+    - fintech.aml_pep_screening
+    - fintech.aml_risk_scoring_model
+    - fintech.aml_sanctions_rescreening_frequency
+    - fintech.aml_sanctions_screening
+    - fintech.aml_transaction_velocity_limits
+    - fintech.aml_unusual_activity_alerting
+    - fintech.aml_watchlist_management
+  KYC Process:
+    title: Identity verification & lifecycle
+    policies:
+    - fintech.kyc_biometric_liveness
+    - fintech.kyc_document_verification
+    - fintech.kyc_reverification_schedule
+    - fintech.kyc_source_of_funds
+    - fintech.kyc_source_of_wealth
+  Open Banking / PSD2:
+    title: SCA, exemptions, APIs and consent
+    policies:
+    - fintech.fapi_compliance
+    - fintech.ob_audit_logging
+    - fintech.ob_consent_expiry_90d
+    - fintech.ob_consent_revocation
+    - fintech.ob_data_minimization
+    - fintech.ob_rate_limits
+    - fintech.ob_tpp_eidas_cert_validation
+    - fintech.psd2_sca_enforced
+    - fintech.psd2_sca_exemptions_controls
+    - fintech.psd2_transaction_risk_analysis
+    - fintech.xs2a_api_security
+  Auth & API Security:
+    title: Strong auth and secure APIs
+    policies:
+    - fintech.jwt_expiry_policy
+    - fintech.mtls_required
+    - fintech.oauth2_pkce_required
+    - fintech.three_ds_required
+  PCI / AppSec:
+    title: PCI DSS and application security controls
+    policies:
+    - fintech.pci_account_lockout
+    - fintech.pci_default_passwords_changed
+    - fintech.pci_file_integrity_monitoring
+    - fintech.pci_https_only
+    - fintech.pci_key_management
+    - fintech.pci_log_retention
+    - fintech.pci_malware_protection
+    - fintech.pci_mfa_required
+    - fintech.pci_network_segmentation
+    - fintech.pci_pan_masking_in_logs
+    - fintech.pci_secure_coding_practices
+    - fintech.pci_session_timeout
+    - fintech.pci_storage_encryption
+    - fintech.pci_tls_min_version
+    - fintech.pci_vulnerability_scanning
+  Crypto / VASP:
+    title: Virtual asset service provider controls
+    policies:
+    - fintech.bitlicense_compliance
+    - fintech.chain_analysis_risk_controls
+    - fintech.cold_storage_ratio
+    - fintech.custody_asset_segregation
+    - fintech.hot_wallet_limits
+    - fintech.proof_of_reserves_reporting
+    - fintech.stablecoin_reserve_ratio
+    - fintech.travel_rule_compliance
+    - fintech.vasp_license_required
+    - fintech.withdrawal_address_whitelist
+  Fraud & Commerce:
+    title: Fraud prevention and payments hygiene
+    policies:
+    - fintech.card_tokenization_required
+    - fintech.chargeback_monitoring
+    - fintech.device_fingerprinting
+    - fintech.fraud_velocity_checks
+    - fintech.geofencing_restricted_markets
+    - fintech.ip_geolocation_consistency
+    - fintech.mcc_whitelisting
+    - fintech.pan_masking_in_logs
+    - fintech.transaction_limits_per_risk

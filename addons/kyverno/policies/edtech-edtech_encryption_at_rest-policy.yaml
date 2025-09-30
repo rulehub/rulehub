@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: edtech-edtech_encryption_at_rest
+  annotations:
+    rulehub.id: edtech.edtech_encryption_at_rest
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: edtech.edtech_encryption_at_rest: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

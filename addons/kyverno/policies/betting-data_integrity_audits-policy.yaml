@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-data-integrity-audits
+  annotations:
+    rulehub.id: betting.data_integrity_audits
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.data_integrity_audits: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

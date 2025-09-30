@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_default_passwords_changed
+name: PCI DSS — Default Passwords Changed
+path:
+  - policies/fintech/pci_default_passwords_changed/policy.rego
+  - policies/fintech/pci_default_passwords_changed/policy_test.rego
+description: Change vendor defaults
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

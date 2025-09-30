@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechOnc_cures_api_fhir_r4Constraint
+metadata:
+  name: medtech-onc_cures_api_fhir_r4
+  annotations:
+    rulehub.id: medtech.onc_cures_api_fhir_r4
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.player_funds_segregation
+name: <Policy Title>
+path:
+  - policies/betting/player_funds_segregation/policy.rego
+  - policies/betting/player_funds_segregation/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.gamblingcommission.gov.uk/
+  - https://kansspelautoriteit.nl/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

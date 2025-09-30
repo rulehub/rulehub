@@ -1,0 +1,14 @@
+pre-commit>=3.7
+ruff>=0.5
+# yamllint removed: replaced by Stoplight Spectral CLI (run via npx)
+pytest>=7
+pip-tools>=7.4
+mypy>=1.10
+
+# Type stubs (fixed in devcontainer to ensure stable typing)
+types-PyYAML>=6.0.12
+types-requests>=2.32.0.2025
+
+# Documentation site
+mkdocs>=1.6
+mkdocs-material>=9.5

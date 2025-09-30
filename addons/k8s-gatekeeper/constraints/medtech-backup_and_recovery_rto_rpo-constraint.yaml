@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechBackup_and_recovery_rto_rpoConstraint
+metadata:
+  name: medtech-backup_and_recovery_rto_rpo
+  annotations:
+    rulehub.id: medtech.backup_and_recovery_rto_rpo
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

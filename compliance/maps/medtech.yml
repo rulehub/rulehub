@@ -1,0 +1,69 @@
+schema_version: 1
+regulation: MedTech (multi-jurisdiction)
+version: current
+sections:
+  HIPAA (US):
+    title: HIPAA Security, Privacy, and Administrative Safeguards
+    policies:
+    - medtech.hipaa_access_audit_logging
+    - medtech.hipaa_baa_with_vendors
+    - medtech.hipaa_mfa_privileged_access
+    - medtech.hipaa_minimum_necessary
+    - medtech.hipaa_security_admin_safeguards
+    - medtech.hipaa_security_tech_encryption
+  HITECH (US):
+    title: HITECH Act Requirements
+    policies:
+    - medtech.hitech_breach_notification_60d
+  FDA (US) — Part 11 and MDR:
+    title: FDA 21 CFR Part 11 and Medical Device Reporting (MDR)
+    policies:
+    - medtech.fda_cybersecurity_524b_sbom
+    - medtech.fda_mdr_event_reporting
+    - medtech.fda_part11_audit_trail
+    - medtech.fda_part11_esign_linkage
+    - medtech.fda_part11_system_validation
+  EU MDR/IVDR (EU):
+    title: EU Medical Device and IVD Regulations
+    policies:
+    - medtech.eu_ivdr_clinical_performance
+    - medtech.eu_mdr_ce_marking_and_udi
+    - medtech.eu_mdr_clinical_evaluation
+    - medtech.eu_mdr_eudamed_registration
+    - medtech.eu_mdr_pms_psur
+    - medtech.eu_vigilance_incident_reporting
+  ONC (US):
+    title: 21st Century Cures (ONC) and Information Blocking
+    policies:
+    - medtech.onc_cures_api_fhir_r4
+    - medtech.onc_information_blocking_prohibited
+  Data Protection & Cross-border:
+    title: GDPR Article 9 and Cross-border Transfers
+    policies:
+    - medtech.gdpr_art9_special_category_safeguards
+    - medtech.health_data_cross_border_controls
+  Standards (ISO/IEC):
+    title: ISO/IEC QMS, Risk, Software Lifecycle, Usability, ISMS
+    policies:
+    - medtech.iec_62304_scm_prp_processes
+    - medtech.iec_62304_software_safety_class
+    - medtech.iec_62366_usability_summative_eval
+    - medtech.iso_13485_document_control
+    - medtech.iso_14971_risk_management_file
+    - medtech.iso_27001_isms_scope_and_controls
+  Technical & Operational Controls:
+    title: Operational and Technical Controls
+    policies:
+    - medtech.backup_and_recovery_rto_rpo
+    - medtech.device_data_integrity_hashing
+    - medtech.dicom_network_security_basic
+    - medtech.fhir_smart_app_authz
+    - medtech.log_retention_for_clinical_events
+  Country/Region-specific:
+    title: National and Regional Healthcare Regulations
+    policies:
+    - medtech.au_myr_health_privacy
+    - medtech.ca_phipa_health_data
+    - medtech.sg_hcsa_pdpa_health_data
+    - medtech.uk_dtac_compliance
+    - medtech.uk_mhra_post_market_surveillance

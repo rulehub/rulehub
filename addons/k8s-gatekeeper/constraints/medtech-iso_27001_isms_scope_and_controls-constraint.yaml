@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechIso_27001_isms_scope_and_controlsConstraint
+metadata:
+  name: medtech-iso_27001_isms_scope_and_controls
+  annotations:
+    rulehub.id: medtech.iso_27001_isms_scope_and_controls
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

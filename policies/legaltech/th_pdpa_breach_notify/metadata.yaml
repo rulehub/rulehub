@@ -1,0 +1,20 @@
+id: legaltech.th_pdpa_breach_notify
+name: Th PDPA Breach Notify
+path:
+  - policies/legaltech/th_pdpa_breach_notify/policy.rego
+  - policies/legaltech/th_pdpa_breach_notify/policy_test.rego
+description: Notify authority affected individuals under PDPA
+standard:
+  name: Regulatory/Best Practice
+  version: current
+links:
+  - https://www.pdpc.or.th/en/home/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

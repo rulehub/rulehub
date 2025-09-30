@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.deposit_limit_controls
+name: Deposit Limit Controls
+path:
+  - policies/betting/deposit_limit_controls/policy.rego
+  - policies/betting/deposit_limit_controls/policy_test.rego
+description: Players can set and enforce deposit limits; exceeded limits require enforced blocks until reset.
+standard:
+  name: UK GC / EU AMLD
+  version: current
+links:
+  - https://www.gamblingcommission.gov.uk/
+  - https://anj.fr/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

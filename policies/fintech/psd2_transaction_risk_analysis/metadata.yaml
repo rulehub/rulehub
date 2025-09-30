@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.psd2_transaction_risk_analysis
+name: PSD2 Transaction Risk Analysis
+path:
+  - policies/fintech/psd2_transaction_risk_analysis/policy.rego
+  - policies/fintech/psd2_transaction_risk_analysis/policy_test.rego
+description: TRA engine & thresholds
+standard:
+  name: PSD2 / EBA RTS
+  version: current
+links:
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366
+  - https://eur-lex.europa.eu/eli/reg_del/2018/389/oj
+geo:
+  regions:
+    - Europe
+  countries:
+    - EU
+    - EEA
+  subregions: []
+  scope: Regional
+jurisdiction:
+  - EU

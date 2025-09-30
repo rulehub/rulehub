@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingSelfExclusionUkGamstop
+metadata:
+  name: betting-self-exclusion-uk-gamstop
+  annotations:
+    rulehub.id: betting.self_exclusion_uk_gamstop
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

@@ -1,0 +1,24 @@
+schema_version: 1
+regulation: PCI DSS
+version: '4.0'
+sections:
+  '3.4':
+    title: Protect stored cardholder data
+    policies:
+    - pci.ebs_encryption
+    - pci.storage_encryption
+  '4.2':
+    title: Use strong cryptography for transmission
+    policies:
+    - pci.https_only
+  '8.2':
+    title: Strong authentication
+    policies:
+    - pci.iam_password_policy
+  '10.2':
+    title: Logging & monitoring
+    policies:
+    - pci.logging_enabled
+  '12.10':
+    title: Incident response monitoring
+    policies: []

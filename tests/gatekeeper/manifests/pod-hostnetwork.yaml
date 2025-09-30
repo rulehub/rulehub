@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostnet
+spec:
+  hostNetwork: true
+  containers:
+    - name: c
+      image: busybox

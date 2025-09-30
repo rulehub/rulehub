@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: edtech.ferpa_consent_or_exception_for_disclosure
+name: <Policy Title>
+path:
+  - policies/edtech/ferpa_consent_or_exception_for_disclosure/policy.rego
+  - policies/edtech/ferpa_consent_or_exception_for_disclosure/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://studentprivacy.ed.gov/
+  - https://www.ecfr.gov/current/title-34/part-99/subpart-D
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

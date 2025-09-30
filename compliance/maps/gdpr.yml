@@ -1,0 +1,16 @@
+schema_version: 1
+regulation: GDPR
+version: "2016/679"
+sections:
+  "Art.5(1)(c)":
+    title: Data minimization
+    policies:
+      - gdpr.data_minimization
+  "Art.5(1)(e)":
+    title: Storage limitation
+    policies:
+      - gdpr.data_retention
+  "Art.6":
+    title: Lawfulness of processing
+    policies:
+      - gdpr.consent_required

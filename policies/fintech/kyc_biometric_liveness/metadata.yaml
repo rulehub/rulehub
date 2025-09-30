@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.kyc_biometric_liveness
+name: KYC Biometric Liveness
+path:
+  - policies/fintech/kyc_biometric_liveness/policy.rego
+  - policies/fintech/kyc_biometric_liveness/policy_test.rego
+description: Biometric liveness detection
+standard:
+  name: EU AMLD / FATF
+  version: current
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

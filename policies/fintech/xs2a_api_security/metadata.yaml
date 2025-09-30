@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.xs2a_api_security
+name: Open Banking XS2A API Security
+path:
+  - policies/fintech/xs2a_api_security/policy.rego
+  - policies/fintech/xs2a_api_security/policy_test.rego
+description: mTLS + OAuth2/PKCE + FAPI
+standard:
+  name: OBIE / FAPI
+  version: current
+links:
+  - https://www.openbanking.org.uk/
+  - https://openid.net/specs/openid-connect-core-1_0.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - EU/UK

@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage Question / Q&A
+    url: https://github.com/rulehub/rulehub/discussions/new?category=q-a
+    about: Ask a question in Discussions (Q&A category)
+  - name: Documentation
+    url: https://github.com/rulehub/rulehub#readme
+    about: Read the project documentation
+

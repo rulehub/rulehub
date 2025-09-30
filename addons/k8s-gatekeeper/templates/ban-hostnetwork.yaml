@@ -1,0 +1,17 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sbanhostnetwork
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sBanHostNetwork
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sbanhostnetwork
+        deny[msg] {
+          input.review.object.spec.hostNetwork == true
+          msg := "hostNetwork is not allowed"
+        }

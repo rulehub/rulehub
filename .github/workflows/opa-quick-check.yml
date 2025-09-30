@@ -1,0 +1,83 @@
+name: opa-quick-check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quick:
+    if: ${{ github.actor != 'nektos/act' }}
+    name: OPA quick check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          fetch-depth: 0
+
+      - name: Install OPA
+        run: |
+          set -euo pipefail
+          # Keep in sync with opa-bundle-publish.yml env OPA_VERSION
+          OPA_VERSION=1.7.1
+          mkdir -p ~/.cache/opa
+          if [ ! -f ~/.cache/opa/opa-${OPA_VERSION} ]; then
+            echo "Downloading OPA ${OPA_VERSION}" >&2
+            curl -sSL -o ~/.cache/opa/opa-${OPA_VERSION} https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64
+            chmod +x ~/.cache/opa/opa-${OPA_VERSION}
+          else
+            echo "Using cached OPA ${OPA_VERSION}" >&2
+          fi
+          sudo cp ~/.cache/opa/opa-${OPA_VERSION} /usr/local/bin/opa
+          opa version
+
+      - name: Parse & type check
+        run: |
+          set -euo pipefail
+          opa check policies
+
+      - name: Forbidden pattern scan
+        run: |
+          set -euo pipefail
+          echo "Scanning for disallowed boolean patterns"
+          MATCHES=$(grep -R -nF -e "(not " -e "and not" -e "not (" policies || true)
+          if [ -n "$MATCHES" ]; then
+            echo "$MATCHES" >&2
+            echo "Found disallowed patterns" >&2
+            exit 2
+          fi
+          echo "None"
+          echo "Scanning for ' not in {'"
+          MATCHES2=$(grep -R -nF ' not in {' policies || true)
+          if [ -n "$MATCHES2" ]; then
+            echo "$MATCHES2" >&2
+            echo "Found disallowed membership negation patterns" >&2
+            exit 3
+          fi
+          echo "None"
+
+      - name: OPA fmt check
+        run: |
+          set -euo pipefail
+          CHANGED=$(opa fmt -l policies || true)
+          if [ -n "$CHANGED" ]; then
+            echo "Rego files require formatting:" >&2
+            echo "$CHANGED" >&2
+            exit 4
+          fi
+          echo "Formatting OK"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "OPA quick check complete"
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] opa-quick-check skipped."

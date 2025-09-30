@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechCa_phipa_health_dataConstraint
+metadata:
+  name: medtech-ca_phipa_health_data
+  annotations:
+    rulehub.id: medtech.ca_phipa_health_data
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

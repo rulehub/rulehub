@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_mdr_ce_marking_and_udiConstraint
+metadata:
+  name: medtech-eu_mdr_ce_marking_and_udi
+  annotations:
+    rulehub.id: medtech.eu_mdr_ce_marking_and_udi
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

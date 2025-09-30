@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechDevice_data_integrity_hashingConstraint
+metadata:
+  name: medtech-device_data_integrity_hashing
+  annotations:
+    rulehub.id: medtech.device_data_integrity_hashing
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

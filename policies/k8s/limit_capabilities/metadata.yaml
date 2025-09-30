@@ -1,0 +1,25 @@
+id: k8s.limit_capabilities
+name: Limit container capabilities
+standard: Kubernetes
+version: 1.x
+path:
+  - addons/k8s-gatekeeper/templates/limit-capabilities.yaml
+  - policies/k8s/limit_capabilities/policy.rego
+  - policies/k8s/limit_capabilities/policy_test.rego
+description: Limit allowed Linux capabilities for containers.
+framework: gatekeeper
+tags:
+- k8s
+- security
+owner: platform-security
+links:
+  - https://kubernetes.io/docs/concepts/security/pod-security-standards/
+  - https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

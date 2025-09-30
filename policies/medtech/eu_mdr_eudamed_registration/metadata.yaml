@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.eu_mdr_eudamed_registration
+name: <Policy Title>
+path:
+  - policies/medtech/eu_mdr_eudamed_registration/policy.rego
+  - policies/medtech/eu_mdr_eudamed_registration/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://ec.europa.eu/health/medical-devices-eudamed/overview_en
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

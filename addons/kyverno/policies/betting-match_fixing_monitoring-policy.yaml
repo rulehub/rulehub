@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-match-fixing-monitoring
+  annotations:
+    rulehub.id: betting.match_fixing_monitoring
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.match_fixing_monitoring: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

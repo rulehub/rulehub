@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.three_ds_required
+name: 3DS Required
+path:
+  - policies/fintech/three_ds_required/policy.rego
+  - policies/fintech/three_ds_required/policy_test.rego
+description: Require 3DS2 for card payments
+standard:
+  name: EMVCo / PSD2
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3-d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - EU/UK

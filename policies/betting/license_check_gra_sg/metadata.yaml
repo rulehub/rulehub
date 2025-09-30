@@ -1,0 +1,17 @@
+id: betting.license_check_gra_sg
+name: License Check — GRA (SG)
+description: Operator licensed by GRA
+standard: GRA (SG)
+version: current
+path:
+  - policies/betting/license_check_gra_sg/policy.rego
+  - policies/betting/license_check_gra_sg/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.gra.gov.sg/
+geo:
+  regions: [APAC]
+  countries: [SG]
+  scope: National

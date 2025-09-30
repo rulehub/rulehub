@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" fill="none">
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size:14px; fill:#1b1f23 }
+    .title { font-size:20px; font-weight:600; }
+    .box { stroke:#2563eb; stroke-width:2; rx:8; ry:8; fill:#f0f7ff; }
+    .accent { fill:#2563eb; font-weight:600; }
+  </style>
+  <rect x="0" y="0" width="960" height="360" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="30" y="40" class="title">RuleHub — High-Level Architecture</text>
+  <!-- Box 1 -->
+  <rect class="box" x="40" y="80" width="260" height="220"/>
+  <text x="55" y="110" class="accent">1. Regulatory Sources</text>
+  <text x="55" y="140">GDPR, PCI DSS, AML, RG,</text>
+  <text x="55" y="160">K8s Baseline</text>
+  <text x="55" y="185">Industry Domains</text>
+  <text x="55" y="205">(FinTech, MedTech ...)</text>
+
+  <!-- Box 2 -->
+  <rect class="box" x="340" y="80" width="260" height="220"/>
+  <text x="355" y="110" class="accent">2. Mapping &amp; Metadata</text>
+  <text x="355" y="140">Compliance Map YAML</text>
+  <text x="355" y="160">Coverage / Traceability</text>
+  <text x="355" y="180">Kyverno, Gatekeeper, Rego</text>
+  <text x="355" y="200">Quality &amp; Coverage Tests</text>
+
+  <!-- Box 3 -->
+  <rect class="box" x="640" y="80" width="260" height="220"/>
+  <text x="655" y="110" class="accent">3. Distribution</text>
+  <text x="655" y="140">OPA Bundle (OCI)</text>
+  <text x="655" y="160">Helm Chart (external)</text>
+  <text x="655" y="180">Export Artifacts / Reports</text>
+  <text x="655" y="200">CI / Platform Integration</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto-start-reverse">
+      <path d="M0,0 L12,6 L0,12 z" fill="#2563eb" />
+    </marker>
+  </defs>
+  <line x1="300" y1="190" x2="340" y2="190" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)" />
+  <line x1="600" y1="190" x2="640" y2="190" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)" />
+  <text x="140" y="325" fill="#6b7280">Unified Flow: Regulatory Requirements → Mapping → Automatable Policies → Verifiable Delivery</text>
+</svg>

@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-self-exclusion-uk-gamstop
+  annotations:
+    rulehub.id: igaming.self_exclusion_uk_gamstop
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "igaming.self_exclusion_uk_gamstop: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

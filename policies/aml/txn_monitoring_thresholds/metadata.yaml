@@ -1,0 +1,18 @@
+id: aml.txn_monitoring_thresholds
+name: Transaction monitoring thresholds
+standard: EU AMLD
+version: 5/6
+path:
+    - policies/aml/txn_monitoring_thresholds/policy.rego
+    - policies/aml/txn_monitoring_thresholds/policy_test.rego
+description: Placeholder rule to monitor transactions based on thresholds.
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html
+  - https://www.legislation.gov.uk/eudr/2015/849/article/33
+geo:
+    regions:
+    - Global
+    countries:
+    - '*'
+    subregions: []
+    scope: Global

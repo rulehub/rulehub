@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.device_fingerprinting
+name: Device Fingerprinting
+path:
+  - policies/fintech/device_fingerprinting/policy.rego
+  - policies/fintech/device_fingerprinting/policy_test.rego
+description: Device fingerprinting enabled
+standard:
+  name: Fraud
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3-d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

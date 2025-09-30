@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_mdr_eudamed_registrationConstraint
+metadata:
+  name: medtech-eu_mdr_eudamed_registration
+  annotations:
+    rulehub.id: medtech.eu_mdr_eudamed_registration
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

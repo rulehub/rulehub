@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-kyc-onboarding
+  annotations:
+    rulehub.id: betting.kyc_onboarding
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.kyc_onboarding: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

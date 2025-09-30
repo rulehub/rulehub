@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechFda_mdr_event_reportingConstraint
+metadata:
+  name: medtech-fda_mdr_event_reporting
+  annotations:
+    rulehub.id: medtech.fda_mdr_event_reporting
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

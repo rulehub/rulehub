@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingMatchFixingMonitoring
+metadata:
+  name: betting-match-fixing-monitoring
+  annotations:
+    rulehub.id: betting.match_fixing_monitoring
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

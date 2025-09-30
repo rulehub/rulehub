@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/schemas/policy-metadata.schema.json",
+  "title": "Policy Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$",
+      "description": "Global policy identifier like 'pci.storage_encryption'"
+    },
+    "name": { "type": "string" },
+    "standard": {
+      "description": "Either a string (flat) or an object with name+version",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "version": { "type": "string", "description": "Flat form version; not required if standard is an object." },
+    "description": { "type": "string" },
+    "framework": {
+      "type": ["string", "null"],
+      "enum": ["kyverno", "gatekeeper", "k8s", "other"],
+      "description": "Underlying policy framework"
+    },
+    "severity": {
+      "type": ["string", "null"],
+      "enum": ["info", "low", "medium", "high", "critical"]
+    },
+    "owner": { "type": ["string", "null"] },
+    "tags": {
+      "type": ["array", "null"],
+      "items": { "type": "string" }
+    },
+    "links": {
+      "type": ["array", "null"],
+      "items": { "type": "string", "format": "uri-reference" }
+    },
+    "geo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["regions", "countries", "scope"],
+      "properties": {
+        "regions": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "countries": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "subregions": { "type": ["array", "null"], "items": { "type": "string" } },
+        "scope": { "type": "string" }
+      }
+    },
+    "jurisdiction": { "type": ["array", "null"], "items": { "type": "string" } },
+    "path": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ],
+      "description": "One or more relative paths to policy files"
+    }
+  },
+  "required": ["id", "name", "standard", "path", "geo"],
+  "oneOf": [
+    {
+      "description": "Flat standard/version form",
+      "required": ["standard", "version"],
+      "properties": {
+        "standard": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    {
+      "description": "Nested standard form (standard.name + standard.version)",
+      "properties": {
+        "standard": {
+          "type": "object",
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

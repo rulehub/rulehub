@@ -1,0 +1,10 @@
+{
+  "name": "rulehub-docs-lint",
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "markdownlint-cli2": "^0.15.0",
+    "markdownlint": "^0.34.0",
+    "cspell": "^8.14.2"
+  }
+}

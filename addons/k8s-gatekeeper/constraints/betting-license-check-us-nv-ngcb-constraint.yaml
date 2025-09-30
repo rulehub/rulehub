@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckUsNvNgcb
+metadata:
+  name: betting-license-check-us-nv-ngcb
+  annotations:
+    rulehub.id: betting.license_check_us_nv_ngcb
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingNoBetsByParticipants
+metadata:
+  name: betting-no-bets-by-participants
+  annotations:
+    rulehub.id: betting.no_bets_by_participants
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

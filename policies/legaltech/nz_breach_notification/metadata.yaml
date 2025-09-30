@@ -1,0 +1,20 @@
+id: legaltech.nz_breach_notification
+name: 'NZ: Breach Notification'
+path:
+  - policies/legaltech/nz_breach_notification/policy.rego
+  - policies/legaltech/nz_breach_notification/policy_test.rego
+description: Notify OPC affected individuals of notifiable privacy breach
+standard:
+  name: Regulatory/Best Practice
+  version: current
+links:
+  - https://www.privacy.org.nz/for-organisations/privacy-breaches/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

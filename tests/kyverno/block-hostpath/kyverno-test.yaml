@@ -1,0 +1,22 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: block-hostpath
+policies:
+  - ../../../addons/kyverno/policies/block-hostpath.yaml
+resources:
+  - resources/pod-with-hostpath.yaml
+  - resources/pod-without-hostpath.yaml
+results:
+  - policy: block-hostpath
+    rule: forbid-hostpath
+    resources:
+      - pod-with-hostpath
+    kind: Pod
+    result: fail
+  - policy: block-hostpath
+    rule: forbid-hostpath
+    resources:
+      - pod-without-hostpath
+    kind: Pod
+    result: pass

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.aml_sanctions_rescreening_frequency
+name: AML Sanctions Re-Screening Frequency
+path:
+  - policies/fintech/aml_sanctions_rescreening_frequency/policy.rego
+  - policies/fintech/aml_sanctions_rescreening_frequency/policy_test.rego
+description: Periodic sanctions re-screening
+standard:
+  name: EU AMLD / FATF
+  version: current
+links:
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

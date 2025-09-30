@@ -1,0 +1,21 @@
+name: "policy-catalog: disabled (moved to separate repo)"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  noop:
+    if: ${{ github.actor != 'nektos/act' }}
+    name: No-op
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The policy-catalog plugin has moved to a separate repository; this workflow is disabled."
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] policy-catalog-pack skipped."

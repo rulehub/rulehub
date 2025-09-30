@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-uk_dtac_compliance
+  annotations:
+    rulehub.id: medtech.uk_dtac_compliance
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.uk_dtac_compliance: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

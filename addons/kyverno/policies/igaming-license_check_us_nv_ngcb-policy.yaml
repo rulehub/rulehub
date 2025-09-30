@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-license-check-us-nv-ngcb
+  annotations:
+    rulehub.id: igaming.license_check_us_nv_ngcb
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "igaming.license_check_us_nv_ngcb: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

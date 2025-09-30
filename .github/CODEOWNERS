@@ -1,0 +1,14 @@
+## CODEOWNERS
+# Single current maintainer. Add teams / additional maintainers later for finer‑grained ownership.
+
+*                 @dev404ai
+
+# Potential future refinements (examples, commented out):
+# /policies/       @dev404ai
+# /compliance/     @dev404ai
+# /tools/          @dev404ai
+# /addons/         @dev404ai
+# /docs/           @dev404ai
+# /tests/          @dev404ai
+
+# GitHub will request review from @dev404ai for any change.

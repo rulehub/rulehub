@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHipaa_security_tech_encryptionConstraint
+metadata:
+  name: medtech-hipaa_security_tech_encryption
+  annotations:
+    rulehub.id: medtech.hipaa_security_tech_encryption
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

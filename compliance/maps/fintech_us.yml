@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: US FinReg
+version: "MTL"
+sections:
+  "State MTL":
+    title: Money Transmitter Licenses
+    policies:
+      - fintech.us_mtl_license

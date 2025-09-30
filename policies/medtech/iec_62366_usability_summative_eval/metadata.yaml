@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.iec_62366_usability_summative_eval
+name: <Policy Title>
+path:
+  - policies/medtech/iec_62366_usability_summative_eval/policy.rego
+  - policies/medtech/iec_62366_usability_summative_eval/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://webstore.iec.ch/en/publication/26023
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

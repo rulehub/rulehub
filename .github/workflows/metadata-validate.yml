@@ -1,0 +1,53 @@
+name: Metadata Validate
+
+on:
+  pull_request:
+    paths:
+      - "policies/**/metadata.yaml"
+      - "tools/validate_metadata.py"
+      - "tools/schemas/policy-metadata.schema.json"
+  push:
+    paths:
+      - "policies/**/metadata.yaml"
+      - "tools/validate_metadata.py"
+      - "tools/schemas/policy-metadata.schema.json"
+  # Manual run (no inputs) – strict mode can be toggled by providing env STRICT_METADATA=1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Validate metadata
+        env:
+          # Strict mode rules:
+          # 1. Always strict for pull_request events.
+          # 2. Optional strict for other events: export STRICT_METADATA=1 (local) or define a repo/Org variable.
+          STRICT_EMPTY_PATHS: ${{ github.event_name == 'pull_request' && '1' || '' }}
+        run: |
+          # Local / manual opt-in strict mode
+            if [ "${STRICT_METADATA:-}" = "1" ]; then export STRICT_EMPTY_PATHS=1; fi
+          python3 tools/validate_metadata.py
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] metadata-validate skipped."

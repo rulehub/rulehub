@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.self_exclusion_es_rgiaj
+name: <Policy Title>
+path:
+  - policies/betting/self_exclusion_es_rgiaj/policy.rego
+  - policies/betting/self_exclusion_es_rgiaj/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.ordenacionjuego.es/en
+  - https://www.ordenacionjuego.es/en/rgiaj
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

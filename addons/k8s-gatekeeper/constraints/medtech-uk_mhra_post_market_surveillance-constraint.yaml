@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechUk_mhra_post_market_surveillanceConstraint
+metadata:
+  name: medtech-uk_mhra_post_market_surveillance
+  annotations:
+    rulehub.id: medtech.uk_mhra_post_market_surveillance
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

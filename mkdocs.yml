@@ -1,0 +1,84 @@
+site_name: RuleHub
+site_description: "Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)"
+site_url: "https://rulehub.github.io/rulehub/"  # GitHub Pages URL (org/repo)
+repo_url: "https://github.com/rulehub/rulehub"
+repo_name: rulehub/rulehub
+copyright: "Copyright © {{ git_committers_time | date('YYYY') }} RuleHub contributors"
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+  language: en
+
+nav:
+  - Overview: index.md
+    # Roadmap removed: ROADMAP.md not present in docs/ — keep nav and files in sync
+  - Getting Started: getting-started.md
+  - Architecture:
+    - Policy Architecture: policy-architecture.md
+    - Metadata: metadata.md
+    - Coverage: coverage.md
+    - Compliance Maps: compliance-maps.md
+  - Kubernetes Policies:
+    - K8s Policies: k8s-policies.md
+  - Security & Supply Chain:
+    - Build Info: build-info.md
+    - Security Provenance: security-provenance.md
+    - CI Security: ci-security.md
+  - Release Process:
+    - Versioning & Releases: release-versioning.md
+  - Release Guide: release-guide.md
+  - Release Runbook: release-runbook.md
+  - Integrity: security-integrity.md
+  - Link Quality Pipeline: link-quality.md
+  - Editorial Checklist: editorial-checklist.md
+  - Aggregated References: references-index.md
+  - Extras:
+  # Local run and Brand usage removed from nav because files are not intended to be part of the public site
+    - Repository README: README_repo.md
+    - OPA bundle format: opa-bundle-format.md
+    - OPA bundle usage: opa-bundle-usage.md
+    - Performance: performance.md
+    - Policy test quality: policy-test-quality.md
+    - Policy title sync plan: policy-title-sync-plan.md
+    - Security threat model: security-threat-model.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rulehub/rulehub
+      name: GitHub
+
+# Provide edit links on pages (Material feature content.action.edit)
+edit_uri: edit/main/docs/
+
+# To preview locally:
+#   make docs-serve
+# To build static site:
+#   make docs-build

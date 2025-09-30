@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.ob_data_minimization
+name: Open Banking Data Minimization
+path:
+  - policies/fintech/ob_data_minimization/policy.rego
+  - policies/fintech/ob_data_minimization/policy_test.rego
+description: Minimize shared data scopes
+standard:
+  name: OBIE
+  version: current
+links:
+  - https://www.openbanking.org.uk/
+  - https://openid.net/specs/openid-connect-core-1_0.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - EU/UK

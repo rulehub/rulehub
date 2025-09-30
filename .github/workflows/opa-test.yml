@@ -1,0 +1,41 @@
+name: OPA Test (Betting Full)
+on: [push, pull_request]
+
+permissions:
+  contents: read
+jobs:
+  test:
+    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Cache OPA binary
+        id: cache-opa
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: ~/.cache/opa
+          key: opa-${{ runner.os }}-1.7.1
+          restore-keys: |
+            opa-${{ runner.os }}-
+      - name: Install OPA
+        run: |
+          set -euo pipefail
+          OPA_VERSION=1.7.1
+          mkdir -p ~/.cache/opa
+          if [ ! -f ~/.cache/opa/opa-${OPA_VERSION} ]; then
+            echo "Downloading OPA ${OPA_VERSION}" >&2
+            curl -sSL -o ~/.cache/opa/opa-${OPA_VERSION} https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64_static
+            chmod +x ~/.cache/opa/opa-${OPA_VERSION}
+          else
+            echo "Using cached OPA ${OPA_VERSION}" >&2
+          fi
+          sudo cp ~/.cache/opa/opa-${OPA_VERSION} /usr/local/bin/opa
+          opa version
+      - name: Run OPA tests (betting)
+        run: opa test -v policies/betting
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] opa-test skipped."

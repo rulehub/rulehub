@@ -1,0 +1,17 @@
+id: igaming.license_check_us_nj_dge
+name: License Check — NJ DGE
+description: Operator licensed by NJ DGE
+standard: NJ DGE
+version: current
+path:
+  - policies/igaming/license_check_us_nj_dge/policy.rego
+  - policies/igaming/license_check_us_nj_dge/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+links:
+  - https://www.nj.gov/oag/ge/
+geo:
+  regions: [North America]
+  countries: [US-NJ]
+  scope: State

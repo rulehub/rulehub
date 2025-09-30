@@ -1,0 +1,20 @@
+id: legaltech.records_classification_scheme_applied
+name: Records Classification Scheme Applied
+path:
+  - policies/legaltech/records_classification_scheme_applied/policy.rego
+  - policies/legaltech/records_classification_scheme_applied/policy_test.rego
+description: Apply records classification scheme
+standard:
+  name: Best Practice
+  version: current
+links:
+  - https://www.iso.org/standard/62542.html
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

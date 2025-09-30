@@ -1,0 +1,20 @@
+id: legaltech.my_pdpa_retention_principle
+name: 'MY: PDPA Retention Principle'
+path:
+  - policies/legaltech/my_pdpa_retention_principle/policy.rego
+  - policies/legaltech/my_pdpa_retention_principle/policy_test.rego
+description: Comply with retention principle (s.10)
+standard:
+  name: Regulatory/Best Practice
+  version: current
+links:
+  - https://www.malaysia.gov.my/portal/content/654
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

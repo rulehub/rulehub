@@ -1,0 +1,21 @@
+id: fintech.us_mtl_license
+name: US Money Transmitter Licensing (MTL)
+standard: US FinReg
+version: "state-licenses"
+path:
+  - policies/fintech/us_mtl_license/policy.rego
+  - policies/fintech/us_mtl_license/policy_test.rego
+framework: other
+severity: high
+owner: compliance
+description: Validates required state money transmitter licenses are held and current for covered US jurisdictions.
+links:
+  - https://www.upguard.com/blog/cybersecurity-regulations-financial-industry
+  - https://www.fincen.gov/msb-state-law-regulatory-framework
+geo:
+  regions:
+  - North America
+  countries:
+  - US
+  subregions: []
+  scope: US

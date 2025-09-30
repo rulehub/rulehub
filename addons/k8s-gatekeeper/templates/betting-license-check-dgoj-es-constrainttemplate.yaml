@@ -1,0 +1,30 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: betting-license-check-dgoj-es
+  annotations:
+    rulehub.id: betting.license_check_dgoj_es
+spec:
+  crd:
+    spec:
+      names:
+        kind: BettingLicenseCheckDgojEs
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredLabel:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package rulehub.betting.license_check_dgoj_es
+        import future.keywords.if
+
+        default deny = []
+
+        deny[msg] {
+          input.review.kind.kind == "Namespace"
+          not input.review.object.metadata.labels[params.requiredLabel]
+          msg := "betting.license_check_dgoj_es: required label missing"
+        }

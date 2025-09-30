@@ -1,0 +1,24 @@
+schema_version: 1
+regulation: EU AMLD
+version: 5/6
+sections:
+  Article 13:
+    title: Customer due diligence
+    policies:
+    - aml.address_verification
+    - aml.kyc_basic_cdd
+    - aml.minimum_age
+    - aml.ubo_identification
+  Article 18:
+    title: Enhanced due diligence
+    policies:
+    - aml.high_risk_country_edd
+    - aml.sanctions_check
+  Article 20:
+    title: PEP
+    policies:
+    - aml.pep_screening_required
+  Article 33:
+    title: Transaction monitoring
+    policies:
+    - aml.txn_monitoring_thresholds

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_mdr_pms_psurConstraint
+metadata:
+  name: medtech-eu_mdr_pms_psur
+  annotations:
+    rulehub.id: medtech.eu_mdr_pms_psur
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

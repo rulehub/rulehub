@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: legaltech.ediscovery_frcp_26_34_37
+name: eDiscovery — FRCP 26/34/37
+path:
+  - policies/legaltech/ediscovery_frcp_26_34_37/policy.rego
+  - policies/legaltech/ediscovery_frcp_26_34_37/policy_test.rego
+description: FRCP discovery non-compliant
+standard:
+  name: FRCP
+  version: current
+links:
+  - https://www.law.cornell.edu/rules/frcp/rule_26
+geo:
+  regions:
+    - North America
+  countries:
+    - US
+  subregions: []
+  scope: Federal
+jurisdiction:
+  - US

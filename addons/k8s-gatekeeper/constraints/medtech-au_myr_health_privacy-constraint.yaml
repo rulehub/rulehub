@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechAu_myr_health_privacyConstraint
+metadata:
+  name: medtech-au_myr_health_privacy
+  annotations:
+    rulehub.id: medtech.au_myr_health_privacy
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

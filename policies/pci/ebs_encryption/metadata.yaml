@@ -1,0 +1,24 @@
+id: pci.ebs_encryption
+name: EBS volume encryption enabled
+standard: PCI DSS
+version: '4.0'
+path:
+  - policies/pci/ebs_encryption/policy.rego
+  - policies/pci/ebs_encryption/policy_test.rego
+description: Placeholder rule for ensuring encryption at rest for block storage volumes.
+framework: other
+tags:
+- pci
+owner: compliance
+severity: medium
+links:
+  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
+  - https://www.pcisecuritystandards.org/document_library # SAQ D Service Provider (canonical library)
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

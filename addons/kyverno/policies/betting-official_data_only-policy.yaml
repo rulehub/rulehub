@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-official-data-only
+  annotations:
+    rulehub.id: betting.official_data_only
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.official_data_only: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHipaa_minimum_necessaryConstraint
+metadata:
+  name: medtech-hipaa_minimum_necessary
+  annotations:
+    rulehub.id: medtech.hipaa_minimum_necessary
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

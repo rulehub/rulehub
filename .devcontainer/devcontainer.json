@@ -1,0 +1,48 @@
+{
+  "name": "RuleHub Dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "updateContentCommand": "bash .devcontainer/scripts/post-create.sh",
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+  "containerEnv": {
+    "PIP_NO_CACHE_DIR": "off",
+    "UV_SYSTEM_PYTHON": "1",
+  "PIP_CACHE_DIR": "/workspace/.cache/pip",
+  "SYFT_VERSION": "1.31.0"
+  },
+  // Using a named volume for pip cache because docker run does not support type=cache mounts
+  "mounts": [
+    "type=volume,source=pip-cache,target=/workspace/.cache/pip"
+  ],
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "tim-koehler.helm-intellisense",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "python.analysis.typeCheckingMode": "basic",
+        "yaml.schemas": {
+          "kubernetes": "**/*.yaml"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-license-check-anj-fr
+  annotations:
+    rulehub.id: igaming.license_check_anj_fr
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "igaming.license_check_anj_fr: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

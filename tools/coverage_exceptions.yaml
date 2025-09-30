@@ -1,0 +1,16 @@
+# Coverage audit exceptions template
+# - Put policy ids you want the audit to ignore for placeholder checks
+# - 'allowlist' is a global list of policy ids that should NOT be flagged as placeholder
+# - 'domains' can contain domain-specific lists (policy ids under that domain)
+
+allowlist:
+  # examples (replace with real ids you want to allow)
+  - betting.license_check_agco_on
+  - k8s.ban_hostnetwork
+  - medtech.uk_mhra_post_market_surveillance
+
+domains:
+  # domain-specific lists (optional)
+  betting:
+    - betting.self_exclusion_on_igaming
+    - betting.slots_no_autoplay_uk

@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-license_check_dgoj_es
+  annotations:
+    rulehub.id: betting.license_check_dgoj_es
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: betting.license_check_dgoj_es: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

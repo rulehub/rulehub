@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srunasnonroot
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRunAsNonRoot
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srunasnonroot
+        deny[msg] {
+          some c
+          c := input.review.object.spec.containers[_]
+          not c.securityContext.runAsNonRoot
+          msg := "Containers must set securityContext.runAsNonRoot=true"
+        }

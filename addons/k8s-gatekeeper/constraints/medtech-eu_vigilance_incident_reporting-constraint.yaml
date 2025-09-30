@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechEu_vigilance_incident_reportingConstraint
+metadata:
+  name: medtech-eu_vigilance_incident_reporting
+  annotations:
+    rulehub.id: medtech.eu_vigilance_incident_reporting
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

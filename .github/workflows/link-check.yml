@@ -1,0 +1,78 @@
+name: link-check
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".github/workflows/link-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    # Skip under act to avoid apt/docker issues locally; CI remains enabled
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Install classification dependencies
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y python3
+      - name: Build tools image
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          docker build -t rulehub-doc-tools:latest .github/tools
+      - name: Run link check (lychee pinned w/ retries)
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          set -e
+          ATTEMPTS=3
+          for i in $(seq 1 $ATTEMPTS); do
+            echo "[lychee] attempt $i/$ATTEMPTS";
+            docker run --rm -v "$PWD:/workspace" -w /workspace rulehub-doc-tools:latest \
+              lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
+                --exclude-path dist --exclude-path site \
+                --exclude "https://github.com/rulehub/rulehub-charts" \
+                **/*.md && success=1 && break || success=0
+            echo "[lychee] attempt $i failed; sleeping 10s before retry"; sleep 10;
+          done
+          if [ "$success" != "1" ]; then
+            echo "[lychee] final classification run (JSON output)";
+            # Produce JSON for classification (do not fail pipeline here)
+            docker run --rm -v "$PWD:/workspace" -w /workspace rulehub-doc-tools:latest \
+              lychee --format json --no-progress --max-concurrency 8 --timeout 20s \
+                --exclude-path dist --exclude-path site \
+                --exclude "https://github.com/rulehub/rulehub-charts" \
+                **/*.md > lychee.json || true
+            python3 .github/scripts/classify_lychee.py lychee.json || exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload lychee.json (if present)
+        if: ${{ always() && github.actor != 'nektos/act' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lychee-report
+          path: lychee.json
+          if-no-files-found: ignore
+      - name: Step summary
+        if: ${{ always() && github.actor != 'nektos/act' }}
+        run: |
+          if [ -f lychee.json ]; then
+            HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
+            SOFT=$(jq '[.errors[] | select((.status|type=="number") and ((.status==429) or (.status>=500 and .status<=599)))] | length' lychee.json || echo 0)
+            echo "### Link Check Summary" >> $GITHUB_STEP_SUMMARY
+            echo "Hard failures: $HARD" >> $GITHUB_STEP_SUMMARY
+            echo "Soft (ignored) failures: $SOFT" >> $GITHUB_STEP_SUMMARY
+            if [ "$HARD" -gt 0 ]; then echo "\n> :x: Hard failures require fixes." >> $GITHUB_STEP_SUMMARY; fi
+            if [ "$SOFT" -gt 0 ]; then echo "\n> :warning: Soft failures (429/5xx) are ignored for success but should be monitored." >> $GITHUB_STEP_SUMMARY; fi
+          else
+            echo "### Link Check Summary" >> $GITHUB_STEP_SUMMARY
+            echo "All attempts succeeded; no lychee.json produced." >> $GITHUB_STEP_SUMMARY
+          fi

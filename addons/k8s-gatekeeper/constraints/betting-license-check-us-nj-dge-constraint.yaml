@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckUsNjDge
+metadata:
+  name: betting-license-check-us-nj-dge
+  annotations:
+    rulehub.id: betting.license_check_us_nj_dge
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

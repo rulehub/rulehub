@@ -1,0 +1,20 @@
+id: legaltech.uk_gdpr_minor_consent
+name: 'UK: GDPR Minor Consent'
+path:
+  - policies/legaltech/uk_gdpr_minor_consent/policy.rego
+  - policies/legaltech/uk_gdpr_minor_consent/policy_test.rego
+description: Parental consent for under-13
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://ico.org.uk/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

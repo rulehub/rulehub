@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.chargeback_monitoring
+name: Chargeback Monitoring
+path:
+  - policies/fintech/chargeback_monitoring/policy.rego
+  - policies/fintech/chargeback_monitoring/policy_test.rego
+description: Monitor and react to chargeback rates
+standard:
+  name: Card Schemes
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

@@ -1,0 +1,25 @@
+id: k8s.no_privileged
+name: Disallow privileged pods
+standard: Kubernetes
+version: 1.x
+path:
+  - addons/kyverno/policies/no-privileged.yaml
+  - policies/k8s/no_privileged/policy.rego
+  - policies/k8s/no_privileged/policy_test.rego
+description: Forbid privileged mode for pods/containers.
+framework: kyverno
+tags:
+- k8s
+- security
+owner: platform-security
+links:
+  - https://kubernetes.io/docs/concepts/security/pod-security-standards/
+  - https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global

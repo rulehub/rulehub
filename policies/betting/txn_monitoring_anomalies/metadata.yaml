@@ -1,0 +1,17 @@
+id: betting.txn_monitoring_anomalies
+name: Transaction Monitoring — Anomalies
+description: Monitor anomalous betting transactions
+standard: AML
+version: current
+path:
+  - policies/betting/txn_monitoring_anomalies/policy.rego
+  - policies/betting/txn_monitoring_anomalies/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+links:
+  - https://www.fatf-gafi.org/
+geo:
+  regions: [Global]
+  countries: ["*"]
+  scope: Global

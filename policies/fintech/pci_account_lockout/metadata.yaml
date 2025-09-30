@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_account_lockout
+name: PCI DSS — Account Lockout
+path:
+  - policies/fintech/pci_account_lockout/policy.rego
+  - policies/fintech/pci_account_lockout/policy_test.rego
+description: Lockout after failed attempts
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

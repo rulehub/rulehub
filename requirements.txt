@@ -1,0 +1,4 @@
+PyYAML>=6.0,<7
+jsonschema>=4.19
+ruamel.yaml>=0.18
+requests>=2.32

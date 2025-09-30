@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: medtech.gdpr_art9_special_category_safeguards
+name: <Policy Title>
+path:
+  - policies/medtech/gdpr_art9_special_category_safeguards/policy.rego
+  - policies/medtech/gdpr_art9_special_category_safeguards/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.9
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.35
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

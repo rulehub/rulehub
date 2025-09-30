@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: PSD2
+version: "2015/2366"
+sections:
+  "SCA":
+    title: Strong Customer Authentication
+    policies:
+      - fintech.psd2_sca

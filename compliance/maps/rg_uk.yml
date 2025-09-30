@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: UKGC/MGA
+version: "placeholder"
+sections:
+  "RG-1":
+    title: Self-exclusion controls
+    policies:
+      - rg.self_exclusion_enforced

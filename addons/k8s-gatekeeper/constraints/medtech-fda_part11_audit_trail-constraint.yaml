@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechFda_part11_audit_trailConstraint
+metadata:
+  name: medtech-fda_part11_audit_trail
+  annotations:
+    rulehub.id: medtech.fda_part11_audit_trail
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

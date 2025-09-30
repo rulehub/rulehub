@@ -1,0 +1,28 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: betting-suspicious-betting-reporting-uk
+  annotations:
+    rulehub.id: betting.suspicious_betting_reporting_uk
+spec:
+  crd:
+    spec:
+      names:
+        kind: BettingSuspiciousBettingReportingUk
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredLabel:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package rulehub.betting.suspicious_betting_reporting_uk
+        import future.keywords.if
+
+        deny[msg] {
+          input.review.kind.kind == "Namespace"
+          not input.review.object.metadata.labels[input.parameters.requiredLabel]
+          msg := "betting.suspicious_betting_reporting_uk: required label missing"
+        }

@@ -1,0 +1,20 @@
+# Example configuration for nektos/act
+# Copy to ~/.actrc or run: act --config ./.actrc.example (...)
+
+# Map GitHub hosted runner label to a local Docker image (micro image is usually enough)
+-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-22.04
+
+# Re-use containers between runs for speed (cache virtual envs, downloaded actions)
+--reuse
+
+# Optional: avoid pulling base image every time unless tag changed
+--pull=false
+
+# Central secrets file (do NOT commit your real .secrets file)
+--secret-file .secrets
+
+# Example of setting a default env var (uncomment to skip supply-chain steps locally)
+# --env SKIP_SUPPLYCHAIN=1
+
+# You can override per invocation, e.g.:
+# act push -j tests --matrix python-version=3.11

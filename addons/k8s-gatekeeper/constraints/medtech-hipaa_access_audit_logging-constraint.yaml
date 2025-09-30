@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHipaa_access_audit_loggingConstraint
+metadata:
+  name: medtech-hipaa_access_audit_logging
+  annotations:
+    rulehub.id: medtech.hipaa_access_audit_logging
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

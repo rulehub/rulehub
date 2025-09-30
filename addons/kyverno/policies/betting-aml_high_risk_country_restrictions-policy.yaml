@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-aml_high_risk_country_restrictions
+  annotations:
+    rulehub.id: betting.aml_high_risk_country_restrictions
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: betting.aml_high_risk_country_restrictions: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

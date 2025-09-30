@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: AU iGaming Hosting
+version: "placeholder"
+sections:
+  "Audit":
+    title: Audit trails & secure hosting
+    policies:
+      - rg.au_audit_trails

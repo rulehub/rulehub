@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-reality_checks_elapsed_time
+  annotations:
+    rulehub.id: betting.reality_checks_elapsed_time
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: betting.reality_checks_elapsed_time: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

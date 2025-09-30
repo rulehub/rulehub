@@ -1,0 +1,48 @@
+# Yamllint configuration for RuleHub
+# Strict on structure, relaxed on style noise.
+
+extends: default
+
+yaml-files:
+  - "**/*.yml"
+  - "**/*.yaml"
+
+ignore:
+  - "charts/**/templates/**"
+  - "charts/**/charts/**"
+  - "addons/**/templates/**"
+  - "**/node_modules/**"
+  - "**/.git/**"
+  - "**/.venv/**"
+  - "**/__pycache__/**"
+  - "dist/**"
+  - ".github/**"
+  - "tmp/**"
+
+rules:
+  # K8s/policy YAML often omits doc markers
+  document-start: disable
+  document-end: disable
+
+  # Keep truthy noise down; CLI tools sometimes require unquoted on/off
+  truthy:
+    allowed-values: ["true", "false", "on", "off", "yes", "no"]
+    check-keys: false
+
+  comments-indentation: disable
+
+  line-length:
+    max: 140
+    allow-non-breakable-words: true
+    level: warning
+
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+    level: warning
+
+  hyphens:
+    level: warning
+
+  commas: disable

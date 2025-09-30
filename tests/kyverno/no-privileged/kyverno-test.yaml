@@ -1,0 +1,22 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: no-privileged
+policies:
+  - ../../../addons/kyverno/policies/no-privileged.yaml
+resources:
+  - resources/pod-privileged.yaml
+  - resources/pod-unprivileged.yaml
+results:
+  - policy: no-privileged
+    rule: forbid-privileged
+    resources:
+      - pod-privileged
+    kind: Pod
+    result: fail
+  - policy: no-privileged
+    rule: forbid-privileged
+    resources:
+      - pod-unprivileged
+    kind: Pod
+    result: pass

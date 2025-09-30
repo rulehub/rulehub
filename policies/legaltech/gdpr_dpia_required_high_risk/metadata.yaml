@@ -1,0 +1,20 @@
+id: legaltech.gdpr_dpia_required_high_risk
+name: 'GDPR: Dpia Required High Risk'
+path:
+  - policies/legaltech/gdpr_dpia_required_high_risk/policy.rego
+  - policies/legaltech/gdpr_dpia_required_high_risk/policy_test.rego
+description: DPIA required completed for high-risk processing (Art. 35)
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.35
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

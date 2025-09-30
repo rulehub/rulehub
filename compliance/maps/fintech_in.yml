@@ -1,0 +1,8 @@
+schema_version: 1
+regulation: RBI eKYC
+version: "placeholder"
+sections:
+  "High-risk eKYC":
+    title: High-risk eKYC controls required
+    policies:
+      - fintech.rbi_ekyc_risk

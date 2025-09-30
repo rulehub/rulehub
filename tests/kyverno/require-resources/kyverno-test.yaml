@@ -1,0 +1,22 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: require-resources
+policies:
+  - ../../../addons/kyverno/policies/require-resources.yaml
+resources:
+  - resources/pod-missing-resources.yaml
+  - resources/pod-with-resources.yaml
+results:
+  - policy: require-resources
+    rule: require-requests-limits
+    resources:
+      - pod-missing-resources
+    kind: Pod
+    result: fail
+  - policy: require-resources
+    rule: require-requests-limits
+    resources:
+      - pod-with-resources
+    kind: Pod
+    result: pass

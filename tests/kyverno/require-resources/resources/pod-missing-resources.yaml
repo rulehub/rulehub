@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-missing-resources
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36

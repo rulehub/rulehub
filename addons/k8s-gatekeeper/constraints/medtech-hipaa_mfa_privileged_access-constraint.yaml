@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechHipaa_mfa_privileged_accessConstraint
+metadata:
+  name: medtech-hipaa_mfa_privileged_access
+  annotations:
+    rulehub.id: medtech.hipaa_mfa_privileged_access
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

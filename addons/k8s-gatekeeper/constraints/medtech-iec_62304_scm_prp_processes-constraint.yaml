@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechIec_62304_scm_prp_processesConstraint
+metadata:
+  name: medtech-iec_62304_scm_prp_processes
+  annotations:
+    rulehub.id: medtech.iec_62304_scm_prp_processes
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

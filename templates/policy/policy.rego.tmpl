@@ -1,0 +1,20 @@
+package rulehub.<domain>.<policy_id>
+import future.keywords.if
+
+# Contract:
+# - Input shape: describe expected fields used below.
+# - Success: allow is true when there are no deny reasons.
+# - Failure: one or more deny[msg] entries explain why.
+
+default allow = false
+
+# Safe allow pattern: allow only when nothing denied
+allow {
+  count(deny) == 0
+}
+
+# Example deny; replace with real checks
+deny[msg] {
+  not input.controls["<domain>.<policy_id>"]
+  msg := "<domain>.<policy_id>: Generic control failed"
+}

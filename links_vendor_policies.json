@@ -1,0 +1,18 @@
+{
+  "sportradar.com": {
+    "allowed": false,
+    "rationale": "Marketing / promotional vendor content; prefer primary regulatory sources."
+  },
+  "emvco.com": {
+    "allowed": true,
+    "rationale": "Industry specification primary source (payment standards)."
+  },
+  "styra.com": {
+    "allowed": false,
+    "rationale": "Vendor blog / marketing material; cite canonical project docs when possible."
+  },
+  "upguard.com": {
+    "allowed": false,
+    "rationale": "Vendor marketing article; prefer authoritative standards or regulations."
+  }
+}

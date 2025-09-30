@@ -1,0 +1,20 @@
+id: legaltech.gdpr_lawful_basis_required
+name: 'GDPR: Lawful Basis Required'
+path:
+  - policies/legaltech/gdpr_lawful_basis_required/policy.rego
+  - policies/legaltech/gdpr_lawful_basis_required/policy_test.rego
+description: Lawful basis documented for each processing activity
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.6
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

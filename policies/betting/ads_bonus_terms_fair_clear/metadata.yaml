@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: betting.ads_bonus_terms_fair_clear
+name: <Policy Title>
+path:
+  - policies/betting/ads_bonus_terms_fair_clear/policy.rego
+  - policies/betting/ads_bonus_terms_fair_clear/policy_test.rego
+description: <Short description of the policy>
+standard:
+  name: <Standard or Regulation>
+  version: <version or "current">
+links:
+  - https://www.gov.uk/government/organisations/competition-and-markets-authority
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

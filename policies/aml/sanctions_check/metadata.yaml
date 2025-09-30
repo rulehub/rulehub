@@ -1,0 +1,19 @@
+id: aml.sanctions_check
+name: Sanctions list screening
+standard: EU AMLD
+version: 5/6
+path:
+    - policies/aml/sanctions_check/policy.rego
+    - policies/aml/sanctions_check/policy_test.rego
+description: Placeholder rule to screen customers against sanctions lists.
+links:
+  - https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en
+  - https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list
+  - https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Bpp-finsanctions-tf-r6.html
+geo:
+    regions:
+    - Global
+    countries:
+    - '*'
+    subregions: []
+    scope: Global

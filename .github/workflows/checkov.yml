@@ -1,0 +1,100 @@
+name: security-checkov
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  security-events: write # for SARIF upload
+  pull-requests: write # to comment on PRs
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkov-scan:
+    # Skip under nektos/act; we provide a separate no-op job so ACT has a stage to run.
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Ensure jq is available (for summary)
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq
+
+      - name: Run Checkov (native via pip) for ACT (no Docker)
+        if: ${{ github.actor == 'nektos/act' }}
+        run: |
+          # Prefer native run under ACT to avoid Docker exec flakiness,
+          # but do not install packages here. Run only if Checkov is already available.
+          if command -v checkov >/dev/null 2>&1; then
+            CHECKOV_CMD="checkov"
+          elif command -v python3 >/dev/null 2>&1 && python3 -c "import checkov" >/dev/null 2>&1; then
+            CHECKOV_CMD="python3 -m checkov"
+          else
+            echo "Checkov not available under ACT image; skipping native Checkov run.";
+            exit 0;
+          fi
+          ${CHECKOV_CMD} -d . --framework kubernetes \
+            --skip-path tests/kyverno --skip-path tests/gatekeeper \
+            --output sarif --output-file-path checkov.sarif \
+            --quiet || true
+
+      - name: Run Checkov (Docker) and produce SARIF
+        if: ${{ github.actor != 'nektos/act' }}
+        run: |
+          REPO="bridgecrew/checkov"
+          if [ -z "${CHECKOV_IMAGE_DIGEST:-}" ]; then
+            echo "ERROR: CHECKOV_IMAGE_DIGEST is required (sha256:...) and must be pinned; refusing to use ':latest'."
+            exit 1
+          fi
+          IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
+          docker run --rm -v "$PWD:/workspace" -w /workspace "$IMG" \
+            checkov -d . --framework kubernetes \
+            --skip-path tests/kyverno --skip-path tests/gatekeeper \
+            --output sarif --output-file-path checkov.sarif \
+            --quiet || true
+
+      - name: Upload SARIF to Code Scanning
+        # Skip under act to avoid external API calls failing locally
+        if: ${{ (success() || failure()) && github.actor != 'nektos/act' }}
+        uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          sarif_file: checkov.sarif
+
+      - name: Comment summary in PR
+        if: ${{ github.event_name == 'pull_request' && github.actor != 'nektos/act' }}
+        run: |
+          if [ -s checkov.sarif ] && command -v jq >/dev/null 2>&1; then
+            total=$(jq '[(.runs[]?.results // [])[]] | length' checkov.sarif)
+          else
+            total=0
+          fi
+          printf "CKV_SUMMARY<<'EOF'\n" >> $GITHUB_ENV
+          echo "### Checkov scan" >> $GITHUB_ENV
+          echo "- Findings: $total" >> $GITHUB_ENV
+          echo "- SARIF uploaded to Code scanning (tool: Checkov)." >> $GITHUB_ENV
+          echo "- See Security > Code scanning alerts for full details." >> $GITHUB_ENV
+          printf "EOF\n" >> $GITHUB_ENV
+
+      - name: Create or update PR comment
+        if: ${{ github.event_name == 'pull_request' && github.actor != 'nektos/act' }}
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
+        env:
+          CKV_SUMMARY: ${{ env.CKV_SUMMARY }}
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ env.CKV_SUMMARY }}
+
+  noop-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "[act] Checkov is skipped locally; full scan runs in GitHub CI."

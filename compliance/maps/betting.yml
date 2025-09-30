@@ -1,0 +1,74 @@
+schema_version: 1
+regulation: Betting (multi-jurisdiction)
+version: current
+sections:
+  1. Operator Controls:
+    title: Licensing, KYC and Core Controls
+    policies:
+      - betting.adr_provider_listed_uk
+      - betting.affordability_checks_uk
+      - betting.complaints_process_published
+      - betting.kyc_onboarding
+      - betting.kyc_on_withdrawal
+      - betting.license_check_adm_it
+      - betting.license_check_anj_fr
+      - betting.license_check_au_nt
+      - betting.license_check_brazil_14790
+      - betting.license_check_ca_on_igaming
+      - betting.license_check_coljuegos_co
+      - betting.license_check_dgoj_es
+      - betting.license_check_ggl_de
+      - betting.license_check_gra_sg
+      - betting.license_check_ksa_nl
+      - betting.license_check_mga
+      - betting.license_check_spelinspektionen_se
+      - betting.license_check_spillemyndigheden_dk
+      - betting.license_check_ukgc
+      - betting.license_check_us_co_division
+      - betting.license_check_us_nj_dge
+      - betting.license_check_us_nv_ngcb
+      - betting.license_check_us_pa_pgcb
+      - betting.player_funds_segregation
+      - betting.source_of_funds_checks
+      - betting.source_of_funds_thresholds
+  2. Market Integrity:
+    title: Integrity, Data, and Youth Protection
+    policies:
+      - betting.ads_bonus_terms_fair_clear
+      - betting.ads_no_minors_targeting
+      - betting.age_verification_before_gambling_uk
+      - betting.credit_card_gambling_ban_uk
+      - betting.data_integrity_audits
+      - betting.game_rules_visible_before_play
+      - betting.geofencing_regulated_markets
+      - betting.in_play_delay_controls
+      - betting.market_restrictions_youth
+      - betting.match_fixing_monitoring
+      - betting.no_bets_by_participants
+      - betting.official_data_only
+      - betting.reverse_withdrawal_ban_uk
+      - betting.rng_certification_gli11
+      - betting.rtp_disclosure_to_players
+      - betting.suspicious_betting_reporting_uk
+  3. AML Monitoring:
+    title: Ongoing Monitoring & Anomalies
+    policies:
+      - betting.aml_high_risk_country_restrictions
+      - betting.aml_sar_reporting_uk
+      - betting.ongoing_aml_monitoring
+      - betting.sanctions_screening_global
+      - betting.txn_monitoring_anomalies
+  4. Player Protection & Limits:
+    title: Player Protection & Limits
+    policies:
+      - betting.deposit_limit_controls
+      - betting.loss_limit_controls
+      - betting.reality_checks_elapsed_time
+      - betting.safer_gambling_interactions
+      - betting.self_exclusion_de_oasis
+      - betting.self_exclusion_dk_rofus
+      - betting.self_exclusion_es_rgiaj
+      - betting.self_exclusion_nl_cruks
+      - betting.self_exclusion_se_spelpaus
+      - betting.self_exclusion_uk_gamstop
+      - betting.session_time_limits_controls

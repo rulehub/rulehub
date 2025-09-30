@@ -1,0 +1,17 @@
+id: betting.suspicious_betting_reporting_uk
+name: Suspicious Betting — Reporting (UK)
+description: Report suspicious betting to UKGC
+standard: UKGC
+version: current
+path:
+  - policies/betting/suspicious_betting_reporting_uk/policy.rego
+  - policies/betting/suspicious_betting_reporting_uk/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
+links:
+  - https://www.gamblingcommission.gov.uk/
+geo:
+  regions: [Europe]
+  countries: [UK]
+  scope: National

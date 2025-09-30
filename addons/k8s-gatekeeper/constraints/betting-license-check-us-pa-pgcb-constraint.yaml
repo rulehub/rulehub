@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingLicenseCheckUsPaPgcb
+metadata:
+  name: betting-license-check-us-pa-pgcb
+  annotations:
+    rulehub.id: betting.license_check_us_pa_pgcb
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

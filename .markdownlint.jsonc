@@ -1,0 +1,8 @@
+{
+  // Core rule tweaks for project style
+  "default": true,
+  "MD013": { "line_length": 120, "code_blocks": false },
+  "MD024": false, // allow duplicate headings in different sections
+  "MD033": false, // allow inline HTML (mermaid fences / badges)
+  "MD041": false  // allow missing first-line heading in some generated files
+}

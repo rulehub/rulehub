@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: betting-license-check-us-co-division
+  annotations:
+    rulehub.id: betting.license_check_us_co_division
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: require-jurisdiction-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      validate:
+        message: "betting.license_check_us_co_division: required label missing"
+        pattern:
+          metadata:
+            labels:
+              jurisdiction: "?*"

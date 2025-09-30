@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.fraud_velocity_checks
+name: Fraud Velocity Checks
+path:
+  - policies/fintech/fraud_velocity_checks/policy.rego
+  - policies/fintech/fraud_velocity_checks/policy_test.rego
+description: Velocity checks on transactions
+standard:
+  name: Fraud
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+  - https://www.emvco.com/emv-technologies/3d-secure/
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

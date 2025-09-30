@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: medtech-sg_hcsa_pdpa_health_data
+  annotations:
+    rulehub.id: medtech.sg_hcsa_pdpa_health_data
+    rulehub.title: <Policy Title>
+    rulehub.links: |
+      - <https://reference-1>
+      - <https://reference-2>
+spec:
+  validationFailureAction: audit # or enforce
+  background: true
+  rules:
+  - name: <rule-name>
+    match:
+      any:
+      - resources:
+          kinds:
+          - "*"
+    validate:
+      message: medtech.sg_hcsa_pdpa_health_data: example validation
+      pattern:
+        metadata:
+          labels:
+            <required-label>: "?*"

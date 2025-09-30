@@ -1,0 +1,20 @@
+id: legaltech.gdpr_cookie_consent_eprivacy
+name: 'GDPR: Cookie Consent Eprivacy'
+path:
+  - policies/legaltech/gdpr_cookie_consent_eprivacy/policy.rego
+  - policies/legaltech/gdpr_cookie_consent_eprivacy/policy_test.rego
+description: Non-essential cookies after consent
+standard:
+  name: GDPR (EU)
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/dir/2002/58/oj
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

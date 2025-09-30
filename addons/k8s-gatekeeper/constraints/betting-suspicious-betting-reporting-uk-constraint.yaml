@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: BettingSuspiciousBettingReportingUk
+metadata:
+  name: betting-suspicious-betting-reporting-uk
+  annotations:
+    rulehub.id: betting.suspicious_betting_reporting_uk
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Namespace"]
+    namespaces: ["*"]
+  parameters:
+    requiredLabel: jurisdiction

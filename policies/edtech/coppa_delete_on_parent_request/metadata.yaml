@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: edtech.coppa_delete_on_parent_request
+name: COPPA Deletion on Parent Request
+path:
+  - policies/edtech/coppa_delete_on_parent_request/policy.rego
+  - policies/edtech/coppa_delete_on_parent_request/policy_test.rego
+description: Child personal data must be deleted when a verifiable parent deletion request is received.
+standard:
+  name: COPPA
+  version: current
+links:
+  - https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

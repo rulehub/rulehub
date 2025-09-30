@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.pci_log_retention
+name: PCI DSS — Log Retention
+path:
+  - policies/fintech/pci_log_retention/policy.rego
+  - policies/fintech/pci_log_retention/policy_test.rego
+description: Retain logs per PCI
+standard:
+  name: PCI DSS 4.0
+  version: current
+links:
+  - https://www.pcisecuritystandards.org/document_library
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

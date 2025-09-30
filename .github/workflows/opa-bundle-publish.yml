@@ -1,0 +1,438 @@
+name: opa-bundle-publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "policies/**"
+      - ".github/workflows/opa-bundle-publish.yml"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/rulehub-bundle
+  # Set to '1' (e.g. via: act -s SKIP_SUPPLYCHAIN=1) to skip OIDC-dependent supply-chain steps locally.
+  SKIP_SUPPLYCHAIN: "0"
+  # Central pinned tool versions (update deliberately & audit supply chain when bumping)
+  OPA_VERSION: "1.7.1"
+  SYFT_VERSION: "v1.20.0"
+  COSIGN_VERSION: "v2.2.4"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+      bundle_sha256: ${{ steps.digest.outputs.bundle_sha256 }}
+      subjects_b64: ${{ steps.digest.outputs.subjects_b64 }}
+      skip_supplychain: ${{ steps.flags.outputs.skip }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      # Ensure the requested Python version is on PATH before any pip installs,
+      # so dependency markers resolve consistently (e.g., avoid extra backports on py310)
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Rego deny[] usage enforcement
+        run: |
+          python -m pip install --quiet --upgrade pip
+          if [ -f requirements.lock ]; then pip install -r requirements.lock; elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          make deny-usage-scan
+
+      # Under local act runs, there is no OIDC; skip supply-chain steps safely
+      - name: Set skip supply-chain for act
+        if: ${{ github.actor == 'nektos/act' }}
+        run: echo "SKIP_SUPPLYCHAIN=1" >> "$GITHUB_ENV"
+
+      - name: Export skip flag
+        id: flags
+        run: echo "skip=${SKIP_SUPPLYCHAIN}" >> "$GITHUB_OUTPUT"
+
+      - name: Install OPA
+        run: |
+          set -euo pipefail
+          echo "Installing pinned OPA ${OPA_VERSION}" >&2
+          mkdir -p "$HOME/.cache/opa"
+          OPA_BIN="$HOME/.cache/opa/opa-${OPA_VERSION}"
+          if [ ! -x "$OPA_BIN" ]; then
+            echo "Downloading OPA ${OPA_VERSION} (with retries, force HTTP/1.1)" >&2
+            CURL="curl -sS --fail --location --retry 5 --retry-delay 2 --retry-connrefused --max-time 120 --http1.1"
+            $CURL -o "$OPA_BIN" "https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64_static" || \
+            $CURL -o "$OPA_BIN" "https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64" || \
+            $CURL -o "$OPA_BIN" "https://github.com/open-policy-agent/opa/releases/download/v${OPA_VERSION}/opa_linux_amd64_static" || \
+            $CURL -o "$OPA_BIN" "https://github.com/open-policy-agent/opa/releases/download/v${OPA_VERSION}/opa_linux_amd64"
+            chmod +x "$OPA_BIN"
+          fi
+          # Place on PATH
+          if command -v sudo >/dev/null 2>&1; then
+            sudo cp "$OPA_BIN" /usr/local/bin/opa || true
+          fi
+          if ! command -v opa >/dev/null 2>&1; then
+            mkdir -p "$HOME/.local/bin"
+            cp "$OPA_BIN" "$HOME/.local/bin/opa"
+            chmod +x "$HOME/.local/bin/opa"
+            echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          fi
+          opa version
+
+      - name: Build OPA bundle
+        run: |
+          mkdir -p dist
+          opa build -b policies -o dist/opa-bundle.tar.gz
+          ls -lh dist/opa-bundle.tar.gz
+
+      - name: Generate manifest
+        run: |
+          python -m pip install --quiet --upgrade pip
+          python tools/generate_bundle_manifest.py --output dist/opa-bundle.manifest.json --exclude-tests
+          head -n 30 dist/opa-bundle.manifest.json || true
+
+      - name: Generate references index (md+json)
+        run: |
+          python tools/generate_refs_index.py --format both || true
+          ls -lh docs/references-index.md dist/references-index.json || true
+
+      - name: Install Syft (SBOM)
+        run: |
+          set -euo pipefail
+          echo "Installing pinned Syft ${SYFT_VERSION}" >&2
+          curl -sSfL https://github.com/anchore/syft/releases/download/${SYFT_VERSION}/syft_${SYFT_VERSION#v}_linux_amd64.tar.gz -o syft.tgz
+          tar -xzf syft.tgz syft
+          chmod +x syft
+          sudo mv syft /usr/local/bin/syft
+          syft version || { echo "Syft install failed" >&2; exit 2; }
+
+      - name: Generate CycloneDX SBOM
+        run: |
+          syft packages file:dist/opa-bundle.tar.gz -o cyclonedx-json > dist/opa-bundle.sbom.cdx.json
+          echo "CycloneDX SBOM generated"
+
+      - name: Generate SPDX SBOM
+        run: |
+          syft packages file:dist/opa-bundle.tar.gz -o spdx-json > dist/opa-bundle.sbom.spdx.json
+          echo "SPDX SBOM generated"
+
+      - name: Compute bundle digest & SLSA subjects
+        id: digest
+        run: |
+          set -euo pipefail
+          SHA256=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
+          SUBJECTS_JSON="[{\"name\":\"rulehub/opa-bundle.tar.gz\",\"digest\":{\"sha256\":\"$SHA256\"}}]"
+          if base64 --help 2>&1 | grep -q '\-w'; then SUBJECTS_B64=$(echo -n "$SUBJECTS_JSON" | base64 -w0); else SUBJECTS_B64=$(echo -n "$SUBJECTS_JSON" | base64); fi
+          echo "bundle_sha256=$SHA256" >> "$GITHUB_OUTPUT"
+          echo "subjects_b64=$SUBJECTS_B64" >> "$GITHUB_OUTPUT"
+
+      - name: Install Cosign
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159
+        with:
+          cosign-release: "${{ env.COSIGN_VERSION }}"
+
+      - name: Sign OPA bundle (keyless)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+          COSIGN_YES: "true"
+        run: |
+          cosign sign-blob --yes --output-signature dist/opa-bundle.tar.gz.sig --output-certificate dist/opa-bundle.tar.gz.cert dist/opa-bundle.tar.gz
+
+      - name: Sign manifest (keyless)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+          COSIGN_YES: "true"
+        run: |
+          cosign sign-blob --yes --output-signature dist/opa-bundle.manifest.json.sig --output-certificate dist/opa-bundle.manifest.json.cert dist/opa-bundle.manifest.json
+
+      - name: Sign SBOMs (keyless)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+          COSIGN_YES: "true"
+        run: |
+          cosign sign-blob --yes --output-signature dist/opa-bundle.sbom.cdx.json.sig --output-certificate dist/opa-bundle.sbom.cdx.json.cert dist/opa-bundle.sbom.cdx.json
+          cosign sign-blob --yes --output-signature dist/opa-bundle.sbom.spdx.json.sig --output-certificate dist/opa-bundle.sbom.spdx.json.cert dist/opa-bundle.sbom.spdx.json
+
+      - name: Self-verify signatures (pre-push)
+        # Ensures generated signatures & certs are valid (OIDC subject/issuer) before publishing to OCI
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          set -euo pipefail
+          for base in dist/opa-bundle.tar.gz dist/opa-bundle.manifest.json dist/opa-bundle.sbom.cdx.json dist/opa-bundle.sbom.spdx.json; do
+            sig="${base}.sig"; cert="${base}.cert";
+            if [ -s "$sig" ] && [ -s "$cert" ]; then
+              echo "Verifying $base" >&2
+              cosign verify-blob \
+                --certificate "$cert" \
+                --signature "$sig" \
+                --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
+                --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
+                "$base"
+            else
+              echo "Missing signature or cert for $base" >&2; exit 1
+            fi
+          done
+
+      - name: Log in to GHCR
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install ORAS
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6
+        with:
+          version: v1.2.0
+
+      - name: Compute tag
+        id: tag
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            echo "tag=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_type }}" == "branch" && "${{ github.ref_name }}" == "main" ]]; then
+            echo "tag=main-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          else
+            echo "tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Push bundle via ORAS
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        run: |
+          oras push ${IMAGE}:${{ steps.tag.outputs.tag }} \
+            dist/opa-bundle.tar.gz:application/vnd.opa.bundle.layer.v1+tar \
+            --annotation org.opencontainers.image.title="RuleHub OPA bundle" \
+            --annotation org.opencontainers.image.source="${{ github.repository }}" \
+            --annotation org.opencontainers.image.revision="${{ github.sha }}" \
+            --annotation io.rulehub.manifest.sha256="$(sha256sum dist/opa-bundle.manifest.json | cut -d' ' -f1)"
+
+      - name: Attest SBOMs
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+          COSIGN_YES: "true"
+        run: |
+          cosign attest --yes --predicate dist/opa-bundle.sbom.cdx.json --type cyclonedx ${IMAGE}:${{ steps.tag.outputs.tag }}
+          cosign attest --yes --predicate dist/opa-bundle.sbom.spdx.json --type spdx ${IMAGE}:${{ steps.tag.outputs.tag }}
+
+      - name: Upload artifacts (full)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' && github.actor != 'nektos/act' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: opa-bundle-${{ steps.tag.outputs.tag }}
+          path: |
+            dist/opa-bundle.tar.gz
+            dist/opa-bundle.tar.gz.sig
+            dist/opa-bundle.tar.gz.cert
+            dist/opa-bundle.sbom.cdx.json
+            dist/opa-bundle.sbom.spdx.json
+            dist/opa-bundle.manifest.json
+            dist/opa-bundle.manifest.json.sig
+            dist/opa-bundle.manifest.json.cert
+            dist/opa-bundle.sbom.cdx.json.sig
+            dist/opa-bundle.sbom.cdx.json.cert
+            dist/opa-bundle.sbom.spdx.json.sig
+            dist/opa-bundle.sbom.spdx.json.cert
+            dist/references-index.json
+            docs/references-index.md
+
+      - name: Upload artifacts (minimal)
+        if: ${{ env.SKIP_SUPPLYCHAIN == '1' && github.actor != 'nektos/act' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: opa-bundle-${{ steps.tag.outputs.tag }}
+          path: |
+            dist/opa-bundle.tar.gz
+            dist/opa-bundle.manifest.json
+            dist/references-index.json
+            docs/references-index.md
+
+      - name: Digest summary
+        id: digests
+        run: |
+          set -euo pipefail
+          MANIFEST_SHA=$(sha256sum dist/opa-bundle.manifest.json | cut -d' ' -f1)
+          BUNDLE_SHA=${{ steps.digest.outputs.bundle_sha256 }}
+          AGG_HASH=$(jq -r '.aggregate_hash // empty' dist/opa-bundle.manifest.json)
+          echo "bundle_sha256=$BUNDLE_SHA" >> $GITHUB_OUTPUT
+          echo "manifest_sha256=$MANIFEST_SHA" >> $GITHUB_OUTPUT
+          echo "aggregate_hash=$AGG_HASH" >> $GITHUB_OUTPUT
+          printf "Bundle SHA256: %s\nManifest SHA256: %s\nAggregate Hash: %s\n" "$BUNDLE_SHA" "$MANIFEST_SHA" "$AGG_HASH" > dist/digest-summary.txt
+          cat dist/digest-summary.txt
+
+      - name: Release assets (full)
+        if: ${{ github.event_name == 'release' && env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836
+        with:
+          files: |
+            dist/opa-bundle.tar.gz
+            dist/opa-bundle.tar.gz.sig
+            dist/opa-bundle.tar.gz.cert
+            dist/opa-bundle.sbom.cdx.json
+            dist/opa-bundle.sbom.spdx.json
+            dist/opa-bundle.manifest.json
+            dist/opa-bundle.manifest.json.sig
+            dist/opa-bundle.manifest.json.cert
+            dist/opa-bundle.sbom.cdx.json.sig
+            dist/opa-bundle.sbom.cdx.json.cert
+            dist/opa-bundle.sbom.spdx.json.sig
+            dist/opa-bundle.sbom.spdx.json.cert
+            dist/references-index.json
+            dist/digest-summary.txt
+            docs/references-index.md
+
+      - name: Release assets (minimal)
+        if: ${{ github.event_name == 'release' && env.SKIP_SUPPLYCHAIN == '1' }}
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836
+        with:
+          files: |
+            dist/opa-bundle.tar.gz
+            dist/opa-bundle.manifest.json
+            dist/references-index.json
+            docs/references-index.md
+
+      - name: Update mutable major tag
+        if: ${{ github.event_name == 'release' }}
+        run: |
+          set -euo pipefail
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          if [[ "$RELEASE_TAG" =~ ^v([0-9]+)\. ]]; then
+            MAJOR=v${BASH_REMATCH[1]}
+            git fetch --tags --quiet
+            git tag -f "$MAJOR" "$RELEASE_TAG"
+            git push origin ":refs/tags/$MAJOR" || true
+            git push origin "$MAJOR"
+          else
+            echo "Release tag $RELEASE_TAG not SemVer vMAJOR.MINOR.PATCH; skipping mutable major tag update"
+          fi
+
+  slsa-provenance:
+    if: ${{ needs.build-and-push.outputs.skip_supplychain != '1' }}
+    needs: build-and-push
+    permissions:
+      actions: read
+      id-token: write
+      contents: read
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@5a775b367a56d5bd118a224a811bba288150a563
+    with:
+      base64-subjects: ${{ needs.build-and-push.outputs.subjects_b64 }}
+      provenance-name: rulehub-opa-bundle.provenance
+      upload-assets: true
+
+  verify:
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    needs: [build-and-push]
+    permissions:
+      contents: read
+      packages: read
+      id-token: write
+    steps:
+      - name: Download artifact bundle
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: opa-bundle-${{ needs.build-and-push.outputs.tag }}
+          path: dist
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Verify manifest integrity (hashes)
+        run: |
+          python tools/verify_bundle.py \
+            --manifest dist/opa-bundle.manifest.json \
+            --bundle dist/opa-bundle.tar.gz \
+            --policies-root policies --skip-git || exit 1
+
+      - name: Install Cosign
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159
+        with:
+          cosign-release: "${{ env.COSIGN_VERSION }}"
+
+      - name: Verify manifest signature
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify-blob \
+            --certificate dist/opa-bundle.manifest.json.cert \
+            --signature dist/opa-bundle.manifest.json.sig \
+            --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
+            --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
+            dist/opa-bundle.manifest.json
+
+      - name: Verify SBOM signatures
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          for base in dist/opa-bundle.sbom.cdx.json dist/opa-bundle.sbom.spdx.json; do
+            cosign verify-blob \
+              --certificate ${base}.cert \
+              --signature ${base}.sig \
+              --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
+              --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
+              ${base}
+          done
+
+      - name: Verify bundle signature
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify-blob \
+            --certificate dist/opa-bundle.tar.gz.cert \
+            --signature dist/opa-bundle.tar.gz.sig \
+            --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
+            --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
+            dist/opa-bundle.tar.gz
+
+      - name: Check SBOM presence (minimal)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        run: |
+          test -s dist/opa-bundle.sbom.cdx.json
+          test -s dist/opa-bundle.sbom.spdx.json
+
+      - name: Install jq
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Login GHCR (provenance fetch)
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify provenance attestation
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify-attestation --type slsaprovenance ${IMAGE}:${{ needs.build-and-push.outputs.tag }} > attestation.jsonl
+          PRED_FILE=extracted-predicate.json
+          head -n1 attestation.jsonl | jq -r '.predicate' > "$PRED_FILE"
+          EXPECTED_SHA=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
+          jq -e --arg sha "${{ github.sha }}" '.buildDefinition.inputMaterials[].digest.sha1? == $sha' "$PRED_FILE" | grep -q true
+          jq -e --arg bsha "$EXPECTED_SHA" '.buildDefinition.inputMaterials[].digest.sha256? == $bsha' "$PRED_FILE" | grep -q true

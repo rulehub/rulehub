@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechFda_part11_esign_linkageConstraint
+metadata:
+  name: medtech-fda_part11_esign_linkage
+  annotations:
+    rulehub.id: medtech.fda_part11_esign_linkage
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

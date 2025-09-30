@@ -1,0 +1,22 @@
+package rulehub.legaltech.vn_pdpd_notice_and_consent
+
+test_allow_when_compliant if {
+	allow with input as {"controls": {"legaltech.vn_pdpd_notice_and_consent": true}, "consent": {"recorded": true}, "notice": {"at_collection_provided": true}}
+}
+
+test_denies_when_consent_recorded_false if {
+	count(deny) > 0 with input as {"controls": {"legaltech.vn_pdpd_notice_and_consent": true}, "consent": {"recorded": false}, "notice": {"at_collection_provided": true}}
+}
+
+test_denies_when_notice_at_collection_provided_false if {
+	count(deny) > 0 with input as {"controls": {"legaltech.vn_pdpd_notice_and_consent": true}, "consent": {"recorded": true}, "notice": {"at_collection_provided": false}}
+}
+
+test_denies_when_control_disabled if {
+	count(deny) > 0 with input as {"controls": {"legaltech.vn_pdpd_notice_and_consent": false}, "consent": {"recorded": true}, "notice": {"at_collection_provided": true}}
+}
+
+# Edge case: consent absent; collection notice absent
+test_denies_when_both_consent_notice_false if {
+	count(deny) > 0 with input as {"controls": {"legaltech.vn_pdpd_notice_and_consent": true}, "consent": {"recorded": false}, "notice": {"at_collection_provided": false}}
+}

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechIec_62304_software_safety_classConstraint
+metadata:
+  name: medtech-iec_62304_software_safety_class
+  annotations:
+    rulehub.id: medtech.iec_62304_software_safety_class
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

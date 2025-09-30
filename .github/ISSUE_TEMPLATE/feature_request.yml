@@ -1,0 +1,37 @@
+name: "Feature"
+description: "Request for an improvement or new capability"
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight Checks
+      options:
+        - label: I searched existing issues/discussions and found no duplicates
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Related Problem
+      description: Describe the problem or use case you want to improve
+      placeholder: It bothers me that ...
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe desired behavior/interface
+      placeholder: It would be great if ...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: What alternatives have you considered?
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Additional context, links, mockups

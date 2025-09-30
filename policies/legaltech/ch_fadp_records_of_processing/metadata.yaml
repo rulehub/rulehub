@@ -1,0 +1,20 @@
+id: legaltech.ch_fadp_records_of_processing
+name: Ch FADP Records Of Processing
+path:
+  - policies/legaltech/ch_fadp_records_of_processing/policy.rego
+  - policies/legaltech/ch_fadp_records_of_processing/policy_test.rego
+description: Maintain records of processing activities (Art. 12)
+standard:
+  name: FADP (Switzerland)
+  version: current
+links:
+  - https://www.fedlex.admin.ch/eli/cc/2022/491/en
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: MedtechIso_14971_risk_management_fileConstraint
+metadata:
+  name: medtech-iso_14971_risk_management_file
+  annotations:
+    rulehub.id: medtech.iso_14971_risk_management_file
+spec:
+  match:
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["*"]
+    namespaces: ["*"]
+  parameters:
+    enabled: true

@@ -1,0 +1,170 @@
+default_language_version:
+  python: python3
+
+repos:
+  - repo: local
+    hooks:
+      # YAML linting (local)
+      - id: spectral
+        name: spectral
+        entry: bash -c 'npx --yes @stoplight/spectral lint --ruleset .spectral.yml --format stylish "$@"'
+        language: system
+        files: '\.(yml|yaml)$'
+        exclude: '(^charts/.*/templates/|^addons/.*/templates/)'
+
+      # Python linting/formatting (local)
+      - id: ruff
+        name: ruff
+        entry: ruff
+        language: system
+        args: ["check", "--fix"]
+        files: '^tools/.*\\.py$'
+
+      - id: ruff-format
+        name: ruff-format
+        entry: ruff
+        language: system
+        args: ["format"]
+        files: '^tools/.*\\.py$'
+
+      # Python static typing (local)
+      - id: mypy
+        name: mypy
+        entry: mypy --install-types --non-interactive --config-file mypy.ini
+        language: system
+        types: [python]
+        files: '^tools/.*\\.py$'
+
+  # Policy drift check removed (Helm chart externalized)
+
+      # Metadata schema + path validation
+      - id: metadata-validate
+        name: metadata validate
+        entry: python tools/validate_metadata.py
+        language: python
+        additional_dependencies:
+          - jsonschema>=4.19
+          - PyYAML>=6.0
+        pass_filenames: false
+        files: '^policies/.*/metadata.yaml$'
+
+      # Compliance maps schema validation
+      - id: compliance-maps-validate
+        name: compliance maps validate
+        entry: python tools/validate_compliance_maps.py
+        language: python
+        additional_dependencies:
+          - jsonschema>=4.19
+          - PyYAML>=6.0
+        pass_filenames: false
+        files: '^compliance/maps/.*\.yml$'
+
+      # Compliance maps duplicate policy check
+      - id: compliance-maps-dupes-check
+        name: compliance maps duplicates check
+        entry: python tools/fix_compliance_map_dupes.py --check
+        language: python
+        additional_dependencies:
+          - PyYAML>=6.0
+          - ruamel.yaml>=0.18
+        pass_filenames: false
+        files: '^compliance/maps/.*\.yml$'
+
+      # Auto-generate references index (markdown + json)
+      - id: refs-index
+        name: references index generate
+        entry: python tools/generate_refs_index.py --format both --fail-missing-links
+        language: python
+        additional_dependencies:
+          - PyYAML>=6.0
+        pass_filenames: false
+        files: '^policies/.*/metadata.yaml$'
+
+      # Rego formatting (fail if any file would change)
+      - id: opa-fmt-auto
+        name: opa fmt auto-fix
+        entry: bash -c 'set -e; opa fmt -w policies'
+        language: system
+        pass_filenames: false
+        files: '^policies/.*/.*\.rego$'
+
+      - id: opa-fmt-check
+        name: opa fmt verify clean
+        entry: >-
+          bash -c 'set -e; CHANGED=$(opa fmt -l policies); if [ -n "$CHANGED" ]; then echo "Unformatted Rego after auto-fix (unexpected):"; echo "$CHANGED"; exit 1; fi'
+        language: system
+        pass_filenames: false
+        files: '^policies/.*/.*\.rego$'
+
+      # Rego quick static check + pattern scan (parse/type + forbidden boolean forms)
+      - id: opa-quick-check
+        name: opa quick check
+        entry: make opa-quick-check
+        language: system
+        pass_filenames: false
+        files: '^policies/.*/.*\.rego$'
+
+      # Policy test pair enforcement (metadata path completeness)
+      - id: policy-test-pairs
+        name: policy test pairs
+        entry: make policy-test-pairs
+        language: system
+        pass_filenames: false
+        files: '^policies/.*/(policy\.rego|policy_test\.rego|metadata\.yaml)$'
+
+      # Metadata path guardrail (non-fatal unless STRICT_EMPTY_PATHS=1)
+      - id: metadata-path-guardrail
+        name: metadata path guardrail
+        entry: python tools/guardrail_metadata_paths.py
+        language: python
+        additional_dependencies:
+          - PyYAML>=6.0
+        pass_filenames: false
+        files: '^policies/.*/metadata.yaml$'
+
+      # Link audit (non-fatal unless FAIL_LINK_AUDIT=1)
+      - id: link-audit
+        name: link audit
+        entry: bash -c 'FAIL_LINK_AUDIT=${FAIL_LINK_AUDIT:-0} make link-audit || echo "[pre-commit] link-audit non-fatal"'
+        language: system
+        pass_filenames: false
+        files: '^(policies/.*/metadata.yaml|links_export.json)$'
+
+      # Markdownlint (markdownlint-cli2) for docs and markdown (advisory; auto-fix not applied here)
+      - id: markdownlint
+        name: markdownlint
+        entry: bash -c 'markdownlint-cli2 "**/*.md" "#dist/**" || true'
+        language: system
+        pass_filenames: false
+        files: '.*\.md$'
+
+      # cspell spelling check (non-blocking; add words to cspell.json words list)
+      - id: cspell
+        name: cspell
+        entry: bash -c 'npx --yes cspell --no-progress --no-must-find-files "**/*.md" || true'
+        language: system
+        pass_filenames: false
+        files: '.*\.md$'
+
+      # Markdown lint (markdownlint-cli2)
+  # (markdownlint disabled by request – MD files excluded from pre-commit)
+
+      # Vale style/language lint (docs only)
+      # (Replaced below with repo-managed hooks for auto-install)
+
+  # (Vale + cspell disabled by request – MD files excluded from pre-commit)
+
+
+  # Optional SPDX headers / REUSE checks
+  # Enable locally by running: pre-commit run -a spdx-reuse --hook-stage manual
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v5.0.2
+    hooks:
+      - id: reuse
+        name: spdx-reuse
+        args: ["lint"]
+        stages: [manual]
+
+ci:
+  autofix_prs: false
+  autoupdate_schedule: monthly

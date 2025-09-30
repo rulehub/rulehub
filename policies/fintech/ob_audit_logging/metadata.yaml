@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.ob_audit_logging
+name: Open Banking Audit Logging
+path:
+  - policies/fintech/ob_audit_logging/policy.rego
+  - policies/fintech/ob_audit_logging/policy_test.rego
+description: Audit logs for XS2A
+standard:
+  name: OBIE
+  version: current
+links:
+  - https://www.openbanking.org.uk/
+  - https://openid.net/specs/openid-connect-core-1_0.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - EU/UK

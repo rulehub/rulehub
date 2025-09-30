@@ -1,0 +1,20 @@
+id: legaltech.legal_hold_no_delete_enforced
+name: Legal Hold No Delete Enforced
+path:
+  - policies/legaltech/legal_hold_no_delete_enforced/policy.rego
+  - policies/legaltech/legal_hold_no_delete_enforced/policy_test.rego
+description: Block deletions during active legal hold
+standard:
+  name: Best Practice
+  version: current
+links:
+  - https://www.law.cornell.edu/rules/frcp/rule_37
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+- Global

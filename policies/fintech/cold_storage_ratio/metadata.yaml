@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
+id: fintech.cold_storage_ratio
+name: Cold Storage Ratio
+path:
+  - policies/fintech/cold_storage_ratio/policy.rego
+  - policies/fintech/cold_storage_ratio/policy_test.rego
+description: Min % in cold storage
+standard:
+  name: Security
+  version: current
+links:
+  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+geo:
+  regions:
+    - Global
+  countries:
+    - '*'
+  subregions: []
+  scope: Global
+jurisdiction:
+  - Global

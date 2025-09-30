@@ -1,0 +1,25 @@
+id: k8s.require_resources
+name: Require resource requests/limits
+standard: Kubernetes
+version: 1.x
+path:
+  - addons/kyverno/policies/require-resources.yaml
+  - policies/k8s/require_resources/policy.rego
+  - policies/k8s/require_resources/policy_test.rego
+description: Ensure containers define resource requests and limits.
+framework: kyverno
+tags:
+- k8s
+- resources
+owner: platform-security
+links:
+  - https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+  - https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/
+
+geo:
+  regions:
+  - Global
+  countries:
+  - '*'
+  subregions: []
+  scope: Global
