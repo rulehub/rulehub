@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Setup Node (needed for actions under act)
+      - name: Setup Node (for Spectral linting)
         if: ${{ github.actor != 'nektos/act' }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
@@ -54,7 +54,7 @@ jobs:
 
       - name: Upload Spectral SARIF artifact
         if: ${{ github.actor != 'nektos/act' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: spectral-sarif
           path: spectral.sarif
@@ -76,7 +76,7 @@ jobs:
       security-events: write
     steps:
       - name: Download Spectral SARIF artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16
         with:
           name: spectral-sarif
           path: .

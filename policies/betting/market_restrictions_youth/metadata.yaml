@@ -1,17 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.market_restrictions_youth
-name: Market Restrictions — Youth/Underage
+name: "Market Restrictions \u2014 Youth/Underage"
 description: No markets on youth leagues
 standard: FR/Other EU
 version: current
 path:
-  - policies/betting/market_restrictions_youth/policy.rego
-  - policies/betting/market_restrictions_youth/policy_test.rego
+- policies/betting/market_restrictions_youth/policy.rego
+- policies/betting/market_restrictions_youth/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://anj.fr/
+- https://anj.fr/
 geo:
-  regions: [Europe]
-  countries: [EU, EEA, FR]
+  regions:
+  - Europe
+  countries:
+  - EU
+  - EEA
+  - FR
   scope: Regional

@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_parent_requested_deletion_and_not_deleted_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.coppa_delete_on_parent_request": false}, "coppa": {"parent_requested_deletion": true, "deleted": false}, "child": {"age": 11}}
 }
+
+# Auto-generated granular test for controls["edtech.coppa_delete_on_parent_request"]
+test_denies_when_controls_edtech_coppa_delete_on_parent_request_failing if {
+	some _ in deny with input as {"controls": {}, "coppa": {"parent_requested_deletion": true}, "controls[\"edtech": {"coppa_delete_on_parent_request\"]": false}}
+}

@@ -7,6 +7,7 @@ Produces:
 
 Columns: policy_path | deny_rules | deny_test_assertions | missing_count | suggested_command
 """
+
 from __future__ import annotations
 
 import argparse
@@ -60,13 +61,15 @@ def build_rows(policies_root: Path) -> List[Dict[str, Any]]:
         assertions = count_test_assertions(pol.parent)
         missing = deny - assertions
         cmd = suggest_command(policies_root, pol, deny, assertions)
-        rows.append({
-            "policy_path": str(pol),
-            "deny_rules": deny,
-            "deny_test_assertions": assertions,
-            "missing_count": missing if missing > 0 else 0,
-            "suggested_command": cmd,
-        })
+        rows.append(
+            {
+                "policy_path": str(pol),
+                "deny_rules": deny,
+                "deny_test_assertions": assertions,
+                "missing_count": missing if missing > 0 else 0,
+                "suggested_command": cmd,
+            }
+        )
     return rows
 
 
@@ -77,8 +80,7 @@ def write_outputs(rows: List[Dict[str, Any]], out_dir: Path, phase_name: str) ->
     json_path.write_text(json.dumps(rows, indent=2), encoding='utf-8')
 
     # write md table
-    headers = ["policy_path", "deny_rules", "deny_test_assertions",
-               "missing_count", "suggested_command"]
+    headers = ["policy_path", "deny_rules", "deny_test_assertions", "missing_count", "suggested_command"]
     lines: List[str] = []
     lines.append("| " + " | ".join(headers) + " |")
     lines.append("| " + " | ".join(["---"] * len(headers)) + " |")

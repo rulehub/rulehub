@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.ccpa_verification_of_requests
 name: 'CCPA: Verification Of Requests'
 path:
-  - policies/legaltech/ccpa_verification_of_requests/policy.rego
-  - policies/legaltech/ccpa_verification_of_requests/policy_test.rego
+- policies/legaltech/ccpa_verification_of_requests/policy.rego
+- policies/legaltech/ccpa_verification_of_requests/policy_test.rego
 description: Verify identity for consumer requests
 standard:
   name: CCPA (California)
   version: current
 links:
-  - https://oag.ca.gov/privacy/ccpa
+- https://oag.ca.gov/privacy/ccpa
 geo:
   regions:
   - Global

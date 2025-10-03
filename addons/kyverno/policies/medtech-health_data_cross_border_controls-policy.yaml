@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.health_data_cross_border_controls: example validation
+      message: "medtech.health_data_cross_border_controls: example validation"
       pattern:
         metadata:
           labels:

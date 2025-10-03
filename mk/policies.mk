@@ -1,6 +1,6 @@
 # Policy-related helpers and maintenance
 
-.PHONY: opa-quick-check refactor-policies repair-tests prune-generic-tests policy-maintenance normalize-metadata-paths granular-tests deny-usage-scan
+.PHONY: opa-quick-check refactor-policies repair-tests prune-generic-tests policy-maintenance normalize-metadata-paths granular-tests deny-usage-scan legacy-scan
 
 opa-quick-check: ## Run OPA syntax/type check and grep for disallowed boolean patterns
 
@@ -52,3 +52,8 @@ granular-tests: deps
 
 deny-usage-scan: ## Fail if any disallowed 'violation[' usage remains in templates/ or addons/
 	@python tools/deny_usage_scan.py
+
+# Backward-compat shorthand used in older docs/automation
+legacy-scan: ## Legacy quick scans: static Rego patterns + deny usage
+	$(MAKE) opa-quick-check
+	$(MAKE) deny-usage-scan

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.ongoing_aml_monitoring: example validation
+      message: "betting.ongoing_aml_monitoring: example validation"
       pattern:
         metadata:
           labels:

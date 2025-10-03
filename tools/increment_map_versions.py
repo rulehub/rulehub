@@ -29,8 +29,7 @@ MAPS_DIR = Path("compliance/maps")
 
 def git_show(ref: str, path: str) -> str | None:
     try:
-        out = subprocess.check_output(
-            ["git", "show", f"{ref}:{path}"], stderr=subprocess.DEVNULL)
+        out = subprocess.check_output(["git", "show", f"{ref}:{path}"], stderr=subprocess.DEVNULL)
         return out.decode("utf-8")
     except subprocess.CalledProcessError:
         return None
@@ -101,12 +100,9 @@ def render_markdown_summary(changes: Dict[Path, dict]) -> str:
 
 def main(argv: List[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--base-tag", required=True,
-                        help="Base git tag or ref to compare from")
-    parser.add_argument("--target", default="main",
-                        help="Target ref to compare to (default: main)")
-    parser.add_argument("--apply", action="store_true",
-                        help="Write updated map files")
+    parser.add_argument("--base-tag", required=True, help="Base git tag or ref to compare from")
+    parser.add_argument("--target", default="main", help="Target ref to compare to (default: main)")
+    parser.add_argument("--apply", action="store_true", help="Write updated map files")
     args = parser.parse_args(argv)
 
     base = args.base_tag
@@ -114,11 +110,11 @@ def main(argv: List[str] | None = None) -> int:
 
     # ensure base tag exists
     try:
-        subprocess.check_call(["git", "rev-parse", "--verify", base],
-                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.check_call(
+            ["git", "rev-parse", "--verify", base], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
     except subprocess.CalledProcessError:
-        print(
-            f"Base tag/ref '{base}' not found. Create it or choose an existing tag.", file=sys.stderr)
+        print(f"Base tag/ref '{base}' not found. Create it or choose an existing tag.", file=sys.stderr)
         return 2
 
     changed = git_changed_files(base, target)
@@ -128,7 +124,7 @@ def main(argv: List[str] | None = None) -> int:
         if p.is_relative_to(MAPS_DIR):
             # load old and new
             old_text = git_show(base, f) or ""
-            new_text = (p.read_text(encoding="utf-8") if p.exists() else "")
+            new_text = p.read_text(encoding="utf-8") if p.exists() else ""
             old_yaml = load_yaml_from_text(old_text) if old_text else {}
             new_yaml = load_yaml_from_text(new_text) if new_text else {}
             old_ids = collect_policy_ids_from_map(old_yaml)
@@ -137,8 +133,7 @@ def main(argv: List[str] | None = None) -> int:
             removed = sorted(old_ids - new_ids)
 
             old_version = old_yaml.get("version")
-            new_version_candidate, bumped = bump_version(
-                new_yaml.get("version", old_version))
+            new_version_candidate, bumped = bump_version(new_yaml.get("version", old_version))
 
             map_changes[p] = {
                 "old_version": old_version,
@@ -166,8 +161,7 @@ def main(argv: List[str] | None = None) -> int:
             print(f"WROTE: {path}")
         else:
             print(f"--- Proposed change for {path} ---")
-            print(
-                f"version: {info.get('old_version')} -> {info.get('new_version')}")
+            print(f"version: {info.get('old_version')} -> {info.get('new_version')}")
 
     return 0
 

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.slots_no_autoplay_uk: example validation
+      message: "betting.slots_no_autoplay_uk: example validation"
       pattern:
         metadata:
           labels:

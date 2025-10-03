@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.loss_limit_controls: example validation
+      message: "betting.loss_limit_controls: example validation"
       pattern:
         metadata:
           labels:

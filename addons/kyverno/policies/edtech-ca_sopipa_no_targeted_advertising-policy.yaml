@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ca_sopipa_no_targeted_advertising: example validation
+      message: "edtech.ca_sopipa_no_targeted_advertising: example validation"
       pattern:
         metadata:
           labels:

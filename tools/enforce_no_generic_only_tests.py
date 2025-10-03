@@ -15,6 +15,7 @@ Output:
 Limitations:
 * Heuristic (regex) – acceptable guardrail; can be upgraded to AST parsing later.
 """
+
 from __future__ import annotations
 
 import json
@@ -53,13 +54,11 @@ def _accumulate_multiline_json(lines: list[str], start_index: int, first_line_st
 
 
 POLICIES_ROOT = Path("policies")
-GENERIC_CONTROL_PATTERN = re.compile(
-    r'"controls"\s*:\s*\{[^}]*?"[\w.]+":\s*false', re.IGNORECASE)
+GENERIC_CONTROL_PATTERN = re.compile(r'"controls"\s*:\s*\{[^}]*?"[\w.]+":\s*false', re.IGNORECASE)
 INPUT_PREFIX_RE = re.compile(r'with\s+input\s+as\s+\{')  # start of inline JSON
 RULE_HEAD_PATTERN = re.compile(r'^\s*test_[\w]+')
 # Evidence hint: presence of input.<alpha>.<alpha> beyond input.controls
-EVIDENCE_REF_PATTERN = re.compile(
-    r'input\.(?!controls)[a-zA-Z_][\w]*(?:\.[a-zA-Z_][\w]*)+')
+EVIDENCE_REF_PATTERN = re.compile(r'input\.(?!controls)[a-zA-Z_][\w]*(?:\.[a-zA-Z_][\w]*)+')
 
 # Deny assertion lines patterns borrowed from coverage tool
 DENY_ASSERT_RE = re.compile(r'(?:count\(\s*deny\s*\)\s*>\s*0)|(?:deny\[)')
@@ -103,7 +102,7 @@ def extract_balanced_input_object(line: str) -> dict | None:
         elif ch == '}':
             depth -= 1
             if depth == 0:
-                snippet = line[brace_start:i + 1]
+                snippet = line[brace_start : i + 1]
                 return extract_json_like(snippet)
     return None
 
@@ -167,19 +166,18 @@ def main() -> int:
                 deny_rules_total += 1
         # Only flag if every deny rule for the policy is generic-only
         if deny_rules_total > 0 and len(generic_only_rules) == deny_rules_total:
-            offenders.append({
-                "policy": str(pol),
-                "test": str(test_file),
-                "generic_only_rules": generic_only_rules,
-            })
+            offenders.append(
+                {
+                    "policy": str(pol),
+                    "test": str(test_file),
+                    "generic_only_rules": generic_only_rules,
+                }
+            )
     if offenders:
-        print(
-            "[generic-only] Found policies whose deny tests rely only on generic control toggles:")
+        print("[generic-only] Found policies whose deny tests rely only on generic control toggles:")
         for off in offenders:
-            print(
-                f" - {off['policy']} -> {', '.join(off['generic_only_rules'])}")
-        print("Add at least one deny test with evidence fields beyond controls{}.".format(
-            " for each listed policy"))
+            print(f" - {off['policy']} -> {', '.join(off['generic_only_rules'])}")
+        print("Add at least one deny test with evidence fields beyond controls{}.".format(" for each listed policy"))
         return 2
     print("[generic-only] OK: no generic-control-only deny test sets detected")
     return 0

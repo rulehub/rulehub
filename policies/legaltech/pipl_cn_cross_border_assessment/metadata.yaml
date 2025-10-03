@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.pipl_cn_cross_border_assessment
 name: 'PIPL: CN Cross Border Assessment'
 path:
-  - policies/legaltech/pipl_cn_cross_border_assessment/policy.rego
-  - policies/legaltech/pipl_cn_cross_border_assessment/policy_test.rego
+- policies/legaltech/pipl_cn_cross_border_assessment/policy.rego
+- policies/legaltech/pipl_cn_cross_border_assessment/policy_test.rego
 description: Security assessment for cross-border transfer
 standard:
   name: PIPL (China)
   version: current
 links:
-  - https://www.npc.gov.cn/englishnpc/
+- https://www.npc.gov.cn/englishnpc/
 geo:
   regions:
   - Global

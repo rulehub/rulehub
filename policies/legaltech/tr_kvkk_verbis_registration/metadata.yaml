@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.tr_kvkk_verbis_registration
 name: 'TR: KVKK VERBIS Registration'
 path:
-  - policies/legaltech/tr_kvkk_verbis_registration/policy.rego
-  - policies/legaltech/tr_kvkk_verbis_registration/policy_test.rego
+- policies/legaltech/tr_kvkk_verbis_registration/policy.rego
+- policies/legaltech/tr_kvkk_verbis_registration/policy_test.rego
 description: Register as data controller in VERBIS when applicable
 standard:
   name: KVKK (Turkey)
   version: current
 links:
-  - https://verbis.kvkk.gov.tr/
+- https://verbis.kvkk.gov.tr/
 geo:
   regions:
   - Global

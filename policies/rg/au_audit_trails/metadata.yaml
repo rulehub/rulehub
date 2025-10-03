@@ -1,16 +1,17 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: rg.au_audit_trails
-name: AU — Audit trails & secure hosting controls
+name: "AU \u2014 Audit trails & secure hosting controls"
 standard: AU iGaming Hosting
-version: "placeholder"
+version: placeholder
 path:
-  - policies/rg/au_audit_trails/policy.rego
-  - policies/rg/au_audit_trails/policy_test.rego
+- policies/rg/au_audit_trails/policy.rego
+- policies/rg/au_audit_trails/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 description: Requires immutable audit logging and secure regulated hosting to support oversight and integrity in AU operations.
 links:
-  - https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215 # Macolin Convention
+- https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215
 geo:
   regions:
   - APAC

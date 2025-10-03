@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.uk_mhra_post_market_surveillance: example validation
+      message: "medtech.uk_mhra_post_market_surveillance: example validation"
       pattern:
         metadata:
           labels:

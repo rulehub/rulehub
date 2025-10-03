@@ -15,6 +15,7 @@ Usage:
 
 The script purposely relies on the shared metadata loader for caching.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -64,35 +65,28 @@ def collect_map_metrics(maps_root: str = "compliance/maps") -> Dict[str, Any]:
 def git_commit() -> str:
     try:
         return (
-            subprocess.check_output(
-                ["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL)
-            .decode()
-            .strip()
+            subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL).decode().strip()
         )
     except Exception:
         return "unknown"
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Generate release metrics JSON")
-    parser.add_argument("--output", type=Path,
-                        default=DEFAULT_OUTPUT, help="Output file path")
+    parser = argparse.ArgumentParser(description="Generate release metrics JSON")
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="Output file path")
     args = parser.parse_args()
 
     metrics: Dict[str, Any] = {"schema_version": 1}
     metrics.update(collect_policy_metrics())
     metrics.update(collect_map_metrics())
-    metrics["timestamp"] = datetime.now(
-        timezone.utc).isoformat().replace("+00:00", "Z")
+    metrics["timestamp"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     metrics["git_commit"] = git_commit()
 
     out_path = args.output
     if not out_path.parent.exists():
         out_path.parent.mkdir(parents=True, exist_ok=True)
     tmp_path = out_path.with_suffix(out_path.suffix + ".tmp")
-    tmp_path.write_text(json.dumps(metrics, indent=2,
-                        sort_keys=True) + "\n", encoding="utf-8")
+    tmp_path.write_text(json.dumps(metrics, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     os.replace(tmp_path, out_path)
     print(f"Wrote {out_path} ({out_path.stat().st_size} bytes)")
     return 0

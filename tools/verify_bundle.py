@@ -37,8 +37,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 
-REQUIRED_MANIFEST_KEYS = {
-    "schema_version", "build_commit", "build_time", "policies", "aggregate_hash"}
+REQUIRED_MANIFEST_KEYS = {"schema_version", "build_commit", "build_time", "policies", "aggregate_hash"}
 POLICY_REQUIRED_KEYS = {"path", "sha256", "bytes"}
 
 
@@ -62,8 +61,7 @@ def sha256_file(path: Path) -> tuple[str, int]:
 
 
 def compute_aggregate(policies: List[Dict[str, Any]]) -> str:
-    lines = [f"{p['sha256']}  {p['path']}" for p in sorted(
-        policies, key=lambda x: x["path"])]
+    lines = [f"{p['sha256']}  {p['path']}" for p in sorted(policies, key=lambda x: x["path"])]
     joined = "\n".join(lines).encode()
     return hashlib.sha256(joined).hexdigest()
 
@@ -92,8 +90,7 @@ def cosign_verify_blob(blob: Path, sig: Path, cert: Optional[Path]) -> tuple[boo
     env = os.environ.copy()
     env.setdefault("COSIGN_EXPERIMENTAL", "1")
     try:
-        out = subprocess.check_output(
-            cmd, stderr=subprocess.STDOUT, text=True, env=env)
+        out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, text=True, env=env)
         return True, out
     except subprocess.CalledProcessError as e:
         return False, e.output
@@ -110,27 +107,17 @@ def verify_bundle_members(bundle_path: Path, expected_paths: List[str]) -> List[
 
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
-    ap = argparse.ArgumentParser(
-        description="Verify OPA bundle + manifest integrity")
+    ap = argparse.ArgumentParser(description="Verify OPA bundle + manifest integrity")
     ap.add_argument("--manifest", required=True, help="Path to manifest JSON")
-    ap.add_argument("--bundle", required=True,
-                    help="Path to OPA bundle tar.gz")
-    ap.add_argument("--policies-root", default="policies",
-                    help="Root directory of policy sources")
-    ap.add_argument("--allow-extra", action="store_true",
-                    help="Do not fail if extra policy files exist on disk")
-    ap.add_argument("--skip-git", action="store_true",
-                    help="Skip git commit validation")
-    ap.add_argument(
-        "--bundle-sig", help="Cosign signature for bundle (optional)")
-    ap.add_argument("--bundle-cert",
-                    help="Cosign certificate for bundle (optional)")
-    ap.add_argument("--manifest-sig",
-                    help="Cosign signature for manifest (optional)")
-    ap.add_argument("--manifest-cert",
-                    help="Cosign certificate for manifest (optional)")
-    ap.add_argument("--all", action="store_true",
-                    help="Accumulate all issues before exiting")
+    ap.add_argument("--bundle", required=True, help="Path to OPA bundle tar.gz")
+    ap.add_argument("--policies-root", default="policies", help="Root directory of policy sources")
+    ap.add_argument("--allow-extra", action="store_true", help="Do not fail if extra policy files exist on disk")
+    ap.add_argument("--skip-git", action="store_true", help="Skip git commit validation")
+    ap.add_argument("--bundle-sig", help="Cosign signature for bundle (optional)")
+    ap.add_argument("--bundle-cert", help="Cosign certificate for bundle (optional)")
+    ap.add_argument("--manifest-sig", help="Cosign signature for manifest (optional)")
+    ap.add_argument("--manifest-cert", help="Cosign certificate for manifest (optional)")
+    ap.add_argument("--all", action="store_true", help="Accumulate all issues before exiting")
     return ap.parse_args(argv)
 
 
@@ -153,20 +140,17 @@ def main(argv: List[str]) -> int:
 
     missing_keys = REQUIRED_MANIFEST_KEYS - manifest.keys()
     if missing_keys:
-        issues.append(
-            Issue("ERROR", f"Manifest missing keys: {sorted(missing_keys)}"))
+        issues.append(Issue("ERROR", f"Manifest missing keys: {sorted(missing_keys)}"))
         if not ns.all:
             print("\n".join(map(str, issues)))
             return 1
 
     # Policies structure
-    policies: List[Dict[str, Any]] = manifest.get(
-        "policies", []) if isinstance(manifest.get("policies"), list) else []
+    policies: List[Dict[str, Any]] = manifest.get("policies", []) if isinstance(manifest.get("policies"), list) else []
     for i, p in enumerate(policies):
         pk = POLICY_REQUIRED_KEYS - p.keys()
         if pk:
-            issues.append(
-                Issue("ERROR", f"Policy[{i}] missing keys: {sorted(pk)}"))
+            issues.append(Issue("ERROR", f"Policy[{i}] missing keys: {sorted(pk)}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
@@ -175,8 +159,7 @@ def main(argv: List[str]) -> int:
     if not ns.skip_git:
         head = git_head()
         if head and manifest.get("build_commit") and head != manifest["build_commit"]:
-            issues.append(Issue(
-                "ERROR", f"Git HEAD {head} != manifest build_commit {manifest['build_commit']}"))
+            issues.append(Issue("ERROR", f"Git HEAD {head} != manifest build_commit {manifest['build_commit']}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
@@ -197,27 +180,23 @@ def main(argv: List[str]) -> int:
         sha, size = sha256_file(fp)
         disk_seen.append(rel)
         if sha != p["sha256"]:
-            issues.append(
-                Issue("ERROR", f"Hash mismatch {rel}: manifest {p['sha256']} != actual {sha}"))
+            issues.append(Issue("ERROR", f"Hash mismatch {rel}: manifest {p['sha256']} != actual {sha}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
         if size != p["bytes"]:
-            issues.append(
-                Issue("ERROR", f"Size mismatch {rel}: manifest {p['bytes']} != actual {size}"))
+            issues.append(Issue("ERROR", f"Size mismatch {rel}: manifest {p['bytes']} != actual {size}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
 
     # Extra files detection
     if not ns.allow_extra:
-        all_policy_files = [str(p.relative_to(policies_root))
-                            for p in policies_root.rglob("metadata.yaml")]
+        all_policy_files = [str(p.relative_to(policies_root)) for p in policies_root.rglob("metadata.yaml")]
         # Heuristic: we only listed metadata.yaml in manifest (extend later if needed)
         extras = set(all_policy_files) - set(disk_seen)
         if extras:
-            issues.append(
-                Issue("ERROR", f"Extra policy files not in manifest: {sorted(extras)[:10]}"))
+            issues.append(Issue("ERROR", f"Extra policy files not in manifest: {sorted(extras)[:10]}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
@@ -228,9 +207,7 @@ def main(argv: List[str]) -> int:
         issues.append(
             Issue(
                 "ERROR",
-                "aggregate_hash mismatch: manifest {} != recomputed {}".format(
-                    manifest.get("aggregate_hash"), agg
-                ),
+                "aggregate_hash mismatch: manifest {} != recomputed {}".format(manifest.get("aggregate_hash"), agg),
             )
         )
         if not ns.all:
@@ -239,11 +216,9 @@ def main(argv: List[str]) -> int:
 
     # Bundle members
     try:
-        missing_in_bundle = verify_bundle_members(
-            bundle_path, [p["path"] for p in policies])
+        missing_in_bundle = verify_bundle_members(bundle_path, [p["path"] for p in policies])
         if missing_in_bundle:
-            issues.append(
-                Issue("ERROR", f"Bundle missing files: {missing_in_bundle[:10]}"))
+            issues.append(Issue("ERROR", f"Bundle missing files: {missing_in_bundle[:10]}"))
             if not ns.all:
                 print("\n".join(map(str, issues)))
                 return 1
@@ -261,17 +236,14 @@ def main(argv: List[str]) -> int:
         if sig.is_file():
             ok, out = cosign_verify_blob(bundle_path, sig, cert)
             if ok:
-                issues.append(
-                    Issue("INFO", f"cosign bundle signature OK ({sig.name})"))
+                issues.append(Issue("INFO", f"cosign bundle signature OK ({sig.name})"))
             else:
-                issues.append(
-                    Issue("ERROR", f"cosign bundle signature FAIL: {out.strip()}"))
+                issues.append(Issue("ERROR", f"cosign bundle signature FAIL: {out.strip()}"))
                 if not ns.all:
                     print("\n".join(map(str, issues)))
                     return 1
         else:
-            issues.append(
-                Issue("WARN", f"Bundle signature file not found: {sig}"))
+            issues.append(Issue("WARN", f"Bundle signature file not found: {sig}"))
 
     if ns.manifest_sig:
         sig = Path(ns.manifest_sig)
@@ -279,17 +251,14 @@ def main(argv: List[str]) -> int:
         if sig.is_file():
             ok, out = cosign_verify_blob(manifest_path, sig, cert)
             if ok:
-                issues.append(
-                    Issue("INFO", f"cosign manifest signature OK ({sig.name})"))
+                issues.append(Issue("INFO", f"cosign manifest signature OK ({sig.name})"))
             else:
-                issues.append(
-                    Issue("ERROR", f"cosign manifest signature FAIL: {out.strip()}"))
+                issues.append(Issue("ERROR", f"cosign manifest signature FAIL: {out.strip()}"))
                 if not ns.all:
                     print("\n".join(map(str, issues)))
                     return 1
         else:
-            issues.append(
-                Issue("WARN", f"Manifest signature file not found: {sig}"))
+            issues.append(Issue("WARN", f"Manifest signature file not found: {sig}"))
 
     # Report
     error_count = sum(1 for i in issues if i.level == "ERROR")

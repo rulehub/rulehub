@@ -1,21 +1,21 @@
 # yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: fintech.pci_storage_encryption
-name: PCI DSS — Storage Encryption
+name: "PCI DSS \u2014 Storage Encryption"
 path:
-  - policies/fintech/pci_storage_encryption/policy.rego
-  - policies/fintech/pci_storage_encryption/policy_test.rego
+- policies/fintech/pci_storage_encryption/policy.rego
+- policies/fintech/pci_storage_encryption/policy_test.rego
 description: Encrypt PAN data at rest
 standard:
   name: PCI DSS 4.0
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/document_library
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

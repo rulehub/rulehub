@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_child_under_age_and_consent_missing_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.in_dpdpa_children_verifiable_consent": false}, "child": {"age": 17}, "parental_consent": false}
 }
+
+# Auto-generated granular test for controls["edtech.in_dpdpa_children_verifiable_consent"]
+test_denies_when_controls_edtech_in_dpdpa_children_verifiable_consent_failing if {
+	some _ in deny with input as {"controls": {}, "child": {"age": true}, "controls[\"edtech": {"in_dpdpa_children_verifiable_consent\"]": false}}
+}

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ppra_parental_consent_sensitive_surveys: example validation
+      message: "edtech.ppra_parental_consent_sensitive_surveys: example validation"
       pattern:
         metadata:
           labels:

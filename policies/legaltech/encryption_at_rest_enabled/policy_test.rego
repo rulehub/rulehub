@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_encryption_at_rest_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.encryption_at_rest_enabled": false}, "security": {"encryption_at_rest": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.encryption_at_rest_enabled"]
+test_denies_when_controls_legaltech_encryption_at_rest_enabled_failing if {
+	some _ in deny with input as {"controls": {}, "security": {"encryption_at_rest": true}, "controls[\"legaltech": {"encryption_at_rest_enabled\"]": false}}
+}

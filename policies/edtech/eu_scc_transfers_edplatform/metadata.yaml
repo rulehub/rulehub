@@ -2,14 +2,14 @@
 id: edtech.eu_scc_transfers_edplatform
 name: <Policy Title>
 path:
-  - policies/edtech/eu_scc_transfers_edplatform/policy.rego
-  - policies/edtech/eu_scc_transfers_edplatform/policy_test.rego
+- policies/edtech/eu_scc_transfers_edplatform/policy.rego
+- policies/edtech/eu_scc_transfers_edplatform/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
+- https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
 geo:
   regions:
   - Global

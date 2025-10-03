@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_least_privilege_and_control_fail if {
 	count(deny) > 0 with input as {"controls": {"edtech.edtech_access_least_privilege": false}, "security": {"least_privilege_enforced": false}}
 }
+
+# Auto-generated granular test for controls["edtech.edtech_access_least_privilege"]
+test_denies_when_controls_edtech_edtech_access_least_privilege_failing if {
+	some _ in deny with input as {"controls": {}, "security": {"least_privilege_enforced": true}, "controls[\"edtech": {"edtech_access_least_privilege\"]": false}}
+}

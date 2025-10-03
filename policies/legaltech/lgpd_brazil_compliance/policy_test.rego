@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_lgpd_noncompliant if {
 	count(deny) > 0 with input as {"controls": {"legaltech.lgpd_brazil_compliance": false}, "lgpd": {"compliant": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.lgpd_brazil_compliance"]
+test_denies_when_controls_legaltech_lgpd_brazil_compliance_failing if {
+	some _ in deny with input as {"controls": {}, "lgpd": {"compliant": true}, "controls[\"legaltech": {"lgpd_brazil_compliance\"]": false}}
+}

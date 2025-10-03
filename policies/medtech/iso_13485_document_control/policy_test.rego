@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_document_control_missing if {
 	count(deny) > 0 with input as {"controls": {"medtech.iso_13485_document_control": false}, "qms": {"document_control_defined": false}}
 }
+
+# Auto-generated granular test for controls["medtech.iso_13485_document_control"]
+test_denies_when_controls_medtech_iso_13485_document_control_failing if {
+	some _ in deny with input as {"controls": {}, "qms": {"document_control_defined": true}, "controls[\"medtech": {"iso_13485_document_control\"]": false}}
+}

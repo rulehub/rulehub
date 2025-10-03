@@ -2,15 +2,15 @@
 id: edtech.ferpa_parent_access_rights
 name: <Policy Title>
 path:
-  - policies/edtech/ferpa_parent_access_rights/policy.rego
-  - policies/edtech/ferpa_parent_access_rights/policy_test.rego
+- policies/edtech/ferpa_parent_access_rights/policy.rego
+- policies/edtech/ferpa_parent_access_rights/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://studentprivacy.ed.gov/
-  - https://www.ecfr.gov/current/title-34/subtitle-A/part-99
+- https://studentprivacy.ed.gov/
+- https://www.ecfr.gov/current/title-34/subtitle-A/part-99
 geo:
   regions:
   - Global

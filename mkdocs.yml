@@ -25,21 +25,20 @@ theme:
 
 nav:
   - Overview: index.md
-    # Roadmap removed: ROADMAP.md not present in docs/ — keep nav and files in sync
   - Getting Started: getting-started.md
   - Architecture:
-    - Policy Architecture: policy-architecture.md
-    - Metadata: metadata.md
-    - Coverage: coverage.md
-    - Compliance Maps: compliance-maps.md
+      - Policy Architecture: policy-architecture.md
+      - Metadata: metadata.md
+      - Coverage: coverage.md
+      - Compliance Maps: compliance-maps.md
   - Kubernetes Policies:
-    - K8s Policies: k8s-policies.md
+      - K8s Policies: k8s-policies.md
   - Security & Supply Chain:
-    - Build Info: build-info.md
-    - Security Provenance: security-provenance.md
-    - CI Security: ci-security.md
+      - Build Info: build-info.md
+      - Security Provenance: security-provenance.md
+      - CI Security: ci-security.md
   - Release Process:
-    - Versioning & Releases: release-versioning.md
+      - Versioning & Releases: release-versioning.md
   - Release Guide: release-guide.md
   - Release Runbook: release-runbook.md
   - Integrity: security-integrity.md
@@ -47,14 +46,14 @@ nav:
   - Editorial Checklist: editorial-checklist.md
   - Aggregated References: references-index.md
   - Extras:
-  # Local run and Brand usage removed from nav because files are not intended to be part of the public site
-    - Repository README: README_repo.md
-    - OPA bundle format: opa-bundle-format.md
-    - OPA bundle usage: opa-bundle-usage.md
-    - Performance: performance.md
-    - Policy test quality: policy-test-quality.md
-    - Policy title sync plan: policy-title-sync-plan.md
-    - Security threat model: security-threat-model.md
+      # Local run and Brand usage removed from nav because files are not intended to be part of the public site
+      - Documentation index: documentation-index.md
+      - OPA bundle format: opa-bundle-format.md
+      - OPA bundle usage: opa-bundle-usage.md
+      - Performance: performance.md
+      - Policy test quality: policy-test-quality.md
+      - Policy title sync plan: policy-title-sync-plan.md
+      - Security threat model: security-threat-model.md
 
 plugins:
   - search

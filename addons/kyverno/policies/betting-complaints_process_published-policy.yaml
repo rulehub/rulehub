@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.complaints_process_published: example validation
+      message: "betting.complaints_process_published: example validation"
       pattern:
         metadata:
           labels:

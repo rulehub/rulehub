@@ -171,4 +171,3 @@
 ## Policy Test Coverage (Gatekeeper Rego)
 
 Policies with tests: 283/283 (100.0%)
-

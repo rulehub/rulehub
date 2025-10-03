@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.ae_pdpl_consent_notice
 name: 'AE: PDPL Consent Notice'
 path:
-  - policies/legaltech/ae_pdpl_consent_notice/policy.rego
-  - policies/legaltech/ae_pdpl_consent_notice/policy_test.rego
+- policies/legaltech/ae_pdpl_consent_notice/policy.rego
+- policies/legaltech/ae_pdpl_consent_notice/policy_test.rego
 description: Obtain consent provide transparent notice
 standard:
   name: PDPL (UAE)
   version: current
 links:
-  - https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law
+- https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law
 geo:
   regions:
   - Global

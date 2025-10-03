@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.pdpa_sg_consent_purposes
 name: 'PDPA: SG Consent Purposes'
 path:
-  - policies/legaltech/pdpa_sg_consent_purposes/policy.rego
-  - policies/legaltech/pdpa_sg_consent_purposes/policy_test.rego
+- policies/legaltech/pdpa_sg_consent_purposes/policy.rego
+- policies/legaltech/pdpa_sg_consent_purposes/policy_test.rego
 description: Consent for purposes; notification requirements
 standard:
   name: PDPA (Singapore)
   version: current
 links:
-  - https://sso.agc.gov.sg/Act/PDPA2012
+- https://sso.agc.gov.sg/Act/PDPA2012
 geo:
   regions:
   - Global

@@ -2,21 +2,21 @@
 id: fintech.geofencing_restricted_markets
 name: Geofencing Restricted Markets
 path:
-  - policies/fintech/geofencing_restricted_markets/policy.rego
-  - policies/fintech/geofencing_restricted_markets/policy_test.rego
+- policies/fintech/geofencing_restricted_markets/policy.rego
+- policies/fintech/geofencing_restricted_markets/policy_test.rego
 description: Block restricted markets by geo
 standard:
   name: Risk
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
-  - https://www.emvco.com/emv-technologies/3d-secure/
+- https://www.pcisecuritystandards.org/document_library
+- https://www.emvco.com/emv-technologies/3d-secure/
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

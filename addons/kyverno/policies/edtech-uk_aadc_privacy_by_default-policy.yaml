@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.uk_aadc_privacy_by_default: example validation
+      message: "edtech.uk_aadc_privacy_by_default: example validation"
       pattern:
         metadata:
           labels:

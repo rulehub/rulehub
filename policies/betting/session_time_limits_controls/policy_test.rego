@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_limits_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.session_time_limits_controls": false}, "limits": {"session_time_limit_enabled": false}}
 }
+
+# Auto-generated granular test for controls["betting.session_time_limits_controls"]
+test_denies_when_controls_betting_session_time_limits_controls_failing if {
+	some _ in deny with input as {"controls": {}, "limits": {"session_time_limit_enabled": true}, "controls[\"betting": {"session_time_limits_controls\"]": false}}
+}

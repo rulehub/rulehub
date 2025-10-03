@@ -1,10 +1,11 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: gdpr.data_retention
 name: Storage limitation (data retention)
 standard: GDPR
 version: 2016/679
 path:
-  - policies/gdpr/data_retention/policy.rego
-  - policies/gdpr/data_retention/policy_test.rego
+- policies/gdpr/data_retention/policy.rego
+- policies/gdpr/data_retention/policy_test.rego
 description: Placeholder rule to ensure personal data is not kept longer than necessary.
 framework: other
 tags:
@@ -12,9 +13,8 @@ tags:
 owner: compliance
 severity: medium
 links:
-  - https://eur-lex.europa.eu/eli/reg/2016/679/oj
-  - https://www.legislation.gov.uk/eudr/2016/679/article/5
-
+- https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- https://www.legislation.gov.uk/eudr/2016/679/article/5
 geo:
   regions:
   - Europe

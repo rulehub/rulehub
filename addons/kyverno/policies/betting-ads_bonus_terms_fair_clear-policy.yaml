@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.ads_bonus_terms_fair_clear: example validation
+      message: "betting.ads_bonus_terms_fair_clear: example validation"
       pattern:
         metadata:
           labels:

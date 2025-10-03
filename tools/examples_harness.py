@@ -33,6 +33,7 @@ Exit code non-zero iff failed > 0.
 
 Schema version: 1 (subject to extension).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -92,7 +93,7 @@ def extract_code(file_path: Path, start: int, end: int) -> List[str]:
     if start < 1 or end > len(lines) or start > end:
         raise ValueError(f"Invalid line range {start}-{end} for {file_path}")
     # Lines are 1-based inclusive
-    return lines[start - 1: end]
+    return lines[start - 1 : end]
 
 
 def violates_network_policy(block: List[str]) -> bool:
@@ -127,11 +128,9 @@ def run_block(block: List[str]) -> tuple[str, str | None, str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Selective example harness")
-    ap.add_argument("--index", default="docs/examples.index",
-                    help="Index file path")
+    ap.add_argument("--index", default="docs/examples.index", help="Index file path")
     ap.add_argument("--docs", default="docs", help="Docs root directory")
-    ap.add_argument("--json", default="-",
-                    help="Output JSON path or - for stdout")
+    ap.add_argument("--json", default="-", help="Output JSON path or - for stdout")
     args = ap.parse_args()
 
     docs_root = Path(args.docs)
@@ -147,8 +146,7 @@ def main() -> int:
         try:
             code_lines = extract_code(file_path, start, end)
         except Exception as e:  # capture extraction errors
-            results.append(HarnessResult(ex_id, str(file_path),
-                           start, end, "failed", expect, flags, error=str(e)))
+            results.append(HarnessResult(ex_id, str(file_path), start, end, "failed", expect, flags, error=str(e)))
             continue
         if "skip" in flags:
             status = "skipped"
@@ -174,8 +172,7 @@ def main() -> int:
                 expect=expect,
                 flags=flags,
                 error=error,
-                stdout_snippet=(stdout_full or "")[
-                    :200] if stdout_full else None,
+                stdout_snippet=(stdout_full or "")[:200] if stdout_full else None,
             )
         )
 

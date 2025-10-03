@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ny_edlaw2d_encryption_and_contracts: example validation
+      message: "edtech.ny_edlaw2d_encryption_and_contracts: example validation"
       pattern:
         metadata:
           labels:

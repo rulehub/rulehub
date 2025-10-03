@@ -33,3 +33,8 @@ test_allow_when_consent_null_values if {
 test_denies_when_multiple_consent_fields_false if {
 	count(deny) > 0 with input as {"controls": {"legaltech.gdpr_consent_valid": true}, "consent": {"freely_given": false, "informed": false, "recorded": true, "unambiguous": true}}
 }
+
+# Auto-generated granular test for controls["legaltech.gdpr_consent_valid"]
+test_denies_when_controls_legaltech_gdpr_consent_valid_failing if {
+	some _ in deny with input as {"controls": {}, "consent": {"informed": true, "freely_given": true, "unambiguous": true, "recorded": true}, "controls[\"legaltech": {"gdpr_consent_valid\"]": false}}
+}

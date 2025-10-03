@@ -2,20 +2,20 @@
 id: betting.self_exclusion_de_oasis
 name: <Policy Title>
 path:
-  - policies/betting/self_exclusion_de_oasis/policy.rego
-  - policies/betting/self_exclusion_de_oasis/policy_test.rego
+- policies/betting/self_exclusion_de_oasis/policy.rego
+- policies/betting/self_exclusion_de_oasis/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gluecksspiel-behoerde.de/
-  - https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis
+- https://www.gluecksspiel-behoerde.de/
+- https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:

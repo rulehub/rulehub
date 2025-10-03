@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_proactive_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.safer_gambling_interactions": false}, "safer_gambling": {"proactive_interactions_enabled": false}}
 }
+
+# Auto-generated granular test for controls["betting.safer_gambling_interactions"]
+test_denies_when_controls_betting_safer_gambling_interactions_failing if {
+	some _ in deny with input as {"controls": {}, "safer_gambling": {"proactive_interactions_enabled": true}, "controls[\"betting": {"safer_gambling_interactions\"]": false}}
+}

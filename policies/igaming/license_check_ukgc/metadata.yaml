@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.license_check_ukgc
-name: License Check — UKGC
+name: "License Check \u2014 UKGC"
 description: Operator holds UKGC license
 standard: UKGC
 version: current
 path:
-  - policies/igaming/license_check_ukgc/policy.rego
-  - policies/igaming/license_check_ukgc/policy_test.rego
+- policies/igaming/license_check_ukgc/policy.rego
+- policies/igaming/license_check_ukgc/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
-  regions: [Europe]
-  countries: [UK]
+  regions:
+  - Europe
+  countries:
+  - UK
   scope: National

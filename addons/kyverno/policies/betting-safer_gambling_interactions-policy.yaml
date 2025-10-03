@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.safer_gambling_interactions: example validation
+      message: "betting.safer_gambling_interactions: example validation"
       pattern:
         metadata:
           labels:

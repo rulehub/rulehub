@@ -2,14 +2,14 @@
 id: medtech.backup_and_recovery_rto_rpo
 name: <Policy Title>
 path:
-  - policies/medtech/backup_and_recovery_rto_rpo/policy.rego
-  - policies/medtech/backup_and_recovery_rto_rpo/policy_test.rego
+- policies/medtech/backup_and_recovery_rto_rpo/policy.rego
+- policies/medtech/backup_and_recovery_rto_rpo/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.iso.org/standard/44379.html
+- https://www.iso.org/standard/44379.html
 geo:
   regions:
   - Global

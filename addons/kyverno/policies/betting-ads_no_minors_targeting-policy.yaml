@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.ads_no_minors_targeting: example validation
+      message: "betting.ads_no_minors_targeting: example validation"
       pattern:
         metadata:
           labels:

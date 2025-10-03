@@ -23,6 +23,7 @@ Environment variables (optional):
 JSON structure:
   { "missing_coverage": [ {"id": <policy_id>, "links_count": N} ], "count": C }
 """
+
 from __future__ import annotations
 
 import json
@@ -39,14 +40,12 @@ COVERAGE_JSON = Path("dist/coverage.json")
 
 def load_coverage_ids() -> Set[str]:
     if not COVERAGE_JSON.exists():
-        print(
-            "[links-no-coverage] coverage.json missing. Run 'make catalog' first.", file=sys.stderr)
+        print("[links-no-coverage] coverage.json missing. Run 'make catalog' first.", file=sys.stderr)
         raise SystemExit(1)
     try:
         data = json.loads(COVERAGE_JSON.read_text(encoding="utf-8"))
     except Exception as e:  # pragma: no cover - defensive
-        print(
-            f"[links-no-coverage] Failed to parse coverage.json: {e}", file=sys.stderr)
+        print(f"[links-no-coverage] Failed to parse coverage.json: {e}", file=sys.stderr)
         raise SystemExit(1)
     ids: Set[str] = set()
     if not isinstance(data, list):
@@ -75,8 +74,7 @@ def find_missing(covered: Set[str]) -> List[Dict[str, object]]:
             links = flat
         if not isinstance(links, list):
             continue
-        links = [link for link in links if isinstance(
-            link, str) and link.strip()]
+        links = [link for link in links if isinstance(link, str) and link.strip()]
         if not links:
             continue  # only interested in policies that DO have links
         if pid not in covered:
@@ -101,7 +99,7 @@ def main() -> int:
     # Cast because mypy/pylance lose precise type (List[Dict[str, object]])
     width = max(len(cast(str, m["id"])) for m in missing)
     print(f"{'policy_id'.ljust(width)} | links_count")
-    print(f"{'-'*width}-+------------")
+    print(f"{'-' * width}-+------------")
     for m in missing:
         pid = cast(str, m["id"])  # defensive cast
         print(f"{pid.ljust(width)} | {m['links_count']}")

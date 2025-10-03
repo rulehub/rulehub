@@ -1,10 +1,11 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: pci.https_only
 name: Enforce HTTPS only
 standard: PCI DSS
 version: '4.0'
 path:
-  - policies/pci/https_only/policy.rego
-  - policies/pci/https_only/policy_test.rego
+- policies/pci/https_only/policy.rego
+- policies/pci/https_only/policy_test.rego
 description: Placeholder rule to enforce HTTPS/TLS for data in transit.
 framework: other
 tags:
@@ -12,10 +13,9 @@ tags:
 owner: compliance
 severity: medium
 links:
-  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
-  - https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/
-  - https://www.pcisecuritystandards.org/document_library # Migrating from SSL/TLS (canonical library)
-
+- https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/
+- https://www.pcisecuritystandards.org/document_library
 geo:
   regions:
   - Global

@@ -2,14 +2,14 @@
 id: medtech.fda_part11_esign_linkage
 name: <Policy Title>
 path:
-  - policies/medtech/fda_part11_esign_linkage/policy.rego
-  - policies/medtech/fda_part11_esign_linkage/policy_test.rego
+- policies/medtech/fda_part11_esign_linkage/policy.rego
+- policies/medtech/fda_part11_esign_linkage/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11
+- https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11
 geo:
   regions:
   - Global

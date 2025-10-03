@@ -2,22 +2,22 @@
 id: fintech.stablecoin_reserve_ratio
 name: Stablecoin Reserve Ratio
 path:
-  - policies/fintech/stablecoin_reserve_ratio/policy.rego
-  - policies/fintech/stablecoin_reserve_ratio/policy_test.rego
+- policies/fintech/stablecoin_reserve_ratio/policy.rego
+- policies/fintech/stablecoin_reserve_ratio/policy_test.rego
 description: Maintain adequate reserves
 standard:
   name: MiCA
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Europe
+  - Europe
   countries:
-    - EU
-    - EEA
+  - EU
+  - EEA
   subregions: []
   scope: Regional
 jurisdiction:
-  - EU
+- EU

@@ -2,21 +2,21 @@
 id: betting.au_iga_no_prohibited_services
 name: AU IGA No Prohibited Services
 path:
-  - policies/betting/au_iga_no_prohibited_services/policy.rego
-  - policies/betting/au_iga_no_prohibited_services/policy_test.rego
+- policies/betting/au_iga_no_prohibited_services/policy.rego
+- policies/betting/au_iga_no_prohibited_services/policy_test.rego
 description: Do not offer prohibited interactive gambling services to Australian players under the IGA.
 standard:
   name: AU IGA
   version: current
 links:
-  - https://www.legislation.gov.au/Series/C2004A00771
-  - https://www.acma.gov.au/interactive-gambling
+- https://www.legislation.gov.au/Series/C2004A00771
+- https://www.acma.gov.au/interactive-gambling
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - AU
+  - AU
   subregions: []
   scope: AU
 jurisdiction:
-  - AU
+- AU

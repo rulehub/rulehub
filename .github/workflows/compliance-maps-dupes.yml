@@ -16,26 +16,18 @@ permissions:
 
 jobs:
   check-dupes:
-    # Skip the job entirely when running under nektos/act to avoid flaky container exec failures locally
-    if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/ci-base:latest
+      options: --user 0:0
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Set up Python
-        if: ${{ github.actor != 'nektos/act' }}
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
       - name: Install dependencies
-        if: ${{ github.actor != 'nektos/act' }}
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements.txt
+          python-venv-install
       - name: Check duplicate policies in compliance maps
         run: |
-          if command -v python3 >/dev/null 2>&1; then
-            python3 tools/fix_compliance_map_dupes.py --check
-          else
-            echo "Skipping duplicate check (python not available under act)"; exit 0
-          fi
+          . .venv/bin/activate
+          python tools/fix_compliance_map_dupes.py --check

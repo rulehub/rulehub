@@ -20,3 +20,8 @@ test_denies_when_generic_control_flag_false if {
 test_denies_when_both_privileged if {
 	count(deny) > 0 with input as {"controls": {"k8s.no_privileged": true}, "kind": "Pod", "spec": {"containers": [{"name": "test", "securityContext": {"privileged": true}}], "securityContext": {"privileged": true}}}
 }
+
+# Auto-generated granular test for controls["k8s.no_privileged"]
+test_denies_when_controls_k8s_no_privileged_failing if {
+	some _ in deny with input as {"controls": {}, "kind": true, "controls[\"k8s": {"no_privileged\"]": false}}
+}

@@ -29,3 +29,8 @@ test_denies_when_both_profiling_and_geolocation_enabled if {
 		"controls": {"edtech.uk_aadc_profiling_and_geolocation_off": true},
 	}
 }
+
+# Auto-generated granular test for controls["edtech.uk_aadc_profiling_and_geolocation_off"]
+test_denies_when_controls_edtech_uk_aadc_profiling_and_geolocation_off_failing if {
+	some _ in deny with input as {"controls": {}, "aadc": {"profiling_enabled": true, "geolocation_enabled": true}, "controls[\"edtech": {"uk_aadc_profiling_and_geolocation_off\"]": false}}
+}

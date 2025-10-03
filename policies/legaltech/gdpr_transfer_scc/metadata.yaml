@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.gdpr_transfer_scc
 name: 'GDPR: Transfer Scc'
 path:
-  - policies/legaltech/gdpr_transfer_scc/policy.rego
-  - policies/legaltech/gdpr_transfer_scc/policy_test.rego
+- policies/legaltech/gdpr_transfer_scc/policy.rego
+- policies/legaltech/gdpr_transfer_scc/policy_test.rego
 description: SCCs or equivalent safeguards for cross-border transfers
 standard:
   name: GDPR (EU)
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
+- https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
 geo:
   regions:
   - Global

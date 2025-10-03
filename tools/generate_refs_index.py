@@ -10,6 +10,7 @@ Exit codes:
  1 policies found without links
  2 other error
 """
+
 from __future__ import annotations
 
 import argparse
@@ -57,15 +58,11 @@ def compute_hash(paths: List[Path]) -> str:
 
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    ap = argparse.ArgumentParser(
-        description="Generate references index from policy metadata")
-    ap.add_argument("--min-dup", type=int, default=5,
-                    help="Min count threshold to list duplicate links")
+    ap = argparse.ArgumentParser(description="Generate references index from policy metadata")
+    ap.add_argument("--min-dup", type=int, default=5, help="Min count threshold to list duplicate links")
     ap.add_argument("--format", choices=["md", "json", "both"], default="md")
-    ap.add_argument("--fail-missing-links", action="store_true",
-                    help="Exit non-zero if any policy missing links")
-    ap.add_argument("--no-cache", action="store_true",
-                    help="Ignore/change cache and force regeneration")
+    ap.add_argument("--fail-missing-links", action="store_true", help="Exit non-zero if any policy missing links")
+    ap.add_argument("--no-cache", action="store_true", help="Ignore/change cache and force regeneration")
     return ap.parse_args(argv)
 
 
@@ -122,8 +119,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         data = load_yaml(meta_path)
         pid = str(data.get("id") or meta_path.parent.name)
         links_val = data.get("links")
-        links: List[str] = [str(x) for x in links_val] if isinstance(
-            links_val, list) else []
+        links: List[str] = [str(x) for x in links_val] if isinstance(links_val, list) else []
         if not links:
             missing_links.append(pid)
         geo_val = data.get("geo")
@@ -149,13 +145,15 @@ def main(argv: Optional[List[str]] = None) -> int:
             if issues:
                 link_issues[norm] = issues
         links = normalized_links
-        metas.append({
-            "id": pid,
-            "regions": regions,
-            "countries": countries,
-            "scope": scope,
-            "links": links,
-        })
+        metas.append(
+            {
+                "id": pid,
+                "regions": regions,
+                "countries": countries,
+                "scope": scope,
+                "links": links,
+            }
+        )
     metas.sort(key=lambda x: x["id"])  # deterministic
 
     # Build MD if needed
@@ -165,8 +163,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         table_header = "| Policy ID | Regions | Countries | Scope | Sources |\n|---|---|---|---|---|\n"
         lines = [header, note, table_header]
         for m in metas:
-            sources_md = "<br>".join(shorten_for_display(u)
-                                     for u in m["links"]) if m["links"] else ""
+            sources_md = "<br>".join(shorten_for_display(u) for u in m["links"]) if m["links"] else ""
             lines.append(
                 "| `{id}` | {regions} | {countries} | {scope} | {sources} |\n".format(
                     id=m["id"],
@@ -191,7 +188,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             for url, count in duplicates:
                 lines.append(f"- {url} (x{count})\n")
             lines.append("\n")
-    # No 'missing geo' section needed now that geo is enforced.
+        # No 'missing geo' section needed now that geo is enforced.
         if link_issues:
             lines.append("Link issues (heuristic): \n")
             for url, issues in link_issues.items():
@@ -202,20 +199,21 @@ def main(argv: Optional[List[str]] = None) -> int:
     # Build JSON if needed
     if args.format in ("json", "both"):
         DIST_JSON.parent.mkdir(parents=True, exist_ok=True)
-        json.dump({
-            "policies": metas,
-            "missing_links": missing_links,
-            "link_occurrences": link_occurrences,
-            "link_issues": link_issues,
-        }, DIST_JSON.open("w", encoding="utf-8"), indent=2)
+        json.dump(
+            {
+                "policies": metas,
+                "missing_links": missing_links,
+                "link_occurrences": link_occurrences,
+                "link_issues": link_issues,
+            },
+            DIST_JSON.open("w", encoding="utf-8"),
+            indent=2,
+        )
 
     CACHE_FILE.write_text(current_hash, encoding="utf-8")
 
     if args.fail_missing_links and missing_links:
-        sys.stderr.write(
-            f"Policies missing links ({len(missing_links)}): " +
-            ", ".join(missing_links) + "\n"
-        )
+        sys.stderr.write(f"Policies missing links ({len(missing_links)}): " + ", ".join(missing_links) + "\n")
         return 1
     return 0
 

@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_request_not_verified if {
 	count(deny) > 0 with input as {"controls": {"legaltech.ccpa_verification_of_requests": true}, "ccpa": {"request_verified": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.ccpa_verification_of_requests"]
+test_denies_when_controls_legaltech_ccpa_verification_of_requests_failing if {
+	some _ in deny with input as {"controls": {}, "ccpa": {"request_verified": true}, "controls[\"legaltech": {"ccpa_verification_of_requests\"]": false}}
+}

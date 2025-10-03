@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.data_residency_requirements_enforced
 name: Data Residency Requirements Enforced
 path:
-  - policies/legaltech/data_residency_requirements_enforced/policy.rego
-  - policies/legaltech/data_residency_requirements_enforced/policy_test.rego
+- policies/legaltech/data_residency_requirements_enforced/policy.rego
+- policies/legaltech/data_residency_requirements_enforced/policy_test.rego
 description: Enforce residency per contract/regulation
 standard:
   name: Best Practice
   version: current
 links:
-  - https://www.iso.org/standard/27001.html
+- https://www.iso.org/standard/27001.html
 geo:
   regions:
   - Global

@@ -1,22 +1,21 @@
 # yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.self_exclusion_dk_rofus
-name: <Policy Title>
+name: Self-exclusion (ROFUS - Denmark)
+description: Enforce self-exclusion checks against the national ROFUS registry
+standard: other
+version: current
 path:
-  - policies/betting/self_exclusion_dk_rofus/policy.rego
-  - policies/betting/self_exclusion_dk_rofus/policy_test.rego
-description: <Short description of the policy>
-standard:
-  name: <Standard or Regulation>
-  version: <version or "current">
+- policies/betting/self_exclusion_dk_rofus/policy.rego
+- policies/betting/self_exclusion_dk_rofus/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
 links:
-  - https://www.spillemyndigheden.dk/
-  - https://www.spillemyndigheden.dk/en/rofus
+- https://www.spillemyndigheden.dk/
+- https://www.spillemyndigheden.dk/en/rofus
 geo:
   regions:
-  - Global
+  - Europe
   countries:
-  - '*'
-  subregions: []
-  scope: Global
-jurisdiction:
-- Global
+  - DK
+  scope: National

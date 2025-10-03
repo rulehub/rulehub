@@ -1,11 +1,12 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: k8s.disallow_latest
 name: Disallow image tag latest
 standard: Kubernetes
 version: 1.x
 path:
-  - addons/kyverno/policies/disallow-latest.yaml
-  - policies/k8s/disallow_latest/policy.rego
-  - policies/k8s/disallow_latest/policy_test.rego
+- addons/kyverno/policies/disallow-latest.yaml
+- policies/k8s/disallow_latest/policy.rego
+- policies/k8s/disallow_latest/policy_test.rego
 description: Prevent use of the 'latest' image tag.
 framework: kyverno
 tags:
@@ -14,9 +15,8 @@ tags:
 - security
 owner: platform-security
 links:
-  - https://kubernetes.io/docs/concepts/containers/images/
-  - https://kubernetes.io/docs/concepts/security/security-checklist/
-
+- https://kubernetes.io/docs/concepts/containers/images/
+- https://kubernetes.io/docs/concepts/security/security-checklist/
 geo:
   regions:
   - Global

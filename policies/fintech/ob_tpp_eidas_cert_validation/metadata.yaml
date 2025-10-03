@@ -2,21 +2,21 @@
 id: fintech.ob_tpp_eidas_cert_validation
 name: Open Banking TPP eIDAS Validation
 path:
-  - policies/fintech/ob_tpp_eidas_cert_validation/policy.rego
-  - policies/fintech/ob_tpp_eidas_cert_validation/policy_test.rego
+- policies/fintech/ob_tpp_eidas_cert_validation/policy.rego
+- policies/fintech/ob_tpp_eidas_cert_validation/policy_test.rego
 description: Validate QWAC/QSealC for TPP
 standard:
   name: eIDAS
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2014/910/oj
+- https://eur-lex.europa.eu/eli/reg/2014/910/oj
 geo:
   regions:
-    - Europe
+  - Europe
   countries:
-    - EU
-    - EEA
+  - EU
+  - EEA
   subregions: []
   scope: Regional
 jurisdiction:
-  - EU
+- EU

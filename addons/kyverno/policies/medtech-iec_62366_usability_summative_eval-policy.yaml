@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.iec_62366_usability_summative_eval: example validation
+      message: "medtech.iec_62366_usability_summative_eval: example validation"
       pattern:
         metadata:
           labels:

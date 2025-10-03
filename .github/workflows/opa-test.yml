@@ -1,41 +1,41 @@
 name: OPA Test (Betting Full)
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub policy image (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        required: false
+        default: ""
 
 permissions:
   contents: read
 jobs:
-  test:
-    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+  guard:
+    name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    steps:
+      - name: Enforce non-latest CI image tag
+        shell: bash
+        run: |
+          input_tag="${{ inputs.ci_image_tag }}"
+          if [ "$input_tag" = "latest" ]; then
+            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
+            exit 1
+          fi
+          if [ -z "$input_tag" ]; then
+            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
+          fi
+  test:
+    needs: guard
+    runs-on: ubuntu-latest
+    container:
+      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || 'latest') }}"
+      options: --user 0:0
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Cache OPA binary
-        id: cache-opa
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
-        with:
-          path: ~/.cache/opa
-          key: opa-${{ runner.os }}-1.7.1
-          restore-keys: |
-            opa-${{ runner.os }}-
-      - name: Install OPA
-        run: |
-          set -euo pipefail
-          OPA_VERSION=1.7.1
-          mkdir -p ~/.cache/opa
-          if [ ! -f ~/.cache/opa/opa-${OPA_VERSION} ]; then
-            echo "Downloading OPA ${OPA_VERSION}" >&2
-            curl -sSL -o ~/.cache/opa/opa-${OPA_VERSION} https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64_static
-            chmod +x ~/.cache/opa/opa-${OPA_VERSION}
-          else
-            echo "Using cached OPA ${OPA_VERSION}" >&2
-          fi
-          sudo cp ~/.cache/opa/opa-${OPA_VERSION} /usr/local/bin/opa
-          opa version
+      - name: OPA version (from CI image)
+        run: opa version
       - name: Run OPA tests (betting)
         run: opa test -v policies/betting
-
-  noop-act:
-    if: ${{ github.actor == 'nektos/act' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "[act] opa-test skipped."

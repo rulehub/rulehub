@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_breach_eligible_and_not_notified_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.au_ndb_breach_notification_edtech": false}, "breach": {"eligible": true, "notified": false}}
 }
+
+# Auto-generated granular test for controls["edtech.au_ndb_breach_notification_edtech"]
+test_denies_when_controls_edtech_au_ndb_breach_notification_edtech_failing if {
+	some _ in deny with input as {"controls": {}, "breach": {"eligible": true}, "controls[\"edtech": {"au_ndb_breach_notification_edtech\"]": false}}
+}

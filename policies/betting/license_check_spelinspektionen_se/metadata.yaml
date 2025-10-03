@@ -2,14 +2,14 @@
 id: betting.license_check_spelinspektionen_se
 name: <Policy Title>
 path:
-  - policies/betting/license_check_spelinspektionen_se/policy.rego
-  - policies/betting/license_check_spelinspektionen_se/policy_test.rego
+- policies/betting/license_check_spelinspektionen_se/policy.rego
+- policies/betting/license_check_spelinspektionen_se/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.spelinspektionen.se/
+- https://www.spelinspektionen.se/
 geo:
   regions:
   - Global

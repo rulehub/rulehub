@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.vn_pdpd_notice_and_consent
 name: Vn Pdpd Notice And Consent
 path:
-  - policies/legaltech/vn_pdpd_notice_and_consent/policy.rego
-  - policies/legaltech/vn_pdpd_notice_and_consent/policy_test.rego
+- policies/legaltech/vn_pdpd_notice_and_consent/policy.rego
+- policies/legaltech/vn_pdpd_notice_and_consent/policy_test.rego
 description: Provide notice obtain consent per PDPD
 standard:
   name: PDPD (Vietnam)
   version: current
 links:
-  - https://www.mps.gov.vn/ # Vietnam Ministry of Public Security
+- https://www.mps.gov.vn/
 geo:
   regions:
   - Global

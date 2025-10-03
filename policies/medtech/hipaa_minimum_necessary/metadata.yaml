@@ -2,14 +2,14 @@
 id: medtech.hipaa_minimum_necessary
 name: <Policy Title>
 path:
-  - policies/medtech/hipaa_minimum_necessary/policy.rego
-  - policies/medtech/hipaa_minimum_necessary/policy_test.rego
+- policies/medtech/hipaa_minimum_necessary/policy.rego
+- policies/medtech/hipaa_minimum_necessary/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html
+- https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html
 geo:
   regions:
   - Global

@@ -9,6 +9,7 @@ Usage: python3 tools/plugin_index_validate.py [--schema SCHEMA] [--index INDEX]
 
 Exit codes: 0 = valid (or no data), 2 = validation errors, 3 = IO/parse/schema issues
 """
+
 from __future__ import annotations
 
 import argparse
@@ -53,12 +54,14 @@ def validate_index(schema_path: Path, index_path: Path) -> Tuple[bool, List[Dict
     errors = []
     for err in sorted(validator.iter_errors(data), key=lambda e: e.path):
         pointer = _json_pointer_from_path(err.absolute_path)
-        errors.append({
-            "pointer": pointer,
-            "message": err.message,
-            "schema_path": list(err.absolute_schema_path),
-            "instance": err.instance,
-        })
+        errors.append(
+            {
+                "pointer": pointer,
+                "message": err.message,
+                "schema_path": list(err.absolute_schema_path),
+                "instance": err.instance,
+            }
+        )
 
     return (len(errors) == 0, errors)
 
@@ -72,26 +75,20 @@ def write_reports(is_valid: bool, errors: List[Dict[str, Any]], out_md: Path, ou
         else:
             f.write("Schema validation errors:\n\n")
             for e in errors:
-                f.write(
-                    f"- Pointer: `{e.get('pointer')}`\n  - Message: {e.get('message')}\n")
+                f.write(f"- Pointer: `{e.get('pointer')}`\n  - Message: {e.get('message')}\n")
 
     if out_json:
         with open(out_json, "w", encoding="utf-8") as fj:
-            json.dump({"valid": is_valid, "errors": errors},
-                      fj, indent=2, ensure_ascii=False)
+            json.dump({"valid": is_valid, "errors": errors}, fj, indent=2, ensure_ascii=False)
 
 
 def main(argv: List[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="plugin_index_validate")
-    parser.add_argument("--schema", type=Path,
-                        default=Path("tools/schemas/plugin-index.schema.json"))
+    parser.add_argument("--schema", type=Path, default=Path("tools/schemas/plugin-index.schema.json"))
     parser.add_argument("--index", type=Path, default=Path("dist/index.json"))
-    parser.add_argument("--out-md", type=Path,
-                        default=Path("dist/integrity/plugin_index_validation.md"))
-    parser.add_argument("--out-json", type=Path,
-                        default=Path("dist/integrity/plugin_index_validation.json"))
-    parser.add_argument("--no-json", action="store_true",
-                        help="Do not write JSON errors file")
+    parser.add_argument("--out-md", type=Path, default=Path("dist/integrity/plugin_index_validation.md"))
+    parser.add_argument("--out-json", type=Path, default=Path("dist/integrity/plugin_index_validation.json"))
+    parser.add_argument("--no-json", action="store_true", help="Do not write JSON errors file")
     args = parser.parse_args(argv)
 
     try:

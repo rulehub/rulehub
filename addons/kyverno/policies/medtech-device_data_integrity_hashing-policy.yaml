@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.device_data_integrity_hashing: example validation
+      message: "medtech.device_data_integrity_hashing: example validation"
       pattern:
         metadata:
           labels:

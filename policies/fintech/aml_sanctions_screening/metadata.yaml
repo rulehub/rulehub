@@ -2,22 +2,22 @@
 id: fintech.aml_sanctions_screening
 name: AML Sanctions Screening
 path:
-  - policies/fintech/aml_sanctions_screening/policy.rego
-  - policies/fintech/aml_sanctions_screening/policy_test.rego
+- policies/fintech/aml_sanctions_screening/policy.rego
+- policies/fintech/aml_sanctions_screening/policy_test.rego
 description: Screen against sanctions lists
 standard:
   name: EU AMLD / FATF
   version: current
 links:
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
-  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
-  - https://ofac.treasury.gov/sanctions-programs-and-country-information
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+- https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+- https://ofac.treasury.gov/sanctions-programs-and-country-information
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_ropa_outdated if {
 	count(deny) > 0 with input as {"controls": {"legaltech.ch_fadp_records_of_processing": true}, "privacy": {"ropa_up_to_date": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.ch_fadp_records_of_processing"]
+test_denies_when_controls_legaltech_ch_fadp_records_of_processing_failing if {
+	some _ in deny with input as {"controls": {}, "privacy": {"ropa_up_to_date": true}, "controls[\"legaltech": {"ch_fadp_records_of_processing\"]": false}}
+}

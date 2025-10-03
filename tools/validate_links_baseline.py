@@ -19,6 +19,7 @@ Rules:
 If the baseline file does not exist, it will be created from the current state and exit 0
 to ease first-time adoption.
 """
+
 from __future__ import annotations
 
 import json
@@ -63,13 +64,10 @@ def write_baseline(rep: Dict[str, Any]) -> None:
     data: Dict[str, Any] = {
         "non_https_urls": sorted(non_https),
         "policies_without_links": int(rep.get("policies_without_links", 0)),
-        "per_policy_duplicate_link_occurrences": int(
-            rep.get("per_policy_duplicate_link_occurrences", 0)
-        ),
+        "per_policy_duplicate_link_occurrences": int(rep.get("per_policy_duplicate_link_occurrences", 0)),
         "dead_urls": dict(sorted(dead_urls.items())),
     }
-    BASELINE_PATH.write_text(json.dumps(
-        data, indent=2) + "\n", encoding="utf-8")
+    BASELINE_PATH.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -85,11 +83,9 @@ def main() -> int:
         return 0
 
     failures: list[str] = []
-    rep_non_https: list[str] = list(
-        rep.get("non_https_urls", []))  # type: ignore[assignment]
+    rep_non_https: list[str] = list(rep.get("non_https_urls", []))  # type: ignore[assignment]
     baseline_non_https: list[str] = list(baseline.get("non_https_urls", []))
-    new_non_https: list[str] = sorted(
-        set(rep_non_https) - set(baseline_non_https))
+    new_non_https: list[str] = sorted(set(rep_non_https) - set(baseline_non_https))
     if new_non_https:
         failures.append(f"New non-HTTPS URLs detected: {len(new_non_https)}")
 
@@ -101,9 +97,7 @@ def main() -> int:
             )
         )
 
-    if rep["per_policy_duplicate_link_occurrences"] > baseline.get(
-        "per_policy_duplicate_link_occurrences", 0
-    ):
+    if rep["per_policy_duplicate_link_occurrences"] > baseline.get("per_policy_duplicate_link_occurrences", 0):
         failures.append(
             "per_policy_duplicate_link_occurrences increased: {} -> {}".format(
                 baseline.get("per_policy_duplicate_link_occurrences", 0),
@@ -128,10 +122,7 @@ def main() -> int:
         failures.append(f"New dead URLs: {len(new_dead)}")
 
     print("Link Audit Summary:")
-    print(
-        "  non_https_urls: "
-        f"{len(rep_non_https)} (baseline {len(baseline_non_https)})"
-    )
+    print(f"  non_https_urls: {len(rep_non_https)} (baseline {len(baseline_non_https)})")
     print(
         "  policies_without_links: "
         f"{rep['policies_without_links']} (baseline {baseline.get('policies_without_links', 0)})"
@@ -141,10 +132,7 @@ def main() -> int:
         f"{rep['per_policy_duplicate_link_occurrences']} (baseline "
         f"{baseline.get('per_policy_duplicate_link_occurrences', 0)})"
     )
-    print(
-        "  dead_urls: "
-        f"{len(current_dead)} (baseline {len(baseline_dead)})"
-    )
+    print(f"  dead_urls: {len(current_dead)} (baseline {len(baseline_dead)})")
     if new_non_https:
         print("  New non-HTTPS URLs:")
         for u in new_non_https[:25]:

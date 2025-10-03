@@ -12,6 +12,7 @@ Safety:
 
 This follows repository conventions used by other tooling in `tools/`.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -172,9 +173,17 @@ def gen_for_policy(pol: Path, apply: bool, force: bool) -> bool:
         print(f"(dry-run) Would write {test_path}")
         return True
 
-    # write file
-    test_path.write_text(content, encoding='utf-8')
-    print(f"Wrote {test_path}")
+    # write file only if content differs
+    if test_path.exists():
+        existing = test_path.read_text(encoding='utf-8')
+        if existing != content:
+            test_path.write_text(content, encoding='utf-8')
+            print(f"UPDATED {test_path}")
+        else:
+            print(f"SKIP {test_path}: identical")
+    else:
+        test_path.write_text(content, encoding='utf-8')
+        print(f"CREATED {test_path}")
     return True
 
 

@@ -36,8 +36,7 @@ def sort_policies_in_map(path: Path) -> bool:
                 data["policies"] = sorted_pols
                 changed = True
     if changed:
-        path.write_text(yaml.safe_dump(data, sort_keys=False,
-                        allow_unicode=True), encoding="utf-8")
+        path.write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True), encoding="utf-8")
     return changed
 
 

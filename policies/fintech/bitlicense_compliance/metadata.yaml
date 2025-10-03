@@ -2,20 +2,20 @@
 id: fintech.bitlicense_compliance
 name: NYDFS BitLicense Compliance
 path:
-  - policies/fintech/bitlicense_compliance/policy.rego
-  - policies/fintech/bitlicense_compliance/policy_test.rego
+- policies/fintech/bitlicense_compliance/policy.rego
+- policies/fintech/bitlicense_compliance/policy_test.rego
 description: Comply with BitLicense
 standard:
   name: NYDFS
   version: current
 links:
-  - https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses
+- https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses
 geo:
   regions:
-    - North America
+  - North America
   countries:
-    - US-NY
+  - US-NY
   subregions: []
   scope: State
 jurisdiction:
-  - US-NY
+- US-NY

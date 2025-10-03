@@ -24,3 +24,8 @@ test_denies_when_control_disabled if {
 test_denies_when_all_backup_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.backup_and_recovery_rto_rpo": true}, "backup": {"restore_tested_recently": false, "rpo_met": false, "rto_met": false}}
 }
+
+# Auto-generated granular test for controls["medtech.backup_and_recovery_rto_rpo"]
+test_denies_when_controls_medtech_backup_and_recovery_rto_rpo_failing if {
+	some _ in deny with input as {"controls": {}, "backup": {"rto_met": true, "rpo_met": true, "restore_tested_recently": true}, "controls[\"medtech": {"backup_and_recovery_rto_rpo\"]": false}}
+}

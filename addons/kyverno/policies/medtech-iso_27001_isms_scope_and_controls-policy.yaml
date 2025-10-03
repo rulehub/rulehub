@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.iso_27001_isms_scope_and_controls: example validation
+      message: "medtech.iso_27001_isms_scope_and_controls: example validation"
       pattern:
         metadata:
           labels:

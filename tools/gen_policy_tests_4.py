@@ -12,6 +12,7 @@ Safety:
 
 This follows repository conventions used by other tooling in `tools/`.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -25,8 +26,7 @@ POLICIES_ROOT = Path("policies")
 TEST_FILENAME = "policy_test.rego"
 
 DENY_RULE_START = re.compile(r"^\s*deny\s+contains\s+msg\s+if\s*{\s*$")
-INPUT_FLAG_RE = re.compile(
-    r"input\.([a-zA-Z0-9_\.\[\]\"]+)\s*(==\s*(true|false))?")
+INPUT_FLAG_RE = re.compile(r"input\.([a-zA-Z0-9_\.\[\]\"]+)\s*(==\s*(true|false))?")
 NOT_INPUT_RE = re.compile(r"not\s+input\.([a-zA-Z0-9_\.\[\]\"]+)")
 CONTROL_KEY_RE = re.compile(r"input\.controls\[\"([^\"]+)\"\]")
 
@@ -115,11 +115,9 @@ def make_package_line(pol_path: Path) -> str:
 
 def gen_for_policy(pol: Path, apply: bool, force: bool) -> bool:
     text = pol.read_text(encoding='utf-8')
-    deny_count = sum(1 for line in text.splitlines()
-                     if re.match(r'^\s*deny\b', line))
+    deny_count = sum(1 for line in text.splitlines() if re.match(r'^\s*deny\b', line))
     if deny_count != 4:
-        raise SystemExit(
-            f"Policy {pol} has {deny_count} deny rules (expected 4); aborting")
+        raise SystemExit(f"Policy {pol} has {deny_count} deny rules (expected 4); aborting")
 
     blocks = extract_rule_blocks(text)
     flags: List[str] = []
@@ -184,13 +182,10 @@ def gen_for_policy(pol: Path, apply: bool, force: bool) -> bool:
 
 def main(argv: List[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('--policies-root', default='policies',
-                    help='Policies root directory')
+    ap.add_argument('--policies-root', default='policies', help='Policies root directory')
     ap.add_argument('--apply', action='store_true', help='Write changes')
-    ap.add_argument('--force', action='store_true',
-                    help='Overwrite existing test files')
-    ap.add_argument(
-        '--policy', help='Path to a specific policy.rego to target')
+    ap.add_argument('--force', action='store_true', help='Overwrite existing test files')
+    ap.add_argument('--policy', help='Path to a specific policy.rego to target')
     ap.add_argument('--limit', type=int, default=None)
     args = ap.parse_args(argv)
 
@@ -220,8 +215,7 @@ def main(argv: List[str] | None = None) -> int:
     processed = 0
     for pol in sorted(policy_files):
         text = pol.read_text(encoding='utf-8')
-        deny_count = sum(1 for line in text.splitlines()
-                         if re.match(r'^\s*deny\b', line))
+        deny_count = sum(1 for line in text.splitlines() if re.match(r'^\s*deny\b', line))
         if deny_count != 4:
             continue
         if args.limit and processed >= args.limit:

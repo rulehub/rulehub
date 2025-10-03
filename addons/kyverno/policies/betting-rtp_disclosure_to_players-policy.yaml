@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.rtp_disclosure_to_players: example validation
+      message: "betting.rtp_disclosure_to_players: example validation"
       pattern:
         metadata:
           labels:

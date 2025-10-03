@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.game_rules_visible_before_play: example validation
+      message: "betting.game_rules_visible_before_play: example validation"
       pattern:
         metadata:
           labels:

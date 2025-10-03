@@ -2,14 +2,14 @@
 id: betting.adr_provider_listed_uk
 name: <Policy Title>
 path:
-  - policies/betting/adr_provider_listed_uk/policy.rego
-  - policies/betting/adr_provider_listed_uk/policy_test.rego
+- policies/betting/adr_provider_listed_uk/policy.rego
+- policies/betting/adr_provider_listed_uk/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr
+- https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr
 geo:
   regions:
   - Global

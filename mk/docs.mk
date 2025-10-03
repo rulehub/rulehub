@@ -44,15 +44,23 @@ docs-lint: ## Run markdownlint, Vale, cspell (Docker toolchain or local fallback
 	fi
 
 link-check: ## Run lychee link checker (mirrors CI settings)
-	@echo "[link-check] building tools image (if not present)"; \
-	if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q '^rulehub-doc-tools:latest$$'; then \
-	  docker build -t rulehub-doc-tools:latest .github/tools; \
-	fi; \
-	docker run --rm -v "$$PWD:/workspace" -w /workspace -e GITHUB_TOKEN=$$GITHUB_TOKEN rulehub-doc-tools:latest \
-	  lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
-	    --exclude-path dist --exclude-path site \
-	    --exclude "https://github.com/rulehub/rulehub-charts" \
-	    **/*.md
+		@if command -v docker >/dev/null 2>&1; then \
+			echo "[link-check] using docker toolchain"; \
+			if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q '^rulehub-doc-tools:latest$$'; then \
+				docker build -t rulehub-doc-tools:latest .github/tools; \
+			fi; \
+			docker run --rm -v "$$PWD:/workspace" -w /workspace -e GITHUB_TOKEN=$$GITHUB_TOKEN rulehub-doc-tools:latest \
+				lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
+					--exclude-path dist --exclude-path site \
+					--exclude "https://github.com/rulehub/rulehub-charts" \
+					**/*.md; \
+		else \
+			echo "[link-check] docker not found; using local Python fallback"; \
+			$(VENV)/bin/python tools/link_check_fallback.py \
+				--exclude-path dist --exclude-path site --exclude-path .venv --exclude-path node_modules \
+				--exclude-url "https://github.com/rulehub/rulehub-charts" \
+				docs *.md; \
+		fi
 
 link-check-json: ## Run lychee and classify (outputs lychee.json)
 	@echo "[link-check-json] building tools image (if not present)"; \

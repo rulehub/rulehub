@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.au_ndb_breach_notification_edtech: example validation
+      message: "edtech.au_ndb_breach_notification_edtech: example validation"
       pattern:
         metadata:
           labels:

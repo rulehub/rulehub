@@ -2,14 +2,14 @@
 id: medtech.hipaa_security_admin_safeguards
 name: <Policy Title>
 path:
-  - policies/medtech/hipaa_security_admin_safeguards/policy.rego
-  - policies/medtech/hipaa_security_admin_safeguards/policy_test.rego
+- policies/medtech/hipaa_security_admin_safeguards/policy.rego
+- policies/medtech/hipaa_security_admin_safeguards/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.hhs.gov/hipaa/for-professionals/security/index.html
+- https://www.hhs.gov/hipaa/for-professionals/security/index.html
 geo:
   regions:
   - Global

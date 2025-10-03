@@ -40,8 +40,7 @@ def git_show(path: pathlib.Path, tag: str) -> str | None:
     """Return file content at tag or None if not present."""
     rel = path.as_posix()
     try:
-        out = subprocess.check_output(
-            ["git", "show", f"{tag}:{rel}"], stderr=subprocess.STDOUT)
+        out = subprocess.check_output(["git", "show", f"{tag}:{rel}"], stderr=subprocess.STDOUT)
         return out.decode()
     except subprocess.CalledProcessError:
         return None
@@ -75,13 +74,11 @@ def build_fragment(since_tag: str | None, current: Dict[str, Set[str]], strict: 
     historical: Dict[str, Set[str]] = {}
     if since_tag:
         # See if tag exists
-        tag_list = subprocess.check_output(
-            ["git", "tag", "--list", since_tag]).decode().strip().splitlines()
+        tag_list = subprocess.check_output(["git", "tag", "--list", since_tag]).decode().strip().splitlines()
         if tag_list and since_tag in tag_list:
             tag_found = True
         elif strict:
-            print(
-                f"Tag '{since_tag}' not found and --strict supplied", file=sys.stderr)
+            print(f"Tag '{since_tag}' not found and --strict supplied", file=sys.stderr)
             sys.exit(2)
 
     for map_name, current_set in current.items():
@@ -128,13 +125,10 @@ def build_fragment(since_tag: str | None, current: Dict[str, Set[str]], strict: 
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Generate compliance map changelog fragment")
-    ap.add_argument(
-        "--since-tag", help="Git tag to diff against", default=None)
+    ap = argparse.ArgumentParser(description="Generate compliance map changelog fragment")
+    ap.add_argument("--since-tag", help="Git tag to diff against", default=None)
     ap.add_argument("--output", help="Optional output file path")
-    ap.add_argument("--strict", action="store_true",
-                    help="Fail if tag missing instead of treating as initial")
+    ap.add_argument("--strict", action="store_true", help="Fail if tag missing instead of treating as initial")
     args = ap.parse_args()
 
     current = collect_current()

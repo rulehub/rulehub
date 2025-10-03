@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.edtech_encryption_at_rest: example validation
+      message: "edtech.edtech_encryption_at_rest: example validation"
       pattern:
         metadata:
           labels:

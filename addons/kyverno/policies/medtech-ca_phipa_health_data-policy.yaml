@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.ca_phipa_health_data: example validation
+      message: "medtech.ca_phipa_health_data: example validation"
       pattern:
         metadata:
           labels:

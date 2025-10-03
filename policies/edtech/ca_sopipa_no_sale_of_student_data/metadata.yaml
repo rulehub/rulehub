@@ -2,14 +2,14 @@
 id: edtech.ca_sopipa_no_sale_of_student_data
 name: <Policy Title>
 path:
-  - policies/edtech/ca_sopipa_no_sale_of_student_data/policy.rego
-  - policies/edtech/ca_sopipa_no_sale_of_student_data/policy_test.rego
+- policies/edtech/ca_sopipa_no_sale_of_student_data/policy.rego
+- policies/edtech/ca_sopipa_no_sale_of_student_data/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=
+- https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=
 geo:
   regions:
   - Global

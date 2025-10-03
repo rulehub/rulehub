@@ -12,6 +12,7 @@ Sections:
 
 Gracefully handles missing base coverage JSON (e.g., first introduction).
 """
+
 from __future__ import annotations
 
 import argparse

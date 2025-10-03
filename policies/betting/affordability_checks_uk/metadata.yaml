@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.affordability_checks_uk
 name: Affordability Checks (UK)
 description: Affordability assessment for bettors
 standard: UKGC
 version: current
 path:
-  - policies/betting/affordability_checks_uk/policy.rego
-  - policies/betting/affordability_checks_uk/policy_test.rego
+- policies/betting/affordability_checks_uk/policy.rego
+- policies/betting/affordability_checks_uk/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
-  regions: [Europe]
-  countries: [UK]
+  regions:
+  - Europe
+  countries:
+  - UK
   scope: National

@@ -2,14 +2,14 @@
 id: edtech.br_lgpd_children_consent_best_interest
 name: <Policy Title>
 path:
-  - policies/edtech/br_lgpd_children_consent_best_interest/policy.rego
-  - policies/edtech/br_lgpd_children_consent_best_interest/policy_test.rego
+- policies/edtech/br_lgpd_children_consent_best_interest/policy.rego
+- policies/edtech/br_lgpd_children_consent_best_interest/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm
+- https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm
 geo:
   regions:
   - Global

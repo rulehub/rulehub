@@ -2,20 +2,20 @@
 id: fintech.fapi_compliance
 name: FAPI Compliance
 path:
-  - policies/fintech/fapi_compliance/policy.rego
-  - policies/fintech/fapi_compliance/policy_test.rego
+- policies/fintech/fapi_compliance/policy.rego
+- policies/fintech/fapi_compliance/policy_test.rego
 description: Adopt OpenID FAPI profile
 standard:
   name: FAPI
   version: current
 links:
-  - https://openid.net/specs/
+- https://openid.net/specs/
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

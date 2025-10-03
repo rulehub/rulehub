@@ -2,21 +2,21 @@
 id: fintech.chain_analysis_risk_controls
 name: Blockchain Analytics Risk Controls
 path:
-  - policies/fintech/chain_analysis_risk_controls/policy.rego
-  - policies/fintech/chain_analysis_risk_controls/policy_test.rego
+- policies/fintech/chain_analysis_risk_controls/policy.rego
+- policies/fintech/chain_analysis_risk_controls/policy_test.rego
 description: Use risk signals from chain analytics
 standard:
   name: FATF
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

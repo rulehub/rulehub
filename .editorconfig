@@ -1,5 +1,37 @@
 root = true
 
+# Global defaults
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Markdown: keep intentional trailing spaces
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML (workflows, configs): enforce 2 spaces
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.yaml]
+indent_style = space
+indent_size = 2
+
+# Python: conventional 4 spaces
+[*.py]
+indent_style = space
+indent_size = 4
+
+# Makefiles require tabs
+[Makefile]
+indent_style = tab
+root = true
+
 [*]
 charset = utf-8
 end_of_line = lf

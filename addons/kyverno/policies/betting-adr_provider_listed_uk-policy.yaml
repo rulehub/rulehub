@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.adr_provider_listed_uk: example validation
+      message: "betting.adr_provider_listed_uk: example validation"
       pattern:
         metadata:
           labels:

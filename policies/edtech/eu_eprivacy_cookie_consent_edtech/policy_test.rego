@@ -18,3 +18,8 @@ test_denies_when_non_essential_cookies_set_before_consent if {
 test_denies_when_non_essential_cookies_and_control_disabled if {
 	count(deny) > 0 with input as {"cookies": {"non_essential_set_before_consent": true}, "controls": {"edtech.eu_eprivacy_cookie_consent_edtech": false}}
 }
+
+# Auto-generated granular test for controls["edtech.eu_eprivacy_cookie_consent_edtech"]
+test_denies_when_controls_edtech_eu_eprivacy_cookie_consent_edtech_failing if {
+	some _ in deny with input as {"controls": {}, "cookies": {"non_essential_set_before_consent": true}, "controls[\"edtech": {"eu_eprivacy_cookie_consent_edtech\"]": false}}
+}

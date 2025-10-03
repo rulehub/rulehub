@@ -83,9 +83,7 @@ def main() -> int:
                 if pid not in known_ids:
                     unknown.add(pid)
         if unknown:
-            print(
-                f"Unknown policy id(s) referenced in {mp}: {', '.join(sorted(unknown))}"
-            )
+            print(f"Unknown policy id(s) referenced in {mp}: {', '.join(sorted(unknown))}")
             errors += len(unknown)
 
     if errors:

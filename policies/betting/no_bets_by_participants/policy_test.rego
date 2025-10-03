@@ -19,3 +19,8 @@ test_denies_when_participant_places_bet if {
 test_denies_when_participant_and_control_fail_extra if {
 	count(deny) > 0 with input as {"participant_role": "coach", "bet": {"placed": true}, "controls": {"betting.no_bets_by_participants": false}}
 }
+
+# Auto-generated granular test for controls["betting.no_bets_by_participants"]
+test_denies_when_controls_betting_no_bets_by_participants_failing if {
+	some _ in deny with input as {"controls": {}, "participant_role": true, "controls[\"betting": {"no_bets_by_participants\"]": false}}
+}

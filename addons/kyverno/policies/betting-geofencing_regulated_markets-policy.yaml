@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.geofencing_regulated_markets: example validation
+      message: "betting.geofencing_regulated_markets: example validation"
       pattern:
         metadata:
           labels:

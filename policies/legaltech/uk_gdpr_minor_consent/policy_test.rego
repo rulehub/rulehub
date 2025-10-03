@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_parental_consent_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.uk_gdpr_minor_consent": false}, "user": {"age": 12}, "parental_consent": false}
 }
+
+# Auto-generated granular test for controls["legaltech.uk_gdpr_minor_consent"]
+test_denies_when_controls_legaltech_uk_gdpr_minor_consent_failing if {
+	some _ in deny with input as {"controls": {}, "user": {"age": true}, "controls[\"legaltech": {"uk_gdpr_minor_consent\"]": false}}
+}

@@ -29,6 +29,7 @@ Rationale / Projection (documented here so CI logs retain context):
   prompt investigation before breaching the hard limit. Revisit thresholds if
   policy count or implementation changes materially.
 """
+
 from __future__ import annotations
 
 import os
@@ -61,12 +62,9 @@ def run_profile() -> Tuple[Dict[str, float], str]:
 
 def main() -> int:
     max_seconds = float(os.environ.get("COVERAGE_MAX_SECONDS", "5.0"))
-    warn_seconds = float(
-        os.environ.get("COVERAGE_WARN_SECONDS", f"{max_seconds * 0.75}")
-    )
+    warn_seconds = float(os.environ.get("COVERAGE_WARN_SECONDS", f"{max_seconds * 0.75}"))
     timings, raw = run_profile()
-    total = timings.get("total") or sum(
-        v for k, v in timings.items() if k != "total")
+    total = timings.get("total") or sum(v for k, v in timings.items() if k != "total")
     status = "OK"
     exit_code = 0
     if total > max_seconds:

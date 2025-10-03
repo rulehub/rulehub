@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.gdpr_consent_valid
 name: 'GDPR: Consent Valid'
 path:
-  - policies/legaltech/gdpr_consent_valid/policy.rego
-  - policies/legaltech/gdpr_consent_valid/policy_test.rego
+- policies/legaltech/gdpr_consent_valid/policy.rego
+- policies/legaltech/gdpr_consent_valid/policy_test.rego
 description: Consent is informed, freely given, unambiguous, recorded
 standard:
   name: GDPR (EU)
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.7
+- https://eur-lex.europa.eu/eli/reg/2016/679/oj
 geo:
   regions:
   - Global

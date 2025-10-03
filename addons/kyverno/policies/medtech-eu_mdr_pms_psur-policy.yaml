@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.eu_mdr_pms_psur: example validation
+      message: "medtech.eu_mdr_pms_psur: example validation"
       pattern:
         metadata:
           labels:

@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.license_check_us_nv_ngcb
-name: License Check — NV NGCB
+name: "License Check \u2014 NV NGCB"
 description: Operator licensed by Nevada NGCB
 standard: NV NGCB
 version: current
 path:
-  - policies/igaming/license_check_us_nv_ngcb/policy.rego
-  - policies/igaming/license_check_us_nv_ngcb/policy_test.rego
+- policies/igaming/license_check_us_nv_ngcb/policy.rego
+- policies/igaming/license_check_us_nv_ngcb/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.gaming.nv.gov/
+- https://www.gaming.nv.gov/
 geo:
-  regions: [North America]
-  countries: [US-NV]
+  regions:
+  - North America
+  countries:
+  - US-NV
   scope: State

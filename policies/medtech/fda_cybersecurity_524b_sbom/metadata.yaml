@@ -2,14 +2,14 @@
 id: medtech.fda_cybersecurity_524b_sbom
 name: <Policy Title>
 path:
-  - policies/medtech/fda_cybersecurity_524b_sbom/policy.rego
-  - policies/medtech/fda_cybersecurity_524b_sbom/policy_test.rego
+- policies/medtech/fda_cybersecurity_524b_sbom/policy.rego
+- policies/medtech/fda_cybersecurity_524b_sbom/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity
+- https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity
 geo:
   regions:
   - Global

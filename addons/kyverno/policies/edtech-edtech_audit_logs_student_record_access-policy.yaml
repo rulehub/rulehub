@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.edtech_audit_logs_student_record_access: example validation
+      message: "edtech.edtech_audit_logs_student_record_access: example validation"
       pattern:
         metadata:
           labels:

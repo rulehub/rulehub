@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.credit_card_gambling_ban_uk: example validation
+      message: "betting.credit_card_gambling_ban_uk: example validation"
       pattern:
         metadata:
           labels:

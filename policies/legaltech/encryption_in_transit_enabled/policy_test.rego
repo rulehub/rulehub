@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_encryption_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.encryption_in_transit_enabled": false}, "security": {"encryption_in_transit": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.encryption_in_transit_enabled"]
+test_denies_when_controls_legaltech_encryption_in_transit_enabled_failing if {
+	some _ in deny with input as {"controls": {}, "security": {"encryption_in_transit": true}, "controls[\"legaltech": {"encryption_in_transit_enabled\"]": false}}
+}

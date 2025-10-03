@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_notice_missing_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.nz_notice_at_collection_edtech": false}, "notice": {"at_collection_provided": false}}
 }
+
+# Auto-generated granular test for controls["edtech.nz_notice_at_collection_edtech"]
+test_denies_when_controls_edtech_nz_notice_at_collection_edtech_failing if {
+	some _ in deny with input as {"controls": {}, "notice": {"at_collection_provided": true}, "controls[\"edtech": {"nz_notice_at_collection_edtech\"]": false}}
+}

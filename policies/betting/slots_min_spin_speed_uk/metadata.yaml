@@ -2,20 +2,20 @@
 id: betting.slots_min_spin_speed_uk
 name: Slots Minimum Spin Speed (UK)
 path:
-  - policies/betting/slots_min_spin_speed_uk/policy.rego
-  - policies/betting/slots_min_spin_speed_uk/policy_test.rego
+- policies/betting/slots_min_spin_speed_uk/policy.rego
+- policies/betting/slots_min_spin_speed_uk/policy_test.rego
 description: Enforces a minimum 2.5 second spin speed for UK slot games to reduce rapid play risk.
 standard:
   name: UKGC Slots Design
   version: current
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

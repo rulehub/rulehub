@@ -27,6 +27,7 @@ Usage:
       --bundle dist/opa-bundle.tar.gz \
       --policies-root policies
 """
+
 from __future__ import annotations
 
 import argparse
@@ -39,18 +40,16 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
 
-BUNDLE_REQUIRED = {"schema_version", "build_commit",
-                   "build_time", "policies", "aggregate_hash"}
-DIST_REQUIRED = {"schema_version", "build_commit",
-                 "build_time", "artifacts", "aggregate_hash"}
+BUNDLE_REQUIRED = {"schema_version", "build_commit", "build_time", "policies", "aggregate_hash"}
+DIST_REQUIRED = {"schema_version", "build_commit", "build_time", "artifacts", "aggregate_hash"}
 POLICY_KEYS = {"path", "sha256", "bytes"}
 ARTIFACT_KEYS = {"path", "sha256", "bytes"}
 
 
 @dataclass
 class Issue:
-    scope: str   # which component (bundle-manifest, dist-manifest, cross)
-    level: str   # ERROR / WARN / INFO
+    scope: str  # which component (bundle-manifest, dist-manifest, cross)
+    level: str  # ERROR / WARN / INFO
     message: str
 
     def __str__(self) -> str:  # pragma: no cover - trivial
@@ -68,8 +67,7 @@ def sha256_file(p: Path) -> tuple[str, int]:
 
 
 def aggregate_hash(items: Iterable[Dict[str, Any]]) -> str:
-    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(
-        items, key=lambda x: x['path'])]
+    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(items, key=lambda x: x['path'])]
     data = "\n".join(lines).encode()
     return hashlib.sha256(data).hexdigest()
 
@@ -93,32 +91,26 @@ def verify_bundle_manifest(
     scope = "bundle-manifest"
     missing = BUNDLE_REQUIRED - manifest.keys()
     if missing:
-        issues.append(
-            Issue(scope, "ERROR", f"missing keys: {sorted(missing)}"))
+        issues.append(Issue(scope, "ERROR", f"missing keys: {sorted(missing)}"))
         return
 
     raw_policies = manifest.get('policies')
-    policies: List[Dict[str, Any]] = raw_policies if isinstance(
-        raw_policies, list) else []
+    policies: List[Dict[str, Any]] = raw_policies if isinstance(raw_policies, list) else []
     for idx, p in enumerate(policies):
         pk = POLICY_KEYS - p.keys()
         if pk:
-            issues.append(
-                Issue(scope, "ERROR", f"policies[{idx}] missing keys: {sorted(pk)}"))
+            issues.append(Issue(scope, "ERROR", f"policies[{idx}] missing keys: {sorted(pk)}"))
             continue
         rel = p['path']
         f = policies_root / rel
         if not f.is_file():
-            issues.append(
-                Issue(scope, "ERROR", f"missing policy file on disk: {rel}"))
+            issues.append(Issue(scope, "ERROR", f"missing policy file on disk: {rel}"))
             continue
         sha, size = sha256_file(f)
         if sha != p['sha256']:
-            issues.append(Issue(
-                scope, "ERROR", f"sha256 mismatch {rel}: manifest {p['sha256']} != actual {sha}"))
+            issues.append(Issue(scope, "ERROR", f"sha256 mismatch {rel}: manifest {p['sha256']} != actual {sha}"))
         if size != p['bytes']:
-            issues.append(Issue(
-                scope, "ERROR", f"size mismatch {rel}: manifest {p['bytes']} != actual {size}"))
+            issues.append(Issue(scope, "ERROR", f"size mismatch {rel}: manifest {p['bytes']} != actual {size}"))
 
     # Aggregate hash check
     agg = aggregate_hash(policies)
@@ -137,9 +129,7 @@ def verify_bundle_manifest(
             with tarfile.open(bundle_path, 'r:gz') as tf:
                 members = {m.name for m in tf.getmembers() if m.isfile()}
             expected = [p['path'] for p in policies if POLICY_KEYS <= p.keys()]
-            missing_in_bundle = [
-                p for p in expected if p not in members and p.lstrip('./') not in members
-            ]
+            missing_in_bundle = [p for p in expected if p not in members and p.lstrip('./') not in members]
             if missing_in_bundle:
                 issues.append(
                     Issue(
@@ -149,29 +139,24 @@ def verify_bundle_manifest(
                     )
                 )
         except tarfile.ReadError as e:  # pragma: no cover - corrupted tar path
-            issues.append(
-                Issue(scope, "ERROR", f"unable to read bundle tar: {e}"))
+            issues.append(Issue(scope, "ERROR", f"unable to read bundle tar: {e}"))
     else:
-        issues.append(
-            Issue(scope, "ERROR", f"bundle file not found: {bundle_path}"))
+        issues.append(Issue(scope, "ERROR", f"bundle file not found: {bundle_path}"))
 
 
 def verify_dist_manifest(manifest: Dict[str, Any], dist_dir: Path, issues: List[Issue]) -> None:
     scope = "dist-manifest"
     missing = DIST_REQUIRED - manifest.keys()
     if missing:
-        issues.append(
-            Issue(scope, "ERROR", f"missing keys: {sorted(missing)}"))
+        issues.append(Issue(scope, "ERROR", f"missing keys: {sorted(missing)}"))
         return
     raw_arts = manifest.get('artifacts')
-    artifacts: List[Dict[str, Any]] = raw_arts if isinstance(
-        raw_arts, list) else []
+    artifacts: List[Dict[str, Any]] = raw_arts if isinstance(raw_arts, list) else []
     seen = []
     for idx, a in enumerate(artifacts):
         ak = ARTIFACT_KEYS - a.keys()
         if ak:
-            issues.append(
-                Issue(scope, "ERROR", f"artifacts[{idx}] missing keys: {sorted(ak)}"))
+            issues.append(Issue(scope, "ERROR", f"artifacts[{idx}] missing keys: {sorted(ak)}"))
             continue
         rel = a['path']
         f = dist_dir / rel
@@ -181,11 +166,9 @@ def verify_dist_manifest(manifest: Dict[str, Any], dist_dir: Path, issues: List[
         sha, size = sha256_file(f)
         seen.append(rel)
         if sha != a['sha256']:
-            issues.append(Issue(
-                scope, "ERROR", f"sha256 mismatch {rel}: manifest {a['sha256']} != actual {sha}"))
+            issues.append(Issue(scope, "ERROR", f"sha256 mismatch {rel}: manifest {a['sha256']} != actual {sha}"))
         if size != a['bytes']:
-            issues.append(Issue(
-                scope, "ERROR", f"size mismatch {rel}: manifest {a['bytes']} != actual {size}"))
+            issues.append(Issue(scope, "ERROR", f"size mismatch {rel}: manifest {a['bytes']} != actual {size}"))
 
     # Aggregate hash
     agg = aggregate_hash(artifacts)
@@ -200,15 +183,12 @@ def verify_dist_manifest(manifest: Dict[str, Any], dist_dir: Path, issues: List[
 
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
-    ap = argparse.ArgumentParser(
-        description="Holistic integrity verification (bundle + dist)")
-    ap.add_argument('--bundle-manifest',
-                    default='dist/opa-bundle.manifest.json')
+    ap = argparse.ArgumentParser(description="Holistic integrity verification (bundle + dist)")
+    ap.add_argument('--bundle-manifest', default='dist/opa-bundle.manifest.json')
     ap.add_argument('--dist-manifest', default='dist/dist.manifest.json')
     ap.add_argument('--bundle', default='dist/opa-bundle.tar.gz')
     ap.add_argument('--policies-root', default='policies')
-    ap.add_argument(
-        '--json', help='Optional path to write machine-readable JSON report')
+    ap.add_argument('--json', help='Optional path to write machine-readable JSON report')
     return ap.parse_args(argv)
 
 
@@ -225,29 +205,24 @@ def main(argv: List[str]) -> int:
         print(f"Policies root not found: {policies_root}", file=sys.stderr)
         return 2
     # Load manifests
-    bundle_manifest = load_json(
-        bundle_manifest_path, 'bundle-manifest', issues)
+    bundle_manifest = load_json(bundle_manifest_path, 'bundle-manifest', issues)
     dist_manifest = load_json(dist_manifest_path, 'dist-manifest', issues)
     if not bundle_manifest or not dist_manifest:
         # Loading failures recorded as issues; proceed to output
         pass
     else:
-        verify_bundle_manifest(
-            bundle_manifest, policies_root, bundle_path, issues)
+        verify_bundle_manifest(bundle_manifest, policies_root, bundle_path, issues)
         verify_dist_manifest(dist_manifest, dist_dir, issues)
 
         # Cross checks
         if bundle_manifest.get('build_commit') != dist_manifest.get('build_commit'):
-            issues.append(
-                Issue('cross', 'ERROR', 'build_commit mismatch between manifests'))
+            issues.append(Issue('cross', 'ERROR', 'build_commit mismatch between manifests'))
 
         # Ensure dist manifest includes the bundle tarball & bundle manifest itself
-        dist_artifacts = {a['path']: a for a in dist_manifest.get(
-            'artifacts', []) if isinstance(a, dict)}
+        dist_artifacts = {a['path']: a for a in dist_manifest.get('artifacts', []) if isinstance(a, dict)}
         for required in [bundle_manifest_path.name, bundle_path.name]:
             if required not in dist_artifacts:
-                issues.append(
-                    Issue('cross', 'ERROR', f'dist manifest missing artifact entry: {required}'))
+                issues.append(Issue('cross', 'ERROR', f'dist manifest missing artifact entry: {required}'))
 
     # Summarize
     error_count = sum(1 for i in issues if i.level == 'ERROR')
@@ -259,8 +234,7 @@ def main(argv: List[str]) -> int:
     print("-----------------------|--------")
     components = ['bundle-manifest', 'dist-manifest', 'cross']
     for comp in components:
-        comp_errors = any(i.level == 'ERROR' and i.scope ==
-                          comp for i in issues)
+        comp_errors = any(i.level == 'ERROR' and i.scope == comp for i in issues)
         comp_warns = any(i.level == 'WARN' and i.scope == comp for i in issues)
         if comp_errors:
             status = 'FAIL'
@@ -284,8 +258,7 @@ def main(argv: List[str]) -> int:
             'dist_manifest': dist_manifest_path.as_posix(),
             'bundle': bundle_path.as_posix(),
         }
-        Path(ns.json).write_text(json.dumps(
-            report, indent=2, sort_keys=True) + "\n")
+        Path(ns.json).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
         print(f"Wrote JSON report: {ns.json}")
 
     if error_count:

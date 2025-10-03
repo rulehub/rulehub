@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.backup_and_recovery_rto_rpo: example validation
+      message: "medtech.backup_and_recovery_rto_rpo: example validation"
       pattern:
         metadata:
           labels:

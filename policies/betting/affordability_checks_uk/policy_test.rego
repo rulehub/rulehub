@@ -17,3 +17,8 @@ test_denies_when_threshold_exceeded if {
 test_denies_when_control_flag_false_and_threshold_ok if {
 	count(deny) > 0 with input as {"controls": {"betting.affordability_checks_uk": false}, "player": {"net_deposit_30d": 100}, "affordability": {"max_30d": 3000}}
 }
+
+# Auto-generated granular test for controls.betting.affordability_checks_uk
+test_denies_when_controls_betting_affordability_checks_uk_failing if {
+	some _ in deny with input as {"controls": {"betting.affordability_checks_uk": false}, "player": {"net_deposit_30d": 100}, "affordability": {"max_30d": 3000}}
+}

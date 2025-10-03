@@ -27,3 +27,8 @@ test_additional_denies_when_smart_fields_missing if {
 }
 
 # (No-op placeholder to keep uniformity across Phase1 additions)
+
+# Auto-generated granular test for controls["medtech.fhir_smart_app_authz"]
+test_denies_when_controls_medtech_fhir_smart_app_authz_failing if {
+	some _ in deny with input as {"controls": {}, "smart": {"oauth2_enabled": true, "scopes_enforced": true}, "controls[\"medtech": {"fhir_smart_app_authz\"]": false}}
+}

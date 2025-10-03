@@ -16,3 +16,8 @@ test_denies_when_child_below_min_age_and_control_disabled if {
 test_denies_when_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.eu_gdpr_minors_consent_education": false}, "child": {"age": 17}, "policy": {"eu": {"min_consent_age": 16}}, "parental_consent": true}
 }
+
+# Auto-generated granular test for controls["edtech.eu_gdpr_minors_consent_education"]
+test_denies_when_controls_edtech_eu_gdpr_minors_consent_education_failing if {
+	some _ in deny with input as {"controls": {}, "child": {"age": true}, "controls[\"edtech": {"eu_gdpr_minors_consent_education\"]": false}}
+}

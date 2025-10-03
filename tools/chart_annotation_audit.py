@@ -8,6 +8,7 @@ Usage:
     [--policies-root policies]
     [--out dist/integrity/helm_annotations.md]
 """
+
 from __future__ import annotations
 
 import argparse
@@ -66,10 +67,8 @@ def extract_chart_annotations(charts_dir: Path) -> Dict[str, List[Dict[str, Any]
             rid = ann.get("rulehub.id") or labels.get("rulehub.id")
             if not rid:
                 continue
-            title = ann.get("rulehub.title") or labels.get(
-                "rulehub.title") or ""
-            links_raw = ann.get("rulehub.links") or labels.get(
-                "rulehub.links") or ""
+            title = ann.get("rulehub.title") or labels.get("rulehub.title") or ""
+            links_raw = ann.get("rulehub.links") or labels.get("rulehub.links") or ""
             links = []
             if isinstance(links_raw, list):
                 links = links_raw
@@ -82,11 +81,13 @@ def extract_chart_annotations(charts_dir: Path) -> Dict[str, List[Dict[str, Any]
                         ln = ln[1:-1]
                     if ln:
                         links.append(ln)
-            out.setdefault(str(rid).strip(), []).append({
-                "file": str(yfile),
-                "title": str(title).strip(),
-                "links": links,
-            })
+            out.setdefault(str(rid).strip(), []).append(
+                {
+                    "file": str(yfile),
+                    "title": str(title).strip(),
+                    "links": links,
+                }
+            )
     return out
 
 
@@ -121,9 +122,7 @@ def write_report(out_path: Path, divergences: List[Dict[str, Any]]):
             exp = "; ".join(exp)
         if isinstance(act, list):
             act = "; ".join(act)
-        lines.append(
-            f"{d.get('file')} | {d.get('id')} | {d.get('field')} | {exp} | {act}"
-        )
+        lines.append(f"{d.get('file')} | {d.get('id')} | {d.get('field')} | {exp} | {act}")
 
     lines.append("")
     lines.append("Patch hints:")
@@ -136,22 +135,11 @@ def write_report(out_path: Path, divergences: List[Dict[str, Any]]):
             exp = "; ".join(exp)
         # simple hint: set annotation in file
         if field == "rulehub.title":
-            lines.append(
-                (
-                    f"- Update {fid}: set metadata.annotations.rulehub.title='{exp}' "
-                    f"for id {idv}"
-                )
-            )
+            lines.append((f"- Update {fid}: set metadata.annotations.rulehub.title='{exp}' for id {idv}"))
         elif field == "rulehub.links":
-            lines.append(
-                (
-                    f"- Update {fid}: set metadata.annotations.rulehub.links "
-                    f"to contain: {exp} for id {idv}"
-                )
-            )
+            lines.append((f"- Update {fid}: set metadata.annotations.rulehub.links to contain: {exp} for id {idv}"))
         elif field == "file":
-            lines.append(
-                f"- Add a template in charts containing metadata.annotations.rulehub.id={idv}")
+            lines.append(f"- Add a template in charts containing metadata.annotations.rulehub.id={idv}")
         else:
             lines.append(f"- Review {fid} for id {idv}: {field} mismatch")
 
@@ -159,12 +147,9 @@ def write_report(out_path: Path, divergences: List[Dict[str, Any]]):
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(
-        description="Audit Helm charts annotations vs policy metadata")
-    ap.add_argument("--charts-dir", required=True,
-                    help="Path to charts files directory")
-    ap.add_argument("--policies-root", default=str(ROOT /
-                    "policies"), help="Policies root dir")
+    ap = argparse.ArgumentParser(description="Audit Helm charts annotations vs policy metadata")
+    ap.add_argument("--charts-dir", required=True, help="Path to charts files directory")
+    ap.add_argument("--policies-root", default=str(ROOT / "policies"), help="Policies root dir")
     ap.add_argument(
         "--out",
         default=str(ROOT / "dist" / "integrity" / "helm_annotations.md"),

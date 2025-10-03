@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.kr_pipa_breach_notification
 name: 'KR: Pipa Breach Notification'
 path:
-  - policies/legaltech/kr_pipa_breach_notification/policy.rego
-  - policies/legaltech/kr_pipa_breach_notification/policy_test.rego
+- policies/legaltech/kr_pipa_breach_notification/policy.rego
+- policies/legaltech/kr_pipa_breach_notification/policy_test.rego
 description: Notify data subjects/authority upon breach per PIPA
 standard:
   name: PIPA (Korea)
   version: current
 links:
-  - https://www.pipc.go.kr/eng/
+- https://www.pipc.go.kr/eng/
 geo:
   regions:
   - Global

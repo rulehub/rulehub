@@ -2,15 +2,15 @@
 id: edtech.ny_edlaw2d_encryption_and_contracts
 name: <Policy Title>
 path:
-  - policies/edtech/ny_edlaw2d_encryption_and_contracts/policy.rego
-  - policies/edtech/ny_edlaw2d_encryption_and_contracts/policy_test.rego
+- policies/edtech/ny_edlaw2d_encryption_and_contracts/policy.rego
+- policies/edtech/ny_edlaw2d_encryption_and_contracts/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf
-  - https://www.nysed.gov/data-privacy-security/laws-regulations
+- https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf
+- https://www.nysed.gov/data-privacy-security/laws-regulations
 geo:
   regions:
   - Global

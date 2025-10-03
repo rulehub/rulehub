@@ -16,3 +16,8 @@ test_denies_when_child_data_excessive if {
 test_denies_when_excessive_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.coppa_data_minimization": false}, "data": {"collected_fields": 15, "necessary_fields": 4}}
 }
+
+# Auto-generated granular test for controls["edtech.coppa_data_minimization"]
+test_denies_when_controls_edtech_coppa_data_minimization_failing if {
+	some _ in deny with input as {"controls": {}, "coppa": {"collected_fields": true}, "controls[\"edtech": {"coppa_data_minimization\"]": false}}
+}

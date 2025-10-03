@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.gdpr_art9_special_category_safeguards: example validation
+      message: "medtech.gdpr_art9_special_category_safeguards: example validation"
       pattern:
         metadata:
           labels:

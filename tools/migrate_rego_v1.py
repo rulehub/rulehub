@@ -10,6 +10,7 @@ Removes: 'import future.keywords.if' lines (no longer needed in v1).
 Only processes .rego files under policies/ whose package starts with 'package rulehub.'
 Provides --dry-run to preview changes.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -71,11 +72,22 @@ def migrate(dry_run: bool = False) -> int:
         if changed:
             edited += 1
             rel = path.relative_to(ROOT)
+            new_text = '\n'.join(new_lines) + '\n'
             if dry_run:
                 print(f"[DRY] Would migrate {rel}")
             else:
-                path.write_text('\n'.join(new_lines) + '\n', encoding='utf-8')
-                print(f"Migrated {rel}")
+                # write only when content differs to avoid noisy git changes
+                if path.exists():
+                    with open(path, 'r', encoding='utf-8') as fh:
+                        existing = fh.read()
+                    if existing != new_text:
+                        path.write_text(new_text, encoding='utf-8')
+                        print(f'UPDATED {rel}')
+                    else:
+                        print(f'SKIP {rel}: identical')
+                else:
+                    path.write_text(new_text, encoding='utf-8')
+                    print(f'CREATED {rel}')
     print(f"Done. Files changed: {edited}")
     return 0
 

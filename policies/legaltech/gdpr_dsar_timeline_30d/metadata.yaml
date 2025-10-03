@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.gdpr_dsar_timeline_30d
 name: 'GDPR: DSAR Timeline 30D'
 path:
-  - policies/legaltech/gdpr_dsar_timeline_30d/policy.rego
-  - policies/legaltech/gdpr_dsar_timeline_30d/policy_test.rego
+- policies/legaltech/gdpr_dsar_timeline_30d/policy.rego
+- policies/legaltech/gdpr_dsar_timeline_30d/policy_test.rego
 description: Respond to DSAR within one month
 standard:
   name: GDPR (EU)
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.12
+- https://eur-lex.europa.eu/eli/reg/2016/679/oj
 geo:
   regions:
   - Global

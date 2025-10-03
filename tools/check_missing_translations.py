@@ -23,6 +23,7 @@ If a translation yaml file includes `source_hash` and it differs, it's considere
 If it omits source_hash, it's considered unknown (reported separately) unless the file only contains id field.
 
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -65,33 +66,27 @@ def load_translation(policy_id: str, lang_dir: Path) -> Tuple[dict | None, Path]
     try:
         data = yaml.safe_load(path.read_text(encoding='utf-8')) or {}
     except Exception as e:
-        print(
-            f"ERROR: failed to parse translation {path}: {e}", file=sys.stderr)
+        print(f"ERROR: failed to parse translation {path}: {e}", file=sys.stderr)
         data = {}
     return data, path
 
 
 def main() -> int:
     if not POLICIES_DIR.is_dir():
-        print(
-            f"No policies directory found at {POLICIES_DIR}", file=sys.stderr)
+        print(f"No policies directory found at {POLICIES_DIR}", file=sys.stderr)
         return 2
     if not TRANSLATIONS_DIR.is_dir():
-        print(
-            f"No translations directory found at {TRANSLATIONS_DIR}", file=sys.stderr)
+        print(f"No translations directory found at {TRANSLATIONS_DIR}", file=sys.stderr)
         return 2
 
     base_metadata = iter_metadata()
-    base_index: Dict[str, dict] = {
-        pid: data for pid, _p, data in base_metadata}
+    base_index: Dict[str, dict] = {pid: data for pid, _p, data in base_metadata}
 
     # Determine languages
     if os.environ.get('LANGS'):
-        langs = [lang_code.strip() for lang_code in os.environ['LANGS'].split(
-            ',') if lang_code.strip()]
+        langs = [lang_code.strip() for lang_code in os.environ['LANGS'].split(',') if lang_code.strip()]
     else:
-        langs = [p.name for p in TRANSLATIONS_DIR.iterdir() if p.is_dir()
-                 and p.name != 'en']
+        langs = [p.name for p in TRANSLATIONS_DIR.iterdir() if p.is_dir() and p.name != 'en']
     langs = sorted(set(langs))
     if not langs:
         print("No target languages to check (nothing to do)")
@@ -172,8 +167,7 @@ def main() -> int:
         for pid in overall_stale.get(lang, []):
             print(f"  - {pid}")
         if lang in overall_unknown:
-            print(
-                f"Unknown (no source_hash, partial) ({len(overall_unknown.get(lang, []))}):")
+            print(f"Unknown (no source_hash, partial) ({len(overall_unknown.get(lang, []))}):")
             for pid in overall_unknown.get(lang, []):
                 print(f"  - {pid}")
         if lang in overall_extra:
@@ -182,9 +176,7 @@ def main() -> int:
                 print(f"  - {pid}")
 
     failed = (
-        any(overall_missing.values())
-        or any(overall_stale.values())
-        or (fail_on_extra and any(overall_extra.values()))
+        any(overall_missing.values()) or any(overall_stale.values()) or (fail_on_extra and any(overall_extra.values()))
     )
     if failed:
         if allow_stale and not any(overall_missing.values()) and not (fail_on_extra and any(overall_extra.values())):

@@ -141,12 +141,9 @@ def load_base_map_version(path: Path, base: str):
 
 
 def main(argv: List[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(
-        description="Ensure compliance maps referencing changed policies have bumped versions")
-    ap.add_argument("--base-tag", required=True,
-                    help="Base git tag / ref (previous release)")
-    ap.add_argument("--target", default="HEAD",
-                    help="Target ref to compare to (default: HEAD)")
+    ap = argparse.ArgumentParser(description="Ensure compliance maps referencing changed policies have bumped versions")
+    ap.add_argument("--base-tag", required=True, help="Base git tag / ref (previous release)")
+    ap.add_argument("--target", default="HEAD", help="Target ref to compare to (default: HEAD)")
     ap.add_argument("--json", action="store_true", help="Emit JSON summary")
     args = ap.parse_args(argv)
 
@@ -174,8 +171,7 @@ def main(argv: List[str] | None = None) -> int:
         current_version = load_map_version(map_file)
         base_version = load_base_map_version(map_file, args.base_tag)
         needs_bump = False
-        enforceable = is_version_like(
-            base_version) and is_version_like(current_version)
+        enforceable = is_version_like(base_version) and is_version_like(current_version)
         if enforceable and base_version == current_version:
             needs_bump = True
         maps_referencing[str(map_file)] = {
@@ -189,15 +185,21 @@ def main(argv: List[str] | None = None) -> int:
     failing = [m for m, info in maps_referencing.items() if info["needs_bump"]]
 
     if args.json:
-        print(json.dumps({
-            "base": args.base_tag,
-            "target": args.target,
-            "changed_policy_ids_count": len(changed_policy_ids),
-            "changed_policy_ids": sorted(changed_policy_ids),
-            "maps": maps_referencing,
-            "failing_maps": failing,
-            "failing_count": len(failing),
-        }, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                {
+                    "base": args.base_tag,
+                    "target": args.target,
+                    "changed_policy_ids_count": len(changed_policy_ids),
+                    "changed_policy_ids": sorted(changed_policy_ids),
+                    "maps": maps_referencing,
+                    "failing_maps": failing,
+                    "failing_count": len(failing),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
     else:
         print(f"[map-version-bumps] base={args.base_tag} target={args.target}")
         print(f"Changed policy IDs: {len(changed_policy_ids)}")

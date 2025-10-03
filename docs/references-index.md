@@ -62,7 +62,7 @@
 | `betting.safer_gambling_interactions` | Global | * | Global | <a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a> |
 | `betting.sanctions_screening_global` | Global | * | Global | <a href="https://sanctionssearch.ofac.treas.gov/" title="https://sanctionssearch.ofac.treas.gov/">sanctionssearch.ofac.treas.gov/</a><br><a href="https://www.eeas.europa.eu/_en" title="https://www.eeas.europa.eu/_en">www.eeas.europa.eu/_en</a> |
 | `betting.self_exclusion_de_oasis` | Global | * | Global | <a href="https://www.gluecksspiel-behoerde.de/" title="https://www.gluecksspiel-behoerde.de/">www.gluecksspiel-behoerde.de/</a><br><a href="https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis" title="https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis">www.gluecksspiel-behoerde.de/de/aufsicht/oasis</a> |
-| `betting.self_exclusion_dk_rofus` | Global | * | Global | <a href="https://www.spillemyndigheden.dk/" title="https://www.spillemyndigheden.dk/">www.spillemyndigheden.dk/</a><br><a href="https://www.spillemyndigheden.dk/en/rofus" title="https://www.spillemyndigheden.dk/en/rofus">www.spillemyndigheden.dk/en/rofus</a> |
+| `betting.self_exclusion_dk_rofus` | Europe | DK | National | <a href="https://www.spillemyndigheden.dk/" title="https://www.spillemyndigheden.dk/">www.spillemyndigheden.dk/</a><br><a href="https://www.spillemyndigheden.dk/en/rofus" title="https://www.spillemyndigheden.dk/en/rofus">www.spillemyndigheden.dk/en/rofus</a> |
 | `betting.self_exclusion_es_rgiaj` | Global | * | Global | <a href="https://www.ordenacionjuego.es/en" title="https://www.ordenacionjuego.es/en">www.ordenacionjuego.es/en</a><br><a href="https://www.ordenacionjuego.es/en/rgiaj" title="https://www.ordenacionjuego.es/en/rgiaj">www.ordenacionjuego.es/en/rgiaj</a> |
 | `betting.self_exclusion_nl_cruks` | Global | * | Global | <a href="https://kansspelautoriteit.nl/" title="https://kansspelautoriteit.nl/">kansspelautoriteit.nl/</a><br><a href="https://cruksregister.nl/" title="https://cruksregister.nl/">cruksregister.nl/</a> |
 | `betting.self_exclusion_on_igaming` | Global | * | Global | <a href="https://www.agco.ca/igaming" title="https://www.agco.ca/igaming">www.agco.ca/igaming</a><br><a href="https://igamingontario.ca/en" title="https://igamingontario.ca/en">igamingontario.ca/en</a> |
@@ -307,4 +307,3 @@ Frequent URLs (count > 5):
 - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html (x9)
 - https://openid.net/specs/openid-connect-core-1_0.html (x6)
 - https://www.openbanking.org.uk/ (x6)
-

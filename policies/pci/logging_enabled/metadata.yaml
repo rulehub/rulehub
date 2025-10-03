@@ -1,10 +1,11 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: pci.logging_enabled
 name: Logging enabled
 standard: PCI DSS
 version: '4.0'
 path:
-  - policies/pci/logging_enabled/policy.rego
-  - policies/pci/logging_enabled/policy_test.rego
+- policies/pci/logging_enabled/policy.rego
+- policies/pci/logging_enabled/policy_test.rego
 description: Placeholder rule to ensure logging and monitoring are enabled.
 framework: other
 tags:
@@ -12,9 +13,8 @@ tags:
 owner: compliance
 severity: medium
 links:
-  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
-  - https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf
-
+- https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf
 geo:
   regions:
   - Global

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.sg_hcsa_pdpa_health_data: example validation
+      message: "medtech.sg_hcsa_pdpa_health_data: example validation"
       pattern:
         metadata:
           labels:

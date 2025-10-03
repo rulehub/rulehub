@@ -14,5 +14,3 @@ Conventions:
 
 - File naming: `<domain>-<policy_id>-constrainttemplate.yaml` for Gatekeeper templates; `<domain>-<policy_id>-policy.yaml` for Kyverno.
 Regeneration / Sync (planned): automation will verify that every published `policies/<domain>/<policy>/metadata.yaml` with a Kubernetes implementation has a corresponding addon artifact.
-
-

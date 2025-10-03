@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.eu_vigilance_incident_reporting: example validation
+      message: "medtech.eu_vigilance_incident_reporting: example validation"
       pattern:
         metadata:
           labels:

@@ -10,30 +10,16 @@ permissions:
 
 jobs:
   quick:
-    if: ${{ github.actor != 'nektos/act' }}
     name: OPA quick check
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/ci-policy:latest
+      options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
         with:
           fetch-depth: 0
-
-      - name: Install OPA
-        run: |
-          set -euo pipefail
-          # Keep in sync with opa-bundle-publish.yml env OPA_VERSION
-          OPA_VERSION=1.7.1
-          mkdir -p ~/.cache/opa
-          if [ ! -f ~/.cache/opa/opa-${OPA_VERSION} ]; then
-            echo "Downloading OPA ${OPA_VERSION}" >&2
-            curl -sSL -o ~/.cache/opa/opa-${OPA_VERSION} https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64
-            chmod +x ~/.cache/opa/opa-${OPA_VERSION}
-          else
-            echo "Using cached OPA ${OPA_VERSION}" >&2
-          fi
-          sudo cp ~/.cache/opa/opa-${OPA_VERSION} /usr/local/bin/opa
-          opa version
 
       - name: Parse & type check
         run: |
@@ -75,9 +61,3 @@ jobs:
         if: always()
         run: |
           echo "OPA quick check complete"
-
-  noop-act:
-    if: ${{ github.actor == 'nektos/act' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "[act] opa-quick-check skipped."

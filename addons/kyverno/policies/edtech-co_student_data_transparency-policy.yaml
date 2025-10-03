@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.co_student_data_transparency: example validation
+      message: "edtech.co_student_data_transparency: example validation"
       pattern:
         metadata:
           labels:

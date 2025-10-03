@@ -21,3 +21,8 @@ test_denies_when_both_integrity_false_and_control_disabled if {
 test_additional_denies_when_integrity_field_missing if {
 	count(deny) > 0 with input as {"controls": {"medtech.device_data_integrity_hashing": false}, "device": {"data": {"integrity_protection_enabled": true}}}
 }
+
+# Auto-generated granular test for controls["medtech.device_data_integrity_hashing"]
+test_denies_when_controls_medtech_device_data_integrity_hashing_failing if {
+	some _ in deny with input as {"controls": {}, "device": {"data": {"integrity_protection_enabled": true}}, "controls[\"medtech": {"device_data_integrity_hashing\"]": false}}
+}

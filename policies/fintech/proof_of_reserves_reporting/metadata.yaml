@@ -2,21 +2,21 @@
 id: fintech.proof_of_reserves_reporting
 name: Proof of Reserves Reporting
 path:
-  - policies/fintech/proof_of_reserves_reporting/policy.rego
-  - policies/fintech/proof_of_reserves_reporting/policy_test.rego
+- policies/fintech/proof_of_reserves_reporting/policy.rego
+- policies/fintech/proof_of_reserves_reporting/policy_test.rego
 description: Provide PoR reports
 standard:
   name: Best Practice
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

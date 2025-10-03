@@ -21,3 +21,8 @@ test_denies_when_both_performance_false_and_control_disabled if {
 test_additional_denies_when_missing_evaluation_or_control if {
 	count(deny) > 0 with input as {"controls": {"medtech.eu_ivdr_clinical_performance": false}, "ivdr": {"performance_evaluation_done": true}}
 }
+
+# Auto-generated granular test for controls["medtech.eu_ivdr_clinical_performance"]
+test_denies_when_controls_medtech_eu_ivdr_clinical_performance_failing if {
+	some _ in deny with input as {"controls": {}, "ivdr": {"performance_evaluation_done": true}, "controls[\"medtech": {"eu_ivdr_clinical_performance\"]": false}}
+}

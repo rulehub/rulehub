@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_high_risk_and_dpia_not_done_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.eu_dpia_high_risk_edtech": false}, "privacy": {"dpia_done": false}, "processing": {"high_risk": true}}
 }
+
+# Auto-generated granular test for controls["edtech.eu_dpia_high_risk_edtech"]
+test_denies_when_controls_edtech_eu_dpia_high_risk_edtech_failing if {
+	some _ in deny with input as {"controls": {}, "processing": {"high_risk": true}, "controls[\"edtech": {"eu_dpia_high_risk_edtech\"]": false}}
+}

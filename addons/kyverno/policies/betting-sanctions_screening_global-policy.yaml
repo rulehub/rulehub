@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.sanctions_screening_global: example validation
+      message: "betting.sanctions_screening_global: example validation"
       pattern:
         metadata:
           labels:

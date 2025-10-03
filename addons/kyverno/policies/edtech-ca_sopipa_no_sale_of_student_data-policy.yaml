@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ca_sopipa_no_sale_of_student_data: example validation
+      message: "edtech.ca_sopipa_no_sale_of_student_data: example validation"
       pattern:
         metadata:
           labels:

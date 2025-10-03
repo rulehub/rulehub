@@ -22,6 +22,7 @@ Examples:
     $ python tools/guardrail_metadata_paths.py
     $ STRICT_EMPTY_PATHS=1 python tools/guardrail_metadata_paths.py
 """
+
 from __future__ import annotations
 
 import os
@@ -61,11 +62,9 @@ def scan(root: Path, strict: bool) -> list[str]:
                         break
                     j += 1
                 if not has_items:
-                    violations.append(
-                        f"{meta}:{i}: empty path value (should be [] or populated list)")
+                    violations.append(f"{meta}:{i}: empty path value (should be [] or populated list)")
             elif strict and stripped == "path: []":
-                violations.append(
-                    f"{meta}:{i}: empty path placeholder not allowed in STRICT mode")
+                violations.append(f"{meta}:{i}: empty path placeholder not allowed in STRICT mode")
     return violations
 
 

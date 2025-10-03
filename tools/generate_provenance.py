@@ -19,6 +19,7 @@ Environment (optional):
 
 The script is intentionally minimal (no external deps) and not a full SLSA level implementation.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -49,8 +50,7 @@ def git_commit() -> str:
 
 def git_remote_url() -> str | None:
     try:
-        url = subprocess.check_output(
-            ["git", "remote", "get-url", "origin"], text=True).strip()
+        url = subprocess.check_output(["git", "remote", "get-url", "origin"], text=True).strip()
         return url
     except Exception:
         return None
@@ -139,10 +139,8 @@ def main(argv: list[str]) -> int:  # pragma: no cover - CLI wrapper
     ns = parse_args(argv)
     builder_id = os.getenv("BUILDER_ID")
     workflow_ref = os.getenv("WORKFLOW_REF")
-    stmt = build_statement(Path(ns.bundle), Path(
-        ns.manifest), Path(ns.output), builder_id, workflow_ref)
-    print(
-        f"Wrote {ns.output} (subject sha256={stmt['subject'][0]['digest']['sha256']})")
+    stmt = build_statement(Path(ns.bundle), Path(ns.manifest), Path(ns.output), builder_id, workflow_ref)
+    print(f"Wrote {ns.output} (subject sha256={stmt['subject'][0]['digest']['sha256']})")
     return 0
 
 

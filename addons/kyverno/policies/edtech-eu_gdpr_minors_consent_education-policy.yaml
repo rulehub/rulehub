@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.eu_gdpr_minors_consent_education: example validation
+      message: "edtech.eu_gdpr_minors_consent_education: example validation"
       pattern:
         metadata:
           labels:

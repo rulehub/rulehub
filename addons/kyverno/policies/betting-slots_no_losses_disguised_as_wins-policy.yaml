@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.slots_no_losses_disguised_as_wins: example validation
+      message: "betting.slots_no_losses_disguised_as_wins: example validation"
       pattern:
         metadata:
           labels:

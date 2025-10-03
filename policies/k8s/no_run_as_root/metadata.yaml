@@ -1,11 +1,12 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: k8s.no_run_as_root
 name: Disallow running as root
 standard: Kubernetes
 version: 1.x
 path:
-  - addons/k8s-gatekeeper/templates/no-run-as-root.yaml
-  - policies/k8s/no_run_as_root/policy.rego
-  - policies/k8s/no_run_as_root/policy_test.rego
+- addons/k8s-gatekeeper/templates/no-run-as-root.yaml
+- policies/k8s/no_run_as_root/policy.rego
+- policies/k8s/no_run_as_root/policy_test.rego
 description: Require containers to run as non-root users.
 framework: gatekeeper
 tags:
@@ -13,9 +14,8 @@ tags:
 - security
 owner: platform-security
 links:
-  - https://kubernetes.io/docs/concepts/security/pod-security-standards/
-  - https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-
+- https://kubernetes.io/docs/concepts/security/pod-security-standards/
+- https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 geo:
   regions:
   - Global

@@ -1,6 +1,6 @@
 # Environment and dependency management
 
-.PHONY: setup-dev pre-commit-install deps lock lock-dev
+.PHONY: setup-dev pre-commit-install deps lock lock-dev python-lock-verify
 
 setup-dev:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
@@ -74,6 +74,7 @@ lock:
 	$(PIP) install -U pip >/dev/null
 	$(PIP) install pip-tools >/dev/null
 	$(VENV)/bin/pip-compile \
+	  --upgrade \
 	  --generate-hashes \
 	  --quiet \
 	  --resolver=backtracking \
@@ -85,9 +86,14 @@ lock-dev:
 	$(PIP) install -U pip >/dev/null
 	$(PIP) install pip-tools >/dev/null
 	$(VENV)/bin/pip-compile \
+	  --upgrade \
 	  --generate-hashes \
 	  --quiet \
 	  --resolver=backtracking \
 	  --allow-unsafe \
 	  --output-file requirements-dev.lock \
 	  requirements-dev.txt
+
+# Verify lock files are up to date (mirrors CI job)
+python-lock-verify:
+	@bash .github/scripts/verify_python_locks.sh

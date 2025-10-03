@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_isms_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.iso_27001_isms_scope_and_controls": true}, "isms": {"controls_implemented": false, "scope_defined": false}}
 }
+
+# Auto-generated granular test for controls["medtech.iso_27001_isms_scope_and_controls"]
+test_denies_when_controls_medtech_iso_27001_isms_scope_and_controls_failing if {
+	some _ in deny with input as {"controls": {}, "isms": {"scope_defined": true, "controls_implemented": true}, "controls[\"medtech": {"iso_27001_isms_scope_and_controls\"]": false}}
+}

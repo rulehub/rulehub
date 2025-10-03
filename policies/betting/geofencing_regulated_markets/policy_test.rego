@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_player_in_disallowed_market_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.geofencing_regulated_markets": true}, "allowed_markets": ["GB", "SE"], "player": {"geo": "BR"}}
 }
+
+# Auto-generated granular test for controls["betting.geofencing_regulated_markets"]
+test_denies_when_controls_betting_geofencing_regulated_markets_failing if {
+	some _ in deny with input as {"controls": {}, "player": {"geo": true}, "controls[\"betting": {"geofencing_regulated_markets\"]": false}}
+}

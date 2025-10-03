@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_risk_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.iso_14971_risk_management_file": true}, "risk": {"controls_traced": false, "file_exists": false}}
 }
+
+# Auto-generated granular test for controls["medtech.iso_14971_risk_management_file"]
+test_denies_when_controls_medtech_iso_14971_risk_management_file_failing if {
+	some _ in deny with input as {"controls": {}, "risk": {"file_exists": true, "controls_traced": true}, "controls[\"medtech": {"iso_14971_risk_management_file\"]": false}}
+}

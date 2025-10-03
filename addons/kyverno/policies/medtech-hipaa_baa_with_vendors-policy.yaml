@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.hipaa_baa_with_vendors: example validation
+      message: "medtech.hipaa_baa_with_vendors: example validation"
       pattern:
         metadata:
           labels:

@@ -2,14 +2,14 @@
 id: medtech.fhir_smart_app_authz
 name: <Policy Title>
 path:
-  - policies/medtech/fhir_smart_app_authz/policy.rego
-  - policies/medtech/fhir_smart_app_authz/policy_test.rego
+- policies/medtech/fhir_smart_app_authz/policy.rego
+- policies/medtech/fhir_smart_app_authz/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://hl7.org/fhir/smart-app-launch/
+- https://hl7.org/fhir/smart-app-launch/
 geo:
   regions:
   - Global

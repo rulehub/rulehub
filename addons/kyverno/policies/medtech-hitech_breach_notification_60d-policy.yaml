@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.hitech_breach_notification_60d: example validation
+      message: "medtech.hitech_breach_notification_60d: example validation"
       pattern:
         metadata:
           labels:

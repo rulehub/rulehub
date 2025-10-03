@@ -23,6 +23,7 @@ Exit codes:
 If the baseline file does not exist, a notice is printed and exit status 0 is
 returned (establish a baseline by copying the current report if desired).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -40,8 +41,7 @@ def load_json(path: Path) -> Dict[str, Any]:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:  # pragma: no cover - defensive
-        print(
-            f"[links-baseline-diff] failed reading {path}: {e}", file=sys.stderr)
+        print(f"[links-baseline-diff] failed reading {path}: {e}", file=sys.stderr)
         return {}
 
 
@@ -108,8 +108,7 @@ def render(summary: Dict[str, Any]) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Compare link audit baseline vs current report")
+    ap = argparse.ArgumentParser(description="Compare link audit baseline vs current report")
     ap.add_argument(
         "--baseline",
         default="links_audit_baseline.json",
@@ -128,14 +127,12 @@ def main() -> int:
 
     if not baseline_path.is_file():
         print(
-            f"[links-baseline-diff] baseline file '{baseline_path}' not found; "
-            "nothing to compare (establish baseline)."
+            f"[links-baseline-diff] baseline file '{baseline_path}' not found; nothing to compare (establish baseline)."
         )
         return 0
     if not current_path.is_file():
         print(
-            f"[links-baseline-diff] current report '{current_path}' not found; "
-            "run analyze_links first.",
+            f"[links-baseline-diff] current report '{current_path}' not found; run analyze_links first.",
             file=sys.stderr,
         )
         return 0
@@ -147,8 +144,7 @@ def main() -> int:
     summary = summarize_diff(base_sets, cur_sets)
 
     if args.json:
-        Path(args.json).write_text(json.dumps(
-            summary, indent=2), encoding="utf-8")
+        Path(args.json).write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(render(summary))
 

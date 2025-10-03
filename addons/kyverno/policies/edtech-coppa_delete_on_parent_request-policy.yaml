@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.coppa_delete_on_parent_request: example validation
+      message: "edtech.coppa_delete_on_parent_request: example validation"
       pattern:
         metadata:
           labels:

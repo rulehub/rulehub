@@ -2,21 +2,21 @@
 id: fintech.travel_rule_compliance
 name: Travel Rule Compliance
 path:
-  - policies/fintech/travel_rule_compliance/policy.rego
-  - policies/fintech/travel_rule_compliance/policy_test.rego
+- policies/fintech/travel_rule_compliance/policy.rego
+- policies/fintech/travel_rule_compliance/policy_test.rego
 description: Transmit originator/beneficiary info
 standard:
   name: FATF Rec.16
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

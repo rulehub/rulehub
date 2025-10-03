@@ -2,14 +2,14 @@
 id: edtech.ca_pipeda_consent_edtech
 name: <Policy Title>
 path:
-  - policies/edtech/ca_pipeda_consent_edtech/policy.rego
-  - policies/edtech/ca_pipeda_consent_edtech/policy_test.rego
+- policies/edtech/ca_pipeda_consent_edtech/policy.rego
+- policies/edtech/ca_pipeda_consent_edtech/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://laws-lois.justice.gc.ca/eng/acts/P-8.6/
+- https://laws-lois.justice.gc.ca/eng/acts/P-8.6/
 geo:
   regions:
   - Global

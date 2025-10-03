@@ -50,8 +50,7 @@ def iter_metadata() -> List[Tuple[str, Path, dict]]:
 def audit(live: bool, timeout: float, workers: int) -> dict:
     policies = iter_metadata()
     issues: Dict[str, List[str]] = defaultdict(list)
-    global_urls: Dict[str, Set[str]] = defaultdict(
-        set)  # url -> set(policy ids)
+    global_urls: Dict[str, Set[str]] = defaultdict(set)  # url -> set(policy ids)
     per_policy_dupes = 0
     non_https = []
     outdated_hints = []
@@ -85,13 +84,14 @@ def audit(live: bool, timeout: float, workers: int) -> dict:
 
     live_results = {}
     if live and requests is not None:
+
         def head(url: str):
             try:
-                r = requests.head(url, allow_redirects=True,
-                                  timeout=timeout, headers=HEADERS)  # type: ignore
+                r = requests.head(url, allow_redirects=True, timeout=timeout, headers=HEADERS)  # type: ignore
                 return url, getattr(r, "status_code", None), getattr(r, "url", None)
             except Exception as e:  # pragma: no cover
                 return url, None, str(e)
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
             for url, sc, final in ex.map(head, list(global_urls.keys())):
                 live_results[url] = {"status": sc, "final": final}
@@ -112,8 +112,7 @@ def audit(live: bool, timeout: float, workers: int) -> dict:
         "outdated_version_hints": sorted(set(outdated_hints)),
         "top_shared_urls": sorted(
             [
-                {"url": u, "count": len(pids), "sample_policies": sorted(
-                    list(pids))[:10]}  # cap sample
+                {"url": u, "count": len(pids), "sample_policies": sorted(list(pids))[:10]}  # cap sample
                 for u, pids in shared.items()
             ],
             key=lambda x: x["count"],
@@ -128,15 +127,12 @@ def audit(live: bool, timeout: float, workers: int) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Audit policy metadata links")
-    ap.add_argument("--live", action="store_true",
-                    help="Perform live HEAD requests (slow)")
+    ap.add_argument("--live", action="store_true", help="Perform live HEAD requests (slow)")
     ap.add_argument("--timeout", type=float, default=5.0)
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--json", type=Path, help="Write full JSON report to file")
-    ap.add_argument("--summary", action="store_true",
-                    help="Print human summary")
-    ap.add_argument("--strict", action="store_true",
-                    help="Exit non-zero if any issues found")
+    ap.add_argument("--summary", action="store_true", help="Print human summary")
+    ap.add_argument("--strict", action="store_true", help="Exit non-zero if any issues found")
     args = ap.parse_args()
 
     rep = audit(live=args.live, timeout=args.timeout, workers=args.workers)
@@ -146,17 +142,14 @@ def main() -> int:
     if args.summary:
         print(f"Policies: {rep['policy_count']}")
         print(f"Policies without links: {rep['policies_without_links']}")
-        print(
-            f"Per-policy duplicate link occurrences: {rep['per_policy_duplicate_link_occurrences']}")
+        print(f"Per-policy duplicate link occurrences: {rep['per_policy_duplicate_link_occurrences']}")
         print(f"Non-HTTPS URLs: {len(rep['non_https_urls'])}")
         print(f"Outdated version hints: {len(rep['outdated_version_hints'])}")
         print("Top domains:")
         for dom, cnt in rep['top_domains'][:10]:
             print(f"  {dom}: {cnt}")
     if args.strict and (
-        rep['policies_without_links'] > 0
-        or rep['per_policy_duplicate_link_occurrences'] > 0
-        or rep['non_https_urls']
+        rep['policies_without_links'] > 0 or rep['per_policy_duplicate_link_occurrences'] > 0 or rep['non_https_urls']
     ):
         return 1
     return 0

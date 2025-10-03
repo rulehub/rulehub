@@ -32,6 +32,7 @@ Heuristics (suspicious):
 
 The script is read-only.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -171,10 +172,7 @@ def analyze_suspicious(all_links: Dict[str, Set[str]]) -> Dict[str, Any]:
     for k in suspicious:
         suspicious[k] = sorted(set(suspicious[k]))
     # Highly shared duplicates threshold
-    duplicates = [
-        {"url": u, "policy_count": len(pids)}
-        for u, pids in all_links.items() if len(pids) > 50
-    ]
+    duplicates = [{"url": u, "policy_count": len(pids)} for u, pids in all_links.items() if len(pids) > 50]
     duplicates.sort(key=lambda x: x["policy_count"], reverse=True)
     return {"suspicious": suspicious, "highly_shared": duplicates[:50]}
 
@@ -200,6 +198,7 @@ def build_all_links(meta: List[Dict[str, Any]], export: Dict[str, List[str]]) ->
 
     def add(pid: str, url: str):
         all_links.setdefault(url, set()).add(pid)
+
     for item in meta:
         for u in item["links"]:
             add(item["id"], u)
@@ -219,8 +218,7 @@ def render_human(report: Dict[str, Any]) -> str:
     if hs:
         lines.append("  highly_shared (top):")
         for entry in hs[:10]:
-            lines.append(
-                f"    - {entry['url']} ({entry['policy_count']} policies)")
+            lines.append(f"    - {entry['url']} ({entry['policy_count']} policies)")
     disc = report["discrepancies"]
     lines.append(
         "Discrepancies: missing_in_metadata={} policies, missing_in_export={} policies".format(
@@ -267,8 +265,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
     if hs:
         lines.append(f"## highly_shared (top {min(10, len(hs))})")
         for entry in hs[:10]:
-            lines.append(
-                f"- {entry['url']} ({entry['policy_count']} policies)")
+            lines.append(f"- {entry['url']} ({entry['policy_count']} policies)")
         lines.append("")
     # Discrepancies
     disc = report["discrepancies"]
@@ -285,8 +282,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
                 escaped = "<br>".join(links[:20])
                 lines.append(f"| {pid} | {escaped} |")
                 if len(links) > 20:
-                    lines.append(
-                        f"| {pid} (continued) | ... {len(links) - 20} more |")
+                    lines.append(f"| {pid} (continued) | ... {len(links) - 20} more |")
         lines.append("")
     return "\n".join(lines)
 
@@ -330,8 +326,7 @@ def write_history_csv(report: Dict[str, Any], path: Path) -> None:
                 # header mismatch -> keep raw rows (will rewrite with new header)
                 else:
                     # Attempt to detect if first row is actually data (date pattern)
-                    rows = existing if existing and existing[0] and existing[0][0].startswith(
-                        "20") else existing[1:]
+                    rows = existing if existing and existing[0] and existing[0][0].startswith("20") else existing[1:]
         except Exception:  # pragma: no cover - defensive
             rows = []
     # Filter out any existing row for today
@@ -353,8 +348,7 @@ def write_history_csv(report: Dict[str, Any], path: Path) -> None:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Heuristic link audit & metadata/export discrepancy report")
+    ap = argparse.ArgumentParser(description="Heuristic link audit & metadata/export discrepancy report")
     ap.add_argument("--export", help="links_export.json path (optional)")
     ap.add_argument("--json", help="Write full JSON report")
     ap.add_argument(
@@ -383,14 +377,12 @@ def main() -> int:
     }
 
     if args.json:
-        Path(args.json).write_text(json.dumps(
-            report, indent=2), encoding="utf-8")
+        Path(args.json).write_text(json.dumps(report, indent=2), encoding="utf-8")
     if args.history:
         try:
             write_history_csv(report, Path(args.history))
         except Exception as e:  # pragma: no cover - non-fatal
-            print(
-                f"[history] failed to write history CSV: {e}", file=sys.stderr)
+            print(f"[history] failed to write history CSV: {e}", file=sys.stderr)
     output_format = os.environ.get("OUTPUT_FORMAT", "human").lower()
     if output_format == "json":
         # Full JSON to stdout (still honor --json file if provided)
@@ -410,8 +402,7 @@ def main() -> int:
             "long",
             "external_source_code",
         ]
-        suspicious_total = sum(len(report["suspicious"][c])
-                               for c in suspicious_cats)
+        suspicious_total = sum(len(report["suspicious"][c]) for c in suspicious_cats)
         discrepancies_total = len(report["discrepancies"]["missing_in_metadata"]) + len(
             report["discrepancies"]["missing_in_export"]
         )

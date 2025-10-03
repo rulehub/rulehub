@@ -2,14 +2,14 @@
 id: betting.credit_card_gambling_ban_uk
 name: <Policy Title>
 path:
-  - policies/betting/credit_card_gambling_ban_uk/policy.rego
-  - policies/betting/credit_card_gambling_ban_uk/policy_test.rego
+- policies/betting/credit_card_gambling_ban_uk/policy.rego
+- policies/betting/credit_card_gambling_ban_uk/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

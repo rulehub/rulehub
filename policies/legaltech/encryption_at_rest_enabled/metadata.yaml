@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.encryption_at_rest_enabled
 name: Encryption At Rest Enabled
 path:
-  - policies/legaltech/encryption_at_rest_enabled/policy.rego
-  - policies/legaltech/encryption_at_rest_enabled/policy_test.rego
+- policies/legaltech/encryption_at_rest_enabled/policy.rego
+- policies/legaltech/encryption_at_rest_enabled/policy_test.rego
 description: Encrypt legal data at rest
 standard:
   name: Best Practice
   version: current
 links:
-  - https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
+- https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
 geo:
   regions:
   - Global

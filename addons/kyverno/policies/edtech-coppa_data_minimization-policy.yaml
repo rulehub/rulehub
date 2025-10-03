@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.coppa_data_minimization: example validation
+      message: "edtech.coppa_data_minimization: example validation"
       pattern:
         metadata:
           labels:

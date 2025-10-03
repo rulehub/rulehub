@@ -10,6 +10,7 @@ Logic:
 
 Idempotent: running again makes no further changes.
 """
+
 from __future__ import annotations
 
 import re

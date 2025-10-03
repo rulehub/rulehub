@@ -21,3 +21,8 @@ test_denies_when_control_disabled_and_pms_not_defined if {
 test_additional_denies_when_pms_flag_missing if {
 	count(deny) > 0 with input as {"controls": {"medtech.uk_mhra_post_market_surveillance": false}, "uk": {"pms_system_defined": true}}
 }
+
+# Auto-generated granular test for controls["medtech.uk_mhra_post_market_surveillance"]
+test_denies_when_controls_medtech_uk_mhra_post_market_surveillance_failing if {
+	some _ in deny with input as {"controls": {}, "uk": {"pms_system_defined": true}, "controls[\"medtech": {"uk_mhra_post_market_surveillance\"]": false}}
+}

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ca_pipeda_consent_edtech: example validation
+      message: "edtech.ca_pipeda_consent_edtech: example validation"
       pattern:
         metadata:
           labels:

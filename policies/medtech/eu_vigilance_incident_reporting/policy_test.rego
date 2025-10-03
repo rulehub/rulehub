@@ -21,3 +21,8 @@ test_denies_when_both_process_false_and_control_disabled if {
 test_additional_denies_when_vigilance_field_missing if {
 	count(deny) > 0 with input as {"controls": {"medtech.eu_vigilance_incident_reporting": false}, "eu": {"vigilance": {"process_defined": true}}}
 }
+
+# Auto-generated granular test for controls["medtech.eu_vigilance_incident_reporting"]
+test_denies_when_controls_medtech_eu_vigilance_incident_reporting_failing if {
+	some _ in deny with input as {"controls": {}, "eu": {"vigilance": {"process_defined": true}}, "controls[\"medtech": {"eu_vigilance_incident_reporting\"]": false}}
+}

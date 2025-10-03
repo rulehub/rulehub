@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.license_check_mga: example validation
+      message: "betting.license_check_mga: example validation"
       pattern:
         metadata:
           labels:

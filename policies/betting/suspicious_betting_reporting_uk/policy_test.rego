@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_suspicious_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.suspicious_betting_reporting_uk": false}, "integrity": {"suspicious_reported": false}}
 }
+
+# Auto-generated granular test for controls["betting.suspicious_betting_reporting_uk"]
+test_denies_when_controls_betting_suspicious_betting_reporting_uk_failing if {
+	some _ in deny with input as {"controls": {}, "integrity": {"suspicious_reported": true}, "controls[\"betting": {"suspicious_betting_reporting_uk\"]": false}}
+}

@@ -2,14 +2,14 @@
 id: medtech.iso_14971_risk_management_file
 name: <Policy Title>
 path:
-  - policies/medtech/iso_14971_risk_management_file/policy.rego
-  - policies/medtech/iso_14971_risk_management_file/policy_test.rego
+- policies/medtech/iso_14971_risk_management_file/policy.rego
+- policies/medtech/iso_14971_risk_management_file/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.iso.org/standard/72704.html
+- https://www.iso.org/standard/72704.html
 geo:
   regions:
   - Global

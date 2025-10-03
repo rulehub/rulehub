@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.reverse_withdrawal_ban_uk: example validation
+      message: "betting.reverse_withdrawal_ban_uk: example validation"
       pattern:
         metadata:
           labels:

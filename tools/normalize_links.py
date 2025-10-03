@@ -31,8 +31,7 @@ from typing import List, Tuple
 
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', 'policies')
-EXPORT_PATH = os.path.join(os.path.dirname(
-    __file__), '..', 'links_export.json')
+EXPORT_PATH = os.path.join(os.path.dirname(__file__), '..', 'links_export.json')
 
 VENDOR_DOMAINS = [
     'sportradar.com',
@@ -42,7 +41,8 @@ VENDOR_DOMAINS = [
 ]
 
 CELEX_QUERY_RE = re.compile(
-    r'(https://eur-lex.europa.eu/legal-content/[^\s]*?TXT/)(PDF/)?(\?uri=CELEX%3A|\?uri=CELEX:)([0-9A-Z]+)')
+    r'(https://eur-lex.europa.eu/legal-content/[^\s]*?TXT/)(PDF/)?(\?uri=CELEX%3A|\?uri=CELEX:)([0-9A-Z]+)'
+)
 
 
 def load_export_links():
@@ -171,8 +171,7 @@ def dedupe_preserve(seq: List[str]) -> List[str]:
 
 
 def process_file(path: str, export_links: dict, sync_export: bool, write: bool, eli: bool) -> dict:
-    text = open(path, 'r', encoding='utf-8',
-                errors='ignore').read().rstrip('\n')
+    text = open(path, 'r', encoding='utf-8', errors='ignore').read().rstrip('\n')
     lines = text.split('\n')
     changed = False
 
@@ -201,7 +200,7 @@ def process_file(path: str, export_links: dict, sync_export: bool, write: bool, 
         # Replace block if changed
         if norm_links != links_list and span[0] != -1:
             new_block = [f'  - {u}' for u in norm_links]
-            lines = lines[:span[0]] + new_block + lines[span[1]:]
+            lines = lines[: span[0]] + new_block + lines[span[1] :]
             changed = True
         # Vendor detection
         for u in norm_links:
@@ -226,14 +225,10 @@ def process_file(path: str, export_links: dict, sync_export: bool, write: bool, 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--write', action='store_true',
-                    help='Apply changes (in-place).')
-    ap.add_argument('--sync-export', action='store_true',
-                    help='Add links present only in links_export.json.')
-    ap.add_argument('--eli', action='store_true',
-                    help='Attempt eur-lex CELEX -> /eli/ canonical conversion.')
-    ap.add_argument('--check', action='store_true',
-                    help='Exit non-zero if any file would change (use in CI).')
+    ap.add_argument('--write', action='store_true', help='Apply changes (in-place).')
+    ap.add_argument('--sync-export', action='store_true', help='Add links present only in links_export.json.')
+    ap.add_argument('--eli', action='store_true', help='Attempt eur-lex CELEX -> /eli/ canonical conversion.')
+    ap.add_argument('--check', action='store_true', help='Exit non-zero if any file would change (use in CI).')
     args = ap.parse_args()
 
     export_links = load_export_links()
@@ -241,12 +236,10 @@ def main():
     for dirpath, _, files in os.walk(ROOT):
         if 'metadata.yaml' in files:
             p = os.path.join(dirpath, 'metadata.yaml')
-            results.append(process_file(p, export_links,
-                           args.sync_export, args.write, args.eli))
+            results.append(process_file(p, export_links, args.sync_export, args.write, args.eli))
 
     changed = [r for r in results if r['changed'] or r['would_change']]
-    vendor = [(r['policy_id'], r['vendor_links'])
-              for r in results if r['vendor_links']]
+    vendor = [(r['policy_id'], r['vendor_links']) for r in results if r['vendor_links']]
 
     print(f'Metadata files processed: {len(results)}')
     print(f'Files needing changes: {len(changed)} (write={args.write})')

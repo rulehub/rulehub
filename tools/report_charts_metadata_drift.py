@@ -30,6 +30,7 @@ import yaml  # type: ignore
 try:  # local import (preferred) – tolerate absence if path issues in ad-hoc envs
     from tools.lib.metadata_loader import load_all_metadata  # type: ignore
 except Exception:  # pragma: no cover - fallback simple loader
+
     def load_all_metadata(root_dir: str = "policies"):
         out = []
         root = Path(root_dir)
@@ -89,14 +90,12 @@ def load_metadata_ids(policies_root: str = "policies") -> Set[str]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Report charts policy IDs that lack local metadata (potential drift)")
-    ap.add_argument("--charts-dir", required=True,
-                    help="Path to rulehub-charts files/ directory")
-    ap.add_argument("--policies-root", default="policies",
-                    help="Root directory containing policy metadata (default: policies)")
-    ap.add_argument("--json", action="store_true",
-                    help="Emit JSON instead of text")
+    ap = argparse.ArgumentParser(description="Report charts policy IDs that lack local metadata (potential drift)")
+    ap.add_argument("--charts-dir", required=True, help="Path to rulehub-charts files/ directory")
+    ap.add_argument(
+        "--policies-root", default="policies", help="Root directory containing policy metadata (default: policies)"
+    )
+    ap.add_argument("--json", action="store_true", help="Emit JSON instead of text")
     args = ap.parse_args()
 
     charts_dir = Path(args.charts_dir)
@@ -109,13 +108,19 @@ def main() -> int:
     missing_metadata = sorted(chart_ids - metadata_ids)
 
     if args.json:
-        print(json.dumps({
-            "charts_count": len(chart_ids),
-            "metadata_ids_count": len(metadata_ids),
-            "duplicates_in_charts": dupes,
-            "missing_metadata": missing_metadata,
-            "missing_metadata_count": len(missing_metadata),
-        }, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                {
+                    "charts_count": len(chart_ids),
+                    "metadata_ids_count": len(metadata_ids),
+                    "duplicates_in_charts": dupes,
+                    "missing_metadata": missing_metadata,
+                    "missing_metadata_count": len(missing_metadata),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
     else:
         print(f"[charts-metadata-drift] chart ids: {len(chart_ids)}")
         print(f"[charts-metadata-drift] metadata ids: {len(metadata_ids)}")
@@ -123,8 +128,7 @@ def main() -> int:
             print("[charts-metadata-drift] duplicate rulehub.id entries detected:")
             for k, v in sorted(dupes.items()):
                 print(f"  {k}: {v}")
-        print(
-            f"\nPolicy IDs present in charts but missing metadata ({len(missing_metadata)}):")
+        print(f"\nPolicy IDs present in charts but missing metadata ({len(missing_metadata)}):")
         for mid in missing_metadata:
             print(f"  - {mid}")
         if not missing_metadata:

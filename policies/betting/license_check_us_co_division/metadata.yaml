@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.license_check_us_co_division
-name: License Check — CO Division
+name: "License Check \u2014 CO Division"
 description: Operator licensed by CO Division of Gaming
 standard: Colorado Division
 version: current
 path:
-  - policies/betting/license_check_us_co_division/policy.rego
-  - policies/betting/license_check_us_co_division/policy_test.rego
+- policies/betting/license_check_us_co_division/policy.rego
+- policies/betting/license_check_us_co_division/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://sbg.colorado.gov/
+- https://sbg.colorado.gov/
 geo:
-  regions: [North America]
-  countries: [US-CO]
+  regions:
+  - North America
+  countries:
+  - US-CO
   scope: State

@@ -5,6 +5,7 @@ This is a lightweight, dependency-free implementation intended for CI use.
 
 Usage: python -m tools.release.readiness_report --root <repo_root> --out-dir <dist/release>
 """
+
 from __future__ import annotations
 
 import argparse
@@ -18,8 +19,7 @@ from typing import Any, Dict, List, Optional
 
 def run_git(args: List[str], cwd: Path) -> str:
     try:
-        out = subprocess.check_output(
-            ["git"] + args, cwd=str(cwd), stderr=subprocess.DEVNULL)
+        out = subprocess.check_output(["git"] + args, cwd=str(cwd), stderr=subprocess.DEVNULL)
         return out.decode().strip()
     except Exception:
         return ""
@@ -80,8 +80,7 @@ def scan_for_todos(root: Path) -> List[Dict[str, Any]]:
         for i, ln in enumerate(text.splitlines(), start=1):
             for pat in patterns:
                 if pat in ln:
-                    findings.append({"file": str(p.relative_to(
-                        root)), "line": i, "snippet": ln.strip(), "tag": pat})
+                    findings.append({"file": str(p.relative_to(root)), "line": i, "snippet": ln.strip(), "tag": pat})
     return findings
 
 
@@ -105,8 +104,7 @@ def collect_link_issues(root: Path) -> List[Dict[str, Any]]:
 
 def coverage_gaps(root: Path) -> Dict[str, Any]:
     # Simple heuristic: count policies and tests
-    policy_count = sum(1 for _ in (root / "policies").rglob("*.yaml")
-                       ) if (root / "policies").exists() else 0
+    policy_count = sum(1 for _ in (root / "policies").rglob("*.yaml")) if (root / "policies").exists() else 0
     # tests under tests/kyverno and tests/gatekeeper
     test_count = 0
     if (root / "tests").exists():
@@ -160,8 +158,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
         lines.append("None")
     else:
         for t in todos[:200]:
-            lines.append(
-                f"- {t['file']}:{t['line']} {t['tag']} - {t['snippet']}")
+            lines.append(f"- {t['file']}:{t['line']} {t['tag']} - {t['snippet']}")
     lines.append("")
 
     lines.append("## Link Issues")
@@ -171,8 +168,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
         lines.append("None")
     else:
         for link in links:
-            lines.append(
-                "- {}: {}".format(link.get("file"), link.get("summary")))
+            lines.append("- {}: {}".format(link.get("file"), link.get("summary")))
     lines.append("")
 
     lines.append("## Coverage Gaps")
@@ -193,8 +189,7 @@ def build_report(root: Path) -> Dict[str, Any]:
     git_info = find_latest_tag_vs_head(root)
     out["summary"] = "Readiness summary for RuleHub"
     out["git"] = git_info
-    out["changelog_diff"] = changelog_diff(
-        root, git_info.get("latest_tag", ""))
+    out["changelog_diff"] = changelog_diff(root, git_info.get("latest_tag", ""))
     out["version_drift"] = {
         "package.json": read_file_if_exists(root / "package.json") is not None,
         "release-please": read_file_if_exists(root / "release-please-config.json") is not None,
@@ -206,17 +201,15 @@ def build_report(root: Path) -> Dict[str, Any]:
     out["recommended_actions"] = [
         "Run pip-audit and npm audit for dependency issues",
         "Ensure policies under policies/ have paired tests under tests/",
-        "Address TODO/FIXME items found in source"
+        "Address TODO/FIXME items found in source",
     ]
     return out
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    p = argparse.ArgumentParser(
-        description="Produce readiness report for RuleHub")
+    p = argparse.ArgumentParser(description="Produce readiness report for RuleHub")
     p.add_argument("--root", default=".", help="Repository root")
-    p.add_argument("--out-dir", default="dist/release",
-                   help="Output directory")
+    p.add_argument("--out-dir", default="dist/release", help="Output directory")
     p.add_argument("--json", action="store_true", help="Also write JSON")
     args = p.parse_args(argv)
 

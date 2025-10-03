@@ -134,9 +134,7 @@ def fix_map_duplicates(data) -> Tuple[int, Set[str]]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Detect and fix duplicate policies in compliance maps"
-    )
+    parser = argparse.ArgumentParser(description="Detect and fix duplicate policies in compliance maps")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true", help="Only check for duplicates")
     mode.add_argument("--fix", action="store_true", help="Remove duplicates in-place")
@@ -184,10 +182,7 @@ def main() -> int:
                         rel = mp.relative_to(ROOT)
                     except Exception:
                         rel = mp
-                    print(
-                        f"Fixed {removed_count} duplicate reference(s) in {rel}: "
-                        + ", ".join(sorted(removed_ids))
-                    )
+                    print(f"Fixed {removed_count} duplicate reference(s) in {rel}: " + ", ".join(sorted(removed_ids)))
 
     if args.check:
         if any_dupes:

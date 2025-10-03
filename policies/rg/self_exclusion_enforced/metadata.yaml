@@ -1,16 +1,17 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: rg.self_exclusion_enforced
-name: Responsible Gambling — Self-exclusion enforced
+name: "Responsible Gambling \u2014 Self-exclusion enforced"
 standard: UKGC/MGA
-version: "placeholder"
+version: placeholder
 path:
-  - policies/rg/self_exclusion_enforced/policy.rego
-  - policies/rg/self_exclusion_enforced/policy_test.rego
+- policies/rg/self_exclusion_enforced/policy.rego
+- policies/rg/self_exclusion_enforced/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 description: Ensures platform enforces active self-exclusion states so excluded players cannot access gambling services.
 links:
-  - https://www.gamblingcommission.gov.uk/ # UKGC authoritative source
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Europe

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.iso_14971_risk_management_file: example validation
+      message: "medtech.iso_14971_risk_management_file: example validation"
       pattern:
         metadata:
           labels:

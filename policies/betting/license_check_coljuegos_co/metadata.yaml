@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.license_check_coljuegos_co
-name: License Check — Coljuegos (CO)
+name: "License Check \u2014 Coljuegos (CO)"
 description: Operator licensed by Coljuegos
 standard: Coljuegos
 version: current
 path:
-  - policies/betting/license_check_coljuegos_co/policy.rego
-  - policies/betting/license_check_coljuegos_co/policy_test.rego
+- policies/betting/license_check_coljuegos_co/policy.rego
+- policies/betting/license_check_coljuegos_co/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.coljuegos.gov.co/
+- https://www.coljuegos.gov.co/
 geo:
-  regions: [LatAm]
-  countries: [CO]
+  regions:
+  - LatAm
+  countries:
+  - CO
   scope: National

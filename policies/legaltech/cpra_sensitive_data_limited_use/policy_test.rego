@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_spi_not_limited if {
 	count(deny) > 0 with input as {"controls": {"legaltech.cpra_sensitive_data_limited_use": true}, "ccpa": {"spi_limited_use": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.cpra_sensitive_data_limited_use"]
+test_denies_when_controls_legaltech_cpra_sensitive_data_limited_use_failing if {
+	some _ in deny with input as {"controls": {}, "ccpa": {"spi_limited_use": true}, "controls[\"legaltech": {"cpra_sensitive_data_limited_use\"]": false}}
+}

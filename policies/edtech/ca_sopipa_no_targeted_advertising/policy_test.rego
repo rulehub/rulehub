@@ -21,3 +21,8 @@ test_denies_when_targeted_ads_and_control_disabled if {
 		"controls": {"edtech.ca_sopipa_no_targeted_advertising": false},
 	}
 }
+
+# Auto-generated granular test for controls["edtech.ca_sopipa_no_targeted_advertising"]
+test_denies_when_controls_edtech_ca_sopipa_no_targeted_advertising_failing if {
+	some _ in deny with input as {"controls": {}, "ads": {"targeted_using_student_data": true}, "controls[\"edtech": {"ca_sopipa_no_targeted_advertising\"]": false}}
+}

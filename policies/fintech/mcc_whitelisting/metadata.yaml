@@ -2,21 +2,21 @@
 id: fintech.mcc_whitelisting
 name: MCC Whitelisting
 path:
-  - policies/fintech/mcc_whitelisting/policy.rego
-  - policies/fintech/mcc_whitelisting/policy_test.rego
+- policies/fintech/mcc_whitelisting/policy.rego
+- policies/fintech/mcc_whitelisting/policy_test.rego
 description: Whitelist allowed MCCs
 standard:
   name: Risk
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
-  - https://www.emvco.com/emv-technologies/3-d-secure/
+- https://www.pcisecuritystandards.org/document_library
+- https://www.emvco.com/emv-technologies/3-d-secure/
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.self_exclusion_on_igaming: example validation
+      message: "betting.self_exclusion_on_igaming: example validation"
       pattern:
         metadata:
           labels:

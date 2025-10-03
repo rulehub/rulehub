@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.lgpd_brazil_compliance
 name: 'LGPD: Brazil Compliance'
 path:
-  - policies/legaltech/lgpd_brazil_compliance/policy.rego
-  - policies/legaltech/lgpd_brazil_compliance/policy_test.rego
+- policies/legaltech/lgpd_brazil_compliance/policy.rego
+- policies/legaltech/lgpd_brazil_compliance/policy_test.rego
 description: Comply with LGPD principles rights
 standard:
   name: LGPD (Brazil)
   version: current
 links:
-  - https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm
+- https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm
 geo:
   regions:
   - Global

@@ -23,6 +23,7 @@ Usage:
   --limit N : only process first N policies.
 
 """
+
 from __future__ import annotations
 
 import argparse
@@ -36,8 +37,7 @@ POLICIES_ROOT = Path("policies")
 TEST_FILENAME = "policy_test.rego"
 
 DENY_RULE_START = re.compile(r"^\s*deny\s+contains\s+msg\s+if\s*{\s*$")
-INPUT_FLAG_RE = re.compile(
-    r"input\.([a-zA-Z0-9_\.\[\]\"]+)\s*(==\s*(true|false))?")
+INPUT_FLAG_RE = re.compile(r"input\.([a-zA-Z0-9_\.\[\]\"]+)\s*(==\s*(true|false))?")
 NOT_INPUT_RE = re.compile(r"not\s+input\.([a-zA-Z0-9_\.\[\]\"]+)")
 # Match control key like input.controls[\"policy.id\"]
 CONTROL_KEY_RE = re.compile(r"input\.controls\[\"([^\"]+)\"\]")
@@ -73,7 +73,12 @@ def derive_flag_from_block(block_lines: List[str]) -> str | None:
     # Prefer explicit equality checks
     m = INPUT_FLAG_RE.search(joined)
     if m:
-        return m.group(1)
+        raw = m.group(1)
+        # normalize control key access input.controls["id"] -> controls.id
+        cm = CONTROL_KEY_RE.search(joined)
+        if cm:
+            return f"controls.{cm.group(1)}"
+        return raw
     n = NOT_INPUT_RE.search(joined)
     if n:
         return n.group(1)
@@ -118,8 +123,7 @@ def build_failing_input(flags: List[str], target: str) -> Dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--apply', action='store_true',
-                    help='Write changes to test files')
+    ap.add_argument('--apply', action='store_true', help='Write changes to test files')
     ap.add_argument('--limit', type=int, default=None)
     args = ap.parse_args()
 
@@ -145,14 +149,31 @@ def main():
         if not flags:
             continue
         test_path = pol.parent / TEST_FILENAME
-        existing = test_path.read_text(
-            encoding='utf-8') if test_path.exists() else ''
+        existing = test_path.read_text(encoding='utf-8') if test_path.exists() else ''
         additions = []
         for f in flags:
-            slug = f.replace('.', '_').replace('["', '_').replace(
-                '"]', '').replace('"', '').replace("'", '')
+            slug = f.replace('.', '_').replace('["', '_').replace('"]', '').replace('"', '').replace("'", '')
             name = f"test_denies_when_{slug}_failing"
+            # Heuristic: consider existing if either the exact flag path
+            # is present OR a JSON-style key pattern is present in the test file.
+            already_present = False
             if f in existing:
+                already_present = True
+            else:
+                # controls.<policy.id> is typically represented as
+                # {"controls": {"<policy.id>": ...}} in tests
+                if f.startswith('controls.'):
+                    ctrl_key = f.split('.', 1)[1]
+                    if f'"{ctrl_key}"' in existing:
+                        already_present = True
+                else:
+                    # Nested input flags like adr.provider_listed often
+                    # appear as {"adr": {"provider_listed": ...}} in tests.
+                    # Treat presence of the leaf key as sufficient evidence.
+                    leaf = f.split('.')[-1]
+                    if f'"{leaf}"' in existing:
+                        already_present = True
+            if already_present:
                 continue
             failing_input = build_failing_input(flags, f)
             # Use some _ in deny pattern

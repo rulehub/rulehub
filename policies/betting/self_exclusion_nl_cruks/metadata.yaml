@@ -2,15 +2,15 @@
 id: betting.self_exclusion_nl_cruks
 name: <Policy Title>
 path:
-  - policies/betting/self_exclusion_nl_cruks/policy.rego
-  - policies/betting/self_exclusion_nl_cruks/policy_test.rego
+- policies/betting/self_exclusion_nl_cruks/policy.rego
+- policies/betting/self_exclusion_nl_cruks/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://kansspelautoriteit.nl/
-  - https://cruksregister.nl/
+- https://kansspelautoriteit.nl/
+- https://cruksregister.nl/
 geo:
   regions:
   - Global

@@ -32,6 +32,7 @@ Exit codes:
   1 no input files found
   2 malformed rows encountered (continues aggregation unless ALL rows bad)
 """
+
 from __future__ import annotations
 
 import argparse
@@ -60,8 +61,7 @@ def parse_history_file(path: Path) -> List[DailyRow]:
                 if i == 0:
                     header = [h.strip() for h in r]
                     if not header or header[0] != "date":
-                        print(
-                            f"[warn] {path}: unexpected/missing header; skipping file", file=sys.stderr)
+                        print(f"[warn] {path}: unexpected/missing header; skipping file", file=sys.stderr)
                         return []
                     continue
                 if not r or not r[0]:
@@ -69,8 +69,7 @@ def parse_history_file(path: Path) -> List[DailyRow]:
                 try:
                     d = date.fromisoformat(r[0])
                 except Exception:  # pragma: no cover - defensive
-                    print(
-                        f"[warn] {path}: bad date '{r[0]}' (row {i+1}); skipping row", file=sys.stderr)
+                    print(f"[warn] {path}: bad date '{r[0]}' (row {i + 1}); skipping row", file=sys.stderr)
                     continue
                 counts: Dict[str, int] = {}
                 for col, val in zip(header[1:], r[1:]):
@@ -78,7 +77,7 @@ def parse_history_file(path: Path) -> List[DailyRow]:
                         counts[col] = int(val)
                     except Exception:
                         print(
-                            f"[warn] {path}: non-integer value '{val}' for column '{col}' (row {i+1}); treating as 0",
+                            f"[warn] {path}: non-integer value '{val}' for column '{col}' (row {i + 1}); treating as 0",
                             file=sys.stderr,
                         )
                         counts[col] = 0
@@ -138,8 +137,7 @@ def write_weekly_csv(path: Path, weekly: Dict[str, Dict[str, float]], categories
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Aggregate daily link audit history into weekly CSV")
+    ap = argparse.ArgumentParser(description="Aggregate daily link audit history into weekly CSV")
     ap.add_argument(
         "--pattern",
         default="links_audit_history*.csv",
@@ -154,8 +152,7 @@ def main() -> int:
 
     files = sorted(glob.glob(args.pattern))
     if not files:
-        print(
-            f"[aggregate] no files matched pattern: {args.pattern}", file=sys.stderr)
+        print(f"[aggregate] no files matched pattern: {args.pattern}", file=sys.stderr)
         return 1
     all_rows: List[DailyRow] = []
     seen_dates = set()
@@ -164,8 +161,7 @@ def main() -> int:
         for r in parse_history_file(Path(fp)):
             if r.day in seen_dates:
                 # Duplicate date across files — skip
-                print(
-                    f"[warn] duplicate date {r.day} in {fp}; ignoring", file=sys.stderr)
+                print(f"[warn] duplicate date {r.day} in {fp}; ignoring", file=sys.stderr)
                 continue
             seen_dates.add(r.day)
             for k in r.counts:

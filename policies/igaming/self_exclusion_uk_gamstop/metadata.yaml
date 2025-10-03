@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.self_exclusion_uk_gamstop
-name: Self-Exclusion — GAMSTOP (UK)
+name: "Self-Exclusion \u2014 GAMSTOP (UK)"
 description: Block self-excluded bettors via GAMSTOP
 standard: UKGC LCCP
 version: current
 path:
-  - policies/igaming/self_exclusion_uk_gamstop/policy.rego
-  - policies/igaming/self_exclusion_uk_gamstop/policy_test.rego
+- policies/igaming/self_exclusion_uk_gamstop/policy.rego
+- policies/igaming/self_exclusion_uk_gamstop/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.gamstop.co.uk/for-operators
+- https://www.gamstop.co.uk/for-operators
 geo:
-  regions: [Europe]
-  countries: [UK]
+  regions:
+  - Europe
+  countries:
+  - UK
   scope: National

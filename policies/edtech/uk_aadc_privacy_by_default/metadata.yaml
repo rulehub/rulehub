@@ -2,14 +2,14 @@
 id: edtech.uk_aadc_privacy_by_default
 name: <Policy Title>
 path:
-  - policies/edtech/uk_aadc_privacy_by_default/policy.rego
-  - policies/edtech/uk_aadc_privacy_by_default/policy_test.rego
+- policies/edtech/uk_aadc_privacy_by_default/policy.rego
+- policies/edtech/uk_aadc_privacy_by_default/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://ico.org.uk/for-organisations/childrens-code-design-guidance/
+- https://ico.org.uk/for-organisations/childrens-code-design-guidance/
 geo:
   regions:
   - Global

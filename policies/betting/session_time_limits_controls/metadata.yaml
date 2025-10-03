@@ -2,15 +2,15 @@
 id: betting.session_time_limits_controls
 name: <Policy Title>
 path:
-  - policies/betting/session_time_limits_controls/policy.rego
-  - policies/betting/session_time_limits_controls/policy_test.rego
+- policies/betting/session_time_limits_controls/policy.rego
+- policies/betting/session_time_limits_controls/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.anj.fr/
-  - https://www.gamblingcommission.gov.uk/
+- https://www.anj.fr/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

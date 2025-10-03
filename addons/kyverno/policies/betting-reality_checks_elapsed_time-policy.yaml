@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.reality_checks_elapsed_time: example validation
+      message: "betting.reality_checks_elapsed_time: example validation"
       pattern:
         metadata:
           labels:

@@ -2,14 +2,14 @@
 id: medtech.hipaa_access_audit_logging
 name: <Policy Title>
 path:
-  - policies/medtech/hipaa_access_audit_logging/policy.rego
-  - policies/medtech/hipaa_access_audit_logging/policy_test.rego
+- policies/medtech/hipaa_access_audit_logging/policy.rego
+- policies/medtech/hipaa_access_audit_logging/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.hhs.gov/hipaa/for-professionals/security/index.html
+- https://www.hhs.gov/hipaa/for-professionals/security/index.html
 geo:
   regions:
   - Global

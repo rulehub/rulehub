@@ -2,15 +2,15 @@
 id: medtech.health_data_cross_border_controls
 name: <Policy Title>
 path:
-  - policies/medtech/health_data_cross_border_controls/policy.rego
-  - policies/medtech/health_data_cross_border_controls/policy_test.rego
+- policies/medtech/health_data_cross_border_controls/policy.rego
+- policies/medtech/health_data_cross_border_controls/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
-  - https://www.hhs.gov/hipaa/
+- https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj
+- https://www.hhs.gov/hipaa/
 geo:
   regions:
   - Global

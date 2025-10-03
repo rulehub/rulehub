@@ -10,6 +10,7 @@ Behavior:
   * Ignore anything under docs/ (examples / narrative allowed there).
   * Report each offending line and exit 1 if any found.
 """
+
 from __future__ import annotations
 
 import pathlib
@@ -44,12 +45,10 @@ for base in TARGET_DIRS:
                 hits.append((rel, ln, line.strip()))
 
 if hits:
-    print(
-        "Forbidden 'violation[' rule syntax detected; use deny[msg] instead:", file=sys.stderr)
+    print("Forbidden 'violation[' rule syntax detected; use deny[msg] instead:", file=sys.stderr)
     for rel, ln, snippet in hits:
         print(f"  {rel}:{ln}: {snippet}", file=sys.stderr)
-    print(
-        "\nFix: rename rule heads to deny[\"<id>\"] and adjust tests.", file=sys.stderr)
+    print("\nFix: rename rule heads to deny[\"<id>\"] and adjust tests.", file=sys.stderr)
     sys.exit(1)
 
 print("deny-usage-scan: OK (no 'violation[' tokens found)")

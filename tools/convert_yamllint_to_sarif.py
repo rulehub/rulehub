@@ -12,6 +12,7 @@ Exit code:
   Mirrors yamllint exit code (non‑zero if issues). The SARIF file is written
   regardless (unless a hard failure occurs) so upload should still proceed.
 """
+
 from __future__ import annotations
 
 import json

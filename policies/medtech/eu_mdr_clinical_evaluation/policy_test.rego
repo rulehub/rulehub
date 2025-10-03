@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_mdr_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.eu_mdr_clinical_evaluation": true}, "mdr": {"clinical_eval_plan": false, "clinical_eval_report": false}}
 }
+
+# Auto-generated granular test for controls["medtech.eu_mdr_clinical_evaluation"]
+test_denies_when_controls_medtech_eu_mdr_clinical_evaluation_failing if {
+	some _ in deny with input as {"controls": {}, "mdr": {"clinical_eval_plan": true, "clinical_eval_report": true}, "controls[\"medtech": {"eu_mdr_clinical_evaluation\"]": false}}
+}

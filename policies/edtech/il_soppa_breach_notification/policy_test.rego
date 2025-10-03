@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_breach_occurred_and_not_notified_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.il_soppa_breach_notification": false}, "breach": {"occurred": true, "notified": false}}
 }
+
+# Auto-generated granular test for controls["edtech.il_soppa_breach_notification"]
+test_denies_when_controls_edtech_il_soppa_breach_notification_failing if {
+	some _ in deny with input as {"controls": {}, "breach": {"occurred": true}, "controls[\"edtech": {"il_soppa_breach_notification\"]": false}}
+}

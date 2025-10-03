@@ -26,3 +26,8 @@ test_denies_when_control_disabled if {
 test_denies_when_disclosure_requested_and_no_consent_no_exception_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.ferpa_consent_or_exception_for_disclosure": false}, "disclosure": {"requested": true, "exception_applies": false, "has_consent": false}}
 }
+
+# Auto-generated granular test for controls["edtech.ferpa_consent_or_exception_for_disclosure"]
+test_denies_when_controls_edtech_ferpa_consent_or_exception_for_disclosure_failing if {
+	some _ in deny with input as {"controls": {}, "disclosure": {"requested": true}, "controls[\"edtech": {"ferpa_consent_or_exception_for_disclosure\"]": false}}
+}

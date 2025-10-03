@@ -2,14 +2,14 @@
 id: betting.complaints_process_published
 name: <Policy Title>
 path:
-  - policies/betting/complaints_process_published/policy.rego
-  - policies/betting/complaints_process_published/policy_test.rego
+- policies/betting/complaints_process_published/policy.rego
+- policies/betting/complaints_process_published/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

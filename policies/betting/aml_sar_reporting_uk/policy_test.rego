@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_suspicion_and_sar_not_filed_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.aml_sar_reporting_uk": true}, "aml": {"suspicion": true, "sar_filed": false}}
 }
+
+# Auto-generated granular test for controls["betting.aml_sar_reporting_uk"]
+test_denies_when_controls_betting_aml_sar_reporting_uk_failing if {
+	some _ in deny with input as {"controls": {}, "aml": {"suspicion": true}, "controls[\"betting": {"aml_sar_reporting_uk\"]": false}}
+}

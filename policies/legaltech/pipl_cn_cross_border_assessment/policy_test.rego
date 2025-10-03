@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_security_assessment_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.pipl_cn_cross_border_assessment": false}, "transfer": {"cn_outbound": true, "security_assessment_done": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.pipl_cn_cross_border_assessment"]
+test_denies_when_controls_legaltech_pipl_cn_cross_border_assessment_failing if {
+	some _ in deny with input as {"controls": {}, "transfer": {"cn_outbound": true}, "controls[\"legaltech": {"pipl_cn_cross_border_assessment\"]": false}}
+}

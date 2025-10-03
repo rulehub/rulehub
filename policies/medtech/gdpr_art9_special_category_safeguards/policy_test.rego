@@ -21,3 +21,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_gdpr_privacy_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.gdpr_art9_special_category_safeguards": true}, "gdpr": {"art9_condition_met": false}, "processing": {"high_risk": true}, "privacy": {"dpia_done": false}}
 }
+
+# Auto-generated granular test for controls["medtech.gdpr_art9_special_category_safeguards"]
+test_denies_when_controls_medtech_gdpr_art9_special_category_safeguards_failing if {
+	some _ in deny with input as {"controls": {}, "gdpr": {"art9_condition_met": true}, "processing": {"high_risk": true}, "controls[\"medtech": {"gdpr_art9_special_category_safeguards\"]": false}}
+}

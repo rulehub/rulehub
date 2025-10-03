@@ -2,15 +2,15 @@
 id: betting.self_exclusion_es_rgiaj
 name: <Policy Title>
 path:
-  - policies/betting/self_exclusion_es_rgiaj/policy.rego
-  - policies/betting/self_exclusion_es_rgiaj/policy_test.rego
+- policies/betting/self_exclusion_es_rgiaj/policy.rego
+- policies/betting/self_exclusion_es_rgiaj/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.ordenacionjuego.es/en
-  - https://www.ordenacionjuego.es/en/rgiaj
+- https://www.ordenacionjuego.es/en
+- https://www.ordenacionjuego.es/en/rgiaj
 geo:
   regions:
   - Global

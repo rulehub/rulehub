@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_child_under_13_and_consent_missing_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.br_lgpd_children_consent_best_interest": false}, "child": {"age": 12}, "parental_consent": false}
 }
+
+# Auto-generated granular test for controls["edtech.br_lgpd_children_consent_best_interest"]
+test_denies_when_controls_edtech_br_lgpd_children_consent_best_interest_failing if {
+	some _ in deny with input as {"controls": {}, "child": {"age": true}, "controls[\"edtech": {"br_lgpd_children_consent_best_interest\"]": false}}
+}

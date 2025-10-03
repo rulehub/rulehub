@@ -2,21 +2,21 @@
 id: fintech.aml_geolocation_restrictions
 name: AML Geolocation Restrictions
 path:
-  - policies/fintech/aml_geolocation_restrictions/policy.rego
-  - policies/fintech/aml_geolocation_restrictions/policy_test.rego
+- policies/fintech/aml_geolocation_restrictions/policy.rego
+- policies/fintech/aml_geolocation_restrictions/policy_test.rego
 description: Block restricted geographies
 standard:
   name: EU AMLD / FATF
   version: current
 links:
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
-  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+- https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

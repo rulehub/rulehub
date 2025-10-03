@@ -24,3 +24,8 @@ test_denies_when_control_disabled if {
 test_denies_when_all_security_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.hipaa_security_admin_safeguards": true}, "hipaa": {"security": {"risk_analysis_done": false, "sanctions_policy": false, "training_program": false}}}
 }
+
+# Auto-generated granular test for controls["medtech.hipaa_security_admin_safeguards"]
+test_denies_when_controls_medtech_hipaa_security_admin_safeguards_failing if {
+	some _ in deny with input as {"controls": {}, "hipaa": {"security": {"risk_analysis_done": true, "training_program": true, "sanctions_policy": true}}, "controls[\"medtech": {"hipaa_security_admin_safeguards\"]": false}}
+}

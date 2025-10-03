@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_ephi_not_logged_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"medtech.hipaa_access_audit_logging": true}, "audit": {"ephi_access_logged": false}}
 }
+
+# Auto-generated granular test for controls["medtech.hipaa_access_audit_logging"]
+test_denies_when_controls_medtech_hipaa_access_audit_logging_failing if {
+	some _ in deny with input as {"controls": {}, "audit": {"ephi_access_logged": true}, "controls[\"medtech": {"hipaa_access_audit_logging\"]": false}}
+}

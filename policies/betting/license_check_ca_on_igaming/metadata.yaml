@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.license_check_ca_on_igaming
-name: License Check — Ontario iGaming
+name: "License Check \u2014 Ontario iGaming"
 description: Operator licensed by AGCO/iGO
 standard: AGCO/iGO
 version: current
 path:
-  - policies/betting/license_check_ca_on_igaming/policy.rego
-  - policies/betting/license_check_ca_on_igaming/policy_test.rego
+- policies/betting/license_check_ca_on_igaming/policy.rego
+- policies/betting/license_check_ca_on_igaming/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.agco.ca/igaming
+- https://www.agco.ca/igaming
 geo:
-  regions: [North America]
-  countries: [CA-ON]
+  regions:
+  - North America
+  countries:
+  - CA-ON
   scope: Province

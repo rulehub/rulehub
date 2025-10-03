@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.rng_certification_gli11: example validation
+      message: "betting.rng_certification_gli11: example validation"
       pattern:
         metadata:
           labels:

@@ -52,19 +52,22 @@ def list_release_tags() -> List[str]:
         m = SEMVER_TAG_RE.match(tag)
         assert m
         return tuple(int(g) for g in m.groups())
+
     return sorted(tags, key=ver_key)
 
 
 def fallback_commit_pair() -> Tuple[str, str] | None:
     try:
-        raw = run([
-            "git",
-            "rev-list",
-            "HEAD",
-            "--max-count=20",
-            "--",
-            "requirements*.lock",
-        ])
+        raw = run(
+            [
+                "git",
+                "rev-list",
+                "HEAD",
+                "--max-count=20",
+                "--",
+                "requirements*.lock",
+            ]
+        )
     except subprocess.CalledProcessError:
         return None
     commits = raw.splitlines()
@@ -132,8 +135,7 @@ def main(argv: List[str]) -> int:
     old_deps = load_deps_for_ref(old_ref)
     new_deps = load_deps_for_ref(new_ref)
     old_names = {d.name for d in old_deps}
-    additions = sorted(
-        [d for d in new_deps if d.name not in old_names], key=lambda d: d.name)
+    additions = sorted([d for d in new_deps if d.name not in old_names], key=lambda d: d.name)
     print(f"Dependency additions (old={old_ref} -> new={new_ref})")
     if not additions:
         print("(none)")

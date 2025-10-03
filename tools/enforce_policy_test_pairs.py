@@ -6,6 +6,7 @@ Exit codes:
  0 - OK
  1 - Violations found
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -37,18 +38,15 @@ def main() -> int:
         has_policy = policy_file.exists()
         has_test = test_file.exists()
         if has_policy and not has_test:
-            violations.append(
-                f"Missing test file: {test_file} (policy exists)")
+            violations.append(f"Missing test file: {test_file} (policy exists)")
         if has_test and not has_policy:
-            violations.append(
-                f"Missing policy file: {policy_file} (test exists)")
+            violations.append(f"Missing policy file: {policy_file} (test exists)")
         paths = norm_paths(data.get("path"))
         # Only enforce when both files actually exist
         if has_policy and has_test:
             for needed in (policy_file, test_file):
                 if str(needed) not in paths:
-                    violations.append(
-                        f"Metadata {meta} path missing entry for {needed}")
+                    violations.append(f"Metadata {meta} path missing entry for {needed}")
     if violations:
         print("Policy test pair enforcement FAILED:")
         for v in violations:

@@ -14,6 +14,7 @@ Exit codes:
   1 usage / missing file
   2 threshold failure
 """
+
 from __future__ import annotations
 
 import json
@@ -32,8 +33,7 @@ def env_int(name: str, default: int) -> int:
     try:
         return int(val)
     except ValueError:
-        print(
-            f"[threshold] Invalid integer for {name}={val!r}", file=sys.stderr)
+        print(f"[threshold] Invalid integer for {name}={val!r}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -49,13 +49,9 @@ def main() -> int:
     # Historical dimension removed; always zero.
     failures: list[str] = []
     if dual_pct < required_dual_pct:
-        failures.append(
-            f"dual-direction percent {dual_pct}% < required {required_dual_pct}%"
-        )
+        failures.append(f"dual-direction percent {dual_pct}% < required {required_dual_pct}%")
     if multi_inadequate > allow_multi_inadequate:
-        failures.append(
-            f"multi-rule inadequacies {multi_inadequate} > allowed {allow_multi_inadequate}"
-        )
+        failures.append(f"multi-rule inadequacies {multi_inadequate} > allowed {allow_multi_inadequate}")
     if failures:
         print("[threshold] FAILURE: thresholds not met:")
         for f in failures:

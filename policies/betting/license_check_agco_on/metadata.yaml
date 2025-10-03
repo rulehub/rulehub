@@ -2,15 +2,15 @@
 id: betting.license_check_agco_on
 name: <Policy Title>
 path:
-  - policies/betting/license_check_agco_on/policy.rego
-  - policies/betting/license_check_agco_on/policy_test.rego
+- policies/betting/license_check_agco_on/policy.rego
+- policies/betting/license_check_agco_on/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.agco.ca/igaming
-  - https://igamingontario.ca/
+- https://www.agco.ca/igaming
+- https://igamingontario.ca/
 geo:
   regions:
   - Global

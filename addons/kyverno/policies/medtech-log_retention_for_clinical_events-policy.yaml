@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.log_retention_for_clinical_events: example validation
+      message: "medtech.log_retention_for_clinical_events: example validation"
       pattern:
         metadata:
           labels:

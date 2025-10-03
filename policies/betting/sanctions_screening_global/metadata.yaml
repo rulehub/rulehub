@@ -2,15 +2,15 @@
 id: betting.sanctions_screening_global
 name: <Policy Title>
 path:
-  - policies/betting/sanctions_screening_global/policy.rego
-  - policies/betting/sanctions_screening_global/policy_test.rego
+- policies/betting/sanctions_screening_global/policy.rego
+- policies/betting/sanctions_screening_global/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://sanctionssearch.ofac.treas.gov/
-  - https://www.eeas.europa.eu/_en
+- https://sanctionssearch.ofac.treas.gov/
+- https://www.eeas.europa.eu/_en
 geo:
   regions:
   - Global

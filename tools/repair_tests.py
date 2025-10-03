@@ -18,6 +18,7 @@ Generated tests:
 
 If no evidence paths found (only control flag), only generic flag tests are produced.
 """
+
 from __future__ import annotations
 
 import json
@@ -39,7 +40,7 @@ REWRITE_TRIGGER_PATTERNS = [
     'test_denies_when_controls_false',
     '_failing if {',
     'some _ in deny',
-    'not deny[_]'
+    'not deny[_]',
 ]
 
 
@@ -66,8 +67,7 @@ def collect_policy_info(policy_path: Path):
     if not pkg_m:
         return None
     package = pkg_m.group(1)
-    policy_id = package.split('.', 1)[1] if package.startswith(
-        'rulehub.') else package
+    policy_id = package.split('.', 1)[1] if package.startswith('rulehub.') else package
     evidences = set(m.group(1) for m in EVIDENCE_RE.finditer(text))
     consts = [(m.group(1), m.group(2)) for m in CONST_RE.finditer(text)]
     has_allow = bool(ALLOW_RE.search(text))
@@ -125,41 +125,34 @@ def generate_tests(info):
     allow_input = compose_input(policy_id, True, evidences, set(), consts)
     lines.append('test_allow_when_compliant if {')
     if has_allow:
-        lines.append(
-            f'    allow with input as {json.dumps(allow_input, separators=(",", ":"))}')
+        lines.append(f'    allow with input as {json.dumps(allow_input, separators=(",", ":"))}')
     else:
-        lines.append(
-            f'    count(deny) == 0 with input as {json.dumps(allow_input, separators=(",", ":"))}')
+        lines.append(f'    count(deny) == 0 with input as {json.dumps(allow_input, separators=(",", ":"))}')
     lines.append('}')
     lines.append('')
     # per evidence denies
     for ev in evidences:
         deny_input = compose_input(policy_id, True, evidences, {ev}, consts)
         lines.append(f'test_denies_when_{ev.replace(".", "_")}_false if {{')
-        lines.append(
-            f'    count(deny) > 0 with input as {json.dumps(deny_input, separators=(",", ":"))}')
+        lines.append(f'    count(deny) > 0 with input as {json.dumps(deny_input, separators=(",", ":"))}')
         lines.append('}')
         lines.append('')
     # generic control flag: include only one control-based deny if no evidences, else still keep control variant
     generic_input = compose_input(policy_id, False, evidences, set(), consts)
     if not evidences:
         lines.append('test_denies_when_generic_control_flag_false if {')
-        lines.append(
-            f'    count(deny) > 0 with input as {json.dumps(generic_input, separators=(",", ":"))}')
+        lines.append(f'    count(deny) > 0 with input as {json.dumps(generic_input, separators=(",", ":"))}')
         lines.append('}')
         lines.append('')
     else:
         lines.append('test_denies_when_generic_control_flag_false if {')
-        lines.append(
-            f'    count(deny) > 0 with input as {json.dumps(generic_input, separators=(",", ":"))}')
+        lines.append(f'    count(deny) > 0 with input as {json.dumps(generic_input, separators=(",", ":"))}')
         lines.append('}')
         lines.append('')
         # both failure conditions only meaningful when evidences exist
-        both_input = compose_input(
-            policy_id, False, evidences, set(evidences), consts)
+        both_input = compose_input(policy_id, False, evidences, set(evidences), consts)
         lines.append('test_denies_when_both_failure_conditions if {')
-        lines.append(
-            f'    count(deny) > 0 with input as {json.dumps(both_input, separators=(",", ":"))}')
+        lines.append(f'    count(deny) > 0 with input as {json.dumps(both_input, separators=(",", ":"))}')
         lines.append('}')
         lines.append('')
     return '\n'.join(lines)

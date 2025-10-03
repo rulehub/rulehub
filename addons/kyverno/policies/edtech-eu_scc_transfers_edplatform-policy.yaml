@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.eu_scc_transfers_edplatform: example validation
+      message: "edtech.eu_scc_transfers_edplatform: example validation"
       pattern:
         metadata:
           labels:

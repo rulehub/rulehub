@@ -2,14 +2,14 @@
 id: betting.game_rules_visible_before_play
 name: <Policy Title>
 path:
-  - policies/betting/game_rules_visible_before_play/policy.rego
-  - policies/betting/game_rules_visible_before_play/policy_test.rego
+- policies/betting/game_rules_visible_before_play/policy.rego
+- policies/betting/game_rules_visible_before_play/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

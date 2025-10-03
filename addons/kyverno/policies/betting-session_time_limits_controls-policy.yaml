@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.session_time_limits_controls: example validation
+      message: "betting.session_time_limits_controls: example validation"
       pattern:
         metadata:
           labels:

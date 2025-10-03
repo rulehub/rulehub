@@ -2,15 +2,15 @@
 id: medtech.onc_cures_api_fhir_r4
 name: <Policy Title>
 path:
-  - policies/medtech/onc_cures_api_fhir_r4/policy.rego
-  - policies/medtech/onc_cures_api_fhir_r4/policy_test.rego
+- policies/medtech/onc_cures_api_fhir_r4/policy.rego
+- policies/medtech/onc_cures_api_fhir_r4/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.healthit.gov/curesrule/
-  - https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi
+- https://www.healthit.gov/curesrule/
+- https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi
 geo:
   regions:
   - Global

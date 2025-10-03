@@ -1,21 +1,21 @@
 # yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: fintech.pci_file_integrity_monitoring
-name: PCI DSS — File Integrity Monitoring
+name: "PCI DSS \u2014 File Integrity Monitoring"
 path:
-  - policies/fintech/pci_file_integrity_monitoring/policy.rego
-  - policies/fintech/pci_file_integrity_monitoring/policy_test.rego
+- policies/fintech/pci_file_integrity_monitoring/policy.rego
+- policies/fintech/pci_file_integrity_monitoring/policy_test.rego
 description: FIM on critical files
 standard:
   name: PCI DSS 4.0
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/document_library
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

@@ -2,14 +2,14 @@
 id: betting.reality_checks_elapsed_time
 name: <Policy Title>
 path:
-  - policies/betting/reality_checks_elapsed_time/policy.rego
-  - policies/betting/reality_checks_elapsed_time/policy_test.rego
+- policies/betting/reality_checks_elapsed_time/policy.rego
+- policies/betting/reality_checks_elapsed_time/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

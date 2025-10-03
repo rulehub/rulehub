@@ -57,8 +57,7 @@ def load_metadata_index():
                 parts = meta.parent.parts
                 pol_idx = parts.index("policies")
                 std = parts[pol_idx + 1] if len(parts) > pol_idx + 1 else None
-                short_id = parts[pol_idx +
-                                 2] if len(parts) > pol_idx + 2 else None
+                short_id = parts[pol_idx + 2] if len(parts) > pol_idx + 2 else None
                 if std and short_id:
                     pid = f"{std}.{short_id}"
                 else:
@@ -69,8 +68,7 @@ def load_metadata_index():
         # Support nested standard object {name, version}
         std = y.get("standard")
         std_name = std.get("name") if isinstance(std, dict) else std
-        std_ver = std.get("version") if isinstance(
-            std, dict) else y.get("version")
+        std_ver = std.get("version") if isinstance(std, dict) else y.get("version")
         idx[pid] = {
             "name": y.get("name"),
             "standard": std_name,
@@ -114,14 +112,13 @@ def build_markdown(maps, meta_idx):
         lines.append("|---|---|---|---|---|")
         total = 0
         covered = 0
-        sections = (m.get("sections") or {})
+        sections = m.get("sections") or {}
         for sec, data in sections.items():
             pols = data.get("policies") or []
             # Coverage indicator:
             #   OK   -> all policy ids have metadata
             #   WARN -> some missing (avoid emojis for plain-text environments)
-            cov = "OK" if all(
-                pid in meta_idx for pid in pols) and pols else "WARN"
+            cov = "OK" if all(pid in meta_idx for pid in pols) and pols else "WARN"
             if pols:
                 covered += sum(1 for pid in pols if pid in meta_idx)
                 total += len(pols)
@@ -131,15 +128,11 @@ def build_markdown(maps, meta_idx):
                 paths = (meta_idx.get(pid) or {}).get("path") or []
                 if not paths:
                     return f"{pid}: —"
-                parts = [
-                    ("OK" if _path_exists(p) else "MISS") + " " + p for p in paths
-                ]
+                parts = [("OK" if _path_exists(p) else "MISS") + " " + p for p in paths]
                 return f"{pid}: " + ", ".join(parts)
 
-            path_counts = "; ".join(_path_icons(pid)
-                                    for pid in pols) if pols else ""
-            lines.append(
-                f"| `{sec}` | {data.get('title', '')} | {', '.join(pols)} | {cov} | {path_counts} |")
+            path_counts = "; ".join(_path_icons(pid) for pid in pols) if pols else ""
+            lines.append(f"| `{sec}` | {data.get('title', '')} | {', '.join(pols)} | {cov} | {path_counts} |")
         lines.append("")
         if total:
             pct = int(100 * covered / total)
@@ -200,8 +193,7 @@ def validate_paths(meta_idx):
     result = {}
     for pid, meta in meta_idx.items():
         paths = meta.get("path") or []
-        result[pid] = [{"path": p, "exists": bool(
-            _path_exists(p))} for p in paths]
+        result[pid] = [{"path": p, "exists": bool(_path_exists(p))} for p in paths]
     return result
 
 
@@ -314,39 +306,38 @@ def write_json_outputs(maps, meta_idx):
                 lineterminator='\n',
                 quoting=csv.QUOTE_ALL,
             )
-            writer.writerow([
-                "id",
-                "name",
-                "standard",
-                "version",
-                "framework",
-                "severity",
-                "geo_regions",
-                "paths_count",
-                "paths",
-            ])
+            writer.writerow(
+                [
+                    "id",
+                    "name",
+                    "standard",
+                    "version",
+                    "framework",
+                    "severity",
+                    "geo_regions",
+                    "paths_count",
+                    "paths",
+                ]
+            )
             for p in policies:
                 geo = p.get("geo") or {}
-                regions = ";".join((geo.get("regions") or [])
-                                   if isinstance(geo, dict) else [])
+                regions = ";".join((geo.get("regions") or []) if isinstance(geo, dict) else [])
                 paths = p.get("paths") or []
-                flat_paths_list = [
-                    str(x.get("path"))
-                    for x in paths
-                    if isinstance(x, dict) and x.get("path")
-                ]
+                flat_paths_list = [str(x.get("path")) for x in paths if isinstance(x, dict) and x.get("path")]
                 flat_paths = ";".join(flat_paths_list)
-                writer.writerow([
-                    p.get("id"),
-                    p.get("name"),
-                    p.get("standard"),
-                    p.get("version"),
-                    p.get("framework"),
-                    p.get("severity"),
-                    regions,
-                    len(paths),
-                    flat_paths,
-                ])
+                writer.writerow(
+                    [
+                        p.get("id"),
+                        p.get("name"),
+                        p.get("standard"),
+                        p.get("version"),
+                        p.get("framework"),
+                        p.get("severity"),
+                        regions,
+                        len(paths),
+                        flat_paths,
+                    ]
+                )
     except Exception as e:
         # Non-fatal; log but continue.
         print("WARN: failed to write CSV:", e)
@@ -371,12 +362,8 @@ def write_json_outputs(maps, meta_idx):
     # field via env flags:
     #   RULEHUB_INDEX_SCHEMA_VERSION (int) -> overrides default
     #   RULEHUB_DISABLE_SCHEMA_VERSION=1   -> omit field for consumers expecting earlier output
-    schema_version = int(os.environ.get(
-        "RULEHUB_INDEX_SCHEMA_VERSION", str(SCHEMA_VERSION_DEFAULT)
-    ))
-    disable_schema_flag = os.environ.get(
-        "RULEHUB_DISABLE_SCHEMA_VERSION", "0"
-    ) in {"1", "true", "TRUE"}
+    schema_version = int(os.environ.get("RULEHUB_INDEX_SCHEMA_VERSION", str(SCHEMA_VERSION_DEFAULT)))
+    disable_schema_flag = os.environ.get("RULEHUB_DISABLE_SCHEMA_VERSION", "0") in {"1", "true", "TRUE"}
     if disable_schema_flag:
         index_payload: dict[str, Any] = {"packages": packages}
     else:
@@ -387,10 +374,8 @@ def write_json_outputs(maps, meta_idx):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Generate coverage & index artifacts")
-    parser.add_argument("--profile", action="store_true",
-                        help="Print timing breakdown stages")
+    parser = argparse.ArgumentParser(description="Generate coverage & index artifacts")
+    parser.add_argument("--profile", action="store_true", help="Print timing breakdown stages")
     args = parser.parse_args()
 
     timings = []

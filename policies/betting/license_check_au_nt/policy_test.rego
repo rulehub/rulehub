@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_operator_unlicensed_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.license_check_au_nt": true}, "operator": {"licensed": false}}
 }
+
+# Auto-generated granular test for controls["betting.license_check_au_nt"]
+test_denies_when_controls_betting_license_check_au_nt_failing if {
+	some _ in deny with input as {"controls": {}, "operator": {"licensed": true}, "controls[\"betting": {"license_check_au_nt\"]": false}}
+}

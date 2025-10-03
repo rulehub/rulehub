@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_software_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.iec_62304_scm_prp_processes": true}, "software": {"problem_resolution_defined": false, "scm_defined": false}}
 }
+
+# Auto-generated granular test for controls["medtech.iec_62304_scm_prp_processes"]
+test_denies_when_controls_medtech_iec_62304_scm_prp_processes_failing if {
+	some _ in deny with input as {"controls": {}, "software": {"scm_defined": true, "problem_resolution_defined": true}, "controls[\"medtech": {"iec_62304_scm_prp_processes\"]": false}}
+}

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.player_funds_segregation: example validation
+      message: "betting.player_funds_segregation: example validation"
       pattern:
         metadata:
           labels:

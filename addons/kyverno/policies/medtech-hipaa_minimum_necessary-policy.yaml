@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.hipaa_minimum_necessary: example validation
+      message: "medtech.hipaa_minimum_necessary: example validation"
       pattern:
         metadata:
           labels:

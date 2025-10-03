@@ -17,6 +17,7 @@ Selection:
   Includes all files under policies/ ending in: metadata.yaml, .rego
   (Excludes test rego files if --exclude-tests given.)
 """
+
 from __future__ import annotations
 
 import argparse
@@ -62,11 +63,7 @@ def collect(policies_root: Path, exclude_tests: bool) -> List[Dict[str, Any]]:
             continue
         if rel.endswith('metadata.yaml') or rel.endswith('.rego'):
             sha, size = sha256_file(path)
-            collected.append({
-                "path": rel,
-                "sha256": sha,
-                "bytes": size
-            })
+            collected.append({"path": rel, "sha256": sha, "bytes": size})
     return collected
 
 

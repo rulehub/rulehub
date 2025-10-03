@@ -2,14 +2,14 @@
 id: betting.license_check_us_pa_pgcb
 name: <Policy Title>
 path:
-  - policies/betting/license_check_us_pa_pgcb/policy.rego
-  - policies/betting/license_check_us_pa_pgcb/policy_test.rego
+- policies/betting/license_check_us_pa_pgcb/policy.rego
+- policies/betting/license_check_us_pa_pgcb/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://gamingcontrolboard.pa.gov/
+- https://gamingcontrolboard.pa.gov/
 geo:
   regions:
   - Global

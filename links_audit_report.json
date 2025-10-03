@@ -1,0 +1,123 @@
+{
+  "suspicious": {
+    "non_https": [],
+    "vendor": [
+      "https://sportradar.com/",
+      "https://www.styra.com/opa-rego-style-guide/",
+      "https://www.upguard.com/blog/cybersecurity-regulations-financial-industry"
+    ],
+    "long": [
+      "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf"
+    ],
+    "tracking_query": [],
+    "celex_pdf": [],
+    "external_source_code": []
+  },
+  "highly_shared": [],
+  "discrepancies": {
+    "missing_in_metadata": {
+      "betting.license_check_adm_it": [
+        "https://www.adm.gov.it/"
+      ],
+      "betting.self_exclusion_on_igaming": [
+        "https://igamingontario.ca/"
+      ],
+      "edtech.edtech_encryption_at_rest": [
+        "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final"
+      ],
+      "edtech.edtech_encryption_in_transit": [
+        "https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final"
+      ],
+      "fintech.device_fingerprinting": [
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ],
+      "fintech.mcc_whitelisting": [
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ],
+      "fintech.pan_masking_in_logs": [
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ],
+      "fintech.three_ds_required": [
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ],
+      "fintech.transaction_limits_per_risk": [
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ],
+      "igaming.license_check_adm_it": [
+        "https://www.adm.gov.it/"
+      ],
+      "igaming.license_check_us_nv_ngcb": [
+        "https://gaming.nv.gov/"
+      ],
+      "legaltech.encryption_in_transit_enabled": [
+        "https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final"
+      ],
+      "medtech.iec_62304_scm_prp_processes": [
+        "https://webstore.iec.ch/publication/24950"
+      ],
+      "medtech.iec_62304_software_safety_class": [
+        "https://webstore.iec.ch/publication/24950"
+      ],
+      "medtech.iec_62366_usability_summative_eval": [
+        "https://webstore.iec.ch/publication/26023"
+      ],
+      "medtech.log_retention_for_clinical_events": [
+        "https://csrc.nist.gov/publications/detail/sp/800-92/final"
+      ]
+    },
+    "missing_in_export": {
+      "betting.license_check_adm_it": [
+        "https://www.adm.gov.it/portale/"
+      ],
+      "betting.self_exclusion_on_igaming": [
+        "https://igamingontario.ca/en"
+      ],
+      "edtech.edtech_encryption_at_rest": [
+        "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+      ],
+      "edtech.edtech_encryption_in_transit": [
+        "https://csrc.nist.gov/pubs/sp/800/52/r2/final"
+      ],
+      "fintech.device_fingerprinting": [
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ],
+      "fintech.mcc_whitelisting": [
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ],
+      "fintech.pan_masking_in_logs": [
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ],
+      "fintech.three_ds_required": [
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ],
+      "fintech.transaction_limits_per_risk": [
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ],
+      "igaming.license_check_adm_it": [
+        "https://www.adm.gov.it/portale/"
+      ],
+      "igaming.license_check_us_nv_ngcb": [
+        "https://www.gaming.nv.gov/"
+      ],
+      "legaltech.encryption_in_transit_enabled": [
+        "https://csrc.nist.gov/pubs/sp/800/52/r2/final"
+      ],
+      "medtech.iec_62304_scm_prp_processes": [
+        "https://webstore.iec.ch/en/publication/24950"
+      ],
+      "medtech.iec_62304_software_safety_class": [
+        "https://webstore.iec.ch/en/publication/24950"
+      ],
+      "medtech.iec_62366_usability_summative_eval": [
+        "https://webstore.iec.ch/en/publication/26023"
+      ],
+      "medtech.log_retention_for_clinical_events": [
+        "https://csrc.nist.gov/pubs/sp/800/92/final"
+      ]
+    }
+  },
+  "counts": {
+    "policies": 283,
+    "unique_links": 170
+  }
+}

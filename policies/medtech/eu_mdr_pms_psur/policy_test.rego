@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_mdr_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.eu_mdr_pms_psur": true}, "mdr": {"pms_plan": false, "psur_prepared": false}}
 }
+
+# Auto-generated granular test for controls["medtech.eu_mdr_pms_psur"]
+test_denies_when_controls_medtech_eu_mdr_pms_psur_failing if {
+	some _ in deny with input as {"controls": {}, "mdr": {"pms_plan": true, "psur_prepared": true}, "controls[\"medtech": {"eu_mdr_pms_psur\"]": false}}
+}

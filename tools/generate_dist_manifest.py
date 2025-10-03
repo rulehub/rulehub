@@ -18,6 +18,7 @@ Notes:
 Usage:
   python tools/generate_dist_manifest.py --output dist/dist.manifest.json
 """
+
 from __future__ import annotations
 
 import argparse
@@ -48,8 +49,7 @@ def git_commit() -> str:
 
 
 def aggregate_hash(items: List[Dict[str, Any]]) -> str:
-    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(
-        items, key=lambda x: x['path'])]
+    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(items, key=lambda x: x['path'])]
     data = "\n".join(lines).encode()
     return hashlib.sha256(data).hexdigest()
 

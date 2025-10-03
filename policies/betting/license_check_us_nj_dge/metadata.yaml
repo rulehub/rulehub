@@ -2,14 +2,14 @@
 id: betting.license_check_us_nj_dge
 name: <Policy Title>
 path:
-  - policies/betting/license_check_us_nj_dge/policy.rego
-  - policies/betting/license_check_us_nj_dge/policy_test.rego
+- policies/betting/license_check_us_nj_dge/policy.rego
+- policies/betting/license_check_us_nj_dge/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.nj.gov/oag/ge/
+- https://www.nj.gov/oag/ge/
 geo:
   regions:
   - Global

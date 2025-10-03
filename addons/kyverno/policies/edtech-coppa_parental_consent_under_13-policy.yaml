@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.coppa_parental_consent_under_13: example validation
+      message: "edtech.coppa_parental_consent_under_13: example validation"
       pattern:
         metadata:
           labels:

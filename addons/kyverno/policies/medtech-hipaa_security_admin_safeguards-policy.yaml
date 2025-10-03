@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.hipaa_security_admin_safeguards: example validation
+      message: "medtech.hipaa_security_admin_safeguards: example validation"
       pattern:
         metadata:
           labels:

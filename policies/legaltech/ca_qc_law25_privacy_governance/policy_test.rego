@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_privacy_officer_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.ca_qc_law25_privacy_governance": true}, "gov": {"privacy_officer_assigned": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.ca_qc_law25_privacy_governance"]
+test_denies_when_controls_legaltech_ca_qc_law25_privacy_governance_failing if {
+	some _ in deny with input as {"controls": {}, "gov": {"privacy_officer_assigned": true}, "controls[\"legaltech": {"ca_qc_law25_privacy_governance\"]": false}}
+}

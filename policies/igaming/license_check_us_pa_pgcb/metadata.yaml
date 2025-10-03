@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.license_check_us_pa_pgcb
-name: License Check — PA PGCB
+name: "License Check \u2014 PA PGCB"
 description: Operator licensed by PA PGCB
 standard: PA PGCB
 version: current
 path:
-  - policies/igaming/license_check_us_pa_pgcb/policy.rego
-  - policies/igaming/license_check_us_pa_pgcb/policy_test.rego
+- policies/igaming/license_check_us_pa_pgcb/policy.rego
+- policies/igaming/license_check_us_pa_pgcb/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://gamingcontrolboard.pa.gov/
+- https://gamingcontrolboard.pa.gov/
 geo:
-  regions: [North America]
-  countries: [US-PA]
+  regions:
+  - North America
+  countries:
+  - US-PA
   scope: State

@@ -16,3 +16,8 @@ test_denies_when_retention_below_minimum if {
 test_denies_when_control_disabled_and_retention_below_minimum if {
 	count(deny) > 0 with input as {"controls": {"medtech.log_retention_for_clinical_events": false}, "logs": {"retention_days": 30}, "policy": {"logs": {"min_retention_days": 90}}}
 }
+
+# Auto-generated granular test for controls["medtech.log_retention_for_clinical_events"]
+test_denies_when_controls_medtech_log_retention_for_clinical_events_failing if {
+	some _ in deny with input as {"controls": {}, "logs": {"retention_days": true}, "controls[\"medtech": {"log_retention_for_clinical_events\"]": false}}
+}

@@ -16,51 +16,46 @@ concurrency:
 
 jobs:
   checkov-scan:
-    # Skip under nektos/act; we provide a separate no-op job so ACT has a stage to run.
-    if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Ensure jq is available (for summary)
-        if: ${{ github.actor != 'nektos/act' }}
+      - name: Detect Docker availability
+        id: docker
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y jq
-
-      - name: Run Checkov (native via pip) for ACT (no Docker)
-        if: ${{ github.actor == 'nektos/act' }}
-        run: |
-          # Prefer native run under ACT to avoid Docker exec flakiness,
-          # but do not install packages here. Run only if Checkov is already available.
-          if command -v checkov >/dev/null 2>&1; then
-            CHECKOV_CMD="checkov"
-          elif command -v python3 >/dev/null 2>&1 && python3 -c "import checkov" >/dev/null 2>&1; then
-            CHECKOV_CMD="python3 -m checkov"
+          set -euo pipefail
+          if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Checkov not available under ACT image; skipping native Checkov run.";
-            exit 0;
+            echo "available=false" >> "$GITHUB_OUTPUT"
           fi
-          ${CHECKOV_CMD} -d . --framework kubernetes \
-            --skip-path tests/kyverno --skip-path tests/gatekeeper \
-            --output sarif --output-file-path checkov.sarif \
-            --quiet || true
 
       - name: Run Checkov (Docker) and produce SARIF
-        if: ${{ github.actor != 'nektos/act' }}
+        if: ${{ steps.docker.outputs.available == 'true' }}
         run: |
+          set -euo pipefail
           REPO="bridgecrew/checkov"
-          if [ -z "${CHECKOV_IMAGE_DIGEST:-}" ]; then
+          if [ -n "${CHECKOV_IMAGE_DIGEST:-}" ]; then
+            IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
+          elif [ "${GITHUB_ACTOR:-}" = "nektos/act" ]; then
+            echo "::warning::CHECKOV_IMAGE_DIGEST not set under act; using '$REPO:latest' ONLY for local testing."
+            IMG="$REPO:latest"
+          else
             echo "ERROR: CHECKOV_IMAGE_DIGEST is required (sha256:...) and must be pinned; refusing to use ':latest'."
             exit 1
           fi
-          IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
           docker run --rm -v "$PWD:/workspace" -w /workspace "$IMG" \
             checkov -d . --framework kubernetes \
             --skip-path tests/kyverno --skip-path tests/gatekeeper \
             --output sarif --output-file-path checkov.sarif \
             --quiet || true
+
+      - name: Note when Docker is unavailable
+        if: ${{ steps.docker.outputs.available != 'true' }}
+        run: |
+          echo "::notice::Docker not available; skipping Checkov run."
 
       - name: Upload SARIF to Code Scanning
         # Skip under act to avoid external API calls failing locally
@@ -92,9 +87,3 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: ${{ env.CKV_SUMMARY }}
-
-  noop-act:
-    if: ${{ github.actor == 'nektos/act' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "[act] Checkov is skipped locally; full scan runs in GitHub CI."

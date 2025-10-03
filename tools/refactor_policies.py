@@ -137,11 +137,15 @@ def main(apply: bool = False):
             new_lines.append(new_line)
         if not changed:
             continue  # skip already refactored
-        # rewrite policy file
+        # rewrite policy file only if changed
         if apply:
-            policy_file.write_text(
-                "\n".join(new_lines) + "\n", encoding="utf-8")
-        modified.append(policy_file)
+            new_text = "\n".join(new_lines) + "\n"
+            existing = policy_file.read_text(encoding='utf-8')
+            if existing != new_text:
+                policy_file.write_text(new_text, encoding="utf-8")
+                modified.append(policy_file)
+        else:
+            modified.append(policy_file)
 
         # Determine package & policy id for tests
         m = re.search(r"package\s+([a-z0-9_.]+)", policy_text)
@@ -161,8 +165,13 @@ def main(apply: bool = False):
             continue  # nothing to build tests from
         new_test = generate_tests(package, policy_id, sorted(evidence_paths))
         if apply:
-            test_file.write_text(new_test, encoding="utf-8")
-        regenerated.append(test_file)
+            # only write test if content differs
+            existing_test = test_file.read_text(encoding='utf-8')
+            if existing_test != new_test:
+                test_file.write_text(new_test, encoding="utf-8")
+                regenerated.append(test_file)
+        else:
+            regenerated.append(test_file)
 
     print(f"Policies modified: {len(modified)}")
     print(f"Tests regenerated: {len(regenerated)}")

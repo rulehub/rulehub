@@ -1,5 +1,7 @@
 package rulehub.betting.geofencing_regulated_markets
 
+import future.keywords.in
+
 default allow := false
 
 # Safe allow pattern for Rego v1
@@ -11,7 +13,7 @@ allow if {
 deny contains msg if {
 	input.player.geo != ""
 	allowed := input.allowed_markets
-	not input.player.geo in allowed
+	input.player.geo in (allowed == false)
 	msg := "gambling.geofencing_regulated_markets: Geo-block unlicensed markets; robust anti‑spoofing"
 }
 

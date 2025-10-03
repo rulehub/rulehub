@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.license_check_adm_it
-name: License Check — ADM (IT)
+name: "License Check \u2014 ADM (IT)"
 description: Operator licensed by ADM
 standard: ADM
 version: current
 path:
-  - policies/igaming/license_check_adm_it/policy.rego
-  - policies/igaming/license_check_adm_it/policy_test.rego
+- policies/igaming/license_check_adm_it/policy.rego
+- policies/igaming/license_check_adm_it/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.adm.gov.it/portale/
+- https://www.adm.gov.it/portale/
 geo:
-  regions: [Europe]
-  countries: [IT]
+  regions:
+  - Europe
+  countries:
+  - IT
   scope: National

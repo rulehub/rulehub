@@ -12,6 +12,14 @@ echo "[lock-verify] Using pip-tools version:"; pip-compile --version || true
 
 fail=0
 
+# Normalize a lock file by stripping the volatile pip-compile header comments.
+# This avoids diffs caused by temp output-file paths or default flags printed by pip-tools.
+normalize_lock() {
+  # Print from the first non-comment line to the end (drop leading '#' header block)
+  # shellcheck disable=SC2016
+  sed -n '/^[^#]/,$p' "$1" > "$2"
+}
+
 if [[ -f requirements.txt ]]; then
   echo "[lock-verify] Recompiling requirements.lock";
   pip-compile \
@@ -19,9 +27,12 @@ if [[ -f requirements.txt ]]; then
     --resolver=backtracking \
     --output-file "$TMP_DIR/requirements.lock" \
     requirements.txt >/dev/null
-  if ! diff -u requirements.lock "$TMP_DIR/requirements.lock" >/dev/null; then
+  # Compare normalized content to ignore header comment differences
+  normalize_lock requirements.lock "$TMP_DIR/requirements.local.norm"
+  normalize_lock "$TMP_DIR/requirements.lock" "$TMP_DIR/requirements.tmp.norm"
+  if ! diff -u "$TMP_DIR/requirements.local.norm" "$TMP_DIR/requirements.tmp.norm" >/dev/null; then
     echo "[lock-verify] requirements.lock is OUT OF DATE" >&2
-    diff -u requirements.lock "$TMP_DIR/requirements.lock" || true
+    diff -u "$TMP_DIR/requirements.local.norm" "$TMP_DIR/requirements.tmp.norm" || true
     fail=1
   else
     echo "[lock-verify] requirements.lock is up to date"
@@ -36,9 +47,11 @@ if [[ -f requirements-dev.txt ]]; then
     --resolver=backtracking \
     --output-file "$TMP_DIR/requirements-dev.lock" \
     requirements-dev.txt >/dev/null
-  if ! diff -u requirements-dev.lock "$TMP_DIR/requirements-dev.lock" >/dev/null; then
+  normalize_lock requirements-dev.lock "$TMP_DIR/requirements-dev.local.norm"
+  normalize_lock "$TMP_DIR/requirements-dev.lock" "$TMP_DIR/requirements-dev.tmp.norm"
+  if ! diff -u "$TMP_DIR/requirements-dev.local.norm" "$TMP_DIR/requirements-dev.tmp.norm" >/dev/null; then
     echo "[lock-verify] requirements-dev.lock is OUT OF DATE" >&2
-    diff -u requirements-dev.lock "$TMP_DIR/requirements-dev.lock" || true
+    diff -u "$TMP_DIR/requirements-dev.local.norm" "$TMP_DIR/requirements-dev.tmp.norm" || true
     fail=1
   else
     echo "[lock-verify] requirements-dev.lock is up to date"

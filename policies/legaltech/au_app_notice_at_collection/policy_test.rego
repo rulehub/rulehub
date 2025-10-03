@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_notice_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.au_app_notice_at_collection": true}, "notice": {"at_collection_provided": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.au_app_notice_at_collection"]
+test_denies_when_controls_legaltech_au_app_notice_at_collection_failing if {
+	some _ in deny with input as {"controls": {}, "notice": {"at_collection_provided": true}, "controls[\"legaltech": {"au_app_notice_at_collection\"]": false}}
+}

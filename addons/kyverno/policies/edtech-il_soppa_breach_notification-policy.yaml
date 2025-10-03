@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.il_soppa_breach_notification: example validation
+      message: "edtech.il_soppa_breach_notification: example validation"
       pattern:
         metadata:
           labels:

@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_transfer_outside_jurisdiction if {
 	count(deny) > 0 with input as {"controls": {"medtech.health_data_cross_border_controls": false}, "transfer": {"outside_jurisdiction": true, "safeguards_in_place": true}}
 }
+
+# Auto-generated granular test for controls["medtech.health_data_cross_border_controls"]
+test_denies_when_controls_medtech_health_data_cross_border_controls_failing if {
+	some _ in deny with input as {"controls": {}, "transfer": {"outside_jurisdiction": true}, "controls[\"medtech": {"health_data_cross_border_controls\"]": false}}
+}

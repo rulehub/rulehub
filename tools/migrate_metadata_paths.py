@@ -11,6 +11,7 @@ Rules:
 
 Outputs summary of changes and skipped reasons.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -56,6 +57,10 @@ def migrate(meta_path: Path) -> tuple[bool, str]:
     if not (policy_file.exists() and test_file.exists()):
         return False, 'missing policy or test file'
     data['path'] = [str(policy_file), str(test_file)]
+    # write only if changed
+    existing = load_metadata(meta_path)
+    if existing.get('path') == data['path']:
+        return False, 'already migrated'
     save_metadata(meta_path, data)
     return True, 'migrated'
 
@@ -80,10 +85,16 @@ def main() -> int:
             test_file = policy_dir / 'policy_test.rego'
             if policy_file.exists() and test_file.exists():
                 if args.apply:
-                    data['path'] = [str(policy_file), str(test_file)]
-                    save_metadata(meta, data)
+                    new_path = [str(policy_file), str(test_file)]
+                    if data.get('path') != new_path:
+                        data['path'] = new_path
+                        save_metadata(meta, data)
+                        print(f"UPDATED {meta}")
+                    else:
+                        print(f"SKIP {meta}: already migrated")
+                else:
+                    print(f"DRY {meta}: would migrate")
                 changed += 1
-                print(f"{meta}: {'migrated' if args.apply else 'would migrate'}")
     print(f"Total {'migrated' if args.apply else 'candidates'}: {changed}")
     return 0
 

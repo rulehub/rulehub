@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.br_lgpd_children_consent_best_interest: example validation
+      message: "edtech.br_lgpd_children_consent_best_interest: example validation"
       pattern:
         metadata:
           labels:

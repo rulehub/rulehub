@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_rules_not_visible_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.game_rules_visible_before_play": true}, "game": {"rules_visible": false}}
 }
+
+# Auto-generated granular test for controls["betting.game_rules_visible_before_play"]
+test_denies_when_controls_betting_game_rules_visible_before_play_failing if {
+	some _ in deny with input as {"controls": {}, "game": {"rules_visible": true}, "controls[\"betting": {"game_rules_visible_before_play\"]": false}}
+}

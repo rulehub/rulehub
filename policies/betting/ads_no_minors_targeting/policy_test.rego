@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_ads_explicitly_target_minors if {
 	count(deny) > 0 with input as {"controls": {"betting.ads_no_minors_targeting": true}, "ads": {"targeting_minors": true}}
 }
+
+# Auto-generated granular test for controls.betting.ads_no_minors_targeting
+test_denies_when_controls_betting_ads_no_minors_targeting_failing if {
+	some _ in deny with input as {"controls": {"betting.ads_no_minors_targeting": false}, "ads": {"targeting_minors": false}}
+}

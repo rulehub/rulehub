@@ -19,3 +19,8 @@ test_denies_when_retention_exceeds_max if {
 test_denies_when_control_disabled_and_retention_exceeds_max if {
 	count(deny) > 0 with input as {"controls": {"legaltech.my_pdpa_retention_principle": false}, "data": {"retention_days": 400}, "policy": {"retention": {"max_days": 365}}}
 }
+
+# Auto-generated granular test for controls["legaltech.my_pdpa_retention_principle"]
+test_denies_when_controls_legaltech_my_pdpa_retention_principle_failing if {
+	some _ in deny with input as {"controls": {}, "data": {"retention_days": true}, "controls[\"legaltech": {"my_pdpa_retention_principle\"]": false}}
+}

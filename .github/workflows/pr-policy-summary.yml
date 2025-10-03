@@ -19,21 +19,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/ci-base:latest
+      options: --user 0:0
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
         with:
           fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
       - name: Install deps (runtime only)
         run: |
-          python -m venv .venv
-          . .venv/bin/activate
-          pip install -U pip
-          if [ -f requirements.lock ]; then pip install -r requirements.lock; else pip install -r requirements.txt; fi
+          python-venv-install
       - name: Generate coverage JSON
         run: |
           . .venv/bin/activate

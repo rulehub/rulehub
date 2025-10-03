@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_player_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.self_exclusion_de_oasis": false}, "player": {"in_oasis": true}, "session": {"blocked": false}}
 }
+
+# Auto-generated granular test for controls["betting.self_exclusion_de_oasis"]
+test_denies_when_controls_betting_self_exclusion_de_oasis_failing if {
+	some _ in deny with input as {"controls": {}, "player": {"in_oasis": true}, "controls[\"betting": {"self_exclusion_de_oasis\"]": false}}
+}

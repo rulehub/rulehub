@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_withdrawal_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.reverse_withdrawal_ban_uk": false}, "withdrawal": {"reverse_enabled": true}}
 }
+
+# Auto-generated granular test for controls["betting.reverse_withdrawal_ban_uk"]
+test_denies_when_controls_betting_reverse_withdrawal_ban_uk_failing if {
+	some _ in deny with input as {"controls": {}, "withdrawal": {"reverse_enabled": true}, "controls[\"betting": {"reverse_withdrawal_ban_uk\"]": false}}
+}

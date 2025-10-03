@@ -1,10 +1,11 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: pci.iam_password_policy
 name: Strong password policy
 standard: PCI DSS
 version: '4.0'
 path:
-  - policies/pci/iam_password_policy/policy.rego
-  - policies/pci/iam_password_policy/policy_test.rego
+- policies/pci/iam_password_policy/policy.rego
+- policies/pci/iam_password_policy/policy_test.rego
 description: Placeholder rule to enforce strong IAM password policy settings.
 framework: other
 tags:
@@ -12,10 +13,9 @@ tags:
 owner: compliance
 severity: medium
 links:
-  - https://www.pcisecuritystandards.org/document_library # PCI DSS core docs
-  - https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf
-  - https://www.pcisecuritystandards.org/document_library # Summary of Changes (canonical library)
-
+- https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf
+- https://www.pcisecuritystandards.org/document_library
 geo:
   regions:
   - Global

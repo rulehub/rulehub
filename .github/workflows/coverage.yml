@@ -1,6 +1,12 @@
 name: Coverage Map
 
 on:
+  workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        required: false
+        default: ""
   pull_request:
     paths:
       - "policies/**"
@@ -19,40 +25,48 @@ permissions:
   actions: write
 
 jobs:
-  build:
-    # Skip under nektos/act to avoid docker/exec flakiness and missing toolchain locally
-    if: ${{ github.actor != 'nektos/act' }}
+  guard:
+    name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    steps:
+      - name: Enforce non-latest CI image tag
+        shell: bash
+        run: |
+          input_tag="${{ inputs.ci_image_tag }}"
+          if [ "$input_tag" = "latest" ]; then
+            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
+            exit 1
+          fi
+          if [ -z "$input_tag" ]; then
+            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
+          fi
+  build:
+    needs: guard
+    runs-on: ubuntu-latest
+    container:
+      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      options: --user 0:0
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Set up Python
-        if: ${{ github.actor != 'nektos/act' }}
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
-
       - name: Install dependencies
-        if: ${{ github.actor != 'nektos/act' }}
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements.txt
+          python-venv-install
 
       - name: Generate coverage artifacts
         run: |
-          python3 tools/coverage_map.py
+          . .venv/bin/activate
+          python tools/coverage_map.py
 
       - name: Validate plugin index schema
         if: ${{ github.actor != 'nektos/act' }}
         run: |
-          python3 - <<'EOF'
+          . .venv/bin/activate
+          python - <<'EOF'
           import json, sys
-          try:
-              import jsonschema
-          except ImportError:
-              print('jsonschema not installed', file=sys.stderr)
-              sys.exit(1)
+          import jsonschema
           schema = json.load(open('tools/schemas/plugin-index.schema.json'))
           data = json.load(open('dist/index.json'))
           jsonschema.validate(data, schema)

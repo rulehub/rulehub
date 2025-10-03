@@ -21,3 +21,8 @@ test_denies_when_student_data_sold_and_control_disabled if {
 		"controls": {"edtech.ca_sopipa_no_sale_of_student_data": false},
 	}
 }
+
+# Auto-generated granular test for controls["edtech.ca_sopipa_no_sale_of_student_data"]
+test_denies_when_controls_edtech_ca_sopipa_no_sale_of_student_data_failing if {
+	some _ in deny with input as {"controls": {}, "data": {"sold_student_info": true}, "controls[\"edtech": {"ca_sopipa_no_sale_of_student_data\"]": false}}
+}

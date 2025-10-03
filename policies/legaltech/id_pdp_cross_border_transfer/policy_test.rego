@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_safeguards_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.id_pdp_cross_border_transfer": false}, "transfer": {"outside_jurisdiction": true, "safeguards_in_place": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.id_pdp_cross_border_transfer"]
+test_denies_when_controls_legaltech_id_pdp_cross_border_transfer_failing if {
+	some _ in deny with input as {"controls": {}, "transfer": {"outside_jurisdiction": true}, "controls[\"legaltech": {"id_pdp_cross_border_transfer\"]": false}}
+}

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.uk_aadc_profiling_and_geolocation_off: example validation
+      message: "edtech.uk_aadc_profiling_and_geolocation_off: example validation"
       pattern:
         metadata:
           labels:

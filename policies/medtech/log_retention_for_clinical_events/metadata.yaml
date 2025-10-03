@@ -2,14 +2,14 @@
 id: medtech.log_retention_for_clinical_events
 name: <Policy Title>
 path:
-  - policies/medtech/log_retention_for_clinical_events/policy.rego
-  - policies/medtech/log_retention_for_clinical_events/policy_test.rego
+- policies/medtech/log_retention_for_clinical_events/policy.rego
+- policies/medtech/log_retention_for_clinical_events/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://csrc.nist.gov/pubs/sp/800/92/final
+- https://csrc.nist.gov/pubs/sp/800/92/final
 geo:
   regions:
   - Global

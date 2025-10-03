@@ -9,6 +9,11 @@ set -euo pipefail
 IMG="ghcr.io/trufflesecurity/trufflehog:${TRUFFLEHOG_VERSION:-3.74.0}"
 echo "Using image ${IMG}"
 
+if ! command -v docker >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
+  echo "Docker not available; skipping TruffleHog scan." >&2
+  exit 0
+fi
+
 if [ -n "${BASE:-}" ] && [ -n "${HEAD:-}" ]; then
   echo "Scanning git range: ${BASE}..${HEAD}"
   git fetch --no-tags --prune --depth=0 origin || true

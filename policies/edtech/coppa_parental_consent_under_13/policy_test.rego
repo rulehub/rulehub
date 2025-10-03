@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_parental_consent_missing_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.coppa_parental_consent_under_13": false}, "child": {"age": 12}, "coppa": {"verifiable_parental_consent": false}}
 }
+
+# Auto-generated granular test for controls["edtech.coppa_parental_consent_under_13"]
+test_denies_when_controls_edtech_coppa_parental_consent_under_13_failing if {
+	some _ in deny with input as {"controls": {}, "child": {"age": true}, "controls[\"edtech": {"coppa_parental_consent_under_13\"]": false}}
+}

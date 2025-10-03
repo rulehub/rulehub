@@ -1,11 +1,12 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: k8s.block_hostpath
 name: Block hostPath volumes
 standard: Kubernetes
 version: 1.x
 path:
-  - addons/kyverno/policies/block-hostpath.yaml
-  - policies/k8s/block_hostpath/policy.rego
-  - policies/k8s/block_hostpath/policy_test.rego
+- addons/kyverno/policies/block-hostpath.yaml
+- policies/k8s/block_hostpath/policy.rego
+- policies/k8s/block_hostpath/policy_test.rego
 description: Prevent use of hostPath volumes.
 framework: kyverno
 tags:
@@ -14,9 +15,8 @@ tags:
 - security
 owner: platform-security
 links:
-  - https://kubernetes.io/docs/concepts/security/pod-security-standards/
-  - https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
-
+- https://kubernetes.io/docs/concepts/security/pod-security-standards/
+- https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
 geo:
   regions:
   - Global

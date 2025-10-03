@@ -2,14 +2,14 @@
 id: betting.license_check_us_nv_ngcb
 name: <Policy Title>
 path:
-  - policies/betting/license_check_us_nv_ngcb/policy.rego
-  - policies/betting/license_check_us_nv_ngcb/policy_test.rego
+- policies/betting/license_check_us_nv_ngcb/policy.rego
+- policies/betting/license_check_us_nv_ngcb/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://gaming.nv.gov/
+- https://gaming.nv.gov/
 geo:
   regions:
   - Global

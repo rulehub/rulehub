@@ -7,6 +7,7 @@ produces a SARIF file suitable for upload to GitHub code scanning.
 Usage:
   python tools/convert_spectral_to_sarif.py <json-file|-> [--output file.sarif]
 """
+
 from __future__ import annotations
 
 import json
@@ -31,8 +32,31 @@ def read_input(path: str) -> List[Dict[str, Any]]:
         # Fallback: wrap dict into list
         return [parsed]
     except json.JSONDecodeError:
-        print("Failed to parse Spectral JSON input", file=sys.stderr)
-        return []
+        # Try to salvage if Spectral appended a human message after JSON.
+        # We attempt to extract the first top-level JSON array/object substring.
+        start_arr = data.find("[")
+        start_obj = data.find("{")
+        starts = [i for i in (start_arr, start_obj) if i != -1]
+        if not starts:
+            print("Failed to parse Spectral JSON input", file=sys.stderr)
+            return []
+        start = min(starts)
+        end_char = "]" if data[start] == "[" else "}"
+        end = data.rfind(end_char)
+        if end == -1 or end < start:
+            print("Failed to parse Spectral JSON input", file=sys.stderr)
+            return []
+        candidate = data[start : end + 1]
+        try:
+            parsed = json.loads(candidate)
+            if isinstance(parsed, list):
+                return parsed
+            if isinstance(parsed, dict) and "results" in parsed and isinstance(parsed["results"], list):
+                return parsed["results"]
+            return [parsed]
+        except Exception:
+            print("Failed to parse Spectral JSON input", file=sys.stderr)
+            return []
 
 
 def severity_to_level(sev: int | str) -> str:
@@ -53,17 +77,14 @@ def to_sarif(results: List[Dict[str, Any]]) -> Dict[str, Any]:
     sarif_results = []
     for r in results:
         # Try multiple common field names used by Spectral results
-        rule_id = r.get("code") or r.get(
-            "ruleId") or r.get("rule") or "spectral"
+        rule_id = r.get("code") or r.get("ruleId") or r.get("rule") or "spectral"
         message = r.get("message") or r.get("text") or ""
         severity = r.get("severity") or r.get("level") or 2
-        location = r.get("path") or (
-            r.get("location") or {}).get("target") or None
+        location = r.get("path") or (r.get("location") or {}).get("target") or None
         # Range info may be under 'range' with start/end having line/character
         start_line = 1
         start_column = 1
-        rng = r.get("range") or r.get("location", {}).get(
-            "range") if isinstance(r.get("location"), dict) else None
+        rng = r.get("range") or r.get("location", {}).get("range") if isinstance(r.get("location"), dict) else None
         if isinstance(rng, dict):
             start = rng.get("start") or {}
             start_line = start.get("line", 1)
@@ -114,8 +135,7 @@ def to_sarif(results: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 def main(argv: List[str]) -> int:
     if not argv:
-        print(
-            "Usage: convert_spectral_to_sarif.py <json|-> [--output file.sarif]")
+        print("Usage: convert_spectral_to_sarif.py <json|-> [--output file.sarif]")
         return 2
     path = argv[0]
     output = "spectral.sarif"

@@ -2,21 +2,21 @@
 id: fintech.vasp_license_required
 name: VASP License Required
 path:
-  - policies/fintech/vasp_license_required/policy.rego
-  - policies/fintech/vasp_license_required/policy_test.rego
+- policies/fintech/vasp_license_required/policy.rego
+- policies/fintech/vasp_license_required/policy_test.rego
 description: Obtain required VASP license/registration
 standard:
   name: MiCA / FATF
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - EU/Global
+- EU/Global

@@ -7,6 +7,7 @@ Exit codes:
 
 Outputs a summary plus per-file errors with line context when possible.
 """
+
 from __future__ import annotations
 
 import json
@@ -57,8 +58,7 @@ def main() -> int:
         data = read_yaml(meta_file)
         if "__yaml_error__" in data:
             invalid += 1
-            details.append(
-                f"{meta_file}: YAML parse error: {data['__yaml_error__']}")
+            details.append(f"{meta_file}: YAML parse error: {data['__yaml_error__']}")
             continue
         errors = list(validator.iter_errors(data))
         if errors:

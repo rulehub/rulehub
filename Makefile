@@ -95,6 +95,8 @@ help:
 	@echo "  workspace-clean        Fail if git dirty or unexpected files present in dist/"
 	@echo "  metrics-capture        Generate dist/release-metrics.json (policy/map counts)"
 	@echo "  test-examples          Execute whitelisted bash/sh examples from docs (marker: # example-test)"
+	@echo "  security-secrets       Run lightweight local secret scan (no Docker)"
+	@echo "  security-checkov       Run Checkov IaC scan locally (Kubernetes framework)"
 
 # Include modular makefiles (order matters only for variable defaults)
 include mk/env.mk
@@ -109,3 +111,18 @@ include mk/docs.mk
 include mk/maps.mk
 include mk/validate.mk
 include mk/release.mk
+
+.PHONY: security-secrets
+security-secrets: ## Run lightweight local secret scan (no Docker)
+	@test -d $(VENV) || $(PY) -m venv $(VENV)
+	$(PIP) install -U pip >/dev/null
+	$(VENV)/bin/python tools/secret_scan.py
+
+.PHONY: security-checkov
+security-checkov: ## Run Checkov IaC scan locally (Kubernetes framework)
+	@test -d $(VENV) || $(PY) -m venv $(VENV)
+	$(PIP) install -U pip >/dev/null
+	# Try a moderately recent Checkov; fall back to latest if resolver issues
+	@($(PIP) install 'checkov~=3.2' >/dev/null 2>&1 || $(PIP) install checkov >/dev/null)
+	$(VENV)/bin/checkov -d . --framework kubernetes \
+	  --skip-path tests/kyverno --skip-path tests/gatekeeper

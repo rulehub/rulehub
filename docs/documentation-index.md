@@ -1,4 +1,4 @@
-# RuleHub documentation index
+# Documentation index
 
 This page is a lightweight entrypoint for the docs site (kept in `docs/` to avoid conflicts with the repository root `README.md`).
 

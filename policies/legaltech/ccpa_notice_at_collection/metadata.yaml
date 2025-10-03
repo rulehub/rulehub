@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.ccpa_notice_at_collection
 name: 'CCPA: Notice At Collection'
 path:
-  - policies/legaltech/ccpa_notice_at_collection/policy.rego
-  - policies/legaltech/ccpa_notice_at_collection/policy_test.rego
+- policies/legaltech/ccpa_notice_at_collection/policy.rego
+- policies/legaltech/ccpa_notice_at_collection/policy_test.rego
 description: Provide notice at collection
 standard:
   name: CCPA (California)
   version: current
 links:
-  - https://oag.ca.gov/privacy/ccpa
+- https://oag.ca.gov/privacy/ccpa
 geo:
   regions:
   - Global

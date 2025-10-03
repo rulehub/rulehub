@@ -2,14 +2,14 @@
 id: edtech.au_ndb_breach_notification_edtech
 name: <Policy Title>
 path:
-  - policies/edtech/au_ndb_breach_notification_edtech/policy.rego
-  - policies/edtech/au_ndb_breach_notification_edtech/policy_test.rego
+- policies/edtech/au_ndb_breach_notification_edtech/policy.rego
+- policies/edtech/au_ndb_breach_notification_edtech/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.oaic.gov.au/privacy/notifiable-data-breaches
+- https://www.oaic.gov.au/privacy/notifiable-data-breaches
 geo:
   regions:
   - Global

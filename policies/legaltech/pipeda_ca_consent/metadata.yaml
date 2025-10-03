@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.pipeda_ca_consent
 name: 'PIPEDA: Ca Consent'
 path:
-  - policies/legaltech/pipeda_ca_consent/policy.rego
-  - policies/legaltech/pipeda_ca_consent/policy_test.rego
+- policies/legaltech/pipeda_ca_consent/policy.rego
+- policies/legaltech/pipeda_ca_consent/policy_test.rego
 description: Obtain meaningful consent
 standard:
   name: PIPEDA (Canada)
   version: current
 links:
-  - https://laws-lois.justice.gc.ca/eng/acts/P-8.6/
+- https://laws-lois.justice.gc.ca/eng/acts/P-8.6/
 geo:
   regions:
   - Global

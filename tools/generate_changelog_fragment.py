@@ -56,8 +56,7 @@ def tag_exists(tag: str) -> bool:
 
 ADD_PAT = re.compile(r"^(feat|add|new)\b", re.IGNORECASE)
 FIX_PAT = re.compile(r"^(fix|bug|hotfix)\b", re.IGNORECASE)
-CHG_PAT = re.compile(
-    r"^(refactor|perf|chore|change|rename|docs)\b", re.IGNORECASE)
+CHG_PAT = re.compile(r"^(refactor|perf|chore|change|rename|docs)\b", re.IGNORECASE)
 
 
 @dataclass
@@ -119,8 +118,7 @@ def map_policy_changes(base: str, target: str, changed_files: Iterable[str]):
             if m_rem:
                 removed.add(m_rem.group(1))
         if added or removed:
-            summary[path] = {"added": sorted(
-                added), "removed": sorted(removed)}
+            summary[path] = {"added": sorted(added), "removed": sorted(removed)}
     return summary
 
 
@@ -153,16 +151,14 @@ def build_markdown(
     added_section: List[str] = []
     if new_policies:
         added_section.append("New policies:")
-        added_section.extend(
-            [f"  - {Path(p).parent.name}" for p in new_policies])
+        added_section.extend([f"  - {Path(p).parent.name}" for p in new_policies])
     if classifier.added:
         for subj in classifier.added:
             added_section.append(f"- {subj}")
     changed_section: List[str] = []
     if changed_policies:
         changed_section.append("Modified policies:")
-        changed_section.extend(
-            [f"  - {Path(p).parent.name}" for p in changed_policies])
+        changed_section.extend([f"  - {Path(p).parent.name}" for p in changed_policies])
     if map_changes:
         for mpath, chg in sorted(map_changes.items()):
             adds = chg["added"]
@@ -173,8 +169,7 @@ def build_markdown(
             if rems:
                 parts.append(f"Removed {len(rems)}")
             if parts:
-                changed_section.append(
-                    f"Map {Path(mpath).name}: {'; '.join(parts)}")
+                changed_section.append(f"Map {Path(mpath).name}: {'; '.join(parts)}")
     if classifier.changed:
         for subj in classifier.changed:
             changed_section.append(f"- {subj}")
@@ -208,16 +203,11 @@ def build_markdown(
 
 
 def parse_args(argv: List[str]):
-    p = argparse.ArgumentParser(
-        description="Generate CHANGELOG fragment between base tag and target ref")
-    p.add_argument("--base-tag", required=True,
-                   help="Existing git tag serving as the base (exclusive)")
-    p.add_argument("--target", default="HEAD",
-                   help="Target ref/branch (default: HEAD)")
-    p.add_argument(
-        "--version", help="Version string for heading (omit to insert <X.Y.Z>)")
-    p.add_argument(
-        "--date", help="Override date (YYYY-MM-DD); default today UTC")
+    p = argparse.ArgumentParser(description="Generate CHANGELOG fragment between base tag and target ref")
+    p.add_argument("--base-tag", required=True, help="Existing git tag serving as the base (exclusive)")
+    p.add_argument("--target", default="HEAD", help="Target ref/branch (default: HEAD)")
+    p.add_argument("--version", help="Version string for heading (omit to insert <X.Y.Z>)")
+    p.add_argument("--date", help="Override date (YYYY-MM-DD); default today UTC")
     return p.parse_args(argv)
 
 
@@ -235,8 +225,7 @@ def main(argv: List[str]):
     new_policies, modified_policies = detect_policy_file_changes(ns_rows)
     changed_files = [p for _, p in ns_rows]
     map_changes = map_policy_changes(args.base_tag, args.target, changed_files)
-    md = build_markdown(args.version, date, classifier,
-                        new_policies, modified_policies, map_changes)
+    md = build_markdown(args.version, date, classifier, new_policies, modified_policies, map_changes)
     print(md)
     return 0
 

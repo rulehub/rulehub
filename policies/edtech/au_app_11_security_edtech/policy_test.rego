@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_encryption_and_control_fail if {
 	count(deny) > 0 with input as {"controls": {"edtech.au_app_11_security_edtech": false}, "security": {"encryption_at_rest": false}}
 }
+
+# Auto-generated granular test for controls["edtech.au_app_11_security_edtech"]
+test_denies_when_controls_edtech_au_app_11_security_edtech_failing if {
+	some _ in deny with input as {"controls": {}, "security": {"encryption_at_rest": true}, "controls[\"edtech": {"au_app_11_security_edtech\"]": false}}
+}

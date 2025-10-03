@@ -17,3 +17,8 @@ test_denies_when_control_disabled if {
 test_denies_when_payment_method_credit_card_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.credit_card_gambling_ban_uk": true}, "payment": {"method": "credit_card"}}
 }
+
+# Auto-generated granular test for controls["betting.credit_card_gambling_ban_uk"]
+test_denies_when_controls_betting_credit_card_gambling_ban_uk_failing if {
+	some _ in deny with input as {"controls": {}, "payment": {"method": true}, "controls[\"betting": {"credit_card_gambling_ban_uk\"]": false}}
+}

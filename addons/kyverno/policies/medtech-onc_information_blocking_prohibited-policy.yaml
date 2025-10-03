@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.onc_information_blocking_prohibited: example validation
+      message: "medtech.onc_information_blocking_prohibited: example validation"
       pattern:
         metadata:
           labels:

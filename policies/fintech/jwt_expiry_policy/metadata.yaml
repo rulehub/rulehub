@@ -2,20 +2,20 @@
 id: fintech.jwt_expiry_policy
 name: JWT Expiry Policy
 path:
-  - policies/fintech/jwt_expiry_policy/policy.rego
-  - policies/fintech/jwt_expiry_policy/policy_test.rego
+- policies/fintech/jwt_expiry_policy/policy.rego
+- policies/fintech/jwt_expiry_policy/policy_test.rego
 description: Short-lived JWTs & clock skew
 standard:
   name: Security
   version: current
 links:
-  - https://datatracker.ietf.org/doc/html/rfc7519
+- https://datatracker.ietf.org/doc/html/rfc7519
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

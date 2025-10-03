@@ -2,15 +2,15 @@
 id: medtech.sg_hcsa_pdpa_health_data
 name: <Policy Title>
 path:
-  - policies/medtech/sg_hcsa_pdpa_health_data/policy.rego
-  - policies/medtech/sg_hcsa_pdpa_health_data/policy_test.rego
+- policies/medtech/sg_hcsa_pdpa_health_data/policy.rego
+- policies/medtech/sg_hcsa_pdpa_health_data/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://sso.agc.gov.sg/Act/HCSA2020
-  - https://sso.agc.gov.sg/Act/PDPA2012
+- https://sso.agc.gov.sg/Act/HCSA2020
+- https://sso.agc.gov.sg/Act/PDPA2012
 geo:
   regions:
   - Global

@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.id_pdp_cross_border_transfer
 name: 'ID: Pdp Cross Border Transfer'
 path:
-  - policies/legaltech/id_pdp_cross_border_transfer/policy.rego
-  - policies/legaltech/id_pdp_cross_border_transfer/policy_test.rego
+- policies/legaltech/id_pdp_cross_border_transfer/policy.rego
+- policies/legaltech/id_pdp_cross_border_transfer/policy_test.rego
 description: Adequacy/contractual safeguards for outbound transfers
 standard:
   name: PDP (Indonesia)
   version: current
 links:
-  - https://jdih.setneg.go.id/ # Official Indonesian legal information portal
+- https://jdih.setneg.go.id/
 geo:
   regions:
   - Global

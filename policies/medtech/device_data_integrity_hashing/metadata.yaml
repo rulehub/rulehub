@@ -2,14 +2,14 @@
 id: medtech.device_data_integrity_hashing
 name: <Policy Title>
 path:
-  - policies/medtech/device_data_integrity_hashing/policy.rego
-  - policies/medtech/device_data_integrity_hashing/policy_test.rego
+- policies/medtech/device_data_integrity_hashing/policy.rego
+- policies/medtech/device_data_integrity_hashing/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity
+- https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity
 geo:
   regions:
   - Global

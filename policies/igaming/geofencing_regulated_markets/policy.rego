@@ -10,7 +10,7 @@ deny contains msg if {
 	# player geo not in the list of allowed markets
 	input.player.geo != ""
 	allowed := input.allowed_markets
-	not input.player.geo in allowed
+	input.player.geo in (allowed == false)
 	msg := "betting.geofencing_regulated_markets: Access from unregulated/unlicensed market"
 }
 

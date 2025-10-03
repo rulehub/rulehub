@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.fda_mdr_event_reporting: example validation
+      message: "medtech.fda_mdr_event_reporting: example validation"
       pattern:
         metadata:
           labels:

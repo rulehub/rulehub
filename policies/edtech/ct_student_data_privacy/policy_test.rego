@@ -21,3 +21,8 @@ test_denies_when_control_disabled if {
 test_denies_when_breach_not_notified_and_vendor_not_compliant if {
 	count(deny) > 0 with input as {"controls": {"edtech.ct_student_data_privacy": true}, "breach": {"occurred": true, "notified": false}, "vendor": {"contract_compliant": false}}
 }
+
+# Auto-generated granular test for controls["edtech.ct_student_data_privacy"]
+test_denies_when_controls_edtech_ct_student_data_privacy_failing if {
+	some _ in deny with input as {"controls": {}, "vendor": {"contract_compliant": true}, "breach": {"occurred": true}, "controls[\"edtech": {"ct_student_data_privacy\"]": false}}
+}

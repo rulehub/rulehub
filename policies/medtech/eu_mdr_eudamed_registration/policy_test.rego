@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_registered_false_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"medtech.eu_mdr_eudamed_registration": false}, "mdr": {"eudamed_registered": false}}
 }
+
+# Auto-generated granular test for controls["medtech.eu_mdr_eudamed_registration"]
+test_denies_when_controls_medtech_eu_mdr_eudamed_registration_failing if {
+	some _ in deny with input as {"controls": {}, "mdr": {"eudamed_registered": true}, "controls[\"medtech": {"eu_mdr_eudamed_registration\"]": false}}
+}

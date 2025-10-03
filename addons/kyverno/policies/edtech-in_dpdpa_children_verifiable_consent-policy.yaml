@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.in_dpdpa_children_verifiable_consent: example validation
+      message: "edtech.in_dpdpa_children_verifiable_consent: example validation"
       pattern:
         metadata:
           labels:

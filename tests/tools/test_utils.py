@@ -40,4 +40,3 @@ def test_validate_paths_tmp(tmp_path, monkeypatch):  # type: ignore[no-untyped-d
     idx = {"ns.id": {"path": [str(p)]}}
     res = coverage_map.validate_paths(idx)
     assert res["ns.id"][0]["exists"] is True
-

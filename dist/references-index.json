@@ -788,12 +788,12 @@
     {
       "id": "betting.self_exclusion_dk_rofus",
       "regions": [
-        "Global"
+        "Europe"
       ],
       "countries": [
-        "*"
+        "DK"
       ],
-      "scope": "Global",
+      "scope": "National",
       "links": [
         "https://www.spillemyndigheden.dk/",
         "https://www.spillemyndigheden.dk/en/rofus"

@@ -24,3 +24,8 @@ test_denies_when_control_disabled if {
 test_denies_when_all_cyber_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.fda_cybersecurity_524b_sbom": true}, "cyber": {"postmarket_process": false, "sbom_available": false, "vuln_mgmt_program": false}}
 }
+
+# Auto-generated granular test for controls["medtech.fda_cybersecurity_524b_sbom"]
+test_denies_when_controls_medtech_fda_cybersecurity_524b_sbom_failing if {
+	some _ in deny with input as {"controls": {}, "cyber": {"sbom_available": true, "vuln_mgmt_program": true, "postmarket_process": true}, "controls[\"medtech": {"fda_cybersecurity_524b_sbom\"]": false}}
+}

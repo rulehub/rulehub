@@ -1,0 +1,70 @@
+name: updates-dry-run
+
+on:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    renovate-dry-run:
+        if: ${{ github.actor != 'nektos/act' }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        container:
+            image: ghcr.io/renovatebot/renovate:37
+            options: --user 0:0
+        steps:
+            - name: Checkout
+              uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+            - name: Run Renovate (dry-run, local platform)
+              env:
+                  LOG_LEVEL: info
+                  RENOVATE_DRY_RUN: full
+                  GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  mkdir -p dist
+                  # Choose managers: under act default to github-actions only for speed; in CI run both
+                  if [ "${GITHUB_ACTOR:-}" = "nektos/act" ]; then
+                    MANAGERS="github-actions"
+                  else
+                    MANAGERS="github-actions,pip_requirements"
+                  fi
+                  echo "Using managers: ${MANAGERS}"
+                  # Helper: timeout if available (prevents long pulls/hangs under act)
+                  TOUT=""
+                  if command -v timeout >/dev/null 2>&1; then
+                    TOUT="timeout -k 10 300s"
+                    echo "Using timeout wrapper: ${TOUT}"
+                  fi
+                  renovate \
+                    --platform=local \
+                    --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" \
+                    --require-config=true \
+                    --enabled-managers="${MANAGERS}" \
+                    --print-config > dist/renovate.print-config.json
+                  # Produce JSON report of detected updates
+                  ${TOUT} renovate --platform=local --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" --require-config=true --dry-run \
+                    --enabled-managers="${MANAGERS}" \
+                    --log-file=dist/renovate.log || true
+                  # Summarize key findings (best-effort)
+                  echo "Renovate dry-run completed. See attached log." > dist/renovate-summary.txt
+
+            - name: Show summary (act-friendly)
+              if: ${{ always() }}
+              run: |
+                  echo "---- Renovate Summary ----"
+                  [ -f dist/renovate-summary.txt ] && cat dist/renovate-summary.txt || true
+                  echo "---- Renovate Log (last 200 lines) ----"
+                  [ -f dist/renovate.log ] && tail -n 200 dist/renovate.log || true
+
+            - name: Upload dry-run report
+              if: ${{ always() && github.actor != 'nektos/act' }}
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+              with:
+                  name: renovate-dry-run
+                  path: |
+                      dist/renovate.log
+                      dist/renovate.print-config.json
+                      dist/renovate-summary.txt

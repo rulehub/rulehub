@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_all_dicom_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.dicom_network_security_basic": true}, "dicom": {"ae_access_controls": false, "tls_enabled": false}}
 }
+
+# Auto-generated granular test for controls["medtech.dicom_network_security_basic"]
+test_denies_when_controls_medtech_dicom_network_security_basic_failing if {
+	some _ in deny with input as {"controls": {}, "dicom": {"tls_enabled": true, "ae_access_controls": true}, "controls[\"medtech": {"dicom_network_security_basic\"]": false}}
+}

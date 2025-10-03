@@ -2,21 +2,21 @@
 id: fintech.card_tokenization_required
 name: Card Tokenization Required
 path:
-  - policies/fintech/card_tokenization_required/policy.rego
-  - policies/fintech/card_tokenization_required/policy_test.rego
+- policies/fintech/card_tokenization_required/policy.rego
+- policies/fintech/card_tokenization_required/policy_test.rego
 description: Tokenize PAN via network/service
 standard:
   name: PCI / EMVCo
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
-  - https://www.emvco.com/emv-technologies/3d-secure/
+- https://www.pcisecuritystandards.org/document_library
+- https://www.emvco.com/emv-technologies/3d-secure/
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.aml_high_risk_country_restrictions: example validation
+      message: "betting.aml_high_risk_country_restrictions: example validation"
       pattern:
         metadata:
           labels:

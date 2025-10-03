@@ -2,20 +2,20 @@
 id: betting.aml_sar_reporting_uk
 name: AML SAR Reporting (UK)
 path:
-  - policies/betting/aml_sar_reporting_uk/policy.rego
-  - policies/betting/aml_sar_reporting_uk/policy_test.rego
+- policies/betting/aml_sar_reporting_uk/policy.rego
+- policies/betting/aml_sar_reporting_uk/policy_test.rego
 description: Suspicious activity reports must be filed to UK authorities when suspicious activity is detected.
 standard:
   name: UK AML / POCA
   version: current
 links:
-  - https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars
+- https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

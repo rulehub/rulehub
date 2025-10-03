@@ -78,12 +78,10 @@ def main() -> int:
     for pid, files in sorted(id_index.items()):
         if len(files) > 1:
             print(
-                "Duplicate policy id '{pid}' found in multiple files: {files}".format(
-                    pid=pid, files=", ".join(files)
-                )
+                "Duplicate policy id '{pid}' found in multiple files: {files}".format(pid=pid, files=", ".join(files))
             )
             # Count each extra occurrence as an error
-            errors += (len(files) - 1)
+            errors += len(files) - 1
 
     if errors:
         print(f"Validation failed with {errors} error(s).", file=sys.stderr)

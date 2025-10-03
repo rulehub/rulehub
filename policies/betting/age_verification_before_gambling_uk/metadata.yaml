@@ -2,14 +2,14 @@
 id: betting.age_verification_before_gambling_uk
 name: <Policy Title>
 path:
-  - policies/betting/age_verification_before_gambling_uk/policy.rego
-  - policies/betting/age_verification_before_gambling_uk/policy_test.rego
+- policies/betting/age_verification_before_gambling_uk/policy.rego
+- policies/betting/age_verification_before_gambling_uk/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

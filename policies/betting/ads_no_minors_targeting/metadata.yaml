@@ -1,21 +1,22 @@
 # yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.ads_no_minors_targeting
-name: <Policy Title>
+name: "Ads \u2014 no minors targeting"
+description: Prevent ads from being targeted at minors
+standard: other
+version: current
 path:
-  - policies/betting/ads_no_minors_targeting/policy.rego
-  - policies/betting/ads_no_minors_targeting/policy_test.rego
-description: <Short description of the policy>
-standard:
-  name: <Standard or Regulation>
-  version: <version or "current">
+- policies/betting/ads_no_minors_targeting/policy.rego
+- policies/betting/ads_no_minors_targeting/policy_test.rego
+framework: other
+severity: medium
+owner: compliance
 links:
-  - https://www.asa.org.uk/codes-and-rulings/advertising-codes.html
+- https://www.asa.org.uk/codes-and-rulings/advertising-codes.html
 geo:
   regions:
   - Global
   countries:
   - '*'
-  subregions: []
   scope: Global
 jurisdiction:
 - Global

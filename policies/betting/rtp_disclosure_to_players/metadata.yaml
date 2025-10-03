@@ -2,14 +2,14 @@
 id: betting.rtp_disclosure_to_players
 name: <Policy Title>
 path:
-  - policies/betting/rtp_disclosure_to_players/policy.rego
-  - policies/betting/rtp_disclosure_to_players/policy_test.rego
+- policies/betting/rtp_disclosure_to_players/policy.rego
+- policies/betting/rtp_disclosure_to_players/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

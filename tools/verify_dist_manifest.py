@@ -13,6 +13,7 @@ Exit codes: 0 OK, 1 validation failure, 2 usage error.
 Usage:
   python tools/verify_dist_manifest.py --manifest dist/dist.manifest.json
 """
+
 from __future__ import annotations
 
 import argparse
@@ -24,8 +25,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 
-REQUIRED_KEYS = {"schema_version", "build_commit",
-                 "build_time", "artifacts", "aggregate_hash"}
+REQUIRED_KEYS = {"schema_version", "build_commit", "build_time", "artifacts", "aggregate_hash"}
 ARTIFACT_KEYS = {"path", "sha256", "bytes"}
 
 
@@ -49,8 +49,7 @@ def sha256_file(p: Path) -> tuple[str, int]:
 
 
 def aggregate_hash(items: List[Dict[str, Any]]) -> str:
-    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(
-        items, key=lambda x: x['path'])]
+    lines = [f"{i['sha256']}  {i['path']}" for i in sorted(items, key=lambda x: x['path'])]
     data = "\n".join(lines).encode()
     return hashlib.sha256(data).hexdigest()
 
@@ -59,8 +58,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument('--manifest', default='dist/dist.manifest.json')
     ap.add_argument('--dist-dir', default='dist')
-    ap.add_argument('--allow-extra', action='store_true',
-                    help='Do not fail on extra dist files')
+    ap.add_argument('--allow-extra', action='store_true', help='Do not fail on extra dist files')
     ap.add_argument('--all', action='store_true', help='Accumulate all issues')
     return ap.parse_args(argv)
 
@@ -85,19 +83,16 @@ def main(argv: List[str]) -> int:
     issues: List[Issue] = []
     missing = REQUIRED_KEYS - manifest.keys()
     if missing:
-        issues.append(
-            Issue('ERROR', f'Manifest missing keys: {sorted(missing)}'))
+        issues.append(Issue('ERROR', f'Manifest missing keys: {sorted(missing)}'))
         if not ns.all:
             print('\n'.join(map(str, issues)))
             return 1
 
-    artifacts = manifest.get('artifacts') if isinstance(
-        manifest.get('artifacts'), list) else []
+    artifacts = manifest.get('artifacts') if isinstance(manifest.get('artifacts'), list) else []
     for i, art in enumerate(artifacts):
         ak = ARTIFACT_KEYS - art.keys()
         if ak:
-            issues.append(
-                Issue('ERROR', f'artifacts[{i}] missing keys: {sorted(ak)}'))
+            issues.append(Issue('ERROR', f'artifacts[{i}] missing keys: {sorted(ak)}'))
             if not ns.all:
                 print('\n'.join(map(str, issues)))
                 return 1
@@ -116,26 +111,22 @@ def main(argv: List[str]) -> int:
         sha, size = sha256_file(f)
         seen.append(rel)
         if sha != art['sha256']:
-            issues.append(
-                Issue('ERROR', f'Hash mismatch {rel}: manifest {art["sha256"]} != actual {sha}'))
+            issues.append(Issue('ERROR', f'Hash mismatch {rel}: manifest {art["sha256"]} != actual {sha}'))
             if not ns.all:
                 print('\n'.join(map(str, issues)))
                 return 1
         if size != art['bytes']:
-            issues.append(
-                Issue('ERROR', f'Size mismatch {rel}: manifest {art["bytes"]} != actual {size}'))
+            issues.append(Issue('ERROR', f'Size mismatch {rel}: manifest {art["bytes"]} != actual {size}'))
             if not ns.all:
                 print('\n'.join(map(str, issues)))
                 return 1
 
     # Extra files check
     if not ns.allow_extra:
-        disk_files = [p.name for p in dist_dir.iterdir(
-        ) if p.is_file() and p.name != manifest_path.name]
+        disk_files = [p.name for p in dist_dir.iterdir() if p.is_file() and p.name != manifest_path.name]
         extras = sorted(set(disk_files) - set(seen))
         if extras:
-            issues.append(
-                Issue('ERROR', f'Extra dist files not in manifest: {extras[:10]}'))
+            issues.append(Issue('ERROR', f'Extra dist files not in manifest: {extras[:10]}'))
             if not ns.all:
                 print('\n'.join(map(str, issues)))
                 return 1
@@ -146,9 +137,7 @@ def main(argv: List[str]) -> int:
         issues.append(
             Issue(
                 'ERROR',
-                'aggregate_hash mismatch: manifest {} != recomputed {}'.format(
-                    manifest.get('aggregate_hash'), agg
-                ),
+                'aggregate_hash mismatch: manifest {} != recomputed {}'.format(manifest.get('aggregate_hash'), agg),
             )
         )
         if not ns.all:

@@ -23,3 +23,8 @@ test_denies_when_retention_exceeds_policy_and_control_disabled if {
 		"controls": {"edtech.edtech_retention_after_course_completion": false},
 	}
 }
+
+# Auto-generated granular test for controls["edtech.edtech_retention_after_course_completion"]
+test_denies_when_controls_edtech_edtech_retention_after_course_completion_failing if {
+	some _ in deny with input as {"controls": {}, "data": {"retention_days": true}, "controls[\"edtech": {"edtech_retention_after_course_completion\"]": false}}
+}

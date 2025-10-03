@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.ca_qc_law25_privacy_governance
 name: Ca QC Law25 Privacy Governance
 path:
-  - policies/legaltech/ca_qc_law25_privacy_governance/policy.rego
-  - policies/legaltech/ca_qc_law25_privacy_governance/policy_test.rego
+- policies/legaltech/ca_qc_law25_privacy_governance/policy.rego
+- policies/legaltech/ca_qc_law25_privacy_governance/policy_test.rego
 description: Assign privacy officer; implement governance policies (P-39.1 as amended)
 standard:
   name: Quebec Law 25 (Canada)
   version: current
 links:
-  - https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1
+- https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1
 geo:
   regions:
   - Global

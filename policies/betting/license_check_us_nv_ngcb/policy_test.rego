@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_license_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.license_check_us_nv_ngcb": false}, "operator": {"licensed": false}}
 }
+
+# Auto-generated granular test for controls["betting.license_check_us_nv_ngcb"]
+test_denies_when_controls_betting_license_check_us_nv_ngcb_failing if {
+	some _ in deny with input as {"controls": {}, "operator": {"licensed": true}, "controls[\"betting": {"license_check_us_nv_ngcb\"]": false}}
+}

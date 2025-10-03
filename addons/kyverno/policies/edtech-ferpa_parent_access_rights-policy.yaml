@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ferpa_parent_access_rights: example validation
+      message: "edtech.ferpa_parent_access_rights: example validation"
       pattern:
         metadata:
           labels:

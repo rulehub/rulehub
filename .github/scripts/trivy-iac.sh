@@ -14,11 +14,16 @@ fi
 
 echo "Running Trivy IaC using Docker image ${IMG}"
 mkdir -p "$HOME/.cache/trivy"
-docker run --rm \
+# Detect Docker availability; skip gracefully under act if unavailable
+if ! command -v docker >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
+  echo "Docker not available; skipping Trivy IaC run and generating minimal SARIF." >&2
+else
+  docker run --rm \
   -v "$PWD:/workspace" -w /workspace \
   -v "$HOME/.cache/trivy:/root/.cache/trivy" \
   "${IMG}" \
   iac --format sarif --output trivy-results.sarif . || true
+fi
 
 # Ensure we always produce a valid SARIF even if the docker run failed or we're offline under ACT.
 ensure_min_sarif() {

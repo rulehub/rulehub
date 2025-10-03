@@ -2,21 +2,21 @@
 id: fintech.kyc_reverification_schedule
 name: KYC Re-Verification Schedule
 path:
-  - policies/fintech/kyc_reverification_schedule/policy.rego
-  - policies/fintech/kyc_reverification_schedule/policy_test.rego
+- policies/fintech/kyc_reverification_schedule/policy.rego
+- policies/fintech/kyc_reverification_schedule/policy_test.rego
 description: Periodic KYC refresh
 standard:
   name: EU AMLD / FATF
   version: current
 links:
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
-  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+- https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

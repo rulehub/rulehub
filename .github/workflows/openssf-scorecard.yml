@@ -1,8 +1,6 @@
 name: OpenSSF Scorecard
 
 on:
-  schedule:
-    - cron: "0 4 * * 1" # Every Monday at 04:00 UTC
   workflow_dispatch:
 
 # Least-privilege permissions for Scorecard to read repo and upload SARIF

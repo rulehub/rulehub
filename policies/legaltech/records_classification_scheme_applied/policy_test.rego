@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_control_disabled_and_classification_missing if {
 	count(deny) > 0 with input as {"controls": {"legaltech.records_classification_scheme_applied": false}, "records": {"classification_applied": false}}
 }
+
+# Auto-generated granular test for controls["legaltech.records_classification_scheme_applied"]
+test_denies_when_controls_legaltech_records_classification_scheme_applied_failing if {
+	some _ in deny with input as {"controls": {}, "records": {"classification_applied": true}, "controls[\"legaltech": {"records_classification_scheme_applied\"]": false}}
+}

@@ -2,14 +2,14 @@
 id: medtech.eu_mdr_clinical_evaluation
 name: <Policy Title>
 path:
-  - policies/medtech/eu_mdr_clinical_evaluation/policy.rego
-  - policies/medtech/eu_mdr_clinical_evaluation/policy_test.rego
+- policies/medtech/eu_mdr_clinical_evaluation/policy.rego
+- policies/medtech/eu_mdr_clinical_evaluation/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://eur-lex.europa.eu/eli/reg/2017/745/oj
+- https://eur-lex.europa.eu/eli/reg/2017/745/oj
 geo:
   regions:
   - Global

@@ -2,14 +2,14 @@
 id: edtech.coppa_parental_consent_under_13
 name: <Policy Title>
 path:
-  - policies/edtech/coppa_parental_consent_under_13/policy.rego
-  - policies/edtech/coppa_parental_consent_under_13/policy_test.rego
+- policies/edtech/coppa_parental_consent_under_13/policy.rego
+- policies/edtech/coppa_parental_consent_under_13/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa
+- https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa
 geo:
   regions:
   - Global

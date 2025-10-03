@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.kr_pipa_guardian_consent_under_14: example validation
+      message: "edtech.kr_pipa_guardian_consent_under_14: example validation"
       pattern:
         metadata:
           labels:

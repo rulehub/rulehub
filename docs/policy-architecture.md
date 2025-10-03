@@ -387,7 +387,7 @@ Kubernetes
   - [OPA Bundles](https://www.openpolicyagent.org/docs/latest/management-bundles/)
   - [ORAS CLI](https://oras.land/) (ORAS CLI)
 - Rego Style Guide
-  - [Styra Rego Style Guide](https://www.styra.com/opa-rego-style-guide/)
+  - [Styra Rego Style Guide](https://github.com/StyraInc/rego-style-guide)
 - Gatekeeper
   - [Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/)
 - Kyverno

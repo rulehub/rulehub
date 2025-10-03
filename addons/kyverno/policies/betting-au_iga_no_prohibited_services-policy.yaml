@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.au_iga_no_prohibited_services: example validation
+      message: "betting.au_iga_no_prohibited_services: example validation"
       pattern:
         metadata:
           labels:

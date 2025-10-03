@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.source_of_funds_thresholds
-name: Source of Funds — Thresholds
+name: "Source of Funds \u2014 Thresholds"
 description: SOF for high-value betting
 standard: UKGC
 version: current
 path:
-  - policies/betting/source_of_funds_thresholds/policy.rego
-  - policies/betting/source_of_funds_thresholds/policy_test.rego
+- policies/betting/source_of_funds_thresholds/policy.rego
+- policies/betting/source_of_funds_thresholds/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
-  regions: [Europe]
-  countries: [UK]
+  regions:
+  - Europe
+  countries:
+  - UK
   scope: National

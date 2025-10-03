@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.fda_part11_esign_linkage: example validation
+      message: "medtech.fda_part11_esign_linkage: example validation"
       pattern:
         metadata:
           labels:

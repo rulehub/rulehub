@@ -2,14 +2,14 @@
 id: edtech.nz_notice_at_collection_edtech
 name: <Policy Title>
 path:
-  - policies/edtech/nz_notice_at_collection_edtech/policy.rego
-  - policies/edtech/nz_notice_at_collection_edtech/policy_test.rego
+- policies/edtech/nz_notice_at_collection_edtech/policy.rego
+- policies/edtech/nz_notice_at_collection_edtech/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.privacy.org.nz/your-rights/privacy-principles/
+- https://www.privacy.org.nz/your-rights/privacy-principles/
 geo:
   regions:
   - Global

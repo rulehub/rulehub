@@ -2,15 +2,15 @@
 id: betting.self_exclusion_on_igaming
 name: <Policy Title>
 path:
-  - policies/betting/self_exclusion_on_igaming/policy.rego
-  - policies/betting/self_exclusion_on_igaming/policy_test.rego
+- policies/betting/self_exclusion_on_igaming/policy.rego
+- policies/betting/self_exclusion_on_igaming/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.agco.ca/igaming
-  - https://igamingontario.ca/en
+- https://www.agco.ca/igaming
+- https://igamingontario.ca/en
 geo:
   regions:
   - Global

@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.dicom_network_security_basic: example validation
+      message: "medtech.dicom_network_security_basic: example validation"
       pattern:
         metadata:
           labels:

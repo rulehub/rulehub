@@ -19,6 +19,7 @@ has adopted the pattern. Policies with a single deny rule are ignored.
 Environment (optional):
   VERBOSE=1  -> emit per-policy debug info
 """
+
 from __future__ import annotations
 
 import os
@@ -31,8 +32,7 @@ POLICIES_ROOT = Path("policies")
 
 RE_DENY_RULE = re.compile(r'^\s*deny\b')
 RE_PACKAGE = re.compile(r'^\s*package\s+rulehub\.(?P<id>[a-zA-Z0-9_.]+)\s*$')
-RE_AGG_ASSERT = re.compile(
-    r'(count\(\s*deny\s*\)\s*>\s*0)|(count\(\s*deny\s*\)\s*>=\s*1)|deny\[|some\s+_?\s+in\s+deny')
+RE_AGG_ASSERT = re.compile(r'(count\(\s*deny\s*\)\s*>\s*0)|(count\(\s*deny\s*\)\s*>=\s*1)|deny\[|some\s+_?\s+in\s+deny')
 
 
 def discover_policy_id(policy_path: Path) -> str | None:
@@ -78,8 +78,7 @@ def main() -> int:
         deny_count = count_deny_rules(policy)
         if deny_count <= 1:
             if verbose:
-                print(
-                    f"[strict-tests] OK (single deny rule -> no aggregate required): {policy_id}")
+                print(f"[strict-tests] OK (single deny rule -> no aggregate required): {policy_id}")
             continue
         test_file = policy.parent / 'policy_test.rego'
         if aggregate_test_present(policy_id, test_file):
@@ -88,16 +87,12 @@ def main() -> int:
             continue
         missing.append((policy_id, str(test_file)))
         if verbose:
-            print(
-                f"[strict-tests] MISSING aggregate test: {policy_id} (expected in {test_file})")
+            print(f"[strict-tests] MISSING aggregate test: {policy_id} (expected in {test_file})")
     if missing:
-        print(
-            '[strict-tests] FAILURE: missing aggregate any_violation tests for multi-deny policies:')
+        print('[strict-tests] FAILURE: missing aggregate any_violation tests for multi-deny policies:')
         for pid, tf in missing:
-            print(
-                f"  - {pid} (expected test_{pid.replace('.', '_')}_denies_when_any_violation in {tf})")
-        print(
-            '[strict-tests] Add an aggregate test asserting >=1 finding (count(deny) > 0).')
+            print(f"  - {pid} (expected test_{pid.replace('.', '_')}_denies_when_any_violation in {tf})")
+        print('[strict-tests] Add an aggregate test asserting >=1 finding (count(deny) > 0).')
         return 2
     print('[strict-tests] OK: all multi-deny policies have aggregate any_violation test')
     return 0

@@ -24,3 +24,8 @@ test_denies_when_control_disabled if {
 test_denies_when_all_nhs_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.uk_dtac_compliance": true}, "nhs": {"clinical_safety": {"dcb0129": false, "dcb0160": false}, "dptk_completed": false}}
 }
+
+# Auto-generated granular test for controls["medtech.uk_dtac_compliance"]
+test_denies_when_controls_medtech_uk_dtac_compliance_failing if {
+	some _ in deny with input as {"controls": {}, "nhs": {"dptk_completed": true, "clinical_safety": {"dcb0129": true, "dcb0160": true}}, "controls[\"medtech": {"uk_dtac_compliance\"]": false}}
+}

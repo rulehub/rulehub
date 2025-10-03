@@ -20,3 +20,8 @@ test_denies_when_control_disabled_and_minimum_necessary_not_enforced if {
 test_additional_denies_when_minimum_necessary_field_missing if {
 	count(deny) > 0 with input as {"controls": {"medtech.hipaa_minimum_necessary": false}, "hipaa": {"privacy": {"minimum_necessary_enforced": true}}}
 }
+
+# Auto-generated granular test for controls["medtech.hipaa_minimum_necessary"]
+test_denies_when_controls_medtech_hipaa_minimum_necessary_failing if {
+	some _ in deny with input as {"controls": {}, "hipaa": {"privacy": {"minimum_necessary_enforced": true}}, "controls[\"medtech": {"hipaa_minimum_necessary\"]": false}}
+}

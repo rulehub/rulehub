@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_part11_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.fda_part11_esign_linkage": true}, "part11": {"esign_linked_to_record": false, "unique_ids": false}}
 }
+
+# Auto-generated granular test for controls["medtech.fda_part11_esign_linkage"]
+test_denies_when_controls_medtech_fda_part11_esign_linkage_failing if {
+	some _ in deny with input as {"controls": {}, "part11": {"unique_ids": true, "esign_linked_to_record": true}, "controls[\"medtech": {"fda_part11_esign_linkage\"]": false}}
+}

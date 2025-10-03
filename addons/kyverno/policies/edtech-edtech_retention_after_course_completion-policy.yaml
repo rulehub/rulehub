@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.edtech_retention_after_course_completion: example validation
+      message: "edtech.edtech_retention_after_course_completion: example validation"
       pattern:
         metadata:
           labels:

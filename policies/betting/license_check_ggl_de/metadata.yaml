@@ -2,14 +2,14 @@
 id: betting.license_check_ggl_de
 name: <Policy Title>
 path:
-  - policies/betting/license_check_ggl_de/policy.rego
-  - policies/betting/license_check_ggl_de/policy_test.rego
+- policies/betting/license_check_ggl_de/policy.rego
+- policies/betting/license_check_ggl_de/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gluecksspiel-behoerde.de/
+- https://www.gluecksspiel-behoerde.de/
 geo:
   regions:
   - Global

@@ -34,7 +34,7 @@ Examples of safe MINOR increments:
 - Logic corrections that only reduce false negatives or false positives without requiring new input fields and are unlikely to break pipelines.
 - Documentation, examples, README, site content changes.
 - CI/workflow improvements not altering published artifact contents (hash stable) — if the bundle bytes change due to a policy fix, it is at minimum a PATCH.
- 
+
 
 ## Patch Changes
 

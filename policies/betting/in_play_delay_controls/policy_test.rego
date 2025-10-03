@@ -20,3 +20,8 @@ test_denies_when_in_play_delay_below_minimum if {
 test_denies_when_control_disabled_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.in_play_delay_controls": false}, "live_betting": {"enabled": true, "delay_ms": 5000}, "policy": {"min_delay_ms": 1000}}
 }
+
+# Auto-generated granular test for controls["betting.in_play_delay_controls"]
+test_denies_when_controls_betting_in_play_delay_controls_failing if {
+	some _ in deny with input as {"controls": {}, "live_betting": {"enabled": true}, "controls[\"betting": {"in_play_delay_controls\"]": false}}
+}

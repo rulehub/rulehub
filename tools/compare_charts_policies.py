@@ -81,14 +81,10 @@ def extract_chart_ids(charts_dir: Path) -> tuple[Set[str], dict[str, int]]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Compare dist/index.json vs chart manifests for rulehub.id drift")
-    ap.add_argument("--charts-dir", required=True,
-                    help="Path to chart files/ directory")
-    ap.add_argument("--json", action="store_true",
-                    help="Emit JSON instead of text")
-    ap.add_argument("--fail-on-drift", action="store_true",
-                    help="Exit 2 if any drift detected")
+    ap = argparse.ArgumentParser(description="Compare dist/index.json vs chart manifests for rulehub.id drift")
+    ap.add_argument("--charts-dir", required=True, help="Path to chart files/ directory")
+    ap.add_argument("--json", action="store_true", help="Emit JSON instead of text")
+    ap.add_argument("--fail-on-drift", action="store_true", help="Exit 2 if any drift detected")
     args = ap.parse_args()
 
     charts_dir = Path(args.charts_dir)
@@ -104,13 +100,19 @@ def main() -> int:
     missing_in_charts = sorted(index_ids - chart_ids)
     extra_in_charts = sorted(chart_ids - index_ids)
     if args.json:
-        print(json.dumps({
-            "missing_in_charts": missing_in_charts,
-            "extra_in_charts": extra_in_charts,
-            "index_count": len(index_ids),
-            "charts_count": len(chart_ids),
-            "chart_duplicates": dupes,
-        }, indent=2, ensure_ascii=False))
+        print(
+            json.dumps(
+                {
+                    "missing_in_charts": missing_in_charts,
+                    "extra_in_charts": extra_in_charts,
+                    "index_count": len(index_ids),
+                    "charts_count": len(chart_ids),
+                    "chart_duplicates": dupes,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
     else:
         print(f"[charts-drift] index ids: {len(index_ids)}")
         print(f"[charts-drift] chart ids: {len(chart_ids)}")
@@ -118,8 +120,7 @@ def main() -> int:
             print("[charts-drift] duplicate chart ids:")
             for k, v in sorted(dupes.items()):
                 print(f"  {k}: {v}")
-        print("\nMissing in charts (present only in index):",
-              len(missing_in_charts))
+        print("\nMissing in charts (present only in index):", len(missing_in_charts))
         for mid in missing_in_charts:
             print(f"  + {mid}")
         print("\nExtra in charts (not in index):", len(extra_in_charts))

@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.geofencing_regulated_markets
-name: Geofencing — Regulated Markets Only
+name: "Geofencing \u2014 Regulated Markets Only"
 description: Geo-block unlicensed markets
 standard: Best Practice
 version: current
 path:
-  - policies/igaming/geofencing_regulated_markets/policy.rego
-  - policies/igaming/geofencing_regulated_markets/policy_test.rego
+- policies/igaming/geofencing_regulated_markets/policy.rego
+- policies/igaming/geofencing_regulated_markets/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
-  regions: [Global]
-  countries: ["*"]
+  regions:
+  - Global
+  countries:
+  - '*'
   scope: Global

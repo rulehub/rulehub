@@ -23,6 +23,7 @@ Output JSON (dist/policy-test-coverage.json):
 
 NOTE: This remains heuristic; enhancements can replace regex with AST parsing later.
 """
+
 from __future__ import annotations
 
 import json
@@ -99,11 +100,9 @@ def main() -> None:
         has_test = test_file.exists()
         if has_test:
             tested += 1
-    # Analyze policy deny rule count
+        # Analyze policy deny rule count
         policy_text = pol.read_text(encoding='utf-8')
-        deny_rule_count = sum(
-            1 for line in policy_text.splitlines() if deny_rule_re.search(line)
-        )
+        deny_rule_count = sum(1 for line in policy_text.splitlines() if deny_rule_re.search(line))
         # Optional: refine deny rule count via AST (opa parse -f json) if available
         if use_opa:
             try:
@@ -127,25 +126,22 @@ def main() -> None:
                     if isinstance(node, list):
                         return sum([_count(n) for n in node])
                     return 0
+
                 ast_count = _count(ast)
                 if ast_count > 0:
                     deny_rule_count = ast_count
             except Exception:
                 pass
-    # Mixed violation/deny concept removed
+        # Mixed violation/deny concept removed
         deny_test_assertions = 0
         has_pass_assertion = False
-    # test-level violation[] detection removed
+        # test-level violation[] detection removed
         if has_test:
             t_text = test_file.read_text(encoding='utf-8')
             # Count deny assertions heuristically
             lines = t_text.splitlines()
-            deny_test_assertions = sum(
-                1 for line in lines if deny_assert_re.search(line)
-            )
-            has_pass_assertion = any(
-                pass_assert_re.search(line) for line in lines
-            )
+            deny_test_assertions = sum(1 for line in lines if deny_assert_re.search(line))
+            has_pass_assertion = any(pass_assert_re.search(line) for line in lines)
             # violation[] detection removed
         is_dual = has_test and deny_test_assertions > 0 and has_pass_assertion
         if is_dual:
@@ -156,29 +152,32 @@ def main() -> None:
             # require at least deny_rule_count + 1 deny assertions (for edge cases)
             if deny_test_assertions < deny_rule_count + 1:
                 adequate = False
-                inadequate_multi_list.append({
-                    "policy": str(pol),
-                    "deny_rules": deny_rule_count,
-                    "deny_test_assertions": deny_test_assertions,
-                })
+                inadequate_multi_list.append(
+                    {
+                        "policy": str(pol),
+                        "deny_rules": deny_rule_count,
+                        "deny_test_assertions": deny_test_assertions,
+                    }
+                )
             else:
                 adequate_multi += 1
-        details.append({
-            "policy": str(pol),
-            "test": str(test_file) if has_test else None,
-            "has_test": has_test,
-            "deny_rule_count": deny_rule_count,
-            "deny_test_assertions": deny_test_assertions,
-            "has_pass_assertion": has_pass_assertion,
-            "dual_direction": is_dual,
-            "adequate_multi_rule": adequate,
-            # historical violation[] fields removed
-        })
+        details.append(
+            {
+                "policy": str(pol),
+                "test": str(test_file) if has_test else None,
+                "has_test": has_test,
+                "deny_rule_count": deny_rule_count,
+                "deny_test_assertions": deny_test_assertions,
+                "has_pass_assertion": has_pass_assertion,
+                "dual_direction": is_dual,
+                "adequate_multi_rule": adequate,
+                # historical violation[] fields removed
+            }
+        )
     pct = round(100 * tested / total, 2)
     dual_pct = round(100 * dual_direction / total, 2)
     print(f"Policy test coverage (presence): {tested}/{total} ({pct}%)")
-    print(
-        f"Dual-direction policies (deny + pass assertion): {dual_direction}/{total} ({dual_pct}%)")
+    print(f"Dual-direction policies (deny + pass assertion): {dual_direction}/{total} ({dual_pct}%)")
     if inadequate_multi_list:
         print("Policies with inadequate multi-rule test depth:")
         for item in inadequate_multi_list:
@@ -188,8 +187,7 @@ def main() -> None:
                 )
             )
     # Prioritized improvement list (exclude already adequate & single-rule)
-    improve_dual = [d for d in details if d['has_test']
-                    and not d['dual_direction']]
+    improve_dual = [d for d in details if d['has_test'] and not d['dual_direction']]
     improve_multi = [i['policy'] for i in inadequate_multi_list]
     if improve_dual or improve_multi:
         print("\nTest Improvement Priorities:")
@@ -198,12 +196,11 @@ def main() -> None:
             for pol in improve_multi[:20]:
                 print(f"     - {pol}")
             if len(improve_multi) > 20:
-                print(f"     ... {len(improve_multi)-20} more")
+                print(f"     ... {len(improve_multi) - 20} more")
         if improve_dual:
             print("  2. Add complementary pass/deny scenarios to achieve dual-direction:")
             # Sort by highest deny_rule_count to tackle complex policies first
-            improve_dual_sorted = sorted(
-                improve_dual, key=lambda d: d['deny_rule_count'], reverse=True)
+            improve_dual_sorted = sorted(improve_dual, key=lambda d: d['deny_rule_count'], reverse=True)
             for d in improve_dual_sorted[:20]:
                 pass_flag = 'yes' if d['has_pass_assertion'] else 'no'
                 print(
@@ -211,31 +208,34 @@ def main() -> None:
                     f"deny_tests={d['deny_test_assertions']}, pass={pass_flag})"
                 )
             if len(improve_dual_sorted) > 20:
-                print(f"     ... {len(improve_dual_sorted)-20} more")
+                print(f"     ... {len(improve_dual_sorted) - 20} more")
     # prior violation[] reporting removed
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_JSON, 'w', encoding='utf-8') as f:
-        json.dump({
-            "tested": tested,
-            "total": total,
-            "percent": pct,
-            "dual_direction": {"count": dual_direction, "percent": dual_pct},
-            "multi_rule": {
-                "policies_with_multi": multi_rule_with_multi,
-                "adequate": adequate_multi,
-                "count_inadequate": len(inadequate_multi_list),
-                "list_inadequate": inadequate_multi_list,
+        json.dump(
+            {
+                "tested": tested,
+                "total": total,
+                "percent": pct,
+                "dual_direction": {"count": dual_direction, "percent": dual_pct},
+                "multi_rule": {
+                    "policies_with_multi": multi_rule_with_multi,
+                    "adequate": adequate_multi,
+                    "count_inadequate": len(inadequate_multi_list),
+                    "list_inadequate": inadequate_multi_list,
+                },
+                # prior violation[] dimension removed
+                "details": details,
             },
-            # prior violation[] dimension removed
-            "details": details,
-        }, f, indent=2)
+            f,
+            indent=2,
+        )
     print(f"Wrote {OUT_JSON}")
 
     # --- Markdown priorities report -------------------------------------
     priorities_md = Path("dist/policy-test-priorities.md")
     priorities_md.parent.mkdir(parents=True, exist_ok=True)
-    dual_missing = [d for d in details if d['has_test']
-                    and not d['dual_direction']]
+    dual_missing = [d for d in details if d['has_test'] and not d['dual_direction']]
     # Combine issues per policy
     rows: list[RowDetail] = []
     for d in dual_missing:
@@ -244,26 +244,25 @@ def main() -> None:
             issue_parts.append('add deny assertions')
         if not d['has_pass_assertion']:
             issue_parts.append('add pass test')
-        issue = ', '.join(
-            issue_parts) if issue_parts else 'add complementary scenario'
-        rows.append({
-            'policy': d['policy'],
-            'deny_rules': d['deny_rule_count'],
-            'deny_tests': d['deny_test_assertions'],
-            'has_pass': d['has_pass_assertion'],
-            'issue': issue,
-        })
+        issue = ', '.join(issue_parts) if issue_parts else 'add complementary scenario'
+        rows.append(
+            {
+                'policy': d['policy'],
+                'deny_rules': d['deny_rule_count'],
+                'deny_tests': d['deny_test_assertions'],
+                'has_pass': d['has_pass_assertion'],
+                'issue': issue,
+            }
+        )
     # Include multi-rule inadequate ones that might already be dual missing
     inadequate_lookup = {i['policy']: i for i in inadequate_multi_list}
     # Sort: primary by deny_rules desc, then by deny_tests asc
-    rows_sorted = sorted(
-        rows, key=lambda r: (-r['deny_rules'], r['deny_tests']))
+    rows_sorted = sorted(rows, key=lambda r: (-r['deny_rules'], r['deny_tests']))
     with open(priorities_md, 'w', encoding='utf-8') as mf:
         mf.write("# Policy Test Improvement Priorities\n\n")
         mf.write("Generated by tools/policy_test_coverage.py\n\n")
         mf.write(
-            "Presence coverage: {tested}/{total} ({pct}%). Dual-direction: "
-            "{dual}/{total} ({dual_pct}%).\n\n".format(
+            "Presence coverage: {tested}/{total} ({pct}%). Dual-direction: {dual}/{total} ({dual_pct}%).\n\n".format(
                 tested=tested,
                 total=total,
                 pct=pct,
@@ -274,10 +273,8 @@ def main() -> None:
         if not rows_sorted:
             mf.write("All policies have dual-direction coverage.\n")
         else:
-            mf.write(
-                "| Policy | Deny Rules | Deny Test Assertions | Has Pass | Issue |\n")
-            mf.write(
-                "|--------|------------|----------------------|----------|-------|\n")
+            mf.write("| Policy | Deny Rules | Deny Test Assertions | Has Pass | Issue |\n")
+            mf.write("|--------|------------|----------------------|----------|-------|\n")
             for r in rows_sorted:
                 has_pass = 'yes' if r['has_pass'] else 'no'
                 mf.write(
@@ -295,8 +292,7 @@ def main() -> None:
             mf.write("|--------|------------|----------------------|--------|\n")
             for pol, meta in sorted(inadequate_lookup.items(), key=lambda kv: -kv[1]['deny_rules']):
                 needed = meta['deny_rules'] - meta['deny_test_assertions']
-                mf.write(
-                    f"| {pol} | {meta['deny_rules']} | {meta['deny_test_assertions']} | +{needed} deny tests |\n")
+                mf.write(f"| {pol} | {meta['deny_rules']} | {meta['deny_test_assertions']} | +{needed} deny tests |\n")
     print(f"Wrote {priorities_md}")
 
 

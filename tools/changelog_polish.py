@@ -12,6 +12,7 @@ the polished content (backup created as CHANGELOG.md.bak.TIMESTAMP).
 This is intentionally dependency-free (stdlib only) and includes graceful
 handling when there are no unreleased entries.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -44,8 +45,7 @@ def find_unreleased_section(text: str) -> Tuple[int, int, str]:
     start_idx is the index of the first character after the Unreleased header line.
     end_idx is the index where the Unreleased section ends (start of next top-level header)"""
     # Match headings like '## [Unreleased]' or '## Unreleased' (case-insensitive)
-    m = re.search(r"^##+\s*\[?Unreleased\]?\s*$", text,
-                  flags=re.IGNORECASE | re.MULTILINE)
+    m = re.search(r"^##+\s*\[?Unreleased\]?\s*$", text, flags=re.IGNORECASE | re.MULTILINE)
     if not m:
         return -1, -1, ""
     start = m.end()
@@ -65,8 +65,7 @@ def categorize_lines(section_text: str) -> Dict[str, List[str]]:
 
     current_cat = None
     bullet_re = re.compile(r"^\s*[-*+]\s+(.*)$")
-    inline_cat_pattern = r"^(?P<cat>{})\s*[:\-]\s*(?P<rest>.+)$".format(
-        "|".join(CATEGORY_HEADERS))
+    inline_cat_pattern = r"^(?P<cat>{})\s*[:\-]\s*(?P<rest>.+)$".format("|".join(CATEGORY_HEADERS))
     inline_cat_re = re.compile(inline_cat_pattern, flags=re.IGNORECASE)
     header_re = re.compile(r"^###+\s*(?P<h>.+)$")
 
@@ -94,8 +93,7 @@ def categorize_lines(section_text: str) -> Dict[str, List[str]]:
             # inline category?
             mi = inline_cat_re.match(content)
             if mi:
-                cat = next((c for c in CATEGORY_HEADERS if c.lower()
-                           == mi.group("cat").lower()), "Other")
+                cat = next((c for c in CATEGORY_HEADERS if c.lower() == mi.group("cat").lower()), "Other")
                 categories[cat].append(mi.group("rest").strip())
             elif current_cat:
                 categories[current_cat].append(content)
@@ -134,8 +132,7 @@ def generate_summary(categories: Dict[str, List[str]]) -> Tuple[str, List[str]]:
 
     # up to 6 highlight bullets: pick first items from largest categories
     # sort categories by size
-    cats_sorted = sorted(categories.items(),
-                         key=lambda kv: len(kv[1]), reverse=True)
+    cats_sorted = sorted(categories.items(), key=lambda kv: len(kv[1]), reverse=True)
     for cat, items in cats_sorted:
         for it in items:
             if len(highlights) >= 6:
@@ -168,8 +165,7 @@ def render_polished(categories: Dict[str, List[str]], summary: str, highlights: 
 
     # If no categorized entries, graceful message
     if not any(categories.values()):
-        parts = ["# Polished Unreleased Changelog\n\n",
-                 "No unreleased changes found.\n"]
+        parts = ["# Polished Unreleased Changelog\n\n", "No unreleased changes found.\n"]
 
     return "\n".join(parts)
 
@@ -196,18 +192,13 @@ def apply_to_changelog(changelog_path: Path, polished_text: str) -> None:
 
 
 def main(argv: List[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Polish the Unreleased section of CHANGELOG.md")
-    parser.add_argument("--changelog", type=Path,
-                        default=Path("CHANGELOG.md"), help="Path to CHANGELOG.md")
-    parser.add_argument(
-        "--out", type=Path, default=Path("dist/release/changelog_polished.md"), help="Output path")
+    parser = argparse.ArgumentParser(description="Polish the Unreleased section of CHANGELOG.md")
+    parser.add_argument("--changelog", type=Path, default=Path("CHANGELOG.md"), help="Path to CHANGELOG.md")
+    parser.add_argument("--out", type=Path, default=Path("dist/release/changelog_polished.md"), help="Output path")
     parser.add_argument(
         "--apply",
         action="store_true",
-        help=(
-            "Apply polished section back to CHANGELOG.md (creates backup)"
-        ),
+        help=("Apply polished section back to CHANGELOG.md (creates backup)"),
     )
     args = parser.parse_args(argv)
 
@@ -234,8 +225,7 @@ def main(argv: List[str] | None = None) -> int:
     if args.apply:
         bak = backup_file(changelog)
         apply_to_changelog(changelog, polished)
-        print(
-            f"Backed up original changelog to {bak} and applied polished section")
+        print(f"Backed up original changelog to {bak} and applied polished section")
 
     return 0
 

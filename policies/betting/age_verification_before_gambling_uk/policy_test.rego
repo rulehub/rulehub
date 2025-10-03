@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_age_unverified_and_control_enabled if {
 	count(deny) > 0 with input as {"controls": {"betting.age_verification_before_gambling_uk": true}, "kyc": {"age_verified": false}}
 }
+
+# Auto-generated granular test for controls.betting.age_verification_before_gambling_uk
+test_denies_when_controls_betting_age_verification_before_gambling_uk_failing if {
+	some _ in deny with input as {"controls": {"betting.age_verification_before_gambling_uk": false}, "kyc": {"age_verified": true}}
+}

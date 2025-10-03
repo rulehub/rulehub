@@ -1,15 +1,16 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.ccpa_opt_out_enabled
 name: 'CCPA: Opt Out Enabled'
 path:
-  - policies/legaltech/ccpa_opt_out_enabled/policy.rego
-  - policies/legaltech/ccpa_opt_out_enabled/policy_test.rego
+- policies/legaltech/ccpa_opt_out_enabled/policy.rego
+- policies/legaltech/ccpa_opt_out_enabled/policy_test.rego
 description: Provide opt-out of sale/sharing
 standard:
   name: CCPA (California)
   version: current
 links:
-  - https://cppa.ca.gov/
-  - https://oag.ca.gov/privacy/ccpa
+- https://cppa.ca.gov/
+- https://oag.ca.gov/privacy/ccpa
 geo:
   regions:
   - Global

@@ -2,14 +2,14 @@
 id: medtech.ca_phipa_health_data
 name: <Policy Title>
 path:
-  - policies/medtech/ca_phipa_health_data/policy.rego
-  - policies/medtech/ca_phipa_health_data/policy_test.rego
+- policies/medtech/ca_phipa_health_data/policy.rego
+- policies/medtech/ca_phipa_health_data/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.ontario.ca/laws/statute/04p03
+- https://www.ontario.ca/laws/statute/04p03
 geo:
   regions:
   - Global

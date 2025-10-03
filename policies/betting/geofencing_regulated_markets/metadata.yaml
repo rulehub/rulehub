@@ -2,14 +2,14 @@
 id: betting.geofencing_regulated_markets
 name: <Policy Title>
 path:
-  - policies/betting/geofencing_regulated_markets/policy.rego
-  - policies/betting/geofencing_regulated_markets/policy_test.rego
+- policies/betting/geofencing_regulated_markets/policy.rego
+- policies/betting/geofencing_regulated_markets/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

@@ -2,20 +2,20 @@
 id: fintech.oauth2_pkce_required
 name: OAuth2 PKCE Required
 path:
-  - policies/fintech/oauth2_pkce_required/policy.rego
-  - policies/fintech/oauth2_pkce_required/policy_test.rego
+- policies/fintech/oauth2_pkce_required/policy.rego
+- policies/fintech/oauth2_pkce_required/policy_test.rego
 description: PKCE for public clients
 standard:
   name: Security
   version: current
 links:
-  - https://datatracker.ietf.org/doc/html/rfc7636
+- https://datatracker.ietf.org/doc/html/rfc7636
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

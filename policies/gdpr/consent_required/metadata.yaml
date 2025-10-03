@@ -1,22 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: gdpr.consent_required
 name: Consent required
 standard: GDPR
 version: 2016/679
 path:
-  - policies/gdpr/consent_required/policy.rego
-  - policies/gdpr/consent_required/policy_test.rego
-description: Placeholder rule to ensure lawfulness of processing based on consent
-  or other legal basis.
+- policies/gdpr/consent_required/policy.rego
+- policies/gdpr/consent_required/policy_test.rego
+description: Placeholder rule to ensure lawfulness of processing based on consent or other legal basis.
 framework: other
 tags:
 - gdpr
 owner: compliance
 severity: medium
 links:
-  - https://eur-lex.europa.eu/eli/reg/2016/679/oj
-  - https://www.legislation.gov.uk/eudr/2016/679/article/6
-  - https://www.legislation.gov.uk/eudr/2016/679/article/7
-
+- https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- https://www.legislation.gov.uk/eudr/2016/679/article/6
+- https://www.legislation.gov.uk/eudr/2016/679/article/7
 geo:
   regions:
   - Europe

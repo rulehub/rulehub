@@ -2,14 +2,14 @@
 id: edtech.ct_student_data_privacy
 name: <Policy Title>
 path:
-  - policies/edtech/ct_student_data_privacy/policy.rego
-  - policies/edtech/ct_student_data_privacy/policy_test.rego
+- policies/edtech/ct_student_data_privacy/policy.rego
+- policies/edtech/ct_student_data_privacy/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy
+- https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy
 geo:
   regions:
   - Global

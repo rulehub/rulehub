@@ -2,21 +2,21 @@
 id: fintech.aml_duplicate_account_detection
 name: AML Duplicate Account Detection
 path:
-  - policies/fintech/aml_duplicate_account_detection/policy.rego
-  - policies/fintech/aml_duplicate_account_detection/policy_test.rego
+- policies/fintech/aml_duplicate_account_detection/policy.rego
+- policies/fintech/aml_duplicate_account_detection/policy_test.rego
 description: Detect duplicate accounts
 standard:
   name: EU AMLD / FATF
   version: current
 links:
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
-  - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html
+- https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

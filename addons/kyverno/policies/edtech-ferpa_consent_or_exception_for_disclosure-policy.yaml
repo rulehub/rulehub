@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: edtech.ferpa_consent_or_exception_for_disclosure: example validation
+      message: "edtech.ferpa_consent_or_exception_for_disclosure: example validation"
       pattern:
         metadata:
           labels:

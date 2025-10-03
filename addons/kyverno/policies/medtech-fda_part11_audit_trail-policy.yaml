@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.fda_part11_audit_trail: example validation
+      message: "medtech.fda_part11_audit_trail: example validation"
       pattern:
         metadata:
           labels:

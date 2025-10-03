@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.eu_mdr_ce_marking_and_udi: example validation
+      message: "medtech.eu_mdr_ce_marking_and_udi: example validation"
       pattern:
         metadata:
           labels:

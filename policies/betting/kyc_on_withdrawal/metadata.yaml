@@ -2,15 +2,15 @@
 id: betting.kyc_on_withdrawal
 name: <Policy Title>
 path:
-  - policies/betting/kyc_on_withdrawal/policy.rego
-  - policies/betting/kyc_on_withdrawal/policy_test.rego
+- policies/betting/kyc_on_withdrawal/policy.rego
+- policies/betting/kyc_on_withdrawal/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.mga.org.mt/
-  - https://www.gamblingcommission.gov.uk/
+- https://www.mga.org.mt/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

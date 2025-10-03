@@ -13,6 +13,7 @@ Logic:
 
 Outputs a markdown table and a short justification. A --json flag emits a JSON payload.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -109,8 +110,7 @@ def extract_versions(paths: List[Tuple[str, str]]) -> List[SourceVersion]:
                 if isinstance(data, dict):
                     ver = data.get("version")
 
-        out.append(SourceVersion(name, path, str(
-            ver) if ver is not None else None))
+        out.append(SourceVersion(name, path, str(ver) if ver is not None else None))
 
     return out
 
@@ -171,12 +171,9 @@ def render_markdown(sources: List[SourceVersion], recommended: str, rationale: s
 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Version consistency helper")
-    parser.add_argument("--sources", nargs="*",
-                        help="Pairs of source:name=path", default=[])
-    parser.add_argument(
-        "--commits-file", help="Path to a file with commit messages, one per line")
-    parser.add_argument("--force-version",
-                        help="Force the recommended version to this value")
+    parser.add_argument("--sources", nargs="*", help="Pairs of source:name=path", default=[])
+    parser.add_argument("--commits-file", help="Path to a file with commit messages, one per line")
+    parser.add_argument("--force-version", help="Force the recommended version to this value")
     parser.add_argument("--json", action="store_true", help="Emit JSON")
     parser.add_argument("--out", help="Output markdown path", default=None)
     args = parser.parse_args(argv)
@@ -193,11 +190,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         repo_root = os.getcwd()
         pairs = [
             ("package.json", os.path.join(repo_root, "package.json")),
-            ("release-please-config.json",
-             os.path.join(repo_root, "release-please-config.json")),
+            ("release-please-config.json", os.path.join(repo_root, "release-please-config.json")),
             ("Chart.yaml", os.path.join(repo_root, "Chart.yaml")),
-            ("requirements.lock (root)", os.path.join(
-                repo_root, "requirements.lock")),
+            ("requirements.lock (root)", os.path.join(repo_root, "requirements.lock")),
         ]
 
     sources = extract_versions(pairs)
@@ -234,8 +229,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         with open(args.out, "w", encoding="utf-8") as f:
             f.write(md)
     if args.json:
-        payload = {"sources": aggregate_versions(
-            sources), "recommended": recommended, "rationale": rationale}
+        payload = {"sources": aggregate_versions(sources), "recommended": recommended, "rationale": rationale}
         print(json.dumps(payload, indent=2))
     else:
         print(md)

@@ -15,3 +15,8 @@ test_denies_when_control_disabled if {
 test_denies_when_funds_and_control_fail_extra if {
 	count(deny) > 0 with input as {"controls": {"betting.player_funds_segregation": false}, "funds": {"segregated": false}}
 }
+
+# Auto-generated granular test for controls["betting.player_funds_segregation"]
+test_denies_when_controls_betting_player_funds_segregation_failing if {
+	some _ in deny with input as {"controls": {}, "funds": {"segregated": true}, "controls[\"betting": {"player_funds_segregation\"]": false}}
+}

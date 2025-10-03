@@ -4,6 +4,7 @@ annotations under addons/**/templates and templates/.
 
 Outputs divergences as: File | Field | Expected | Actual
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -62,8 +63,7 @@ def extract_annotations_from_file(path: Path) -> List[Dict]:
         if not rid:
             continue
         title = ann.get("rulehub.title") or labels.get("rulehub.title") or ""
-        links_raw = ann.get("rulehub.links") or labels.get(
-            "rulehub.links") or ""
+        links_raw = ann.get("rulehub.links") or labels.get("rulehub.links") or ""
         links = []
         if isinstance(links_raw, list):
             links = links_raw
@@ -78,19 +78,20 @@ def extract_annotations_from_file(path: Path) -> List[Dict]:
                     ln = ln[1:-1]
                 if ln:
                     links.append(ln)
-        res.append({
-            "id": str(rid).strip(),
-            "title": str(title).strip(),
-            "links": links,
-            "file": str(path),
-        })
+        res.append(
+            {
+                "id": str(rid).strip(),
+                "title": str(title).strip(),
+                "links": links,
+                "file": str(path),
+            }
+        )
     return res
 
 
 def gather_template_annotations() -> Dict[str, List[Dict]]:
     out: Dict[str, List[Dict]] = {}
-    paths = list((ROOT / "addons").rglob("templates/*.yaml")) + \
-        list((ROOT / "templates").rglob("**/*.tmpl"))
+    paths = list((ROOT / "addons").rglob("templates/*.yaml")) + list((ROOT / "templates").rglob("**/*.tmpl"))
     # also include addons kyverno policies which are templates too
     paths += list((ROOT / "addons").rglob("*.yaml"))
     seen = set()
@@ -132,26 +133,54 @@ def main():
         expected_links = normalize_links(info.get("links") or [])
         tpl_entries = templates.get(pid) or []
         if not tpl_entries:
-            divergences.append({"file": "(none)", "id": pid, "field": "file",
-                               "expected": "template with rulehub.id", "actual": "missing"})
+            divergences.append(
+                {
+                    "file": "(none)",
+                    "id": pid,
+                    "field": "file",
+                    "expected": "template with rulehub.id",
+                    "actual": "missing",
+                }
+            )
             continue
         for te in tpl_entries:
             actual_title = (te.get("title") or "").strip()
             actual_links = normalize_links(te.get("links") or [])
             if expected_title != actual_title:
-                divergences.append({"file": te.get(
-                    "file"), "id": pid, "field": "rulehub.title", "expected": expected_title, "actual": actual_title})
+                divergences.append(
+                    {
+                        "file": te.get("file"),
+                        "id": pid,
+                        "field": "rulehub.title",
+                        "expected": expected_title,
+                        "actual": actual_title,
+                    }
+                )
             # compare links as sets to tolerate order
             if set(expected_links) != set(actual_links):
-                divergences.append({"file": te.get(
-                    "file"), "id": pid, "field": "rulehub.links", "expected": expected_links, "actual": actual_links})
+                divergences.append(
+                    {
+                        "file": te.get("file"),
+                        "id": pid,
+                        "field": "rulehub.links",
+                        "expected": expected_links,
+                        "actual": actual_links,
+                    }
+                )
 
     # Also detect templates that have rulehub.id but no metadata entry
     for tid, entries in templates.items():
         if tid not in meta:
             for te in entries:
-                divergences.append({"file": te.get("file"), "id": tid, "field": "metadata",
-                                   "expected": "metadata for id present in policies/", "actual": "missing"})
+                divergences.append(
+                    {
+                        "file": te.get("file"),
+                        "id": tid,
+                        "field": "metadata",
+                        "expected": "metadata for id present in policies/",
+                        "actual": "missing",
+                    }
+                )
 
     # Print report
     if not divergences:

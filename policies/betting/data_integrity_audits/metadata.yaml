@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.data_integrity_audits
 name: Data Integrity Audits
 description: Audit data providers regularly
 standard: Integrity
 version: current
 path:
-  - policies/betting/data_integrity_audits/policy.rego
-  - policies/betting/data_integrity_audits/policy_test.rego
+- policies/betting/data_integrity_audits/policy.rego
+- policies/betting/data_integrity_audits/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-  - https://ibia.bet/
+- https://ibia.bet/
 geo:
-  regions: [Global]
-  countries: ["*"]
+  regions:
+  - Global
+  countries:
+  - '*'
   scope: Global

@@ -1,17 +1,22 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: igaming.deposit_limit_controls
-name: Deposit Limits — Controls
+name: "Deposit Limits \u2014 Controls"
 description: Deposit limits per player account
 standard: UKGC/EU
 version: current
 path:
-  - policies/igaming/deposit_limit_controls/policy.rego
-  - policies/igaming/deposit_limit_controls/policy_test.rego
+- policies/igaming/deposit_limit_controls/policy.rego
+- policies/igaming/deposit_limit_controls/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
-  regions: [Europe]
-  countries: [EU, EEA, UK]
+  regions:
+  - Europe
+  countries:
+  - EU
+  - EEA
+  - UK
   scope: Regional

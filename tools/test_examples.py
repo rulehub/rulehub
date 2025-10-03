@@ -22,6 +22,7 @@ Heuristics / Safety:
 Limitations: Full network isolation would normally require container /
 namespaces; here we rely on static scanning to prevent unintended use.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -126,12 +127,9 @@ def truncate(text: str, limit: int = 400) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Execute whitelisted shell example blocks from docs/")
-    parser.add_argument("--docs", default="docs",
-                        help="Docs directory (default: docs)")
-    parser.add_argument("--json", default="-",
-                        help="Output JSON path or - for stdout")
+    parser = argparse.ArgumentParser(description="Execute whitelisted shell example blocks from docs/")
+    parser.add_argument("--docs", default="docs", help="Docs directory (default: docs)")
+    parser.add_argument("--json", default="-", help="Output JSON path or - for stdout")
     args = parser.parse_args()
 
     docs_root = Path(args.docs)
@@ -154,8 +152,7 @@ def main() -> int:
                 end_line=end,
                 language=lang,
                 status=status,
-                command_count=sum(1 for ln in block if ln.strip()
-                                  and not ln.strip().startswith("#")),
+                command_count=sum(1 for ln in block if ln.strip() and not ln.strip().startswith("#")),
                 error=error,
             )
         )

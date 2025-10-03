@@ -16,3 +16,8 @@ test_denies_when_retention_exceeds_limit if {
 test_denies_when_control_disabled_and_retention_exceeds_limit if {
 	count(deny) > 0 with input as {"controls": {"legaltech.gdpr_retention_limit": false}, "data": {"retention_days": 400}, "policy": {"gdpr": {"retention_max_days": 365}}}
 }
+
+# Auto-generated granular test for controls["legaltech.gdpr_retention_limit"]
+test_denies_when_controls_legaltech_gdpr_retention_limit_failing if {
+	some _ in deny with input as {"controls": {}, "data": {"retention_days": true}, "controls[\"legaltech": {"gdpr_retention_limit\"]": false}}
+}

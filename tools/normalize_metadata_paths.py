@@ -25,6 +25,7 @@ Design notes:
   - Counts changes; prints a concise summary to stdout.
   - No YAML parsing required; simple line transform keeps risk minimal.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -62,14 +63,10 @@ def normalize_file(path: Path, apply: bool, verbose: bool) -> bool:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="Normalize empty path: to path: [] in metadata")
-    ap.add_argument("--root", default="policies",
-                    help="Root directory to scan (default: policies)")
-    ap.add_argument("--apply", action="store_true",
-                    help="Apply changes in-place (otherwise dry-run)")
-    ap.add_argument("-v", "--verbose", action="store_true",
-                    help="Verbose per-file output")
+    ap = argparse.ArgumentParser(description="Normalize empty path: to path: [] in metadata")
+    ap.add_argument("--root", default="policies", help="Root directory to scan (default: policies)")
+    ap.add_argument("--apply", action="store_true", help="Apply changes in-place (otherwise dry-run)")
+    ap.add_argument("-v", "--verbose", action="store_true", help="Verbose per-file output")
     args = ap.parse_args()
 
     root = Path(args.root)
@@ -95,8 +92,7 @@ def main() -> int:
             modified += 1
 
     mode = "APPLY" if args.apply else "DRY-RUN"
-    print(
-        f"[normalize-metadata-paths] Mode: {mode}; candidates: {candidates}; modified: {modified}")
+    print(f"[normalize-metadata-paths] Mode: {mode}; candidates: {candidates}; modified: {modified}")
     if not args.apply and modified:
         print("(dry-run) Re-run with --apply to write changes")
     return 0

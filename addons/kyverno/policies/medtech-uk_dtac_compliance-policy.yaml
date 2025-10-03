@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: medtech.uk_dtac_compliance: example validation
+      message: "medtech.uk_dtac_compliance: example validation"
       pattern:
         metadata:
           labels:

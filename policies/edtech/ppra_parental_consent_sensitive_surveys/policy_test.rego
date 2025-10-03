@@ -16,3 +16,8 @@ test_denies_when_control_disabled if {
 test_denies_when_sensitive_survey_and_consent_missing_and_control_disabled if {
 	count(deny) > 0 with input as {"controls": {"edtech.ppra_parental_consent_sensitive_surveys": false}, "survey": {"contains_sensitive_topics": true, "parental_consent_obtained": false}}
 }
+
+# Auto-generated granular test for controls["edtech.ppra_parental_consent_sensitive_surveys"]
+test_denies_when_controls_edtech_ppra_parental_consent_sensitive_surveys_failing if {
+	some _ in deny with input as {"controls": {}, "survey": {"contains_sensitive_topics": true}, "controls[\"edtech": {"ppra_parental_consent_sensitive_surveys\"]": false}}
+}

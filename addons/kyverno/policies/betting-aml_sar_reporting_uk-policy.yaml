@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.aml_sar_reporting_uk: example validation
+      message: "betting.aml_sar_reporting_uk: example validation"
       pattern:
         metadata:
           labels:

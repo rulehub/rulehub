@@ -215,4 +215,3 @@ Only after broad adoption; not planned yet.
 
 This phased approach avoids breaking consumers, needs minimal code (one manifest writer + chunk
 loop), and provides clear upgrade semantics with cryptographic integrity for each page.
-

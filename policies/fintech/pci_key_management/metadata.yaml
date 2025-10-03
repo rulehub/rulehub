@@ -1,21 +1,21 @@
 # yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: fintech.pci_key_management
-name: PCI DSS — Key Management
+name: "PCI DSS \u2014 Key Management"
 path:
-  - policies/fintech/pci_key_management/policy.rego
-  - policies/fintech/pci_key_management/policy_test.rego
+- policies/fintech/pci_key_management/policy.rego
+- policies/fintech/pci_key_management/policy_test.rego
 description: Key mgmt lifecycle
 standard:
   name: PCI DSS 4.0
   version: current
 links:
-  - https://www.pcisecuritystandards.org/document_library
+- https://www.pcisecuritystandards.org/document_library
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

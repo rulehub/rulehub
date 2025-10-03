@@ -1,18 +1,24 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: betting.in_play_delay_controls
 name: In-Play Delay Controls
 description: Minimum delay for live betting acceptance
 standard: UKGC/MGA
 version: current
 path:
-  - policies/betting/in_play_delay_controls/policy.rego
-  - policies/betting/in_play_delay_controls/policy_test.rego
+- policies/betting/in_play_delay_controls/policy.rego
+- policies/betting/in_play_delay_controls/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-  - https://www.gamblingcommission.gov.uk/
-  - https://www.mga.org.mt/
+- https://www.gamblingcommission.gov.uk/
+- https://www.mga.org.mt/
 geo:
-  regions: [Europe]
-  countries: [EU, EEA, UK, MT]
+  regions:
+  - Europe
+  countries:
+  - EU
+  - EEA
+  - UK
+  - MT
   scope: Regional

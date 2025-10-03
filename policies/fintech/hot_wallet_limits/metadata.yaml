@@ -2,21 +2,21 @@
 id: fintech.hot_wallet_limits
 name: Hot Wallet Limits
 path:
-  - policies/fintech/hot_wallet_limits/policy.rego
-  - policies/fintech/hot_wallet_limits/policy_test.rego
+- policies/fintech/hot_wallet_limits/policy.rego
+- policies/fintech/hot_wallet_limits/policy_test.rego
 description: Limits on hot wallet float
 standard:
   name: Security
   version: current
 links:
-  - https://eur-lex.europa.eu/eli/reg/2023/1114/oj
-  - https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
+- https://eur-lex.europa.eu/eli/reg/2023/1114/oj
+- https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html
 geo:
   regions:
-    - Global
+  - Global
   countries:
-    - '*'
+  - '*'
   subregions: []
   scope: Global
 jurisdiction:
-  - Global
+- Global

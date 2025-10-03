@@ -2,14 +2,14 @@
 id: edtech.co_student_data_transparency
 name: <Policy Title>
 path:
-  - policies/edtech/co_student_data_transparency/policy.rego
-  - policies/edtech/co_student_data_transparency/policy_test.rego
+- policies/edtech/co_student_data_transparency/policy.rego
+- policies/edtech/co_student_data_transparency/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://coag.gov/office-sections/consumer-protection/student-data-privacy/
+- https://coag.gov/office-sections/consumer-protection/student-data-privacy/
 geo:
   regions:
   - Global

@@ -1,20 +1,21 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: rg.uigea_payment_blocks
-name: UIGEA — Payment blocks
+name: "UIGEA \u2014 Payment blocks"
 standard: UIGEA
-version: "31 USC 5361"
+version: 31 USC 5361
 path:
-  - policies/rg/uigea_payment_blocks/policy.rego
-  - policies/rg/uigea_payment_blocks/policy_test.rego
+- policies/rg/uigea_payment_blocks/policy.rego
+- policies/rg/uigea_payment_blocks/policy_test.rego
 framework: other
 severity: high
 owner: compliance
 description: Blocks prohibited gambling payment transactions in line with UIGEA restrictions on unlawful internet wagering.
 links:
-  - https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm # UIGEA related regulatory press release
+- https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm
 geo:
   regions:
-    - North America
+  - North America
   countries:
-    - US
+  - US
   subregions: []
   scope: US

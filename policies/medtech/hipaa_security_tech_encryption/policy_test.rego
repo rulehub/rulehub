@@ -20,3 +20,8 @@ test_denies_when_control_disabled if {
 test_denies_when_both_security_false if {
 	count(deny) > 0 with input as {"controls": {"medtech.hipaa_security_tech_encryption": true}, "security": {"encryption_at_rest": false, "encryption_in_transit": false}}
 }
+
+# Auto-generated granular test for controls["medtech.hipaa_security_tech_encryption"]
+test_denies_when_controls_medtech_hipaa_security_tech_encryption_failing if {
+	some _ in deny with input as {"controls": {}, "security": {"encryption_at_rest": true, "encryption_in_transit": true}, "controls[\"medtech": {"hipaa_security_tech_encryption\"]": false}}
+}

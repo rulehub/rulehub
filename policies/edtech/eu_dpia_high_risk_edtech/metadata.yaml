@@ -2,14 +2,14 @@
 id: edtech.eu_dpia_high_risk_edtech
 name: <Policy Title>
 path:
-  - policies/edtech/eu_dpia_high_risk_edtech/policy.rego
-  - policies/edtech/eu_dpia_high_risk_edtech/policy_test.rego
+- policies/edtech/eu_dpia_high_risk_edtech/policy.rego
+- policies/edtech/eu_dpia_high_risk_edtech/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://eur-lex.europa.eu/eli/reg/2016/679/oj # Art.35
+- https://eur-lex.europa.eu/eli/reg/2016/679/oj
 geo:
   regions:
   - Global

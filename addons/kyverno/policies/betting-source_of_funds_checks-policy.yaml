@@ -19,7 +19,7 @@ spec:
           kinds:
           - "*"
     validate:
-      message: betting.source_of_funds_checks: example validation
+      message: "betting.source_of_funds_checks: example validation"
       pattern:
         metadata:
           labels:

@@ -2,14 +2,14 @@
 id: betting.safer_gambling_interactions
 name: <Policy Title>
 path:
-  - policies/betting/safer_gambling_interactions/policy.rego
-  - policies/betting/safer_gambling_interactions/policy_test.rego
+- policies/betting/safer_gambling_interactions/policy.rego
+- policies/betting/safer_gambling_interactions/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.gamblingcommission.gov.uk/
+- https://www.gamblingcommission.gov.uk/
 geo:
   regions:
   - Global

@@ -2,14 +2,14 @@
 id: edtech.kr_pipa_guardian_consent_under_14
 name: <Policy Title>
 path:
-  - policies/edtech/kr_pipa_guardian_consent_under_14/policy.rego
-  - policies/edtech/kr_pipa_guardian_consent_under_14/policy_test.rego
+- policies/edtech/kr_pipa_guardian_consent_under_14/policy.rego
+- policies/edtech/kr_pipa_guardian_consent_under_14/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://www.pipc.go.kr/eng/
+- https://www.pipc.go.kr/eng/
 geo:
   regions:
   - Global

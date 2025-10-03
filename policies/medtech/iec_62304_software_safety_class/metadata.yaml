@@ -2,14 +2,14 @@
 id: medtech.iec_62304_software_safety_class
 name: <Policy Title>
 path:
-  - policies/medtech/iec_62304_software_safety_class/policy.rego
-  - policies/medtech/iec_62304_software_safety_class/policy_test.rego
+- policies/medtech/iec_62304_software_safety_class/policy.rego
+- policies/medtech/iec_62304_software_safety_class/policy_test.rego
 description: <Short description of the policy>
 standard:
   name: <Standard or Regulation>
   version: <version or "current">
 links:
-  - https://webstore.iec.ch/en/publication/24950
+- https://webstore.iec.ch/en/publication/24950
 geo:
   regions:
   - Global

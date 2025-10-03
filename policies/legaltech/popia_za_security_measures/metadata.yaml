@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json
 id: legaltech.popia_za_security_measures
 name: 'POPIA: ZA Security Measures'
 path:
-  - policies/legaltech/popia_za_security_measures/policy.rego
-  - policies/legaltech/popia_za_security_measures/policy_test.rego
+- policies/legaltech/popia_za_security_measures/policy.rego
+- policies/legaltech/popia_za_security_measures/policy_test.rego
 description: Appropriate security safeguards
 standard:
   name: POPIA (South Africa)
   version: current
 links:
-  - https://www.justice.gov.za/inforeg/ # Information Regulator (South Africa)
+- https://www.justice.gov.za/inforeg/
 geo:
   regions:
   - Global
