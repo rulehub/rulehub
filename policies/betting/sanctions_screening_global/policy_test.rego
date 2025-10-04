@@ -19,5 +19,5 @@ test_denies_when_sanctions_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.sanctions_screening_global"]
 test_denies_when_controls_betting_sanctions_screening_global_failing if {
-	some _ in deny with input as {"controls": {}, "sanctions": {"hit": true}, "controls[\"betting": {"sanctions_screening_global\"]": false}}
+	some _ in deny with input as {"controls": {"betting.sanctions_screening_global": false}, "sanctions": {"hit": true}}
 }

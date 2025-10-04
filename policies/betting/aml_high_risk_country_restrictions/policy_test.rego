@@ -20,5 +20,5 @@ test_denies_when_customer_in_high_risk_and_no_edd if {
 
 # Auto-generated granular test for controls["betting.aml_high_risk_country_restrictions"]
 test_denies_when_controls_betting_aml_high_risk_country_restrictions_failing if {
-	some _ in deny with input as {"controls": {}, "customer": {"country": true}, "controls[\"betting": {"aml_high_risk_country_restrictions\"]": false}}
+	some _ in deny with input as {"controls": {"betting.aml_high_risk_country_restrictions": false}, "customer": {"country": "IR"}}
 }

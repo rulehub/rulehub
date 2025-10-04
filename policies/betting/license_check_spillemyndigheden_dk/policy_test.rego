@@ -18,5 +18,5 @@ test_denies_when_both_operator_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.license_check_spillemyndigheden_dk"]
 test_denies_when_controls_betting_license_check_spillemyndigheden_dk_failing if {
-	some _ in deny with input as {"controls": {}, "operator": {"licensed": true}, "controls[\"betting": {"license_check_spillemyndigheden_dk\"]": false}}
+	some _ in deny with input as {"controls": {"betting.license_check_spillemyndigheden_dk": false}, "operator": {"licensed": true}}
 }

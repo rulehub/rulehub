@@ -13,8 +13,10 @@ allow if {
 deny contains msg if {
 	input.player.geo != ""
 	allowed := input.allowed_markets
-	input.player.geo in (allowed == false)
-	msg := "gambling.geofencing_regulated_markets: Geo-block unlicensed markets; robust anti‑spoofing"
+
+	# Deny when player's geo is not in the list of allowed markets
+	not input.player.geo in allowed
+	msg := "gambling.geofencing_regulated_markets: Geo-block unlicensed markets; robust anti-spoofing"
 }
 
 deny contains msg if {

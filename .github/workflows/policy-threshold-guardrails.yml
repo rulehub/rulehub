@@ -31,6 +31,11 @@ on:
       - "requirements.lock"
       - ".github/workflows/policy-threshold-guardrails.yml"
   workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub policy image (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        required: false
+        default: ""
 
 concurrency:
   group: policy-threshold-guardrails-${{ github.ref }}
@@ -40,6 +45,21 @@ permissions:
   contents: read
 
 jobs:
+  guard:
+    name: Require CI image tag (no drift)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enforce non-latest CI image tag
+        shell: bash
+        run: |
+          input_tag="${{ inputs.ci_image_tag }}"
+          if [ "$input_tag" = "latest" ]; then
+            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
+            exit 1
+          fi
+          if [ -z "$input_tag" ]; then
+            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
+          fi
   noop-act:
     if: ${{ github.actor == 'nektos/act' }}
     runs-on: ubuntu-latest
@@ -52,8 +72,9 @@ jobs:
     name: Threshold & Guardrails
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs: guard
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-policy:latest
+      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
       options: --user 0:0
     defaults:
       run:

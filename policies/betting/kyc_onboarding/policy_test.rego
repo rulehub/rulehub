@@ -19,5 +19,5 @@ test_denies_when_player_missing_kyc_extra if {
 
 # Auto-generated granular test for controls["betting.kyc_onboarding"]
 test_denies_when_controls_betting_kyc_onboarding_failing if {
-	some _ in deny with input as {"controls": {}, "player": {"kyc_completed": true}, "controls[\"betting": {"kyc_onboarding\"]": false}}
+	some _ in deny with input as {"controls": {"betting.kyc_onboarding": false}, "player": {"kyc_completed": true}}
 }

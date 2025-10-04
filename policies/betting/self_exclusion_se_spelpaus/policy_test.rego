@@ -20,5 +20,5 @@ test_denies_when_player_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.self_exclusion_se_spelpaus"]
 test_denies_when_controls_betting_self_exclusion_se_spelpaus_failing if {
-	some _ in deny with input as {"controls": {}, "player": {"in_spelpaus": true}, "controls[\"betting": {"self_exclusion_se_spelpaus\"]": false}}
+	some _ in deny with input as {"controls": {"betting.self_exclusion_se_spelpaus": false}, "player": {"in_spelpaus": true}}
 }

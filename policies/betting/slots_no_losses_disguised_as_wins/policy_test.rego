@@ -19,5 +19,5 @@ test_denies_when_celebrate_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.slots_no_losses_disguised_as_wins"]
 test_denies_when_controls_betting_slots_no_losses_disguised_as_wins_failing if {
-	some _ in deny with input as {"controls": {}, "slots": {"celebrate_losses_as_wins": true}, "controls[\"betting": {"slots_no_losses_disguised_as_wins\"]": false}}
+	some _ in deny with input as {"controls": {"betting.slots_no_losses_disguised_as_wins": false}, "slots": {"celebrate_losses_as_wins": true}}
 }

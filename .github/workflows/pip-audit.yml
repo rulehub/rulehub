@@ -18,6 +18,12 @@ on:
       - "requirements-dev.lock"
       - "pyproject.toml"
       - "setup.cfg"
+  workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub CI image (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -28,11 +34,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  guard:
+    name: Require CI image tag (no drift)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enforce non-latest CI image tag
+        shell: bash
+        run: |
+          input_tag="${{ inputs.ci_image_tag }}"
+          if [ "$input_tag" = "latest" ]; then
+            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
+            exit 1
+          fi
+          if [ -z "$input_tag" ]; then
+            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
+          fi
   scan:
+    needs: guard
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-base:latest
+      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
       options: --user 0:0
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -42,9 +67,17 @@ jobs:
       - name: pip-audit (requirements)
         run: |
           set -euo pipefail
-          if [ -f requirements.lock ]; then BASE_REQ=requirements.lock; else BASE_REQ=requirements.txt; fi
+          if [ -n "${ACT:-}" ]; then
+            # Under ACT, avoid pip's --require-hashes install strictness against transitive deps in some lockfiles
+            BASE_REQ=requirements.txt
+          else
+            if [ -f requirements.lock ]; then BASE_REQ=requirements.lock; else BASE_REQ=requirements.txt; fi
+          fi
           pip-audit -r "$BASE_REQ" -f json -o pip-audit.json || true
           if [ -f requirements-dev.txt ]; then pip-audit -r requirements-dev.txt -f json -o pip-audit-dev.json || true; fi
+          # Ensure output files exist to allow merging logic to proceed
+          if [ ! -f pip-audit.json ]; then echo '{"vulns": []}' > pip-audit.json; fi
+          if [ ! -f pip-audit-dev.json ]; then echo '{"vulns": []}' > pip-audit-dev.json; fi
           # Merge vulnerability entries (supports old + new schema)
           jq -s '[.[] | if type=="object" then ( (.vulns // .vulnerabilities // ( [ (.dependencies[]?.vulns[]?) ] )) ) else [] end | .[] ] | {vulns: .}' pip-audit.json pip-audit-dev.json 2>/dev/null > pip-audit-combined.json || cp pip-audit.json pip-audit-combined.json
           HIGH_COUNT=$(jq '[.vulns[]? | select((.severity // "") | ascii_upcase == "HIGH" or (.severity // "") | ascii_upcase == "CRITICAL")] | length' pip-audit-combined.json || echo 0)

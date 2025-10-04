@@ -70,8 +70,17 @@ jobs:
           python tools/analyze_links.py --export links_export.json --json links_audit_report.json
           # Compare against baseline; honors FAIL_LINK_AUDIT=1 to fail on drift
           python tools/compare_links_baseline.py | tee link_audit_output.txt
+
+  upload-artifacts:
+    name: Upload audit artifacts
+    needs: audit
+    # Skip in ACT runs
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Upload audit summary & baseline
-        if: ${{ always() && github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: link-audit

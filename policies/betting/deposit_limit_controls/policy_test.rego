@@ -24,5 +24,5 @@ test_denies_when_limit_exceeded_and_not_applied_extra if {
 
 # Auto-generated granular test for controls["betting.deposit_limit_controls"]
 test_denies_when_controls_betting_deposit_limit_controls_failing if {
-	some _ in deny with input as {"controls": {}, "limits": {"deposit_limit_enabled": true, "limit_exceeded": true}, "controls[\"betting": {"deposit_limit_controls\"]": false}}
+	some _ in deny with input as {"controls": {"betting.deposit_limit_controls": false}, "limits": {"deposit_limit_enabled": true, "limit_exceeded": true}}
 }

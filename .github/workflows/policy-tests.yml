@@ -103,6 +103,8 @@ jobs:
       - name: Validate policy metadata
         run: |
           . .venv/bin/activate
+          # Ensure minimal deps available if venv install was skipped under ACT
+          python -c "import yaml, jsonschema" 2>/dev/null || pip install --no-input pyyaml jsonschema
           python tools/validate_metadata.py
       - name: Enforce policy test coverage thresholds
         run: |
@@ -141,7 +143,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           . .venv/bin/activate
-          # Ensure minimal deps available if venv install skipped
+          # Ensure minimal deps available if venv install skipped (ACT)
           python -c "import yaml, jsonschema" 2>/dev/null || pip install --no-input pyyaml jsonschema
           python tools/validate_metadata.py
       # Kyverno CLI is preinstalled in the CI container image
@@ -185,7 +187,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           . .venv/bin/activate
-          # Ensure minimal deps available if venv install skipped
+          # Ensure minimal deps available if venv install skipped (ACT)
           python -c "import yaml, jsonschema" 2>/dev/null || pip install --no-input pyyaml jsonschema
           python tools/validate_metadata.py
       # OPA is preinstalled in the CI container image
@@ -224,6 +226,8 @@ jobs:
       - name: Enforce policy/test file pairing
         run: |
           . .venv/bin/activate
+          # Ensure minimal deps available if venv install was skipped under ACT
+          python -c "import yaml" 2>/dev/null || pip install --no-input pyyaml
           # Call the Python script directly to avoid depending on make inside container
           python tools/enforce_policy_test_pairs.py
 

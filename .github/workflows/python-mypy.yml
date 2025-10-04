@@ -42,7 +42,7 @@ jobs:
     needs: guard
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || 'latest') }}"
+      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
       options: --user 0:0
     steps:
       - name: Checkout
@@ -56,5 +56,20 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          . .venv/bin/activate
-          mypy --config-file mypy.ini
+          if [ "${ACT:-}" = "true" ] || [ "${IS_ACT:-}" = "true" ]; then
+            # Under ACT, avoid heavy installs inside venv to prevent RWLayer/memory issues.
+            # Prefer mypy already present in the CI image; install only if missing.
+            if ! command -v mypy >/dev/null 2>&1; then
+              echo "[act] mypy not found in base image; attempting lightweight install"
+              python -m pip install --no-input --no-cache-dir mypy || true
+            fi
+            # Ensure minimal runtime deps and type stubs (lightweight)
+            python -c "import yaml" 2>/dev/null || python -m pip install --no-input --no-cache-dir pyyaml || true
+            python -m pip install --no-input --no-cache-dir types-PyYAML types-requests typing_extensions || true
+            mypy --config-file mypy.ini
+          else
+            . .venv/bin/activate
+            python -c "import mypy" 2>/dev/null || pip install --no-input mypy
+            python -c "import yaml" 2>/dev/null || pip install --no-input pyyaml
+            mypy --config-file mypy.ini
+          fi

@@ -19,5 +19,5 @@ test_denies_when_high_spend_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.source_of_funds_checks"]
 test_denies_when_controls_betting_source_of_funds_checks_failing if {
-	some _ in deny with input as {"controls": {}, "player": {"high_spend": true}, "controls[\"betting": {"source_of_funds_checks\"]": false}}
+	some _ in deny with input as {"controls": {"betting.source_of_funds_checks": false}, "player": {"high_spend": true}}
 }

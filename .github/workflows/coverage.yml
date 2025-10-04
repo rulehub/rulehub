@@ -58,6 +58,8 @@ jobs:
       - name: Generate coverage artifacts
         run: |
           . .venv/bin/activate
+          # Ensure minimal deps are present for coverage script under act images
+          python -c "import yaml, jsonschema" 2>/dev/null || pip install --no-input pyyaml jsonschema
           python tools/coverage_map.py
 
       - name: Validate plugin index schema
@@ -74,6 +76,7 @@ jobs:
           EOF
 
       - name: Enforce committed artifacts up-to-date
+        shell: bash
         run: |
           set -euo pipefail
           if [ "${ACT:-}" = "true" ]; then

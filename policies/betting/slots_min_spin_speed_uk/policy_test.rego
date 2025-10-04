@@ -19,5 +19,5 @@ test_denies_when_spin_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.slots_min_spin_speed_uk"]
 test_denies_when_controls_betting_slots_min_spin_speed_uk_failing if {
-	some _ in deny with input as {"controls": {}, "slots": {"spin_time_ms": true}, "controls[\"betting": {"slots_min_spin_speed_uk\"]": false}}
+	some _ in deny with input as {"controls": {"betting.slots_min_spin_speed_uk": false}, "slots": {"spin_time_ms": 2000}}
 }

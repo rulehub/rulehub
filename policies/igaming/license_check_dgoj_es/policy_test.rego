@@ -18,5 +18,5 @@ test_denies_when_control_disabled_and_operator_unlicensed if {
 
 # Auto-generated granular test for controls["betting.license_check_dgoj_es"]
 test_denies_when_controls_betting_license_check_dgoj_es_failing if {
-	some _ in deny with input as {"controls": {}, "operator": {"licensed": true}, "controls[\"betting": {"license_check_dgoj_es\"]": false}}
+	some _ in deny with input as {"controls": {"betting.license_check_dgoj_es": false}, "operator": {"licensed": true}}
 }

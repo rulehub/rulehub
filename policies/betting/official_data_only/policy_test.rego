@@ -21,5 +21,5 @@ test_denies_when_data_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.official_data_only"]
 test_denies_when_controls_betting_official_data_only_failing if {
-	some _ in deny with input as {"controls": {}, "data": {"source": true}, "controls[\"betting": {"official_data_only\"]": false}}
+	some _ in deny with input as {"controls": {"betting.official_data_only": false}, "data": {"source": "unofficial"}}
 }

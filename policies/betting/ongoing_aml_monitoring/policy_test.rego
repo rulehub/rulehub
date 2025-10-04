@@ -18,5 +18,5 @@ test_denies_when_aml_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.ongoing_aml_monitoring"]
 test_denies_when_controls_betting_ongoing_aml_monitoring_failing if {
-	some _ in deny with input as {"controls": {}, "aml": {"txn_monitoring_enabled": true}, "controls[\"betting": {"ongoing_aml_monitoring\"]": false}}
+	some _ in deny with input as {"controls": {"betting.ongoing_aml_monitoring": false}, "aml": {"txn_monitoring_enabled": true}}
 }

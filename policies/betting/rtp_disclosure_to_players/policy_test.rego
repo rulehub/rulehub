@@ -18,5 +18,5 @@ test_denies_when_rtp_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.rtp_disclosure_to_players"]
 test_denies_when_controls_betting_rtp_disclosure_to_players_failing if {
-	some _ in deny with input as {"controls": {}, "game": {"rtp_disclosed": true}, "controls[\"betting": {"rtp_disclosure_to_players\"]": false}}
+	some _ in deny with input as {"controls": {"betting.rtp_disclosure_to_players": false}, "game": {"rtp_disclosed": true}}
 }

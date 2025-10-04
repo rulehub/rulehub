@@ -22,5 +22,5 @@ test_denies_when_participant_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.no_bets_by_participants"]
 test_denies_when_controls_betting_no_bets_by_participants_failing if {
-	some _ in deny with input as {"controls": {}, "participant_role": true, "controls[\"betting": {"no_bets_by_participants\"]": false}}
+	some _ in deny with input as {"controls": {"betting.no_bets_by_participants": false}, "participant_role": "athlete"}
 }

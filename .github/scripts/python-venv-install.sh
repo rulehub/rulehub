@@ -19,6 +19,17 @@ fi
 
 python -m pip install -U pip
 
+# Under nektos/act, multiple jobs may run concurrently inside separate
+# containers. Heavy pip installs across jobs can exhaust Docker's RW layer or
+# memory and lead to exit 137 / "RWLayer unexpectedly nil". To keep ACT runs
+# stable and fast, skip requirements installs entirely when ACT=true; individual
+# steps can install tiny, targeted deps on demand (e.g., pyyaml, jsonschema).
+if [ "${ACT:-}" = "true" ]; then
+  echo "ACT=true detected; skipping requirements installs to reduce parallel load"
+  echo "Python deps installed into .venv (no-op under ACT)"
+  exit 0
+fi
+
 # Shim for conditional deps when lock generated on newer Python
 PY_VER=$(python - <<'EOF'
 import sys
@@ -41,10 +52,30 @@ elif [ -f requirements.txt ]; then
   pip install -r requirements.txt
 fi
 
+# Heuristic: if running under ACT (ACT=true) or common dev tools are already
+# available system-wide (e.g., ruff), skip installing heavy dev requirements.
+# This prevents concurrent jobs from all pulling large wheels (mkdocs, mypy,
+# ruff, etc.) which can cause OOM or Docker RWLayer errors under ACT.
+SKIP_DEV_INSTALL=0
+if [ "${ACT:-}" = "true" ]; then
+  SKIP_DEV_INSTALL=1
+fi
+if command -v ruff >/dev/null 2>&1; then
+  SKIP_DEV_INSTALL=1
+fi
+
 if [ -f requirements-dev.lock ]; then
-  pip install -r requirements-dev.lock
+  if [ "$SKIP_DEV_INSTALL" = "1" ]; then
+    echo "System-wide Python packages present (marker=ruff or ACT=true); skipping dev requirements install"
+  else
+    pip install -r requirements-dev.lock
+  fi
 elif [ -f requirements-dev.txt ]; then
-  pip install -r requirements-dev.txt
+  if [ "$SKIP_DEV_INSTALL" = "1" ]; then
+    echo "System-wide Python packages present (marker=ruff or ACT=true); skipping dev requirements install"
+  else
+    pip install -r requirements-dev.txt
+  fi
 fi
 
 echo "Python deps installed into .venv"

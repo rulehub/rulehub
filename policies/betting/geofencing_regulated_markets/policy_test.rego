@@ -20,5 +20,14 @@ test_denies_when_player_in_disallowed_market_extra if {
 
 # Auto-generated granular test for controls["betting.geofencing_regulated_markets"]
 test_denies_when_controls_betting_geofencing_regulated_markets_failing if {
-	some _ in deny with input as {"controls": {}, "player": {"geo": true}, "controls[\"betting": {"geofencing_regulated_markets\"]": false}}
+	some _ in deny with input as {"controls": {"betting.geofencing_regulated_markets": false}, "allowed_markets": ["GB"], "player": {"geo": "GB"}}
+}
+
+# Edge cases
+test_denies_when_allowed_markets_empty if {
+	count(deny) > 0 with input as {"controls": {"betting.geofencing_regulated_markets": true}, "allowed_markets": [], "player": {"geo": "GB"}}
+}
+
+test_allows_when_player_geo_empty if {
+	allow with input as {"controls": {"betting.geofencing_regulated_markets": true}, "allowed_markets": ["GB", "SE"], "player": {"geo": ""}}
 }

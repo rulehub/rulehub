@@ -23,5 +23,5 @@ test_denies_when_market_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.market_restrictions_youth"]
 test_denies_when_controls_betting_market_restrictions_youth_failing if {
-	some _ in deny with input as {"controls": {}, "market": {"type": true}, "controls[\"betting": {"market_restrictions_youth\"]": false}}
+	some _ in deny with input as {"controls": {"betting.market_restrictions_youth": false}, "market": {"type": "youth"}}
 }

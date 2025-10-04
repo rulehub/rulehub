@@ -23,5 +23,5 @@ test_denies_when_control_disabled_extra if {
 
 # Auto-generated granular test for controls["betting.in_play_delay_controls"]
 test_denies_when_controls_betting_in_play_delay_controls_failing if {
-	some _ in deny with input as {"controls": {}, "live_betting": {"enabled": true}, "controls[\"betting": {"in_play_delay_controls\"]": false}}
+	some _ in deny with input as {"controls": {"betting.in_play_delay_controls": false}, "live_betting": {"enabled": true}}
 }

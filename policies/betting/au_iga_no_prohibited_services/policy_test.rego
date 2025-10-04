@@ -20,5 +20,5 @@ test_denies_when_prohibited_service_offered_extra if {
 
 # Auto-generated granular test for controls["betting.au_iga_no_prohibited_services"]
 test_denies_when_controls_betting_au_iga_no_prohibited_services_failing if {
-	some _ in deny with input as {"controls": {}, "au": {"offer_prohibited_service": true}, "controls[\"betting": {"au_iga_no_prohibited_services\"]": false}}
+	some _ in deny with input as {"controls": {"betting.au_iga_no_prohibited_services": false}, "au": {"offer_prohibited_service": true}}
 }

@@ -18,5 +18,5 @@ test_denies_when_monitoring_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.match_fixing_monitoring"]
 test_denies_when_controls_betting_match_fixing_monitoring_failing if {
-	some _ in deny with input as {"controls": {}, "integrity": {"monitoring_enabled": true}, "controls[\"betting": {"match_fixing_monitoring\"]": false}}
+	some _ in deny with input as {"controls": {"betting.match_fixing_monitoring": false}, "integrity": {"monitoring_enabled": true}}
 }

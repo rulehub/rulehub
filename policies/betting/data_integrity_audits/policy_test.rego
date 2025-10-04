@@ -19,5 +19,5 @@ test_denies_when_data_audit_failed_extra if {
 
 # Auto-generated granular test for controls["betting.data_integrity_audits"]
 test_denies_when_controls_betting_data_integrity_audits_failing if {
-	some _ in deny with input as {"controls": {}, "data": {"audit_passed": true}, "controls[\"betting": {"data_integrity_audits\"]": false}}
+	some _ in deny with input as {"controls": {"betting.data_integrity_audits": false}, "data": {"audit_passed": true}}
 }

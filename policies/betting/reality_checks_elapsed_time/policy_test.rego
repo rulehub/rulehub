@@ -18,5 +18,5 @@ test_denies_when_session_and_control_fail_extra if {
 
 # Auto-generated granular test for controls["betting.reality_checks_elapsed_time"]
 test_denies_when_controls_betting_reality_checks_elapsed_time_failing if {
-	some _ in deny with input as {"controls": {}, "session": {"reality_checks_enabled": true}, "controls[\"betting": {"reality_checks_elapsed_time\"]": false}}
+	some _ in deny with input as {"controls": {"betting.reality_checks_elapsed_time": false}, "session": {"reality_checks_enabled": true}}
 }
