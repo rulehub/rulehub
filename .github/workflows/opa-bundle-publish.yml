@@ -49,6 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -345,7 +348,8 @@ jobs:
     permissions:
       actions: read
       id-token: write
-      contents: read
+      # Reusable workflow requires contents: write when upload-assets=true
+      contents: write
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@5a775b367a56d5bd118a224a811bba288150a563
     with:
       base64-subjects: ${{ needs.build-and-push.outputs.subjects_b64 }}
@@ -357,6 +361,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     needs: [build-and-push]
     permissions:

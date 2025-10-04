@@ -37,6 +37,8 @@ jobs:
         run: |
           set -euo pipefail
           REPO="bridgecrew/checkov"
+          # Provide CHECKOV_IMAGE_DIGEST via a repository Variable or Secret and map it into the environment
+          # (e.g., using a job-level env or a dedicated setup step) so it's available here.
           if [ -n "${CHECKOV_IMAGE_DIGEST:-}" ]; then
             IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
           elif [ "${GITHUB_ACTOR:-}" = "nektos/act" ]; then
@@ -58,8 +60,8 @@ jobs:
           echo "::notice::Docker not available; skipping Checkov run."
 
       - name: Upload SARIF to Code Scanning
-        # Skip under act to avoid external API calls failing locally
-        if: ${{ (success() || failure()) && github.actor != 'nektos/act' }}
+        # Skip under act to avoid external API calls failing locally; only upload if file exists
+        if: ${{ github.actor != 'nektos/act' && hashFiles('checkov.sarif') != '' }}
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           sarif_file: checkov.sarif

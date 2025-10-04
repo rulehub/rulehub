@@ -22,6 +22,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   guard:
@@ -42,15 +43,31 @@ jobs:
   build-index:
     needs: guard
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5')) }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Prepare Python env (venv with baked deps)
         run: |
-          python-venv-install
+          if command -v python-venv-install >/dev/null 2>&1; then
+            python-venv-install
+          else
+            set -euo pipefail
+            if ! command -v python3 >/dev/null 2>&1; then
+              apt-get update && apt-get install -y python3 python3-venv python3-pip
+            fi
+            python3 -m venv .venv
+            . .venv/bin/activate
+            if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          fi
       - name: Generate references index (md+json)
         run: |
           . .venv/bin/activate
@@ -64,18 +81,35 @@ jobs:
     needs: build-index
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     permissions:
       contents: read
       actions: write
+      packages: read
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5')) }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Prepare Python env (venv with baked deps)
         run: |
-          python-venv-install
+          if command -v python-venv-install >/dev/null 2>&1; then
+            python-venv-install
+          else
+            set -euo pipefail
+            if ! command -v python3 >/dev/null 2>&1; then
+              apt-get update && apt-get install -y python3 python3-venv python3-pip
+            fi
+            python3 -m venv .venv
+            . .venv/bin/activate
+            if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          fi
       - name: Generate references index (md+json)
         run: |
           . .venv/bin/activate

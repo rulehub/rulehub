@@ -1,28 +1,41 @@
 name: legacy-scan
 
 on:
+  workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        required: false
+        default: ""
   pull_request:
   push:
     branches: [main]
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   legacy:
     name: Legacy violation[] scan
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-base:latest
+      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, (inputs.ci_image_tag != '' && inputs.ci_image_tag) || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG) || '2025.10.03-f072ceb5') }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Install deps (minimal)
+      - name: Install deps (venv with baked deps)
         run: |
-          python-venv-install
-      - name: Run legacy scan
+          bash .github/scripts/python-venv-install.sh
+      - name: Run deny-usage scan (legacy violation[] enforcement)
         run: |
           . .venv/bin/activate
-          make legacy-scan
+          python tools/deny_usage_scan.py
