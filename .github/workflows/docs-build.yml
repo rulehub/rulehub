@@ -23,6 +23,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   guard:
@@ -39,6 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
@@ -52,9 +56,4 @@ jobs:
           . .venv/bin/activate
           # Ensure mkdocs is available (images may skip dev installs under act)
           mkdocs --version >/dev/null 2>&1 || pip install --no-input mkdocs mkdocs-material mkdocs-get-deps mkdocs-material-extensions ghp-import
-          if [ "${ACT:-}" = "true" ]; then
-            echo "[act] Running mkdocs build without --strict to avoid failing on known local-only warnings (e.g., README.md vs index.md)."
-            mkdocs build --verbose
-          else
-            mkdocs build --strict --verbose
-          fi
+          mkdocs build --strict --verbose

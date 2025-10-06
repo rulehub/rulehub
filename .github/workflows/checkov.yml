@@ -114,8 +114,9 @@ jobs:
           if [ -n "${CHECKOV_IMAGE_DIGEST:-}" ]; then
             IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
           else
-            echo "::warning::CHECKOV_IMAGE_DIGEST not set under act; using '$REPO:latest' ONLY for local testing."
-            IMG="$REPO:latest"
+            echo "ERROR: CHECKOV_IMAGE_DIGEST is required under act runs as well to mirror GitHub Actions; refusing to use ':latest'." >&2
+            echo "Hint: run: act -s CHECKOV_IMAGE_DIGEST=sha256:<digest>" >&2
+            exit 1
           fi
           docker run --rm -v "$PWD:/workspace" -w /workspace "$IMG" \
             checkov -d . --framework kubernetes \
