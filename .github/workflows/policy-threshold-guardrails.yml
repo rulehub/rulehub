@@ -49,17 +49,11 @@ jobs:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
-        run: |
-          input_tag="${{ inputs.ci_image_tag }}"
-          if [ "$input_tag" = "latest" ]; then
-            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
-            exit 1
-          fi
-          if [ -z "$input_tag" ]; then
-            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
-          fi
+        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
   noop-act:
     if: ${{ github.actor == 'nektos/act' }}
     runs-on: ubuntu-latest
@@ -67,8 +61,8 @@ jobs:
       - run: echo "[act] policy-threshold-guardrails skipped."
 
   policy-threshold-guardrails:
-    # Run in CI (non-act) always; allow local act via workflow_dispatch
-    if: ${{ github.actor != 'nektos/act' || github.event_name == 'workflow_dispatch' }}
+    # Run in CI (non-act) only; under act we rely on Stage 1 or noop path
+    if: ${{ github.actor != 'nektos/act' }}
     name: Threshold & Guardrails
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -96,59 +90,32 @@ jobs:
       - name: Enforce policy test thresholds
         run: |
           set -euo pipefail
-          . .venv/bin/activate
-          # Generate coverage first to ensure JSON is fresh, then enforce thresholds
-          python tools/policy_test_coverage.py >/dev/null
-          python tools/enforce_policy_test_thresholds.py
+          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/policy_test_coverage.py >/dev/null
+          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/enforce_policy_test_thresholds.py
 
       - name: Run guardrails aggregate
         env:
           FAIL_LINK_AUDIT: "0"
         run: |
           set -euo pipefail
-          # Prefer venv Python; fall back to system Python if deps missing; install into venv as last resort
-          . .venv/bin/activate || true
-          PYBIN=python
-          if ! $PYBIN -c 'import yaml, jsonschema' >/dev/null 2>&1
-          then
-            echo "[guardrails] venv missing deps; attempting system Python"
-            deactivate || true
-            PYBIN=python3
-            if ! $PYBIN -c 'import yaml, jsonschema' >/dev/null 2>&1
-            then
-              echo "[guardrails] system Python missing deps; attempting local install into venv"
-              . .venv/bin/activate || true
-              python -m pip install --disable-pip-version-check -q PyYAML jsonschema || true
-              PYBIN=python
-            else
-              echo "[guardrails] using system Python for guardrails"
-            fi
-          else
-            echo "[guardrails] using venv Python for guardrails"
-          fi
-          echo "[guardrails] running generic-only test guardrail"
-          $PYBIN tools/enforce_no_generic_only_tests.py
-          echo "[guardrails] generic-only OK"
-          echo "[guardrails] running metadata paths guardrail"
-          $PYBIN tools/guardrail_metadata_paths.py
-          echo "[guardrails] metadata paths OK"
-          echo "[guardrails] enforcing policy test pairs"
-          $PYBIN tools/enforce_policy_test_pairs.py
-          echo "[guardrails] test pairs OK"
-          echo "[guardrails] validating metadata schema"
-          $PYBIN tools/validate_metadata_schema.py
-          echo "[guardrails] schema OK"
-          echo "[guardrails] link normalization check"
-          $PYBIN tools/normalize_links.py --check --eli || echo "[guardrails] link-normalize-check non-fatal issues"
-          echo "[guardrails] link audit"
+          # Generic-only test guardrail
+          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/enforce_no_generic_only_tests.py
+          # Metadata paths guardrail
+          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/guardrail_metadata_paths.py
+          # Test pairs guardrail
+          bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/enforce_policy_test_pairs.py
+          # Schema validation
+          bash .github/scripts/python-ensure-and-run.sh "import jsonschema" python tools/validate_metadata_schema.py
+          # Link normalization (non-fatal)
+          bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/normalize_links.py --check --eli || echo "[guardrails] link-normalize-check non-fatal issues"
+          # Link audit
           if [ "${FAIL_LINK_AUDIT}" = "1" ]; then
-            $PYBIN tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null
-            $PYBIN tools/compare_links_baseline.py || exit 1
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null
+            python tools/compare_links_baseline.py || exit 1
           else
-            $PYBIN tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null || true
-            $PYBIN tools/compare_links_baseline.py || echo "[guardrails] link-audit non-fatal"
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null || true
+            python tools/compare_links_baseline.py || echo "[guardrails] link-audit non-fatal"
           fi
-          echo "[guardrails] link audit complete"
           echo "[guardrails] complete"
 
       - name: Upload coverage artifacts

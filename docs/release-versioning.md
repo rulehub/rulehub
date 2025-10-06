@@ -33,14 +33,14 @@ Examples of safe MINOR increments:
 - Adding new annotations, SBOM formats, attestations, or documentation pages.
 - Logic corrections that only reduce false negatives or false positives without requiring new input fields and are unlikely to break pipelines.
 - Documentation, examples, README, site content changes.
-- CI/workflow improvements not altering published artifact contents (hash stable) — if the bundle bytes change due to a policy fix, it is at minimum a PATCH.
+- CI/workflow improvements not altering published artifact contents (hash stable) - if the bundle bytes change due to a policy fix, it is at minimum a PATCH.
 
 
 ## Patch Changes
 
 - Logic corrections that only reduce false negatives or false positives without requiring new input fields and are unlikely to break pipelines.
 - Documentation, examples, README, site content changes.
-- CI/workflow improvements not altering published artifact contents (hash stable) — if the bundle bytes change due to a policy fix, it is at minimum a PATCH.
+- CI/workflow improvements not altering published artifact contents (hash stable) - if the bundle bytes change due to a policy fix, it is at minimum a PATCH.
 
 ## Pre-1.0.0 Policy
 
@@ -48,10 +48,10 @@ Before `v1.0.0`, minor version bumps (0.Y.Z) may include changes that would othe
 
 ## Release Flow
 
-1. Merge changes to `main` — automated publish workflow builds snapshot bundle (`main-<shortsha>` tag in GHCR) with manifest + SBOM + signatures + provenance.
+1. Merge changes to `main` - automated publish workflow builds snapshot bundle (`main-<shortsha>` tag in GHCR) with manifest + SBOM + signatures + provenance.
 2. Prepare a release PR using `release-please` (generates updated CHANGELOG and version bump proposal based on commit conventions).
 3. On tag push / GitHub Release publish (`vX.Y.Z`), the workflow rebuilds, signs, attests and attaches artifacts to the Release.
-4. Docs site (MkDocs) can be deployed separately (`make docs-deploy`) – ensure `site_url` matches GitHub Pages.
+4. Docs site (MkDocs) can be deployed separately (`make docs-deploy`) - ensure `site_url` matches GitHub Pages.
 5. Consumers pin exact tags or immutable digests (recommended: digest from provenance / manifest integrity verification).
 
 ## Commit & Changelog Conventions
@@ -61,7 +61,7 @@ Use conventional commit-like prefixes to aid automated tooling (not strictly enf
 - `feat(policy): ...` new policy or enhancement (likely MINOR)
 - `fix(policy): ...` logic correction (PATCH)
 - `refactor(policy): ...` internal change (PATCH unless behavior changes)
-- `break(policy)!: ...` denotes breaking change (MAJOR) — include migration notes.
+- `break(policy)!: ...` denotes breaking change (MAJOR) - include migration notes.
 - `docs: ...` documentation only.
 - `build|ci|chore: ...` infra / tooling.
 

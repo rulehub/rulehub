@@ -26,15 +26,7 @@ jobs:
     steps:
       - name: Enforce non-latest CI image tag
         shell: bash
-        run: |
-          input_tag="${{ inputs.ci_image_tag }}"
-          if [ "$input_tag" = "latest" ]; then
-            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
-            exit 1
-          fi
-          if [ -z "$input_tag" ]; then
-            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
-          fi
+        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
   build-and-deploy:
     # Skip under act; publishing to Pages is CI-only
     if: ${{ github.actor != 'nektos/act' }}

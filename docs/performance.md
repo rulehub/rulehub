@@ -33,8 +33,8 @@ A lightweight guard ensures performance regression detection:
 1. Run `make perf-coverage` (invokes `tools/perf_check_coverage.py`).
 2. Script parses `--profile` output; compares `total` against thresholds.
 3. Environment variables:
-   - `COVERAGE_MAX_SECONDS` (default 5.0) – hard fail (exit 5) if exceeded.
-   - `COVERAGE_WARN_SECONDS` (default 75% of max) – soft warning (exit 3) if exceeded.
+   - `COVERAGE_MAX_SECONDS` (default 5.0) - hard fail (exit 5) if exceeded.
+   - `COVERAGE_WARN_SECONDS` (default 75% of max) - soft warning (exit 3) if exceeded.
 4. CI job marks build unstable (treat exit 3 as warn); blocks merge on exit 5.
 
 Initial recommended settings:
@@ -70,7 +70,7 @@ Goal: Prepare for future scale where `dist/index.json` (currently a single JSON 
 
 ### Drivers
 
-- JSON size growth: O(policy_count); at several thousand policies >1–2 MB may affect initial page load & caching.
+- JSON size growth: O(policy_count); at several thousand policies >1-2 MB may affect initial page load & caching.
 - Differential fetch: allow clients to only pull needed segment(s) (e.g., lazy search index construction).
 - Integrity: enable per-page hashing so partial corruption is detectable.
 
@@ -78,9 +78,9 @@ Goal: Prepare for future scale where `dist/index.json` (currently a single JSON 
 
 Artifacts (new optional files alongside existing single file):
 
-1. `dist/index.json` (UNCHANGED for compatibility) – still contains full `{"packages": [...]}` list.
-2. `dist/index-pages.json` (manifest) – metadata describing paging set.
-3. `dist/index-page-<n>.json` – individual page files containing a slice of packages array.
+1. `dist/index.json` (UNCHANGED for compatibility) - still contains full `{"packages": [...]}` list.
+2. `dist/index-pages.json` (manifest) - metadata describing paging set.
+3. `dist/index-page-<n>.json` - individual page files containing a slice of packages array.
 
 The paging artifacts are additive; existing consumers continue reading monolithic `index.json` until upgraded.
 
@@ -139,11 +139,11 @@ Package object remains unchanged to preserve plugin data contract.
 
 Phase 0 (Current): Only `index.json` produced.
 
-Phase 1 (Additive – Proposed): Produce both monolith and paged set (flag `PAGED_INDEX=1` or
+Phase 1 (Additive - Proposed): Produce both monolith and paged set (flag `PAGED_INDEX=1` or
 auto when `len(packages) > PAGE_THRESHOLD`). Plugin continues to read monolith; experimental
 plugin reads manifest first if present.
 
-Phase 2 (Opt-In Consumption): Document plugin upgrade path: try manifest → fall back to
+Phase 2 (Opt-In Consumption): Document plugin upgrade path: try manifest -> fall back to
 monolith. Provide feature flag `USE_PAGED_INDEX` in plugin config.
 
 Phase 3 (Future Optional): If size exceeds hard threshold (e.g., 5 MB), monolith may contain
@@ -163,7 +163,7 @@ Only after broad adoption; not planned yet.
 
 ### Page Size Selection
 
-- Default target: 200 packages per page (env `INDEX_PAGE_SIZE`). Balances ~50–150 KB compressed per
+- Default target: 200 packages per page (env `INDEX_PAGE_SIZE`). Balances ~50-150 KB compressed per
    page (estimate) vs request overhead.
 - Hard minimum: 50 (avoid too many small requests). Hard maximum: 1000 (avoid large transfers defeating purpose).
 
@@ -180,7 +180,7 @@ Only after broad adoption; not planned yet.
 ### Client Consumption Flow (Plugin Upgrade)
 
 1. Attempt fetch `index-pages.json`.
-2. If 404 → load fallback monolithic `index.json`.
+2. If 404 -> load fallback monolithic `index.json`.
 3. Else parse manifest, optionally validate `monolith.sha256` (defense-in-depth), then lazily fetch
    pages (e.g., first page for summary; others for search / detail view).
 4. Optionally verify each page hash after download.

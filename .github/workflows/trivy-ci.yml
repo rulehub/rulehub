@@ -4,6 +4,7 @@ name: security-trivy
   pull_request:
   push:
     branches: [main, master]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,8 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  trivy-config-scan:
-    name: Trivy IaC (config) scan
+  trivy-iac-gh:
+    if: ${{ github.actor != 'nektos/act' }}
+    name: Trivy IaC (config) scan (GH)
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write # to create/update PR comments
@@ -32,7 +34,6 @@ jobs:
         run: bash .github/scripts/trivy-iac.sh
 
       - name: Upload SARIF to Code Scanning
-        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           sarif_file: trivy-results.sarif
@@ -45,7 +46,7 @@ jobs:
           printf "TRIVY_SUMMARY<<'EOF'\n%s\nEOF\n" "$SUMMARY" >> "$GITHUB_ENV"
 
       - name: Create or update PR comment
-        if: ${{ github.event_name == 'pull_request' && github.actor != 'nektos/act' }}
+        if: ${{ github.event_name == 'pull_request' }}
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
         env:
           TRIVY_SUMMARY: ${{ env.TRIVY_SUMMARY }}
@@ -54,8 +55,25 @@ jobs:
           body: ${{ env.TRIVY_SUMMARY }}
 
       - name: Upload SARIF as artifact (optional)
-        if: ${{ always() && github.actor != 'nektos/act' }}
+        if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: trivy-sarif
           path: trivy-results.sarif
+
+  trivy-iac-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    name: Trivy IaC (config) scan (ACT)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Trivy IaC via Docker (produce SARIF)
+        id: trivy_iac
+        env:
+          TRIVY_VERSION: 0.56.2
+          ACT: "true"
+        run: bash .github/scripts/trivy-iac.sh

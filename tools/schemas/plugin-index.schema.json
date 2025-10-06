@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "RuleHub Backstage Plugin Index",
   "description": "Schema for dist/index.json consumed by the Backstage policy catalog plugin.",
   "type": "object",
@@ -18,17 +18,23 @@
             "description": "Stable policy identifier <namespace>.<short_id> (e.g., pci.storage_encryption).",
             "pattern": "^[a-z0-9_.-]+\\.[a-z0-9_.-]+$"
           },
-            "name": {"type": "string", "description": "Human-friendly policy name."},
-            "standard": {"type": "string", "description": "Source domain / standard (PCI DSS, GDPR, etc.)."},
-            "version": {"type": ["string", "number"], "description": "Version of the standard / domain."},
-            "coverage": {
-              "type": "array",
-              "description": "Readable labels of regulation sections referencing this policy.",
-              "items": {"type": "string"}
-            }
+          "name": { "type": "string", "description": "Human-friendly policy name." },
+          "standard": {
+            "type": "string",
+            "description": "Source domain / standard (PCI DSS, GDPR, etc.)."
+          },
+          "version": {
+            "type": ["string", "number"],
+            "description": "Version of the standard / domain."
+          },
+          "coverage": {
+            "type": "array",
+            "description": "Readable labels of regulation sections referencing this policy.",
+            "items": { "type": "string" }
           }
         }
       }
-    },
+    }
+  },
   "additionalProperties": false
 }

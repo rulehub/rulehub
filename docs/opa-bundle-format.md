@@ -33,11 +33,11 @@ Semantics:
 
 ## Verification Layers
 
-1. File-level hashing (per policy source file) — detects modification.
-2. Aggregate hash — detects insertion, deletion, reordering, or hash substitution.
-3. Cosign signature over the bundle tarball (`sign-blob`) — cryptographic integrity + origin (GitHub OIDC / Fulcio cert) of the packaged result.
+1. File-level hashing (per policy source file) - detects modification.
+2. Aggregate hash - detects insertion, deletion, reordering, or hash substitution.
+3. Cosign signature over the bundle tarball (`sign-blob`) - cryptographic integrity + origin (GitHub OIDC / Fulcio cert) of the packaged result.
 4. Optional: cosign signature (or future attestation) over the manifest itself.
-5. SBOM — transparency of included components, enabling vulnerability & license workflows.
+5. SBOM - transparency of included components, enabling vulnerability & license workflows.
 
 ## Build & Verify Workflow
 

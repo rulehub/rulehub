@@ -1,70 +1,134 @@
 name: updates-dry-run
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    renovate-dry-run:
-        if: ${{ github.actor != 'nektos/act' }}
-        runs-on: ubuntu-latest
-        timeout-minutes: 30
-        container:
-            image: ghcr.io/renovatebot/renovate:37
-            options: --user 0:0
-        steps:
-            - name: Checkout
-              uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+  renovate-dry-run-gh:
+    if: ${{ github.actor != 'nektos/act' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: ghcr.io/renovatebot/renovate:37
+      options: --user 0:0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-            - name: Run Renovate (dry-run, local platform)
-              env:
-                  LOG_LEVEL: info
-                  RENOVATE_DRY_RUN: full
-                  GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  mkdir -p dist
-                  # Choose managers: under act default to github-actions only for speed; in CI run both
-                  if [ "${GITHUB_ACTOR:-}" = "nektos/act" ]; then
-                    MANAGERS="github-actions"
-                  else
-                    MANAGERS="github-actions,pip_requirements"
-                  fi
-                  echo "Using managers: ${MANAGERS}"
-                  # Helper: timeout if available (prevents long pulls/hangs under act)
-                  TOUT=""
-                  if command -v timeout >/dev/null 2>&1; then
-                    TOUT="timeout -k 10 300s"
-                    echo "Using timeout wrapper: ${TOUT}"
-                  fi
-                  renovate \
-                    --platform=local \
-                    --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" \
-                    --require-config=true \
-                    --enabled-managers="${MANAGERS}" \
-                    --print-config > dist/renovate.print-config.json
-                  # Produce JSON report of detected updates
-                  ${TOUT} renovate --platform=local --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" --require-config=true --dry-run \
-                    --enabled-managers="${MANAGERS}" \
-                    --log-file=dist/renovate.log || true
-                  # Summarize key findings (best-effort)
-                  echo "Renovate dry-run completed. See attached log." > dist/renovate-summary.txt
+      - name: Run Renovate (dry-run, local platform)
+        env:
+          LOG_LEVEL: info
+          RENOVATE_DRY_RUN: full
+          GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p dist
+          # Provide minimal local config to satisfy --require-config
+          cat > dist/renovate.local.json <<'JSON'
+          {
+            "extends": ["config:recommended"],
+            "dependencyDashboard": false,
+            "prHourlyLimit": 0
+          }
+          JSON
+          # Managers: run both in GitHub CI
+          MANAGERS="github-actions,pip_requirements"
+          echo "Using managers: ${MANAGERS}"
+          renovate \
+            --platform=local \
+            --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" \
+            --require-config=true \
+            --config-file=dist/renovate.local.json \
+            --enabled-managers="${MANAGERS}" \
+            --print-config > dist/renovate.print-config.json
+          # Produce JSON report of detected updates
+          renovate --platform=local --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" --require-config=true --dry-run \
+            --config-file=dist/renovate.local.json \
+            --enabled-managers="${MANAGERS}" \
+            --log-file=dist/renovate.log || true
+          # Summarize key findings (best-effort)
+          echo "Renovate dry-run completed. See attached log." > dist/renovate-summary.txt
 
-            - name: Show summary (act-friendly)
-              if: ${{ always() }}
-              run: |
-                  echo "---- Renovate Summary ----"
-                  [ -f dist/renovate-summary.txt ] && cat dist/renovate-summary.txt || true
-                  echo "---- Renovate Log (last 200 lines) ----"
-                  [ -f dist/renovate.log ] && tail -n 200 dist/renovate.log || true
+      - name: Upload dry-run report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: renovate-dry-run
+          path: |
+            dist/renovate.log
+            dist/renovate.print-config.json
+            dist/renovate-summary.txt
 
-            - name: Upload dry-run report
-              if: ${{ always() && github.actor != 'nektos/act' }}
-              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-              with:
-                  name: renovate-dry-run
-                  path: |
-                      dist/renovate.log
-                      dist/renovate.print-config.json
-                      dist/renovate-summary.txt
+  renovate-dry-run-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Preflight (docker)
+        run: |
+          docker version || true
+
+      - name: Run Renovate (act-friendly dry-run)
+        env:
+          LOG_LEVEL: info
+          RENOVATE_DRY_RUN: full
+          # Avoid GitHub API calls failing under act; platform=local should not require this
+          GITHUB_COM_TOKEN: ""
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cat > dist/renovate.local.json <<'JSON'
+          {
+            "extends": ["config:recommended"],
+            "dependencyDashboard": false,
+            "prHourlyLimit": 0
+          }
+          JSON
+          # Limit scope under act for speed/stability
+          MANAGERS="github-actions"
+          echo "Using managers: ${MANAGERS}"
+          # Use dockerized renovate to avoid job.container issues under act
+          DOCKER_IMG="ghcr.io/renovatebot/renovate:37"
+          # Print-config (best-effort)
+          docker run --rm -u 0:0 \
+            -v "${GITHUB_WORKSPACE:-$PWD}":/repo \
+            -w /repo \
+            -e LOG_LEVEL \
+            -e RENOVATE_DRY_RUN \
+            -e GITHUB_COM_TOKEN \
+            "$DOCKER_IMG" \
+            renovate --platform=local --local-dir=/repo --require-config=true \
+            --config-file=/repo/dist/renovate.local.json \
+            --enabled-managers="${MANAGERS}" \
+            --print-config > dist/renovate.print-config.json || true
+          # Best-effort dry-run with timeout if available
+          TOUT=""
+          if command -v timeout >/dev/null 2>&1; then
+            TOUT="timeout -k 10 300s"
+            echo "Using timeout wrapper: ${TOUT}"
+          fi
+          ${TOUT} docker run --rm -u 0:0 \
+            -v "${GITHUB_WORKSPACE:-$PWD}":/repo \
+            -w /repo \
+            -e LOG_LEVEL \
+            -e RENOVATE_DRY_RUN \
+            -e GITHUB_COM_TOKEN \
+            "$DOCKER_IMG" \
+            renovate --platform=local --local-dir=/repo --require-config=true --dry-run \
+            --config-file=/repo/dist/renovate.local.json \
+            --enabled-managers="${MANAGERS}" \
+            --log-file=/repo/dist/renovate.log || true
+          echo "Renovate dry-run (act) completed. See dist/renovate.log if present." > dist/renovate-summary.txt
+
+      - name: Show summary (act-friendly)
+        if: ${{ always() }}
+        run: |
+          echo "---- Renovate Summary ----"
+          [ -f dist/renovate-summary.txt ] && cat dist/renovate-summary.txt || true
+          echo "---- Renovate Log (last 200 lines) ----"
+          [ -f dist/renovate.log ] && tail -n 200 dist/renovate.log || true

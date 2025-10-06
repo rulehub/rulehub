@@ -23,8 +23,9 @@ Thumbs.db
 .idea/**/shelf/
 .idea/**/deployment.xml
 .idea/**/dictionaries/
-# VS Code
-.vscode/
+# VS Code (keep settings tracked)
+.vscode/*
+!.vscode/settings.json
 .vscode/*.code-workspace
 .vscode/.history/
 *.code-workspace
@@ -46,12 +47,16 @@ __pycache__/
 *.pyd
 *.cover
 .coverage*
+.coverage
+coverage.*
 .pytest_cache/
 .mypy_cache/
 .hypothesis/
 .nox/
 htmlcov/
 coverage.xml
+.tox/
+.cache/
 .benchmarks/
 __pypackages__/
 pip-wheel-metadata/

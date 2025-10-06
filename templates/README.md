@@ -2,14 +2,14 @@ Templates overview
 
 - Policy (OPA/Rego) template: templates/policy/\*
 
-  - metadata.yaml.tmpl — RuleHub metadata for coverage/catalogs
-  - policy.rego.tmpl — Rego v1-safe allow/violation pattern
-  - policy_test.rego.tmpl — two minimal tests
+  - metadata.yaml.tmpl - RuleHub metadata for coverage/catalogs
+  - policy.rego.tmpl - Rego v1-safe allow/violation pattern
+  - policy_test.rego.tmpl - two minimal tests
 
 - Gatekeeper templates: templates/gatekeeper/\*
 
-  - constrainttemplate.yaml.tmpl — define <Kind> and Rego logic
-  - constraint.yaml.tmpl — instantiate <Kind> with params and match
+  - constrainttemplate.yaml.tmpl - define <Kind> and Rego logic
+  - constraint.yaml.tmpl - instantiate <Kind> with params and match
 
 - Kyverno template: templates/kyverno/policy.yaml.tmpl
 

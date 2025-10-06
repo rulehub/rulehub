@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "$id": "https://example.com/rulehub/metadata.schema.json",
   "title": "RuleHub Policy Metadata",
   "type": "object",
@@ -8,61 +8,64 @@
   "properties": {
     "id": {
       "type": "string",
-  "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$",
+      "pattern": "^[a-z0-9_]+\\.[a-z0-9_]+$",
       "description": "Policy identifier domain.short_id (lowercase, dot separated)."
     },
-    "name": {"type": "string", "minLength": 3},
+    "name": { "type": "string", "minLength": 3 },
     "standard": {
       "description": "Either a string or object with name/version for the governing standard.",
       "oneOf": [
-        {"type": "string"},
+        { "type": "string" },
         {
           "type": "object",
-            "required": ["name"],
-            "properties": {
-              "name": {"type": "string"},
-              "version": {"type": ["string", "number"], "description": "Standard version (string/number)"}
-            },
-            "additionalProperties": false
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "version": {
+              "type": ["string", "number"],
+              "description": "Standard version (string/number)"
+            }
+          },
+          "additionalProperties": false
         }
       ]
     },
-    "version": {"type": ["string", "number"], "description": "Deprecated: prefer standard.version when standard is object."},
+    "version": {
+      "type": ["string", "number"],
+      "description": "Deprecated: prefer standard.version when standard is object."
+    },
     "path": {
       "description": "List of file paths (policy.rego, policy_test.rego, templates, etc.)",
-      "oneOf": [
-        {"type": "string"},
-        {"type": "array", "items": {"type": "string"}}
-      ]
+      "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
     },
-    "description": {"type": "string", "minLength": 5},
-    "framework": {"type": "string", "enum": ["gatekeeper", "kyverno", "k8s", "other", ""]},
-    "severity": {"type": "string", "enum": ["info", "low", "medium", "high", "critical"]},
-    "owner": {"type": "string"},
+    "description": { "type": "string", "minLength": 5 },
+    "framework": { "type": "string", "enum": ["gatekeeper", "kyverno", "k8s", "other", ""] },
+    "severity": { "type": "string", "enum": ["info", "low", "medium", "high", "critical"] },
+    "owner": { "type": "string" },
     "tags": {
       "type": "array",
-  "items": {"type": "string", "pattern": "^[a-z0-9_\\-]+$"},
+      "items": { "type": "string", "pattern": "^[a-z0-9_\\-]+$" },
       "minItems": 1,
       "uniqueItems": true
     },
     "links": {
       "type": "array",
-      "items": {"type": "string", "format": "uri"}
+      "items": { "type": "string", "format": "uri" }
     },
     "geo": {
       "type": "object",
       "required": ["regions", "countries"],
       "properties": {
-        "regions": {"type": "array", "items": {"type": "string"}},
-        "countries": {"type": "array", "items": {"type": "string"}},
-        "subregions": {"type": "array", "items": {"type": "string"}},
-        "scope": {"type": "string"}
+        "regions": { "type": "array", "items": { "type": "string" } },
+        "countries": { "type": "array", "items": { "type": "string" } },
+        "subregions": { "type": "array", "items": { "type": "string" } },
+        "scope": { "type": "string" }
       },
       "additionalProperties": true
     },
     "jurisdiction": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": { "type": "string" },
       "description": "Optional jurisdiction codes relevant to policy scope."
     }
   }

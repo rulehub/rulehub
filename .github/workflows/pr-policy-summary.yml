@@ -3,6 +3,7 @@ name: PR Policy Summary
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,7 +16,8 @@ jobs:
       - run: echo "[act] pr-policy-summary skipped."
 
   summary:
-    if: ${{ github.event.pull_request.draft == false && github.actor != 'nektos/act' }}
+    # Guard against act and non-PR events (where pull_request fields are undefined)
+    if: ${{ github.actor != 'nektos/act' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false) }}
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

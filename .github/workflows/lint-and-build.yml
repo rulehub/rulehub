@@ -8,24 +8,24 @@ on:
 
 permissions:
   contents: read
-  security-events: write # for SARIF upload
+  security-events: write
 
 jobs:
-  yamllint:
-    name: Lint YAML files
+  yamllint-gh:
+    name: Lint YAML files (GitHub)
+    if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: Setup Node (for Spectral linting)
-        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "20"
+          # pinned commit to avoid drift
 
       - name: Set up Python (with pip cache)
-        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.11"
@@ -35,42 +35,43 @@ jobs:
             requirements.txt
             requirements-dev.lock
             requirements-dev.txt
-
-      - name: Set up Python (act, no cache)
-        if: ${{ github.actor == 'nektos/act' }}
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
-
-      # setup-node already configured above; reuse for npx
+          # pinned commit to avoid drift
 
       - name: Run Spectral (JSON->SARIF)
-        if: ${{ github.actor != 'nektos/act' }}
         run: |
-          # Use npx to run Spectral, output JSON to stdout and convert to SARIF
           npx --yes @stoplight/spectral lint --ruleset .spectral.yml --format json . \
             | python3 tools/convert_spectral_to_sarif.py - --output spectral.sarif || true
         continue-on-error: true
 
       - name: Upload Spectral SARIF artifact
-        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: spectral-sarif
           path: spectral.sarif
           if-no-files-found: ignore
 
-      - name: Skip Spectral under act
-        if: ${{ github.actor == 'nektos/act' }}
-        run: echo "[act] Skipping Spectral (action dependency missing under local runner)"
+  yamllint-act:
+    name: Lint YAML files (act)
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-  # plugin build removed: plugin has been moved to separate repository
+      - name: Install yamllint (apt)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y yamllint
+
+      - name: Run yamllint (parsable)
+        run: |
+          yamllint . -f parsable
 
   upload-sarif:
     name: Upload SARIF to code scanning
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
-    needs: yamllint
+    needs: yamllint-gh
     permissions:
       contents: read
       security-events: write

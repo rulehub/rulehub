@@ -8,8 +8,8 @@ This guide shows how to install dependencies, generate coverage, run tests, and 
 - Kyverno and/or Gatekeeper pre‑installed in the cluster (enable only what you need)
 - Python 3.11+ and pip (for coverage and index generation)
 - Node.js 18+ (for building the Backstage plugin, if used)
-- OPA 1.7+ (to run Rego v1 tests) — optional
-- ORAS CLI — optional (to publish the OPA bundle to an OCI registry)
+- OPA 1.7+ (to run Rego v1 tests) - optional
+- ORAS CLI - optional (to publish the OPA bundle to an OCI registry)
 
 ## Steps
 
@@ -55,11 +55,11 @@ make test-tools
 
 ## Repository structure (short)
 
-- `addons/**` — Kyverno & Gatekeeper policy YAML (authoring source)
+- `addons/**` - Kyverno & Gatekeeper policy YAML (authoring source)
 - (Helm chart moved to external repo: rulehub/rulehub-charts)
-- `policies/**` — Rego policies (compliance/metadata/tests)
-- `compliance/maps/*.yml` — compliance maps for regions/regulations
-- `tools/**` — generators, validators (sync helpers removed)
-- `docs/**` — documentation and reports
+- `policies/**` - Rego policies (compliance/metadata/tests)
+- `compliance/maps/*.yml` - compliance maps for regions/regulations
+- `tools/**` - generators, validators (sync helpers removed)
+- `docs/**` - documentation and reports
 
 See also: `docs/k8s-policies.md`, `docs/policy-architecture.md`, `docs/README.md`.

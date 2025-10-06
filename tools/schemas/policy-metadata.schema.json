@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "$id": "https://example.org/schemas/policy-metadata.schema.json",
   "title": "Policy Metadata",
   "type": "object",
@@ -26,7 +26,10 @@
         }
       ]
     },
-    "version": { "type": "string", "description": "Flat form version; not required if standard is an object." },
+    "version": {
+      "type": "string",
+      "description": "Flat form version; not required if standard is an object."
+    },
     "description": { "type": "string" },
     "framework": {
       "type": ["string", "null"],
@@ -59,10 +62,7 @@
     },
     "jurisdiction": { "type": ["array", "null"], "items": { "type": "string" } },
     "path": {
-      "oneOf": [
-        { "type": "string" },
-        { "type": "array", "items": { "type": "string" } }
-      ],
+      "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }],
       "description": "One or more relative paths to policy files"
     }
   },

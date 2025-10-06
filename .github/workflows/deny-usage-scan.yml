@@ -19,17 +19,11 @@ jobs:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
-        run: |
-          input_tag="${{ inputs.ci_image_tag }}"
-          if [ "$input_tag" = "latest" ]; then
-            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
-            exit 1
-          fi
-          if [ -z "$input_tag" ]; then
-            echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
-          fi
+        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
 
   scan:
     name: Rego deny[] rule enforcement scan
@@ -50,4 +44,4 @@ jobs:
       - name: Run deny usage scan
         run: |
           . .venv/bin/activate
-          python tools/deny_usage_scan.py
+          bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/deny_usage_scan.py

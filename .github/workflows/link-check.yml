@@ -1,8 +1,6 @@
 name: link-check
 
 on:
-  schedule:
-    - cron: "0 3 * * *"
   pull_request:
     paths:
       - "**/*.md"
@@ -13,7 +11,8 @@ permissions:
   contents: read
 
 jobs:
-  lychee:
+  lychee-gh:
+    if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -40,8 +39,6 @@ jobs:
         if: ${{ steps.docker.outputs.available == 'true' }}
         run: |
           set -e
-          # Under act we prefer classification over immediate failure to reduce flakiness
-          if [ "${ACT:-}" = "true" ]; then export LYCHEE_ACT_MODE=1; fi
           ATTEMPTS=3
           for i in $(seq 1 $ATTEMPTS); do
             echo "[lychee] attempt $i/$ATTEMPTS";
@@ -54,26 +51,12 @@ jobs:
           done
           if [ "$success" != "1" ]; then
             echo "[lychee] final classification run (JSON output)";
-            # Produce JSON for classification (do not fail pipeline here)
             docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
               lychee --format json --no-progress --max-concurrency 8 --timeout 20s \
                 --exclude-path dist --exclude-path site \
                 --exclude "https://github.com/rulehub/rulehub-charts" \
                 **/*.md > lychee.json || true
-            # If running under act, fail on hard errors (non-429/5xx), ignore soft (429/5xx) flakiness
-            if [ "${ACT:-}" = "true" ]; then
-              python3 .github/scripts/classify_lychee.py lychee.json || echo "[act] classification indicates failures";
-              HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
-              if [ "$HARD" -gt 0 ]; then
-                echo "[act] hard link failures detected: $HARD" >&2
-                exit 1
-              else
-                echo "[act] only soft link failures (or none); ignoring under act"
-                exit 0
-              fi
-            else
-              python3 .github/scripts/classify_lychee.py lychee.json || exit 1
-            fi
+            python3 .github/scripts/classify_lychee.py lychee.json || exit 1
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -81,14 +64,14 @@ jobs:
         if: ${{ steps.docker.outputs.available != 'true' }}
         run: echo "::notice::Docker not available; skipping lychee run locally."
       - name: Upload lychee.json (if present)
-        if: ${{ always() && github.actor != 'nektos/act' }}
+        if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: lychee-report
           path: lychee.json
           if-no-files-found: ignore
       - name: Step summary
-        if: ${{ always() && github.actor != 'nektos/act' }}
+        if: ${{ always() }}
         run: |
           if [ -f lychee.json ]; then
             HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
@@ -102,3 +85,58 @@ jobs:
             echo "### Link Check Summary" >> $GITHUB_STEP_SUMMARY
             echo "All attempts succeeded; no lychee.json produced." >> $GITHUB_STEP_SUMMARY
           fi
+
+  lychee-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    env:
+      ACT: "true"
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Prepare classification runtime (Python already on runner)
+        run: |
+          python3 --version || true
+      - name: Detect Docker availability
+        id: docker
+        run: |
+          if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run link check (lychee pinned w/ retries)
+        if: ${{ steps.docker.outputs.available == 'true' }}
+        run: |
+          set -e
+          export LYCHEE_ACT_MODE=1
+          ATTEMPTS=3
+          for i in $(seq 1 $ATTEMPTS); do
+            echo "[lychee] attempt $i/$ATTEMPTS";
+            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
+              lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
+                --exclude-path dist --exclude-path site \
+                --exclude "https://github.com/rulehub/rulehub-charts" \
+                **/*.md && success=1 && break || success=0
+            echo "[lychee] attempt $i failed; sleeping 10s before retry"; sleep 10;
+          done
+          if [ "$success" != "1" ]; then
+            echo "[lychee] final classification run (JSON output)";
+            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
+              lychee --format json --no-progress --max-concurrency 8 --timeout 20s \
+                --exclude-path dist --exclude-path site \
+                --exclude "https://github.com/rulehub/rulehub-charts" \
+                **/*.md > lychee.json || true
+            python3 .github/scripts/classify_lychee.py lychee.json || echo "[act] classification indicates failures";
+            HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
+            if [ "$HARD" -gt 0 ]; then
+              echo "[act] hard link failures detected: $HARD" >&2
+              exit 1
+            else
+              echo "[act] only soft link failures (or none); ignoring under act"
+              exit 0
+            fi
+          fi
+      - name: Note when Docker is unavailable
+        if: ${{ steps.docker.outputs.available != 'true' }}
+        run: echo "::notice::Docker not available; skipping lychee run locally."

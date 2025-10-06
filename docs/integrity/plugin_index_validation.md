@@ -28,11 +28,11 @@ python3 tools/plugin_index_validate.py
 
 Optional flags:
 
-- `--schema` — path to JSON Schema (default: `tools/schemas/plugin-index.schema.json`)
-- `--index` — path to index JSON (default: `dist/index.json`)
-- `--out-md` — path to markdown report (default: `dist/integrity/plugin_index_validation.md`)
-- `--out-json` — path to JSON errors output (default: `dist/integrity/plugin_index_validation.json`)
-- `--no-json` — skip writing the JSON errors file
+- `--schema` - path to JSON Schema (default: `tools/schemas/plugin-index.schema.json`)
+- `--index` - path to index JSON (default: `dist/index.json`)
+- `--out-md` - path to markdown report (default: `dist/integrity/plugin_index_validation.md`)
+- `--out-json` - path to JSON errors output (default: `dist/integrity/plugin_index_validation.json`)
+- `--no-json` - skip writing the JSON errors file
 
 Example (custom paths):
 

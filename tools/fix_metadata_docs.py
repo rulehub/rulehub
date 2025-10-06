@@ -9,9 +9,11 @@ Conservative metadata YAML fixer.
 This is conservative: it preserves data content but will lose comments. Use with --dry-run to preview.
 """
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
+
 import yaml
+
 
 SCHEMA_LINE = "# yaml-language-server: $schema=../../../tools/schemas/policy-metadata.schema.json"
 

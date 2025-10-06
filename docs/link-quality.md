@@ -74,7 +74,7 @@ The daily link audit workflow (see CI) performs:
 
 1. Run `make link-audit` to (re)generate `links_audit_report.json` (suspicious categories + discrepancies).
 2. Extract a single CSV line of summary counts (date plus category counts) and append/update an in‑memory
-   `links_audit_history.csv` (idempotent — if a row for `YYYY-MM-DD` already exists it is not duplicated).
+   `links_audit_history.csv` (idempotent - if a row for `YYYY-MM-DD` already exists it is not duplicated).
 3. Upload the resulting `links_audit_history.csv` as an artifact named `links-audit-history` (retention ~30 days;
    adjust retention in workflow settings as needed). No commit is made to the repo.
 
@@ -86,7 +86,7 @@ date,non_https,vendor,tracking_query,celex_pdf,long,highly_shared,external_sourc
 ...
 ```
 
-Rationale for “artifact not git”:
+Rationale for "artifact not git":
 
 - Avoid noisy churn in PRs (one line per day commit pollution).
 - Allow automatic pruning via artifact retention instead of manual VCS hygiene.
@@ -125,7 +125,7 @@ The weekly file can be used to drive charts or embedded tables in documentation 
   weekly aggregates (or snapshot a baseline) into a permanent location (could be a dedicated `metrics/` branch or external storage).
 - If a daily artifact is missing (workflow skipped/failing) aggregation naturally yields a lower `sum_*` for that week;
   gaps can be detected by missing calendar dates compared to expected range.
-- Baseline + weekly trends together allow answering: “Did vendor links spike this month?” without storing every raw event.
+- Baseline + weekly trends together allow answering: "Did vendor links spike this month?" without storing every raw event.
 
 ### Integrity & Reproducibility
 
@@ -134,7 +134,7 @@ The weekly file can be used to drive charts or embedded tables in documentation 
 
 ### Security Considerations
 
-- No external network calls are made in the metrics pipeline — counts are computed solely from repository metadata.
+- No external network calls are made in the metrics pipeline - counts are computed solely from repository metadata.
 - Artifact tampering risk is low; for higher assurance, a future workflow could sign weekly aggregates and publish detached signatures.
 
 ### Summary

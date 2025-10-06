@@ -18,4 +18,4 @@ Need help with RuleHub? This guide explains how to get answers faster.
 ## SLA & Priorities
 
 - This is an open source project with limited maintainer time; no guaranteed response times.
-- Security issues: use the private channel (see `SECURITY.md`) — highest priority.
+- Security issues: use the private channel (see `SECURITY.md`) - highest priority.

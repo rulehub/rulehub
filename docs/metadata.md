@@ -97,7 +97,7 @@ path:
 
 Notes:
 
-- Do not set future/globbed paths (e.g., `addons/**`) — they will fail validation until real files exist and globs are not expanded by the validator.
+- Do not set future/globbed paths (e.g., `addons/**`) - they will fail validation until real files exist and globs are not expanded by the validator.
 - Prefer adding only the `addons/**` source path; external chart repo handles mirroring.
 
 ## Severity and tags conventions (adjust after implementation)
@@ -114,7 +114,7 @@ When adding a real policy, adjust `severity` and extend `tags` by topic. Example
 - Encryption at rest (e.g., storage/volume encryption): `high` or `critical`; tags: `encryption`, `data-at-rest`, `storage`
 - Encryption in transit / HTTPS-only: `high`; tags: `tls`, `https`, `network`
 - IAM password policy / strong auth: `high`; tags: `iam`, `auth`, `password-policy`
-- Logging & monitoring: `medium`–`high`; tags: `logging`, `monitoring`, `audit`
+- Logging & monitoring: `medium`-`high`; tags: `logging`, `monitoring`, `audit`
 - GDPR data retention: `high`; tags: `privacy`, `retention`, `storage-limitation`
-- GDPR data minimization: `medium`–`high`; tags: `privacy`, `data-minimization`
+- GDPR data minimization: `medium`-`high`; tags: `privacy`, `data-minimization`
 - AML sanctions/PEP screening, EDD: `high`; tags: `sanctions`, `pep`, `screening`, `edd`

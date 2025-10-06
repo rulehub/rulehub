@@ -23,7 +23,7 @@
 | Initiative | Description | Status | Target |
 |------------|-------------|--------|--------|
 | Chunked Index (Sharded) | When `dist/index.json` exceeds N packages (configurable), emit `dist/index-part-0001.json` etc. plus a root manifest with part count & hashes. Backwards compatibility: keep monolith until size threshold hit (e.g., 1 MB uncompressed). | DESIGN | 0.3.x |
-| Paging Contract | Formalize optional query pattern for downstream consumers: load manifest → fetch parts (parallel). | DESIGN | 0.3.x |
+| Paging Contract | Formalize optional query pattern for downstream consumers: load manifest -> fetch parts (parallel). | DESIGN | 0.3.x |
 | Integrity For Parts | Extend provenance + manifest to include per‑part hash list + aggregate hash (Merkle root candidate). | BACKLOG | 0.3.x |
 
 ### Chunked Index Notes

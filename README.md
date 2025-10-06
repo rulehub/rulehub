@@ -1,4 +1,4 @@
-## RuleHub — Policy & Compliance, Beautifully Managed
+## RuleHub - Policy & Compliance, Beautifully Managed
 
 [![CodeQL](https://github.com/rulehub/rulehub/actions/workflows/codeql.yml/badge.svg)](https://github.com/rulehub/rulehub/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/rulehub/rulehub/badge)](https://securityscorecards.dev/viewer/?uri=github.com/rulehub/rulehub)
@@ -8,7 +8,7 @@ RuleHub is a policy & compliance hub that unifies requirements, policy code (Kyv
 tests, metadata, integrity (bundles, SBOM, provenance), and docs into one auditable delivery pipeline.
 
 Ship guardrails with confidence: measure coverage, enforce quality gates in CI, and publish signed,
-reproducible policy bundles with a clear evidence trail from requirement → rule → test → release.
+reproducible policy bundles with a clear evidence trail from requirement -> rule -> test -> release.
 
 ---
 
@@ -17,13 +17,13 @@ reproducible policy bundles with a clear evidence trail from requirement → rul
 - Turns written requirements into verifiable policy code and tests.
 - Tracks traceability: requirement mappings, rule metadata, test coverage, release artifacts.
 - Automates quality gates in CI/CD across Kyverno and OPA/Gatekeeper.
-- Produces supply‑chain ready outputs: deterministic OPA bundles, SBOMs, signatures, and provenance.
+- Produces supply-chain ready outputs: deterministic OPA bundles, SBOMs, signatures, and provenance.
 
 <p align="center">
   <img src="docs/assets/value-loop.svg" alt="RuleHub value loop" width="760"/>
 </p>
 
-## Who it’s for
+## Who it's for
 
 - Security and Compliance teams needing fast, defensible audit evidence.
 - Platform/DevOps teams standardizing cluster guardrails across tenants.
@@ -32,16 +32,16 @@ reproducible policy bundles with a clear evidence trail from requirement → rul
 ## Key features
 
 - Compliance maps: model requirements alongside the policies that implement them.
-- Multi‑engine policy support: Kyverno and OPA/Gatekeeper with first‑class tests.
+- Multi-engine policy support: Kyverno and OPA/Gatekeeper with first-class tests.
 - Policy quality gates: unit tests, coverage targets, static validation, guardrails.
 - Reproducible delivery: deterministic bundles, integrity manifests, and signing.
 - Rich metadata: ownership, references, and documentation that drive reports.
-- Docs built‑in: MkDocs site with architecture, integrity, coverage, and examples.
+- Docs built-in: MkDocs site with architecture, integrity, coverage, and examples.
 
 ## Why teams choose RuleHub (differentiators)
 
 - One hub for requirements, policy code, tests, and release evidence.
-- CI‑first: measurable coverage and enforceable thresholds to block regressions.
+- CI-first: measurable coverage and enforceable thresholds to block regressions.
 - Supply chain integrity by default: SBOMs, signatures, provenance, verification.
 - Industry‑ready: curated policy sets and templates for common regulated domains.
 
@@ -49,7 +49,7 @@ reproducible policy bundles with a clear evidence trail from requirement → rul
 
 > Replace or augment with your own product shots as the project evolves.
 
-- Architecture (high‑level):
+- Architecture (high-level):
 
   <img src="docs/assets/architecture-overview.svg" alt="Architecture" width="760"/>
 
@@ -57,9 +57,9 @@ reproducible policy bundles with a clear evidence trail from requirement → rul
 
 ```yaml
 id: CM-001
-title: "Network segmentation requirement"
-controls: ["CIS-1.1"]
-owners: ["security@example.com"]
+title: 'Network segmentation requirement'
+controls: ['CIS-1.1']
+owners: ['security@example.com']
 policies:
   - kyverno/network-segmentation
 ```
@@ -82,7 +82,7 @@ spec:
         pattern:
           spec:
             containers:
-              - image: "!*:latest"
+              - image: '!*:latest'
 ```
 
 - Example Gatekeeper/Rego snippet (illustrative):
@@ -101,7 +101,7 @@ deny[msg] {
 
 ## Minimal quick start
 
-This is a tiny fast‑path to see the repo structure and run a basic validation. For a full walkthrough, head to the docs.
+This is a tiny fast-path to see the repo structure and run a basic validation. For a full walkthrough, head to the docs.
 
 1. Clone and enter the repository
 
@@ -142,4 +142,4 @@ Contributions and issues are welcome. Please read CONTRIBUTING.md and CODE_OF_CO
 
 ## License
 
-License: MIT — see LICENSE.
+License: MIT - see LICENSE.

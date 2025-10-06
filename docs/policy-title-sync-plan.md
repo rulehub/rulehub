@@ -8,7 +8,7 @@ Conventions / Rules Applied:
 3. Use spaces and slashes for paired abbreviations ("PMS / PSUR").
 4. Keep wording concise; avoid trailing words like "Requirement" unless clarity requires.
 5. Country codes (AU, CA, EU, UK, SG) retained as uppercase prefixes.
-6. Where underlying abbreviation meaning could vary (e.g., MYR), chose common interpretation "My Health Records" (note below) — flag for reviewer confirmation.
+6. Where underlying abbreviation meaning could vary (e.g., MYR), chose common interpretation "My Health Records" (note below) - flag for reviewer confirmation.
 
 Legend Notes column markers:
 - (VERIFY) = Please confirm phrasing / expansion correctness.
@@ -54,7 +54,7 @@ Legend Notes column markers:
 | medtech.au_myr_health_privacy | policies/medtech/au_myr_health_privacy/metadata.yaml | AU My Health Records Privacy | VERIFY (MyHR?) |
 | medtech.ca_phipa_health_data | policies/medtech/ca_phipa_health_data/metadata.yaml | CA PHIPA Health Data | ACRONYM |
 
-Addon Kyverno Policies (annotation rulehub.title): same title mapping applies — update `addons/kyverno/policies/*-policy.yaml` entries where `rulehub.title: <Policy Title>` using the Proposed Title derived above (replace `medtech-<rest>` hyphenated id segments with the matching metadata id's Proposed Title).
+Addon Kyverno Policies (annotation rulehub.title): same title mapping applies - update `addons/kyverno/policies/*-policy.yaml` entries where `rulehub.title: <Policy Title>` using the Proposed Title derived above (replace `medtech-<rest>` hyphenated id segments with the matching metadata id's Proposed Title).
 
 Next Steps (Implementation Outline):
 1. Approve / adjust any titles flagged (VERIFY).

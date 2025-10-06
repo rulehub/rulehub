@@ -28,9 +28,9 @@ sections:                     # section key -> object with title and policy list
 
 More examples:
 
-- `compliance/maps/gdpr.yml` — article style keys: `"Art.5(1)(c)"`
-- `compliance/maps/pci.yml` — numeric sections: `'3.4'`, `'8.2'`
-- `compliance/maps/fintech_us.yml` — textual keys: `"State MTL"`
+- `compliance/maps/gdpr.yml` - article style keys: `"Art.5(1)(c)"`
+- `compliance/maps/pci.yml` - numeric sections: `'3.4'`, `'8.2'`
+- `compliance/maps/fintech_us.yml` - textual keys: `"State MTL"`
 
 ## Naming: sections and policies
 
@@ -59,7 +59,7 @@ Examples: `gdpr.data_minimization`, `pci.storage_encryption`, `fintech.us_mtl_li
 
 Deriving id from folder structure (when `metadata.yaml` omits `id`):
 
-- `policies/<namespace>/<short_id>/metadata.yaml` → `<namespace>.<short_id>`
+- `policies/<namespace>/<short_id>/metadata.yaml` -> `<namespace>.<short_id>`
 
 ## Validation & tooling
 

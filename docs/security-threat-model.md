@@ -1,4 +1,4 @@
-# High-Level Threat Model: Metadata → Coverage Map → dist/index.json → Consumers
+# High-Level Threat Model: Metadata -> Coverage Map -> dist/index.json -> Consumers
 
 This document captures a pragmatic, evolving threat model for the RuleHub policy supply chain
 from authoring time to downstream consumption.
@@ -19,7 +19,7 @@ Primary assets:
 - Policy logic (Rego) and associated metadata fields (id, severity, tags, links).
 - Compliance maps (mapping policies to frameworks / sections).
 - Integrity artifacts: bundle manifest hashes, signatures, provenance attestation.
-- Index (`dist/index.json`) — canonical machine-readable catalog.
+- Index (`dist/index.json`) - canonical machine-readable catalog.
 
 
 Security properties desired:
@@ -48,7 +48,7 @@ Authors → Git Repo (policies/, metadata/) → Guardrail / Lint (CI) →
 ```
 Trust boundaries:
 
-- B1: Contributor workstation → GitHub repo.
+- B1: Contributor workstation -> GitHub repo.
 - B2: GitHub Actions workflow execution environment.
 - B3: Storage / Release distribution (GitHub Releases, GHCR registry).
 - B4: Consumer environment (clusters / pipelines verifying artifacts).
@@ -91,13 +91,13 @@ Trust boundaries:
 
 ## 6. Recommended Mitigations & Roadmap
 
-Short term (1–2 releases):
+Short term (1-2 releases):
 
 - Consumer guidance: document verification workflow (provenance + freshness check).
 - Add Make target `verify-index` to recompute & compare `dist/index.json` vs sources + manifest.
 - Enforce aggregate test gate (deny rules >1 must have aggregate test).
 
-Mid term (2–4 releases):
+Mid term (2-4 releases):
 
 - Extend provenance predicate to include `dist/index.json` hash.
 - Introduce release metadata file (policy count & index SHA) signed separately.
@@ -108,7 +108,7 @@ Long term:
 
 - Reproducible build: secondary ephemeral rebuild to compare hashes.
 - Continuous attestation monitoring (Rekor scanning / mismatch alerts).
-- Policy-level provenance (source digest → packaged path mapping).
+- Policy-level provenance (source digest -> packaged path mapping).
 
 ## 7. Attack Scenarios & Mitigations
 

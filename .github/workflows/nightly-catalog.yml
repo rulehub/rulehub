@@ -6,14 +6,14 @@ on:
 permissions:
   contents: read
   actions: write
-
 jobs:
   build-catalog:
-    if: ${{ github.actor != 'nektos/act' }}
+    if: ${{ !contains(github.actor, 'nektos/act') }}
+    continue-on-error: ${{ contains(github.actor, 'nektos/act') }}
     name: Generate catalog index
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-base:latest
+      image: ghcr.io/${{ github.repository_owner }}/ci-base:2025.10.03-f072ceb5
       options: --user 0:0
     timeout-minutes: 10
     steps:
@@ -53,7 +53,7 @@ jobs:
           EOF
 
   noop-act:
-    if: ${{ github.actor == 'nektos/act' }}
+    if: ${{ contains(github.actor, 'nektos/act') }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "[act] nightly-catalog skipped."

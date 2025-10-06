@@ -54,3 +54,8 @@ verify-all: ## Aggregate: lint-all + tests + coverage + link-check (soft-fail tr
 	$(MAKE) test
 	$(MAKE) coverage
 	-$(MAKE) link-check || echo "[verify-all] link-check reported hard failures (see above)"
+
+.PHONY: scan-invisible-unicode
+scan-invisible-unicode: ## Scan for invisible/zero-width Unicode and write dist/invisible-unicode-report.txt
+	@test -d $(VENV) || $(PY) -m venv $(VENV)
+	$(VENV)/bin/python tools/scan_invisible_unicode.py

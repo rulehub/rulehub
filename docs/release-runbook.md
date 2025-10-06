@@ -14,7 +14,7 @@ required by GitHub.
 - [ ] Update dev environment: `make setup-dev` (or ensure virtualenv active)
 - [ ] Quick hygiene:
   - [ ] YAML: `make lint-yaml` (or `npx @stoplight/spectral lint --ruleset .spectral.yml .`)
-  - [ ] TS/TSX: (n/a — plugin in separate repo)
+  - [ ] TS/TSX: (n/a - plugin in separate repo)
   - [ ] Python: `ruff check .` (optionally `ruff format`)
 
 ## Versioning & CHANGELOG
@@ -22,15 +22,15 @@ required by GitHub.
 - [ ] Pick release version (semver): `<major.minor.patch>`
 - [ ] Bump versions:
   - [ ] Backstage plugin: version handled separately
-- [ ] Update `CHANGELOG.md` (`[Unreleased]` → new version section)
+- [ ] Update `CHANGELOG.md` (`[Unreleased]` -> new version section)
 
 ## Validation & Artifact Build
 
 - [ ] Metadata validation: `make validate` (or `make validate-strict`)
 - [ ] Coverage & catalog:
-  - [ ] `make coverage` — refreshes `docs/coverage.md` & `dist/*`
-  - [ ] `make catalog` — generates `dist/index.json` for plugin (Policy
-        source sync now handled externally — skip here)
+  - [ ] `make coverage` - refreshes `docs/coverage.md` & `dist/*`
+  - [ ] `make catalog` - generates `dist/index.json` for plugin (Policy
+        source sync now handled externally - skip here)
 
 ## Tests
 
@@ -43,14 +43,14 @@ See `rulehub/rulehub-charts` repository for chart lint/render/package/publish st
 
 ## Backstage Plugin (NPM)
 
-Released separately via `@rulehub/plugin-policy-catalog` repository (see its README/CI) — no steps here.
+Released separately via `@rulehub/plugin-policy-catalog` repository (see its README/CI) - no steps here.
 
 ## OPA Bundle (OCI Publishing)
 
 - [ ] Build: `make opa-bundle` (produces `dist/opa-bundle.tar.gz`)
 - [ ] (Optional shortcut) All-in-one: `make opa-bundle-all` (bundle + manifest + SBOM in one step)
 - [ ] Link audit drift: `make link-audit && make link-audit-diff` (ensure unexpected drift = 0 before tagging)
-- [ ] Manifest: `make opa-bundle-manifest` (produces `dist/opa-bundle.manifest.json` — hashes & aggregate integrity)
+- [ ] Manifest: `make opa-bundle-manifest` (produces `dist/opa-bundle.manifest.json` - hashes & aggregate integrity)
 - [ ] SBOM (default SPDX): `make sbom-opa-bundle` (creates
       `dist/opa-bundle.spdx-json.json` via Syft; override format with
       `SBOM_FORMAT=`; default output path shown in Makefile variable

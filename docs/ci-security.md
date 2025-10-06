@@ -7,20 +7,20 @@ This repo runs the following workflows:
 - Trivy IaC scan: .github/workflows/trivy.yml
 - Checkov scan: .github/workflows/checkov.yml
 - Secret scanning (TruffleHog): .github/workflows/secrets-scan.yml
-- (Removed) internal policy drift check – handled in external Helm chart repo.
+- (Removed) internal policy drift check - handled in external Helm chart repo.
 
 How to read results in GitHub:
 
 1. Open the Security tab > Code scanning alerts. You will see tools named "Trivy" and "Checkov". Click an alert to view impacted file, line, and remediation guidance. Use filters (severity, branch, tool) to focus.
 2. On a pull request, a short summary comment is posted by Trivy/Checkov. For full details, follow the Security tab link above; PR Checks also show the SARIF upload step.
-3. Secret scanning: TruffleHog reports inline in the job logs and will fail the job if verified or likely secrets are found. Click the “Secret Scanning” job in the PR Checks to see matched detectors and locations. Rotate any exposed credentials and force-push a fix if needed.
+3. Secret scanning: TruffleHog reports inline in the job logs and will fail the job if verified or likely secrets are found. Click the "Secret Scanning" job in the PR Checks to see matched detectors and locations. Rotate any exposed credentials and force-push a fix if needed.
 4. Helm chart policy drift (if any) is validated in the `rulehub-charts` repository CI.
 
 Tips for Trivy/Checkov SARIF views:
 
-- Use “Filter” to narrow by severity (error/warning/note) and by tool.
-- Each alert links to the exact file/line; open the “Rule” to see remediation guidance.
-- You can suppress false positives at the code level using the tool’s ignore annotations where applicable, but prefer fixing misconfigurations.
+- Use "Filter" to narrow by severity (error/warning/note) and by tool.
+- Each alert links to the exact file/line; open the "Rule" to see remediation guidance.
+- You can suppress false positives at the code level using the tool's ignore annotations where applicable, but prefer fixing misconfigurations.
 
 YAML linting: Helm templates are no longer present in this repository.
 
@@ -73,8 +73,8 @@ act -s GH_TOKEN=ghp_xxx ...
 
 Notes / limitations:
 
-- OIDC (id-token) and keyless cosign signing can’t be reproduced; gate those steps with `SKIP_SUPPLYCHAIN` (already supported).
-- `GITHUB_TOKEN` permissions differ; don’t rely on fine‑grained permission simulation locally.
+- OIDC (id-token) and keyless cosign signing can't be reproduced; gate those steps with `SKIP_SUPPLYCHAIN` (already supported).
+- `GITHUB_TOKEN` permissions differ; don't rely on fine‑grained permission simulation locally.
 - Only Linux runner images are emulated.
 
 When to still push a branch / PR:
@@ -102,7 +102,7 @@ The `link-check` workflow retries up to 3 times and classifies final failures:
 - Hard failures (non-429 and non-5xx HTTP codes, DNS errors) fail the job.
 - Soft failures (HTTP 429 or 5xx) are tolerated after retries but reported in the job summary and artifact (`lychee.json`).
 
-Rationale: transient rate limits and upstream outages shouldn’t block unrelated PRs, while genuine 404/410 issues must be fixed promptly.
+Rationale: transient rate limits and upstream outages shouldn't block unrelated PRs, while genuine 404/410 issues must be fixed promptly.
 
 Local reproduction:
 

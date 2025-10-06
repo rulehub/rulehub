@@ -2,7 +2,7 @@
 
 This document specifies how to add, package, publish, and use RuleHub policies as OPA bundles in OCI registries, in Kubernetes (Gatekeeper, Kyverno), and in CI pipelines.
 
-## End-to-end Flow (author → test → bundle → publish → consume)
+## End-to-end Flow (author -> test -> bundle -> publish -> consume)
 
 Figure (text alternative for the following mermaid diagram, for screen readers): The lifecycle proceeds linearly: Author policy (create Rego, metadata, and tests) -> Validate (format, schema) -> Unit tests (opa / kyverno / gatekeeper) -> Build OPA bundle (tar artifact) -> Publish to OCI registry -> Two parallel consumption paths: (a) CI pipelines (conftest / opa eval) and (b) Kubernetes admission controllers (Gatekeeper / Kyverno). This describes how authored policies become consumable artifacts.
 
@@ -19,9 +19,9 @@ flowchart LR
 ## Repository structure and naming
 
 - Policies live under `policies/<domain>/<policy_id>/`
-  - `policy.rego` — Rego module(s)
-  - `policy_test.rego` — unit tests for rules
-  - `metadata.yaml` — id, title, description, references to standards (PCI/GDPR/etc.), coverage, paths
+  - `policy.rego` - Rego module(s)
+  - `policy_test.rego` - unit tests for rules
+  - `metadata.yaml` - id, title, description, references to standards (PCI/GDPR/etc.), coverage, paths
 - Metadata schema under `tools/schemas/policy-metadata.schema.json` (already present)
 - K8s integration examples under `addons/`:
   - Gatekeeper ConstraintTemplates and Constraints: `addons/k8s-gatekeeper/{templates,constraints}/*.yaml`
@@ -120,7 +120,7 @@ references:
   - Unit tests: `opa test -v policies`
 - If applicable, add K8s examples in `addons/`; external chart repo manages packaging.
 - Update compliance maps in `compliance/maps/*.yml` if this policy contributes to coverage
-- Submit PR; CI runs validate → test → bundle (if Rego present) → optionally publish on main
+- Submit PR; CI runs validate -> test -> bundle (if Rego present) -> optionally publish on main
 
 ## Consumer path: Use a policy
 
@@ -204,14 +204,14 @@ spec:
 
 Optional runtime OPA: configure OPA sidecar to pull bundles from OCI registry as a bundle source (see OPA docs) and evaluate decisions through its API.
 
-## Make/CI steps (validate → test → bundle → publish)
+## Make/CI steps (validate -> test -> bundle -> publish)
 
 Make targets (see repo `Makefile`):
 
-- `make validate` — validate metadata against JSON Schema
-- `make test` — run Kyverno and Gatekeeper tests
-- `make opa-bundle` — build `dist/opa-bundle.tar.gz` from `policies/` (if `.rego` files exist)
-- `make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>` — publish the bundle to OCI with correct mediaType
+- `make validate` - validate metadata against JSON Schema
+- `make test` - run Kyverno and Gatekeeper tests
+- `make opa-bundle` - build `dist/opa-bundle.tar.gz` from `policies/` (if `.rego` files exist)
+- `make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>` - publish the bundle to OCI with correct mediaType
 
 GitHub Actions workflow `.github/workflows/opa-bundle-publish.yml` publishes on pushes to `main` and releases.
 
@@ -263,14 +263,14 @@ All Rego sources must pass `opa fmt` (pre-commit `opa-fmt`, CI quick check).
 
 The quick check (`make opa-quick-check` and workflow `opa-quick-check.yml`) fails on these textual patterns:
 
-- `(not` — Parenthesized negation grouping inside composite boolean expressions.
-- `and not` — Inline conjunction + negation; expand to separate rule or explicit equality lines.
-- `not (` — Leading `not` applied to grouped expression containing `and` / `or`.
-- `not in {` — Negated membership; rewrite as chained inequalities or explicit whitelist set.
+- `(not` - Parenthesized negation grouping inside composite boolean expressions.
+- `and not` - Inline conjunction + negation; expand to separate rule or explicit equality lines.
+- `not (` - Leading `not` applied to grouped expression containing `and` / `or`.
+- `not in {` - Negated membership; rewrite as chained inequalities or explicit whitelist set.
 
 Rationale: Older / stricter Rego parser modes and future optimizations reject or mis-handle certain parenthesized negations; splitting conditions keeps each violation predicate simple and avoids hidden precedence errors.
 
-### Rewrite examples (`violation[...]` → `deny[...]`)
+### Rewrite examples (`violation[...]` -> `deny[...]`)
 
 Anti-pattern:
 
@@ -338,7 +338,7 @@ Each test case should:
 1. Split disjunctions (OR) across separate `deny[...]` rules.
 2. Convert `A and not B` into a single deny block listing both atomic lines (`A == true` and `B == false`).
 3. Replace negated group `not (A and B and C)` with multiple atomic deny rules (one per missing/false predicate) unless semantic meaning differs.
-4. Replace `X not in { ... }` with either explicit inequalities or a positive membership check plus `not` on the set (`allowed[X]` pattern) — but avoid negative set membership in a single expression.
+4. Replace `X not in { ... }` with either explicit inequalities or a positive membership check plus `not` on the set (`allowed[X]` pattern) - but avoid negative set membership in a single expression.
 
 ### Tooling enforcement
 

@@ -1,4 +1,3 @@
-
 extends: 'spectral:oas'
 
 # Minimal local ruleset for general YAML linting in this repository.
@@ -7,9 +6,8 @@ rules:
   info-description:
     description: "Ensure 'info.description' is present when applicable"
     message: "Add an 'info.description' value"
-    given: "$..info.description"
+    given: '$..info.description'
     then:
       function: truthy
-    severity: "info"
-
+    severity: 'info'
 # You can add project-specific rules or extends here. See Spectral docs.

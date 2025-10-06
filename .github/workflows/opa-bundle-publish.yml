@@ -44,7 +44,8 @@ jobs:
           if [ -z "$input_tag" ]; then
             echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
           fi
-  build-and-push:
+  build-and-push-gh:
+    if: ${{ github.actor != 'nektos/act' }}
     needs: guard
     runs-on: ubuntu-latest
     container:
@@ -81,9 +82,7 @@ jobs:
           python tools/deny_usage_scan.py
 
       # Under local act runs, there is no OIDC; skip supply-chain steps safely
-      - name: Set skip supply-chain for act
-        if: ${{ github.actor == 'nektos/act' }}
-        run: echo "SKIP_SUPPLYCHAIN=1" >> "$GITHUB_ENV"
+      # SKIP_SUPPLYCHAIN remains whatever is passed; GH path expects OIDC
 
       - name: Export skip flag
         id: flags
@@ -252,7 +251,7 @@ jobs:
           cosign attest --yes --predicate dist/opa-bundle.sbom.spdx.json --type spdx ${IMAGE}:${{ steps.tag.outputs.tag }}
 
       - name: Upload artifacts (full)
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' && github.actor != 'nektos/act' }}
+        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: opa-bundle-${{ steps.tag.outputs.tag }}
@@ -273,7 +272,7 @@ jobs:
             docs/references-index.md
 
       - name: Upload artifacts (minimal)
-        if: ${{ env.SKIP_SUPPLYCHAIN == '1' && github.actor != 'nektos/act' }}
+        if: ${{ env.SKIP_SUPPLYCHAIN == '1' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: opa-bundle-${{ steps.tag.outputs.tag }}
@@ -343,8 +342,8 @@ jobs:
           fi
 
   slsa-provenance:
-    if: ${{ needs.build-and-push.outputs.skip_supplychain != '1' }}
-    needs: build-and-push
+    if: ${{ needs.build-and-push-gh.outputs.skip_supplychain != '1' }}
+    needs: build-and-push-gh
     permissions:
       actions: read
       id-token: write
@@ -352,7 +351,7 @@ jobs:
       contents: write
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@5a775b367a56d5bd118a224a811bba288150a563
     with:
-      base64-subjects: ${{ needs.build-and-push.outputs.subjects_b64 }}
+      base64-subjects: ${{ needs.build-and-push-gh.outputs.subjects_b64 }}
       provenance-name: rulehub-opa-bundle.provenance
       upload-assets: true
 
@@ -365,7 +364,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
-    needs: [build-and-push]
+    needs: [build-and-push-gh]
     permissions:
       contents: read
       packages: read
@@ -374,7 +373,7 @@ jobs:
       - name: Download artifact bundle
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: opa-bundle-${{ needs.build-and-push.outputs.tag }}
+          name: opa-bundle-${{ needs.build-and-push-gh.outputs.tag }}
           path: dist
 
       # Python provided by CI container image
@@ -447,9 +446,94 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "1"
         run: |
-          cosign verify-attestation --type slsaprovenance ${IMAGE}:${{ needs.build-and-push.outputs.tag }} > attestation.jsonl
+          cosign verify-attestation --type slsaprovenance ${IMAGE}:${{ needs.build-and-push-gh.outputs.tag }} > attestation.jsonl
           PRED_FILE=extracted-predicate.json
           head -n1 attestation.jsonl | jq -r '.predicate' > "$PRED_FILE"
           EXPECTED_SHA=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
           jq -e --arg sha "${{ github.sha }}" '.buildDefinition.inputMaterials[].digest.sha1? == $sha' "$PRED_FILE" | grep -q true
           jq -e --arg bsha "$EXPECTED_SHA" '.buildDefinition.inputMaterials[].digest.sha256? == $bsha' "$PRED_FILE" | grep -q true
+
+  build-act:
+    if: ${{ github.actor == 'nektos/act' }}
+    needs: guard
+    runs-on: ubuntu-latest
+    container:
+      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      options: --user 0:0
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Prepare Python env (venv with baked deps)
+        run: |
+          python-venv-install
+
+      - name: Rego deny[] usage enforcement
+        run: |
+          . .venv/bin/activate
+          python tools/deny_usage_scan.py
+
+      - name: Set skip supply-chain for act
+        run: echo "SKIP_SUPPLYCHAIN=1" >> "$GITHUB_ENV"
+
+      - name: Tool versions (from CI image)
+        run: |
+          set -euo pipefail
+          if command -v python3 >/dev/null 2>&1; then python3 --version; elif command -v python >/dev/null 2>&1; then python --version; else echo "python not found"; fi
+          opa version || echo "opa not found"
+          kyverno version || echo "kyverno not found"
+          syft version || echo "syft not found"
+          cosign version || echo "cosign not found"
+          oras version || echo "oras not found"
+
+      - name: Build OPA bundle
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          if ! opa build -b policies -o dist/opa-bundle.tar.gz; then
+            echo "[act] opa build failed; falling back to tar.gz of policies for local CI" >&2
+            if [ -d policies ]; then
+              tar czf dist/opa-bundle.tar.gz -C policies . || (echo "Fallback tar failed" >&2; : > dist/opa-bundle.tar.gz)
+            else
+              echo "policies/ not found; emitting empty bundle to unblock act" >&2
+              : > dist/opa-bundle.tar.gz
+            fi
+          fi
+          ls -lh dist/opa-bundle.tar.gz || true
+
+      - name: Generate manifest
+        run: |
+          set -euo pipefail
+          . .venv/bin/activate
+          python tools/generate_bundle_manifest.py --output dist/opa-bundle.manifest.json --exclude-tests
+          head -n 30 dist/opa-bundle.manifest.json || true
+
+      - name: Generate references index (md+json)
+        run: |
+          set -euo pipefail
+          . .venv/bin/activate
+          python tools/generate_refs_index.py --format both || true
+          ls -lh docs/references-index.md dist/references-index.json || true
+
+      - name: Generate CycloneDX SBOM
+        run: |
+          syft packages file:dist/opa-bundle.tar.gz -o cyclonedx-json > dist/opa-bundle.sbom.cdx.json || echo "syft not available"
+
+      - name: Generate SPDX SBOM
+        run: |
+          syft packages file:dist/opa-bundle.tar.gz -o spdx-json > dist/opa-bundle.sbom.spdx.json || echo "syft not available"
+
+      - name: Compute bundle digest & summary
+        run: |
+          set -euo pipefail
+          SHA256=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
+          printf "Bundle SHA256: %s\n" "$SHA256" | tee dist/digest-summary.txt

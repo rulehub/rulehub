@@ -26,7 +26,7 @@ Conventions:
 
 - Only ASCII letters, digits and `-` for `policy-slug`; dots separate filename segments.
 - One file = one logical policy (Kyverno/ConstraintTemplate/Constraint may embed multiple underlying rules but they constitute one RuleHub policy).
-- Engine is not encoded in the filename — it is inferred from file location (see "Where policies live") and duplicated in labels.
+- Engine is not encoded in the filename - it is inferred from file location (see "Where policies live") and duplicated in labels.
 
 Examples:
 
@@ -43,7 +43,7 @@ Add labels under `metadata.labels` for filtering and cataloging. Key labels and 
 | rulehub.io/engine   | yes         | kyverno         | gatekeeper                                       | From file location (`addons/kyverno/**` or `addons/k8s-gatekeeper/**`) | kyverno |
 | rulehub.io/domain   | yes         | lowercase       | First filename segment                           | k8s                                                                    |
 | rulehub.io/geo      | yes         | lowercase       | Second filename segment                          | global                                                                 |
-| rulehub.io/id       | yes         | snake_case      | `policy-slug` from filename → convert `-` to `_` | no_run_as_root                                                         |
+| rulehub.io/id       | yes         | snake_case      | `policy-slug` from filename -> convert `-` to `_` | no_run_as_root                                                         |
 | rulehub.io/severity | recommended | info            | low                                              | medium                                                                 | high    | critical | If known; for Kyverno may correlate with `validationFailureAction` | high |
 | rulehub.io/owner    | optional    | free text       | Owning team                                      | platform-security                                                      |
 | rulehub.io/tags     | optional    | comma-separated | Thematic tags                                    | security,run-as-non-root                                               |
@@ -52,9 +52,9 @@ Note:
 
 - `rulehub.io/id` aligns with `id` in `policies/**/metadata.yaml` (see `docs/metadata.md`): snake_case inside the identifier; kebab-case in filename.
 - File location determines the engine and resource kind:
-  - Kyverno: `addons/kyverno/policies/*.yaml` → `rulehub.io/engine=kyverno`
-  - Gatekeeper ConstraintTemplate: `addons/k8s-gatekeeper/templates/*.yaml` → `rulehub.io/engine=gatekeeper`
-  - Gatekeeper Constraint: `addons/k8s-gatekeeper/constraints/*.yaml` → `rulehub.io/engine=gatekeeper`
+  - Kyverno: `addons/kyverno/policies/*.yaml` -> `rulehub.io/engine=kyverno`
+  - Gatekeeper ConstraintTemplate: `addons/k8s-gatekeeper/templates/*.yaml` -> `rulehub.io/engine=gatekeeper`
+  - Gatekeeper Constraint: `addons/k8s-gatekeeper/constraints/*.yaml` -> `rulehub.io/engine=gatekeeper`
 
 ### Label examples
 
