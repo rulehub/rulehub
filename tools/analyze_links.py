@@ -39,6 +39,7 @@ import argparse
 import csv
 import json
 import os
+from urllib.parse import urlparse
 import re
 import sys
 from datetime import date
@@ -139,6 +140,22 @@ def load_vendor_policies() -> tuple[Set[str], Set[str]]:
     return allowed, disallowed
 
 
+def _hostname(u: str) -> str:
+    """Return lower-cased hostname for URL or empty string on failure."""
+    try:
+        h = urlparse(u).hostname
+        return h.lower() if h else ""
+    except Exception:
+        return ""
+
+
+def _host_matches_domain(host: str, domain: str) -> bool:
+    """True if host equals domain or is a subdomain of it (with dot boundary)."""
+    host = (host or "").lower()
+    domain = (domain or "").lower()
+    return host == domain or host.endswith("." + domain)
+
+
 def analyze_suspicious(all_links: Dict[str, Set[str]]) -> Dict[str, Any]:
     suspicious: Dict[str, List[str]] = {
         "non_https": [],
@@ -152,8 +169,8 @@ def analyze_suspicious(all_links: Dict[str, Set[str]]) -> Dict[str, Any]:
     for url, policies in all_links.items():
         if url.startswith("http://"):
             suspicious["non_https"].append(url)
-        host = re.sub(r"^https?://([^/]+).*", r"\1", url).lower()
-        matched = [dom for dom in VENDOR_DOMAINS if dom in host]
+        host = _hostname(url)
+        matched = [dom for dom in VENDOR_DOMAINS if _host_matches_domain(host, dom)]
         if matched:
             # Flag only if any matched domain is disallowed (explicit or by default)
             if any(dom in disallowed_vendor for dom in matched):

@@ -2,6 +2,7 @@ import importlib.util
 import json
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 def load_module():
@@ -32,8 +33,14 @@ def test_vendor_detection():
     # Expected suspicious categories exist
     for cat in ["non_https", "vendor", "long", "tracking_query", "celex_pdf"]:
         assert cat in report["suspicious"], f"missing category {cat}"
-    # The sportradar URL should be flagged as vendor
-    assert any("sportradar.com" in u for u in report["suspicious"]["vendor"])
+    # The sportradar URL should be flagged as vendor (check host safely)
+    def host_matches(url: str, domain: str) -> bool:
+        h = urlparse(url).hostname or ""
+        h = h.lower()
+        d = domain.lower()
+        return h == d or h.endswith("." + d)
+
+    assert any(host_matches(u, "sportradar.com") for u in report["suspicious"]["vendor"])
 
 
 def test_discrepancy_detection():
@@ -94,3 +101,23 @@ def test_end_to_end_link_audit(tmp_path, monkeypatch, capsys):
     # Validate vendor detection & discrepancy counts surfaced
     assert "vendor: 1" in captured
     assert "Discrepancies: missing_in_metadata=1 policies, missing_in_export=1 policies" in captured
+
+
+def test_vendor_host_matching_edge_cases():
+    mod = load_module()
+    meta = [
+        {"id": "p1", "links": [
+            "https://sportradar.com/news",
+            "https://blog.sportradar.com/post",
+            "https://evilsportradar.com/path",
+        ]}
+    ]
+    export = {}
+    all_links = mod.build_all_links(meta, export)
+    report = mod.analyze_suspicious(all_links)
+    vendors = set(report["suspicious"].get("vendor", []))
+    # Exact and subdomain should be flagged
+    assert "https://sportradar.com/news" in vendors
+    assert "https://blog.sportradar.com/post" in vendors
+    # Substring-only (no dot boundary) must NOT be flagged
+    assert "https://evilsportradar.com/path" not in vendors
