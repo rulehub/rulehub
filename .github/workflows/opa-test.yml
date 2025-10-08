@@ -27,8 +27,32 @@ jobs:
           if [ -z "$input_tag" ]; then
             echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
           fi
-  test:
+  probe-ghcr:
+    name: Probe GHCR access (ci-policy)
     needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  test:
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
@@ -39,3 +63,21 @@ jobs:
         run: opa version
       - name: Run OPA tests (betting)
         run: opa test -v policies/betting
+
+  test-fallback:
+    name: OPA tests (fallback, no container)
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup OPA (host)
+        run: |
+          set -euo pipefail
+          curl -sSL -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+          opa version
+      - name: Run OPA tests (betting) on host
+        run: |
+          opa test -v policies/betting

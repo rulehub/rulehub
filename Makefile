@@ -54,6 +54,7 @@ help:
 	@echo "  dist-manifest          Generate manifest for dist/ artifact inventory"
 	@echo "  verify-dist-manifest   Verify dist/ files vs dist manifest"
 	@echo "  verify-all-integrity   Aggregate integrity checks (bundle + dist manifests + cross checks)"
+	@echo "  export-plugin-metadata Export dist/plugin-index-metadata.json for Backstage plugin enrichment"
 	@echo "  sign-oci               Cosign sign pushed OCI artifact (needs IMAGE,TAG)"
 	@echo "  docs-serve             Run MkDocs live-reload dev server"
 	@echo "  docs-build             Build static MkDocs site into site/"
@@ -111,6 +112,13 @@ include mk/docs.mk
 include mk/maps.mk
 include mk/validate.mk
 include mk/release.mk
+
+.PHONY: export-plugin-metadata
+export-plugin-metadata: ## Export dist/plugin-index-metadata.json for Backstage plugin enrichment
+	@test -d $(VENV) || $(PY) -m venv $(VENV)
+	$(PIP) install -U pip >/dev/null
+	$(PIP) install -r requirements.txt >/dev/null
+	$(VENV)/bin/python tools/export_plugin_metadata.py
 
 .PHONY: security-secrets
 security-secrets: ## Run lightweight local secret scan (no Docker)

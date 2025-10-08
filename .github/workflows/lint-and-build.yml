@@ -54,14 +54,12 @@ jobs:
     name: Lint YAML files (act)
     if: ${{ github.actor == 'nektos/act' }}
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/ci-base:2025.10.03-f072ceb5
+      options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-
-      - name: Install yamllint (apt)
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y yamllint
 
       - name: Run yamllint (parsable)
         run: |

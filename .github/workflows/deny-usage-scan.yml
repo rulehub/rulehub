@@ -28,13 +28,11 @@ jobs:
 
   scan:
     name: Rego deny[] rule enforcement scan
-    needs: guard
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -49,3 +47,61 @@ jobs:
         run: |
           . .venv/bin/activate
           bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/deny_usage_scan.py
+
+  probe-ghcr:
+    name: Probe GHCR access (ci-base)
+    needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-base)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
+            echo "Image present locally; skipping pull"
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          elif command -v timeout >/dev/null 2>&1; then
+            if timeout 120s docker pull "$IMAGE_REF"; then
+              echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "can_pull=false" >> "$GITHUB_OUTPUT"
+            fi
+          elif docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  scan-fallback:
+    name: Rego deny[] rule enforcement scan (fallback, no container)
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup Python venv
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          # Minimal deps for deny_usage_scan
+          pip install -r requirements.txt || pip install pyyaml
+      - name: Run deny usage scan (host)
+        shell: bash
+        run: |
+          set -euo pipefail
+          . .venv/bin/activate
+          python tools/deny_usage_scan.py

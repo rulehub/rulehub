@@ -61,18 +61,38 @@ jobs:
     steps:
       - run: echo "[act] policy-threshold-guardrails skipped."
 
+  probe-ghcr:
+    name: Probe GHCR access (ci-policy)
+    needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
   policy-threshold-guardrails:
     # Run in CI (non-act) only; under act we rely on Stage 1 or noop path
-    if: ${{ github.actor != 'nektos/act' }}
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull == 'true' }}
     name: Threshold & Guardrails
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: guard
+    needs: [guard, probe-ghcr]
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -146,3 +166,50 @@ jobs:
             fi
           fi
           echo "Guardrails status: see job log for detail" >> $GITHUB_STEP_SUMMARY
+
+  policy-threshold-guardrails-fallback:
+    name: Threshold & Guardrails (fallback, no container)
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull != 'true' }}
+    needs: [guard, probe-ghcr]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+      - name: Install OPA (host)
+        run: |
+          set -euo pipefail
+          curl -sSL -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+      - name: Run gatekeeper tests (host)
+        run: |
+          opa test tests/gatekeeper/policies tests/gatekeeper/tests -v || exit 1
+      - name: Enforce policy test thresholds (host)
+        run: |
+          python tools/policy_test_coverage.py >/dev/null
+          python tools/enforce_policy_test_thresholds.py
+      - name: Run guardrails aggregate (host)
+        env:
+          FAIL_LINK_AUDIT: "0"
+        run: |
+          python tools/enforce_no_generic_only_tests.py
+          python tools/guardrail_metadata_paths.py
+          python tools/enforce_policy_test_pairs.py
+          python tools/validate_metadata_schema.py
+          python tools/normalize_links.py --check --eli || echo "[guardrails] link-normalize-check non-fatal issues"
+          if [ "${FAIL_LINK_AUDIT}" = "1" ]; then
+            python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null
+            python tools/compare_links_baseline.py || exit 1
+          else
+            python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null || true
+            python tools/compare_links_baseline.py || echo "[guardrails] link-audit non-fatal"
+          fi
+          echo "[guardrails] complete (fallback)"

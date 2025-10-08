@@ -64,7 +64,7 @@ Released separately via `@rulehub/plugin-policy-catalog` repository (see its REA
 - [ ] (Optional) Verify signatures locally: `make verify-opa-bundle` (or manual `cosign verify-blob ...`)
 - [ ] Integrity check (post-build): `make verify-bundle` (ensures manifest hashes match bundle contents)
 - [ ] Determinism (spot check): `make bundle-deterministic` (two builds -> identical SHA256)
-- [ ] Push to OCI: `make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>`
+- [ ] Push to OCI: `make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=<tag>`
   - Requires ORAS CLI and authenticated login (`oras login ghcr.io`).
   - After push (CI): provenance & SBOM attestations generated/signature verification (see `opa-bundle-publish.yml`).
 

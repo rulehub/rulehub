@@ -17,8 +17,6 @@ fi
 
 . .venv/bin/activate
 
-python -m pip install -U pip
-
 # Under nektos/act, multiple jobs may run concurrently inside separate
 # containers. Heavy pip installs across jobs can exhaust Docker's RW layer or
 # memory and lead to exit 137 / "RWLayer unexpectedly nil". To keep ACT runs
@@ -29,6 +27,8 @@ if [ "${ACT:-}" = "true" ]; then
   echo "Python deps installed into .venv (no-op under ACT)"
   exit 0
 fi
+
+python -m pip install -U pip
 
 # Shim for conditional deps when lock generated on newer Python
 PY_VER=$(python - <<'EOF'

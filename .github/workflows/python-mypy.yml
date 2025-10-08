@@ -60,12 +60,8 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           set -euo pipefail
-          # Use a local venv for mypy and types only (lightweight)
-          python -m venv .venv || true
-          . .venv/bin/activate
-          python -m pip install -U pip
-          python -m pip install --no-input --no-cache-dir mypy types-PyYAML types-requests
+          # Use mypy preinstalled in the CI image (/opt/ci-venv on PATH)
           export MYPY_CACHE_DIR=${MYPY_CACHE_DIR:-/tmp/mypy_cache}
           mkdir -p "$MYPY_CACHE_DIR"
-          python -c 'import mypy, sys; print("mypy", getattr(mypy, "__version__", "unknown"), "python", sys.version.split()[0])'
-          python -m mypy --config-file mypy.ini
+          mypy --version || true
+          mypy --config-file mypy.ini

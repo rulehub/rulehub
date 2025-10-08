@@ -39,12 +39,12 @@ import argparse
 import csv
 import json
 import os
-from urllib.parse import urlparse
 import re
 import sys
 from datetime import date
 from pathlib import Path
 from typing import Any, Dict, List, Set
+from urllib.parse import urlparse
 
 
 # Attempt standard intra-repo import (may be shadowed by external 'tools' package)

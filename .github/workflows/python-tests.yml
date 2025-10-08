@@ -43,10 +43,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
-    strategy:
-      matrix:
-        python-version: ["3.11", "3.13"]
-      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955

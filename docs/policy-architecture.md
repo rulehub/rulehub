@@ -36,7 +36,7 @@ Naming conventions:
 - Policy ID: `<domain>.<slug>`; do not mix kebab/underscore inside the same identifier. Prefer dot-separated package path and snake_case rule names if needed.
 - Versioning:
   - Record standard versions (e.g., PCI DSS 4.0) in `metadata.yaml` under `references`.
-  - OPA bundle tag: semantic version or a short SHA label. OCI reference example: `oci://ghcr.io/<org>/rulehub-bundle:<tag>`
+  - OPA bundle tag: semantic version or a short SHA label. OCI reference example: `oci://ghcr.io/rulehub/rulehub-bundle:<tag>`
 
 ### Minimal file scaffolds
 
@@ -211,7 +211,7 @@ Make targets (see repo `Makefile`):
 - `make validate` - validate metadata against JSON Schema
 - `make test` - run Kyverno and Gatekeeper tests
 - `make opa-bundle` - build `dist/opa-bundle.tar.gz` from `policies/` (if `.rego` files exist)
-- `make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>` - publish the bundle to OCI with correct mediaType
+- `make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=<tag>` - publish the bundle to OCI with correct mediaType
 
 GitHub Actions workflow `.github/workflows/opa-bundle-publish.yml` publishes on pushes to `main` and releases.
 
@@ -342,13 +342,13 @@ Each test case should:
 
 ### Tooling enforcement
 
-| Check                   | Mechanism                             | Invocation                |
-| ----------------------- | ------------------------------------- | ------------------------- |
-| Formatting              | `opa fmt -l` via pre-commit `opa-fmt` | `pre-commit run opa-fmt`  |
-| Forbidden patterns      | grep scan (see Makefile)              | `make opa-quick-check`    |
-| Parse/type errors       | `opa check policies`                  | `make opa-quick-check`    |
-| deny[] rule usage scan | `tools/deny_usage_scan.py`  | (add to CI before bundle) |
-| Unit tests              | `opa test` / `make test-gatekeeper`   | CI & local                |
+| Check                  | Mechanism                             | Invocation                |
+| ---------------------- | ------------------------------------- | ------------------------- |
+| Formatting             | `opa fmt -l` via pre-commit `opa-fmt` | `pre-commit run opa-fmt`  |
+| Forbidden patterns     | grep scan (see Makefile)              | `make opa-quick-check`    |
+| Parse/type errors      | `opa check policies`                  | `make opa-quick-check`    |
+| deny[] rule usage scan | `tools/deny_usage_scan.py`            | (add to CI before bundle) |
+| Unit tests             | `opa test` / `make test-gatekeeper`   | CI & local                |
 
 Violations of style should be fixed in-place rather than waived.
 

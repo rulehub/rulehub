@@ -25,15 +25,36 @@ jobs:
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+  probe-ghcr:
+    name: Probe GHCR access (ci-policy)
+    needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
   quick:
     name: OPA quick check
     runs-on: ubuntu-latest
-    needs: guard
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -89,3 +110,58 @@ jobs:
         if: always()
         run: |
           echo "OPA quick check complete"
+
+  quick-fallback:
+    name: OPA quick check (fallback, no container)
+    runs-on: ubuntu-latest
+    needs: [guard, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          fetch-depth: 0
+      - name: Setup OPA
+        run: |
+          set -euo pipefail
+          curl -sSL -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+          opa version
+      - name: Parse & type check (host)
+        run: |
+          set -euo pipefail
+          opa check policies
+      - name: Forbidden pattern scan (host)
+        run: |
+          set -euo pipefail
+          echo "Scanning for disallowed boolean patterns"
+          MATCHES=$(grep -R -nF -e "(not " -e "and not" -e "not (" policies || true)
+          if [ -n "$MATCHES" ]; then
+            echo "$MATCHES" >&2
+            echo "Found disallowed patterns" >&2
+            exit 2
+          fi
+          echo "None"
+          echo "Scanning for ' not in {'"
+          MATCHES2=$(grep -R -nF ' not in {' policies || true)
+          if [ -n "$MATCHES2" ]; then
+            echo "$MATCHES2" >&2
+            echo "Found disallowed membership negation patterns" >&2
+            exit 3
+          fi
+          echo "None"
+      - name: OPA fmt check (host)
+        run: |
+          set -euo pipefail
+          CHANGED=$(opa fmt -l policies || true)
+          if [ -n "$CHANGED" ]; then
+            echo "Rego files require formatting:" >&2
+            echo "$CHANGED" >&2
+            for f in $CHANGED; do
+              echo "--- fmt diff for: $f" >&2
+              opa fmt -d "$f" || true
+            done
+            exit 4
+          fi
+          echo "Formatting OK"

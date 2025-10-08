@@ -32,20 +32,66 @@ jobs:
   guard:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    outputs:
+      is_act: ${{ steps.detect.outputs.is_act }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
-  audit:
+      - name: Detect act runtime
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${ACT:-}" = "true" ] || [ "${IS_ACT:-}" = "true" ]; then
+            echo "Detected act environment"
+            echo "is_act=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_act=false" >> "$GITHUB_OUTPUT"
+          fi
+  probe-ghcr:
+    name: Probe GHCR access (ci-base)
     needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-base)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          # If image already present, skip pulling to save time
+          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
+            echo "Image already present locally; skipping pull."
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          elif command -v timeout >/dev/null 2>&1; then
+            # Bound the pull to 120 seconds to avoid long hangs
+            if timeout 120s docker pull "$IMAGE_REF"; then
+              echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "can_pull=false" >> "$GITHUB_OUTPUT"
+            fi
+          elif docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  audit:
+    needs: [guard, probe-ghcr]
+    # Run containerized audit whenever the CI image is available locally (including under act)
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -64,6 +110,29 @@ jobs:
           set -euo pipefail
           bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json
           # Compare against baseline; honors FAIL_LINK_AUDIT=1 to fail on drift
+          python tools/compare_links_baseline.py | tee link_audit_output.txt
+
+  audit-fallback:
+    name: Link audit (fallback, no container)
+    needs: [guard, probe-ghcr]
+    # Run fallback only when the CI image cannot be used
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || pip install pyyaml jsonschema
+      - name: Run link audit (host)
+        run: |
+          set -euo pipefail
+          python tools/analyze_links.py --export links_export.json --json links_audit_report.json
           python tools/compare_links_baseline.py | tee link_audit_output.txt
 
   upload-artifacts:

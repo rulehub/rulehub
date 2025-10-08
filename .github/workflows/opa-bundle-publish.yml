@@ -23,10 +23,6 @@ env:
   IMAGE: ghcr.io/${{ github.repository_owner }}/rulehub-bundle
   # Set to '1' (e.g. via: act -s SKIP_SUPPLYCHAIN=1) to skip OIDC-dependent supply-chain steps locally.
   SKIP_SUPPLYCHAIN: "0"
-  # Central pinned tool versions (update deliberately & audit supply chain when bumping)
-  OPA_VERSION: "1.7.1"
-  SYFT_VERSION: "v1.20.0"
-  COSIGN_VERSION: "v2.2.4"
 
 jobs:
   guard:
@@ -44,15 +40,37 @@ jobs:
           if [ -z "$input_tag" ]; then
             echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
           fi
-  build-and-push-gh:
+  probe-ghcr:
     if: ${{ github.actor != 'nektos/act' }}
+    name: Probe GHCR access (ci-policy)
     needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        timeout-minutes: 3
+        shell: bash
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if docker pull "$IMAGE_REF"; then
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "can_pull=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  build-and-push-gh:
+    needs: [guard, probe-ghcr]
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -138,8 +156,28 @@ jobs:
       - name: Generate references index (md+json)
         run: |
           set -euo pipefail
-          . .venv/bin/activate
-          python tools/generate_refs_index.py --format both || true
+          # Prefer .venv but fall back to CI base venv Python if PyYAML isn't available there (avoid runtime installs)
+          if [ -x .venv/bin/python ]; then
+            . .venv/bin/activate
+            if python -c "import yaml" >/dev/null 2>&1; then
+              python tools/generate_refs_index.py --format both || true
+            else
+              # .venv lacks PyYAML (seen under act when venv cannot see base venv packages). Use base Python from CI image.
+              deactivate || true
+              echo "[ci] .venv missing PyYAML; using base Python for refs-index generation" >&2
+              if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
+                /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
+              else
+                echo "[ci] base Python also missing PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
+              fi
+            fi
+          else
+            if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
+              /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
+            else
+              echo "[ci] Python lacks PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
+            fi
+          fi
           ls -lh docs/references-index.md dist/references-index.json || true
 
       # Syft preinstalled in CI image
@@ -272,7 +310,7 @@ jobs:
             docs/references-index.md
 
       - name: Upload artifacts (minimal)
-        if: ${{ env.SKIP_SUPPLYCHAIN == '1' }}
+        if: ${{ env.SKIP_SUPPLYCHAIN == '1' && github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: opa-bundle-${{ steps.tag.outputs.tag }}
@@ -294,6 +332,11 @@ jobs:
           echo "aggregate_hash=$AGG_HASH" >> $GITHUB_OUTPUT
           printf "Bundle SHA256: %s\nManifest SHA256: %s\nAggregate Hash: %s\n" "$BUNDLE_SHA" "$MANIFEST_SHA" "$AGG_HASH" > dist/digest-summary.txt
           cat dist/digest-summary.txt
+
+      - name: Act completion marker
+        if: ${{ github.actor == 'nektos/act' }}
+        run: |
+          echo "[act] build path complete (uploads/signing skipped)."
 
       - name: Release assets (full)
         if: ${{ github.event_name == 'release' && env.SKIP_SUPPLYCHAIN != '1' }}
@@ -360,9 +403,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     needs: [build-and-push-gh]
     permissions:
@@ -398,6 +438,8 @@ jobs:
             --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
             --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
             dist/opa-bundle.manifest.json
+
+      # No fallback for build/publish verify: if GHCR image is not available, we intentionally skip these steps.
 
       - name: Verify SBOM signatures
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
@@ -520,8 +562,27 @@ jobs:
       - name: Generate references index (md+json)
         run: |
           set -euo pipefail
-          . .venv/bin/activate
-          python tools/generate_refs_index.py --format both || true
+          # Prefer .venv but fall back to CI base venv Python if PyYAML isn't available there (avoid runtime installs)
+          if [ -x .venv/bin/python ]; then
+            . .venv/bin/activate
+            if python -c "import yaml" >/dev/null 2>&1; then
+              python tools/generate_refs_index.py --format both || true
+            else
+              deactivate || true
+              echo "[act] .venv missing PyYAML; using base Python for refs-index generation" >&2
+              if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
+                /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
+              else
+                echo "[act] base Python also missing PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
+              fi
+            fi
+          else
+            if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
+              /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
+            else
+              echo "[act] Python lacks PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
+            fi
+          fi
           ls -lh docs/references-index.md dist/references-index.json || true
 
       - name: Generate CycloneDX SBOM

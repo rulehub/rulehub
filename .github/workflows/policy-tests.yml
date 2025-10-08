@@ -165,7 +165,6 @@ jobs:
         shell: bash
     timeout-minutes: 10
     env:
-      OPA_VERSION: "v1.8.0"
       PYTHONPATH: /github/workspace
     steps:
       - name: Checkout

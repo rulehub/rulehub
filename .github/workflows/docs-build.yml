@@ -29,20 +29,80 @@ jobs:
   guard:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    container:
+      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      options: --user 0:0
+    outputs:
+      is_act: ${{ steps.detect.outputs.is_act }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
-  build-docs:
+      - name: Detect act runtime
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${ACT:-}" = "true" ] || [ "${IS_ACT:-}" = "true" ]; then
+            echo "Detected act environment"
+            echo "is_act=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_act=false" >> "$GITHUB_OUTPUT"
+          fi
+  probe-ghcr:
+    name: Probe GHCR access (ci-base)
     needs: guard
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Try anonymous pull (ci-base)
+        id: probe
+        shell: bash
+        env:
+          IS_ACT: ${{ needs.guard.outputs.is_act }}
+        run: |
+          set -euo pipefail
+          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          echo "Probing anonymous pull for $IMAGE_REF"
+          if [ "${IS_ACT}" = "true" ]; then
+            echo "act detected; assuming image available via local map or prefetch"
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # If the image already exists locally, consider pullable without network
+          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
+            echo "Image present locally; skipping pull"
+            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Time-bound the pull to avoid hangs on problematic registries
+          if command -v timeout >/dev/null 2>&1; then
+            if timeout 120s docker pull "$IMAGE_REF"; then
+              echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "can_pull=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            if docker pull "$IMAGE_REF"; then
+              echo "can_pull=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "can_pull=false" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+  build-docs:
+    needs: [guard, probe-ghcr]
+    # Use container whenever image is available locally or pullable; act mapping may redirect to dev-local
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
@@ -53,7 +113,33 @@ jobs:
       - name: Build (strict)
         shell: bash
         run: |
+          set -euo pipefail
+          if command -v mkdocs >/dev/null 2>&1; then
+            MK=mkdocs
+          elif [ -x /opt/ci-venv/bin/mkdocs ]; then
+            MK=/opt/ci-venv/bin/mkdocs
+            export PATH=/opt/ci-venv/bin:$PATH
+          else
+            echo "mkdocs not found in PATH or /opt/ci-venv/bin" >&2
+            exit 127
+          fi
+          "$MK" --version
+          "$MK" build --strict --verbose
+
+  build-docs-fallback:
+    name: Build docs (fallback, no container)
+    needs: [guard, probe-ghcr]
+    # Run fallback only when pull is not possible
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup Python (no network)
+        run: |
+          python3 -m venv .venv
           . .venv/bin/activate
-          # Ensure mkdocs is available (images may skip dev installs under act)
-          mkdocs --version >/dev/null 2>&1 || pip install --no-input mkdocs mkdocs-material mkdocs-get-deps mkdocs-material-extensions ghp-import
+          python -c 'import sys; print(sys.version)'
+          echo "Fallback path: no deps installed to avoid network under act"
+      - name: Build (strict) on host
+        run: |
           mkdocs build --strict --verbose

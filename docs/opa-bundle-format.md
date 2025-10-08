@@ -97,20 +97,20 @@ Expected output includes INFO lines for successful cosign checks and a final `OK
 Publishing (example):
 
 ```bash
-make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=vX.Y.Z
+make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=vX.Y.Z
 ```
 
 Adds OCI annotations including `io.rulehub.manifest.sha256`. Optional signing:
 
 ```bash
-make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=vX.Y.Z SIGN=1
+make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=vX.Y.Z SIGN=1
 ```
 
 Later verification (OCI):
 
 ```bash
-COSIGN_EXPERIMENTAL=1 cosign verify ghcr.io/<org>/rulehub-bundle:vX.Y.Z
-oras pull ghcr.io/<org>/rulehub-bundle:vX.Y.Z -o dist/
+COSIGN_EXPERIMENTAL=1 cosign verify ghcr.io/rulehub/rulehub-bundle:vX.Y.Z
+oras pull ghcr.io/rulehub/rulehub-bundle:vX.Y.Z -o dist/
 ```
 
 ## Local Evaluation Example

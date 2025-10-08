@@ -4,16 +4,16 @@ This document describes the security, integrity, and transparency artifacts publ
 
 ## Published Artifacts (per release / tagged build)
 
-| Artifact | Location | Purpose |
-|----------|----------|---------|
-| OPA bundle | `dist/opa-bundle.tar.gz` + GH Release asset + GHCR (OCI layer) | Policy distribution (Rego / constraints) |
-| Signature | `dist/opa-bundle.tar.gz.sig` | Integrity + origin (Sigstore keyless) |
-| Certificate | `dist/opa-bundle.tar.gz.cert` | Fulcio cert binding signature to GitHub workflow identity |
-| SBOM (CycloneDX) | `dist/opa-bundle.sbom.cdx.json` | Dependency / component inventory (CycloneDX tooling) |
-| SBOM (SPDX) | `dist/opa-bundle.sbom.spdx.json` | License / compliance workflows (SPDX tooling) |
-| SBOM attestations | OCI attestations (`type=cyclonedx`, `type=spdx`) | Bind SBOMs to the pushed OCI artifact |
-| SLSA v1 provenance attestation | OCI attestation (`type=slsaprovenance`) | Build provenance (SLSA Level 3 via official generator) |
-| Generator provenance artifact | Release asset (name: `rulehub-opa-bundle.provenance.intoto.jsonl` or similar) | Downloadable in-toto statement for offline verification |
+| Artifact                       | Location                                                                      | Purpose                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| OPA bundle                     | `dist/opa-bundle.tar.gz` + GH Release asset + GHCR (OCI layer)                | Policy distribution (Rego / constraints)                  |
+| Signature                      | `dist/opa-bundle.tar.gz.sig`                                                  | Integrity + origin (Sigstore keyless)                     |
+| Certificate                    | `dist/opa-bundle.tar.gz.cert`                                                 | Fulcio cert binding signature to GitHub workflow identity |
+| SBOM (CycloneDX)               | `dist/opa-bundle.sbom.cdx.json`                                               | Dependency / component inventory (CycloneDX tooling)      |
+| SBOM (SPDX)                    | `dist/opa-bundle.sbom.spdx.json`                                              | License / compliance workflows (SPDX tooling)             |
+| SBOM attestations              | OCI attestations (`type=cyclonedx`, `type=spdx`)                              | Bind SBOMs to the pushed OCI artifact                     |
+| SLSA v1 provenance attestation | OCI attestation (`type=slsaprovenance`)                                       | Build provenance (SLSA Level 3 via official generator)    |
+| Generator provenance artifact  | Release asset (name: `rulehub-opa-bundle.provenance.intoto.jsonl` or similar) | Downloadable in-toto statement for offline verification   |
 
 Artifacts are attached to GitHub Releases. The bundle is published to `ghcr.io/rulehub/rulehub-bundle:<tag>` (tag = release tag or main snapshot) along with attestations.
 
@@ -52,7 +52,7 @@ Retrieve and verify the provenance attestation (public registry scenario):
 ```bash
 cosign verify-attestation \
   --type slsaprovenance \
-  ghcr.io/<org>/rulehub-bundle:<tag> > attestation.jsonl
+  ghcr.io/rulehub/rulehub-bundle:<tag> > attestation.jsonl
 
 grep sha256 attestation.jsonl
 ```
@@ -62,19 +62,19 @@ Add identity constraints (recommended):
 ```bash
 cosign verify-attestation \
   --type slsaprovenance \
-  --certificate-identity-regexp "https://github.com/<org>/<repo>/.*" \
+  --certificate-identity-regexp "https://github.com/rulehub/<repo>/.*" \
   --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
-  ghcr.io/<org>/rulehub-bundle:<tag>
+  ghcr.io/rulehub/rulehub-bundle:<tag>
 ```
 
 The statement's `subject` digest must match the bundle SHA256 published in logs. The repository commit SHA should appear in materials. Consumers can further enforce policy (e.g., required builder ID / workflow path) with `cosign verify-attestation` flags.
 
 ## 4. Analysis & Tooling Suggestions
 
-| Format | Typical Uses | Notes |
-|--------|--------------|-------|
-| CycloneDX | Vulnerability & dependency graph tools, BOM diffing | Broad ecosystem support (Grype, Dependency-Track, etc.) |
-| SPDX | License compliance, provenance ingestion in legal tooling | SPDX JSON v2.3 generated directly (no conversion loss) |
+| Format    | Typical Uses                                              | Notes                                                   |
+| --------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| CycloneDX | Vulnerability & dependency graph tools, BOM diffing       | Broad ecosystem support (Grype, Dependency-Track, etc.) |
+| SPDX      | License compliance, provenance ingestion in legal tooling | SPDX JSON v2.3 generated directly (no conversion loss)  |
 
 Conversion between formats is optional (Syft already emits both). Downstream systems can choose their preferred format.
 

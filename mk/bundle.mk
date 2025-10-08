@@ -109,10 +109,10 @@ artifacts-verify: ## Verify required release artifacts exist (bundle, manifest, 
 	if [ $$missing -ne 0 ]; then echo "[artifacts-verify] FAIL" >&2; exit 2; else echo "[artifacts-verify] OK"; fi
 
 # Publish bundle to OCI with proper mediaType using ORAS CLI
-# Usage: make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>
+# Usage: make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=<tag>
 oras-publish:
 	@if [ -z "$(IMAGE)" ] || [ -z "$(TAG)" ]; then \
-		echo "Usage: make oras-publish IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>"; exit 2; \
+		echo "Usage: make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=<tag>"; exit 2; \
 	fi
 	@command -v oras >/dev/null 2>&1 || { echo "ORAS not found. See https://oras.land/ for install"; exit 127; }
 	@test -f dist/opa-bundle.tar.gz || { echo "Bundle not found. Run 'make opa-bundle' first."; exit 3; }
@@ -136,7 +136,7 @@ oras-publish:
 
 sign-oci: ## Cosign sign $(IMAGE):$(TAG) (keyless)
 	@if [ -z "$(IMAGE)" ] || [ -z "$(TAG)" ]; then \
-		echo "Usage: make sign-oci IMAGE=ghcr.io/<org>/rulehub-bundle TAG=<tag>"; exit 2; \
+		echo "Usage: make sign-oci IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=<tag>"; exit 2; \
 	fi
 	@command -v cosign >/dev/null 2>&1 || { echo "Cosign not found."; exit 127; }
 	@echo "Signing OCI artifact $(IMAGE):$(TAG) (keyless)"

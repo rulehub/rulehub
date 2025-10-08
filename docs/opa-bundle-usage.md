@@ -23,8 +23,8 @@ python tools/verify_bundle.py \
 Option B (OCI):
 
 ```bash
-oras pull ghcr.io/<org>/rulehub-bundle:vX.Y.Z -o dist/
-COSIGN_EXPERIMENTAL=1 cosign verify ghcr.io/<org>/rulehub-bundle:vX.Y.Z
+oras pull ghcr.io/rulehub/rulehub-bundle:vX.Y.Z -o dist/
+COSIGN_EXPERIMENTAL=1 cosign verify ghcr.io/rulehub/rulehub-bundle:vX.Y.Z
 ```
 
 ## 2. Deploy OPA
@@ -41,7 +41,7 @@ data:
   config.yaml: |
     services:
       rulehub:
-        url: https://github.com/<org>/rulehub/releases/download/vX.Y.Z
+  url: https://github.com/rulehub/rulehub/releases/download/vX.Y.Z
     bundles:
       rulehub:
         service: rulehub
