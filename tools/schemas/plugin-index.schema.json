@@ -5,6 +5,11 @@
   "type": "object",
   "required": ["packages"],
   "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version for forward compatibility; default 1."
+    },
     "packages": {
       "type": "array",
       "description": "List of policy packages exposed to the plugin.",
@@ -31,6 +36,75 @@
             "type": "array",
             "description": "Readable labels of regulation sections referencing this policy.",
             "items": { "type": "string" }
+          },
+          "jurisdiction": {
+            "description": "Optional jurisdiction(s) for the policy.",
+            "anyOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
+          },
+          "description": { "type": "string" },
+          "framework": { "type": "string", "enum": ["kyverno", "gatekeeper", "other"] },
+          "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+          "geo": { "type": "object" },
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": { "type": "string" },
+                "exists": { "type": "boolean" }
+              },
+              "required": ["path", "exists"],
+              "additionalProperties": false
+            }
+          },
+          "owner": { "type": ["string", "object"] },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "links": { "type": ["array", "object"] },
+          "repoPath": {
+            "type": "string",
+            "description": "Repository-relative path to the primary policy directory or file (e.g., policies/<domain>/<id>)."
+          },
+          "repoUrl": {
+            "type": "string",
+            "description": "Web URL to the repository location for browsing (e.g., https://github.com/<org>/<repo>/blob/<branch>/<path>)."
+          },
+          "kyverno": {
+            "type": "array",
+            "description": "List of Kyverno artifacts for this policy.",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Repository-relative path to Kyverno YAML."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Web URL to the Kyverno YAML in the repo."
+                }
+              }
+            }
+          },
+          "gatekeeper": {
+            "type": "array",
+            "description": "List of Gatekeeper artifacts for this policy.",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Repository-relative path to Gatekeeper template/constraint or Rego policy."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Web URL to the Gatekeeper artifact in the repo."
+                }
+              }
+            }
           }
         }
       }

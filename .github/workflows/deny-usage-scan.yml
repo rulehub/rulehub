@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
   pull_request:
@@ -28,11 +28,11 @@ jobs:
 
   scan:
     name: Rego deny[] rule enforcement scan
-    needs: [guard, probe-ghcr]
+    needs: [guard, resolve, probe-ghcr]
     if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: "${{ needs.resolve.outputs.image }}"
       options: --user 0:0
     defaults:
       run:
@@ -50,7 +50,7 @@ jobs:
 
   probe-ghcr:
     name: Probe GHCR access (ci-base)
-    needs: guard
+    needs: [guard, resolve]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -63,7 +63,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          IMAGE_REF="${{ needs.resolve.outputs.image }}"
           echo "Probing anonymous pull for $IMAGE_REF"
           if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
             echo "Image present locally; skipping pull"
@@ -105,3 +105,17 @@ jobs:
           set -euo pipefail
           . .venv/bin/activate
           python tools/deny_usage_scan.py
+  resolve:
+    name: Resolve CI image (ci-base)
+    needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base

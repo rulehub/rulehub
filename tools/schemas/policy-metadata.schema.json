@@ -49,6 +49,10 @@
       "type": ["array", "null"],
       "items": { "type": "string", "format": "uri-reference" }
     },
+    "industry": {
+      "description": "Target industry or industries for which this policy is relevant",
+      "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
+    },
     "geo": {
       "type": "object",
       "additionalProperties": false,

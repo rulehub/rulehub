@@ -21,7 +21,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub CI image (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub CI image (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
 
@@ -43,12 +43,26 @@ jobs:
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
-  scan-gh:
-    if: ${{ github.actor != 'nektos/act' }}
+  resolve:
+    name: Resolve CI image (ci-base)
     needs: guard
     runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
+  scan-gh:
+    if: ${{ github.actor != 'nektos/act' }}
+    needs: [guard, resolve]
+    runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: "${{ needs.resolve.outputs.image }}"
       options: --user 0:0
     defaults:
       run:
@@ -88,12 +102,12 @@ jobs:
 
   scan-act:
     if: ${{ github.actor == 'nektos/act' }}
-    needs: guard
+    needs: [guard, resolve]
     runs-on: ubuntu-latest
     env:
       ACT: "true"
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: "${{ needs.resolve.outputs.image }}"
       options: --user 0:0
     defaults:
       run:

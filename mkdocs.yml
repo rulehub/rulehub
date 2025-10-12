@@ -1,7 +1,7 @@
 site_name: RuleHub
-site_description: "Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)"
-site_url: "https://rulehub.github.io/rulehub/"  # GitHub Pages URL (org/repo)
-repo_url: "https://github.com/rulehub/rulehub"
+site_description: 'Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)'
+site_url: 'https://rulehub.github.io/rulehub/' # GitHub Pages URL (org/repo)
+repo_url: 'https://github.com/rulehub/rulehub'
 repo_name: rulehub/rulehub
 copyright: "Copyright © {{ git_committers_time | date('YYYY') }} RuleHub contributors"
 
@@ -31,6 +31,7 @@ nav:
       - Metadata: metadata.md
       - Coverage: coverage.md
       - Compliance Maps: compliance-maps.md
+      - Plugin Index: plugin-index.md
   - Kubernetes Policies:
       - K8s Policies: k8s-policies.md
   - Security & Supply Chain:
@@ -76,7 +77,6 @@ extra:
 
 # Provide edit links on pages (Material feature content.action.edit)
 edit_uri: edit/main/docs/
-
 # To preview locally:
 #   make docs-serve
 # To build static site:

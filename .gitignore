@@ -162,6 +162,7 @@ _temp/
 **/_temp/
 .tmp-*.sh
 /tmp-*.sh
+/tmp/
 
 # Local runner secret/env files (never commit real values)
 .github/act.secrets

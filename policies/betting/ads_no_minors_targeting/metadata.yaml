@@ -5,18 +5,19 @@ description: Prevent ads from being targeted at minors
 standard: other
 version: current
 path:
-- policies/betting/ads_no_minors_targeting/policy.rego
-- policies/betting/ads_no_minors_targeting/policy_test.rego
+  - policies/betting/ads_no_minors_targeting/policy.rego
+  - policies/betting/ads_no_minors_targeting/policy_test.rego
 framework: other
 severity: medium
 owner: compliance
 links:
-- https://www.asa.org.uk/codes-and-rulings/advertising-codes.html
+  - https://www.asa.org.uk/codes-and-rulings/advertising-codes.html
 geo:
   regions:
-  - Global
+    - Global
   countries:
-  - '*'
+    - '*'
   scope: Global
 jurisdiction:
-- Global
+  - Global
+industry: gambling

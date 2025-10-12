@@ -1,23 +1,40 @@
-## RuleHub - Policy & Compliance, Beautifully Managed
+## RuleHub — Open Guardrails for ML & LLM Systems
 
 [![CodeQL](https://github.com/rulehub/rulehub/actions/workflows/codeql.yml/badge.svg)](https://github.com/rulehub/rulehub/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/rulehub/rulehub/badge)](https://securityscorecards.dev/viewer/?uri=github.com/rulehub/rulehub)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-RuleHub is a policy & compliance hub that unifies requirements, policy code (Kyverno + OPA/Gatekeeper),
-tests, metadata, integrity (bundles, SBOM, provenance), and docs into one auditable delivery pipeline.
+> **Open-source guardrails and Policy-as-Code for ML & LLM systems — safety, compliance, and reproducibility in one framework.**
 
-Ship guardrails with confidence: measure coverage, enforce quality gates in CI, and publish signed,
-reproducible policy bundles with a clear evidence trail from requirement -> rule -> test -> release.
+> **Developer-first Policy-as-Code framework** for securing and auditing **AI pipelines** —
+> from classical ML training to LLM guardrails, with supply-chain integrity, compliance mapping,
+> and reproducible evidence for trustworthy AI.
+
+---
+
+## Overview
+
+**RuleHub** unifies safety, security, and compliance for AI systems.
+It brings together policies (OPA / Kyverno), compliance mappings, tests, and signed bundles into a single reproducible workflow.
+
+RuleHub connects:
+- **Policy-as-Code:** encode safety and regulatory requirements as reusable policies.
+- **MLSec module:** dataset, model, and training pipeline security.
+- **LLMSec module:** prompt and output guardrails for LLM/RAG systems.
+- **Compliance layer:** EU AI Act, NIST AI RMF, ISO 42001 mappings.
+- **Observability:** Prometheus / OpenTelemetry metrics and evidence trails.
 
 ---
 
 ## What RuleHub does
 
-- Turns written requirements into verifiable policy code and tests.
-- Tracks traceability: requirement mappings, rule metadata, test coverage, release artifacts.
-- Automates quality gates in CI/CD across Kyverno and OPA/Gatekeeper.
-- Produces supply-chain ready outputs: deterministic OPA bundles, SBOMs, signatures, and provenance.
+| Problem | How RuleHub helps |
+|----------|------------------|
+| Fragmented AI security & compliance tools | Unified Policy-as-Code workflow |
+| Manual reviews & audits | Automated, testable policies with CI gates |
+| Missing AI supply-chain visibility | SBOM / AIBOM + cosign-signed artifacts |
+| No reproducible evidence trail | Provenance and compliance exports |
+| Lack of developer-friendly guardrails | Open, YAML-based policies and SDKs |
 
 <p align="center">
   <img src="docs/assets/value-loop.svg" alt="RuleHub value loop" width="760"/>
@@ -31,27 +48,16 @@ reproducible policy bundles with a clear evidence trail from requirement -> rule
 
 ## Key features
 
-- Compliance maps: model requirements alongside the policies that implement them.
-- Multi-engine policy support: Kyverno and OPA/Gatekeeper with first-class tests.
-- Policy quality gates: unit tests, coverage targets, static validation, guardrails.
-- Reproducible delivery: deterministic bundles, integrity manifests, and signing.
-- Rich metadata: ownership, references, and documentation that drive reports.
-- Docs built-in: MkDocs site with architecture, integrity, coverage, and examples.
-
-## Why teams choose RuleHub (differentiators)
-
-- One hub for requirements, policy code, tests, and release evidence.
-- CI-first: measurable coverage and enforceable thresholds to block regressions.
-- Supply chain integrity by default: SBOMs, signatures, provenance, verification.
-- Industry‑ready: curated policy sets and templates for common regulated domains.
+- **Policy-as-Code** — Kyverno / OPA / Rego rules, tests, coverage reports.
+- **AI Supply-Chain Security** — SBOM / AIBOM generation, cosign signatures, provenance.
+- **ML & LLM Guardrails** — dataset integrity, prompt filtering, data-leak policies.
+- **Compliance Automation** — EU AI Act / NIST RMF / ISO 42001 mappings.
+- **Observability & Evidence** — OpenTelemetry metrics, Grafana dashboards.
+- **Integration Ready** — Helm charts, Backstage plugin, CI/CD pipelines.
 
 ## Screenshots & examples
 
 > Replace or augment with your own product shots as the project evolves.
-
-- Architecture (high-level):
-
-  <img src="docs/assets/architecture-overview.svg" alt="Architecture" width="760"/>
 
 - Example compliance map (YAML):
 
@@ -99,6 +105,35 @@ deny[msg] {
 }
 ```
 
+## 🏗 Architecture
+
+```text
+                 ┌───────────────────────────┐
+                 │     RuleHub Core          │
+                 │  Policy Engine + Tests    │
+                 │  (OPA / Kyverno)          │
+                 └────────────┬──────────────┘
+                              │
+          ┌───────────────────┼───────────────────┐
+          │                   │                   │
+   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+   │  MLSec       │     │  LLMSec      │     │  Compliance  │
+   │  Training &  │     │  Guardrails  │     │  Mappings    │
+   │  Model rules │     │  for LLMs    │     │  (AI Act etc)│
+   └──────────────┘     └──────────────┘     └──────────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │ Observability & Reports │
+                 │  (Grafana / OTel / CI)  │
+                 └──────────────────────────┘
+```
+
+- Architecture (high-level):
+
+  <img src="docs/assets/architecture-overview.svg" alt="Architecture" width="760"/>
+
+---
+
 ## Minimal quick start
 
 This is a tiny fast-path to see the repo structure and run a basic validation. For a full walkthrough, head to the docs.
@@ -136,9 +171,30 @@ Optional next steps:
 - Integrity, SBOM, signing: docs/security-integrity.md and docs/security-provenance.md
 - Policy quality & coverage: docs/policy-test-quality.md and docs/coverage.md
 
+## Roadmap
+
+| Milestone | Target | Artifacts |
+|------------|---------|-----------|
+| **M1** | Core release + policy framework, Helm chart, Backstage plugin | `rulehub`, `rulehub-charts`, `rulehub-backstage-plugin` |
+| **M2** | MLSec / LLMSec modules + AIBOM support | `rulehub-mlsec`, `rulehub-llmsec` |
+| **M3** | Cloud registry + telemetry agent + docs site | `rulehub-cloud`, `rulehub-observability-agent`, `rulehub-docs` |
+
+## Repository Structure
+
+| Repo | Purpose |
+|------|----------|
+| [`rulehub/rulehub`](https://github.com/rulehub/rulehub) | Core Policy-as-Code engine |
+| [`rulehub-charts`](https://github.com/rulehub/rulehub-charts) | Helm charts and release bundles |
+| [`rulehub-backstage-plugin`](https://github.com/rulehub/rulehub-backstage-plugin) | Backstage UI plugin |
+| [`rulehub-mlsec`](https://github.com/rulehub/rulehub-mlsec) | ML pipeline security policies |
+| [`rulehub-llmsec`](https://github.com/rulehub/rulehub-llmsec) | LLM guardrails and runtime policies |
+| [`rulehub-observability-agent`](https://github.com/rulehub/rulehub-observability-agent) | Telemetry collector |
+
+---
+
 ## Contributing
 
-Contributions and issues are welcome. Please read CONTRIBUTING.md and CODE_OF_CONDUCT.md before opening PRs.
+Contributions and issues are welcome. Please read [Contributing Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before opening PRs.
 
 ## License
 

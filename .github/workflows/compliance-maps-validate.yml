@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
   pull_request:
@@ -33,17 +33,31 @@ jobs:
         run: |
           input_tag="${{ inputs.ci_image_tag }}"
           if [ "$input_tag" = "latest" ]; then
-            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., 2025.10.03-<sha> or vX.Y.Z)." >&2
+            echo "Workflow input ci_image_tag must not be 'latest'. Use an immutable tag (e.g., YYYY.MM.DD-<sha> or vX.Y.Z)." >&2
             exit 1
           fi
           if [ -z "$input_tag" ]; then
             echo "Note: ci_image_tag input not provided. Ensure repository variable CI_IMAGE_TAG is set to a pinned tag to avoid drift." >&2
           fi
-  validate:
+  resolve:
+    name: Resolve CI image (base)
     needs: guard
     runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.resolve.outputs.image }}
+      tag: ${{ steps.resolve.outputs.tag }}
+    steps:
+      - name: Resolve CI image tag and ref
+        id: resolve
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
+  validate:
+    needs: [guard, resolve]
+    runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: "${{ needs.resolve.outputs.image }}"
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}

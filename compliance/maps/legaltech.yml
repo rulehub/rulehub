@@ -5,62 +5,64 @@ sections:
   GDPR Core:
     title: GDPR principles and data subject rights
     policies:
-    - legaltech.gdpr_breach_72h
-    - legaltech.gdpr_consent_valid
-    - legaltech.gdpr_cookie_consent_eprivacy
-    - legaltech.gdpr_data_minimization
-    - legaltech.gdpr_dpia_required_high_risk
-    - legaltech.gdpr_dsar_timeline_30d
-    - legaltech.gdpr_lawful_basis_required
-    - legaltech.gdpr_records_of_processing
-    - legaltech.gdpr_retention_limit
-    - legaltech.gdpr_transfer_scc
+      - legaltech.gdpr_breach_72h
+      - legaltech.gdpr_consent_valid
+      - legaltech.gdpr_cookie_consent_eprivacy
+      - legaltech.gdpr_data_minimization
+      - legaltech.gdpr_dpia_required_high_risk
+      - legaltech.gdpr_dsar_timeline_30d
+      - legaltech.gdpr_lawful_basis_required
+      - legaltech.gdpr_records_of_processing
+      - legaltech.gdpr_retention_limit
+      - legaltech.gdpr_transfer_scc
   US (CCPA/CPRA):
     title: California privacy (CCPA/CPRA)
     policies:
-    - legaltech.ccpa_notice_at_collection
-    - legaltech.ccpa_opt_out_enabled
-    - legaltech.ccpa_verification_of_requests
-    - legaltech.cpra_sensitive_data_limited_use
+      - legaltech.ccpa_notice_at_collection
+      - legaltech.ccpa_opt_out_enabled
+      - legaltech.ccpa_verification_of_requests
+      - legaltech.cpra_sensitive_data_limited_use
   Security Controls:
     title: Technical and organizational measures
     policies:
-    - legaltech.data_residency_requirements_enforced
-    - legaltech.encryption_at_rest_enabled
-    - legaltech.encryption_in_transit_enabled
-    - legaltech.popia_za_security_measures
+      - legaltech.data_residency_requirements_enforced
+      - legaltech.encryption_at_rest_enabled
+      - legaltech.encryption_in_transit_enabled
+      - legaltech.popia_za_security_measures
   Records & eDiscovery:
     title: Records governance and eDiscovery
     policies:
-    - legaltech.ch_fadp_records_of_processing
-    - legaltech.ediscovery_frcp_26_34_37
-    - legaltech.legal_hold_no_delete_enforced
-    - legaltech.records_classification_scheme_applied
+      - legaltech.ch_fadp_records_of_processing
+      - legaltech.ediscovery_frcp_26_34_37
+      - legaltech.legal_hold_no_delete_enforced
+      - legaltech.records_classification_scheme_applied
   Cross-border Transfers:
     title: International data transfers
     policies:
-    - legaltech.id_pdp_cross_border_transfer
-    - legaltech.pipl_cn_cross_border_assessment
+      - legaltech.id_pdp_cross_border_transfer
+      - legaltech.pipl_cn_cross_border_assessment
   Children & Minors:
     title: Child-specific consent and protections
     policies:
-    - legaltech.uk_gdpr_minor_consent
+      - legaltech.uk_gdpr_minor_consent
   Country-specific:
     title: National privacy laws
     policies:
-    - legaltech.ca_qc_law25_privacy_governance
-    - legaltech.kr_pipa_breach_notification
-    - legaltech.lgpd_brazil_compliance
-    - legaltech.mx_lfpdppp_notice_at_collection
-    - legaltech.my_pdpa_retention_principle
-    - legaltech.nz_breach_notification
-    - legaltech.pdpa_sg_consent_purposes
-    - legaltech.pipeda_ca_consent
-    - legaltech.sa_pdpl_breach_notify
-    - legaltech.th_pdpa_breach_notify
-    - legaltech.tr_kvkk_verbis_registration
-    - legaltech.vn_pdpd_notice_and_consent
+      - legaltech.ca_qc_law25_privacy_governance
+      - legaltech.au_app_notice_at_collection
+      - legaltech.ae_pdpl_consent_notice
+      - legaltech.kr_pipa_breach_notification
+      - legaltech.lgpd_brazil_compliance
+      - legaltech.mx_lfpdppp_notice_at_collection
+      - legaltech.my_pdpa_retention_principle
+      - legaltech.nz_breach_notification
+      - legaltech.pdpa_sg_consent_purposes
+      - legaltech.pipeda_ca_consent
+      - legaltech.sa_pdpl_breach_notify
+      - legaltech.th_pdpa_breach_notify
+      - legaltech.tr_kvkk_verbis_registration
+      - legaltech.vn_pdpd_notice_and_consent
   Professional Conduct:
     title: Legal ethics and confidentiality
     policies:
-    - legaltech.aba_model_rule_1_6_confidentiality
+      - legaltech.aba_model_rule_1_6_confidentiality

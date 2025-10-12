@@ -1,0 +1,60 @@
+name: Resolve CI image
+description: Resolve RuleHub CI container image references with centralized fallback logic
+
+inputs:
+  ci_image_tag:
+    description: Optional image tag override passed by workflow_dispatch or caller
+    required: false
+    default: ''
+  kind:
+    description: Image kind to resolve (base|policy|charts|frontend)
+    required: true
+    default: base
+
+outputs:
+  image:
+    description: Fully qualified image reference (ghcr.io/<owner>/ci-<kind>:<tag>)
+    value: ${{ steps.out.outputs.image }}
+  tag:
+    description: The resolved tag used
+    value: ${{ steps.out.outputs.tag }}
+
+runs:
+  using: composite
+  steps:
+    - id: compute
+      shell: bash
+      env:
+        INPUT_TAG: ${{ inputs.ci_image_tag }}
+        VAR_TAG: ${{ vars.CI_IMAGE_TAG }}
+        ENV_TAG: ${{ env.CI_IMAGE_TAG }}
+        KIND: ${{ inputs.kind }}
+        OWNER: ${{ github.repository_owner }}
+      run: |
+        set -euo pipefail
+        t="$INPUT_TAG"
+        if [ -z "$t" ]; then
+          t="$VAR_TAG"
+        fi
+        # Optional environment variable fallback (useful for local act runs or matrix-injected env)
+        if [ -z "$t" ]; then
+          t="${ENV_TAG:-}"
+        fi
+        # No pinned fallback: require explicit tag via input or repo/org variable
+        if [ -z "$t" ]; then
+          echo "No CI image tag resolved. Provide ci_image_tag input, or set repository/org variable CI_IMAGE_TAG, or export CI_IMAGE_TAG in env." >&2
+          echo "Example tags: YYYY.MM.DD-<sha> or v1.2.3" >&2
+          exit 1
+        fi
+        case "$KIND" in
+          base|policy|charts|frontend) ;;
+          *) echo "Unsupported kind: $KIND" >&2; exit 2;;
+        esac
+        echo "TAG=$t" >> "$GITHUB_ENV"
+        echo "IMAGE=ghcr.io/$OWNER/ci-$KIND:$t" >> "$GITHUB_ENV"
+    - id: out
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+        echo "tag=$TAG" >> "$GITHUB_OUTPUT"

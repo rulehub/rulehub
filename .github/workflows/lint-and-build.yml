@@ -5,6 +5,11 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+    inputs:
+      ci_image_tag:
+        description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Optional; falls back to repo/org CI_IMAGE_TAG or pinned fallback."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -53,9 +58,10 @@ jobs:
   yamllint-act:
     name: Lint YAML files (act)
     if: ${{ github.actor == 'nektos/act' }}
+    needs: [resolve]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-base:2025.10.03-f072ceb5
+      image: ${{ needs.resolve.outputs.image }}
       options: --user 0:0
     steps:
       - name: Checkout
@@ -83,3 +89,17 @@ jobs:
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           sarif_file: spectral.sarif
+  resolve:
+    name: Resolve CI image (ci-base)
+    if: ${{ github.actor == 'nektos/act' }}
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base

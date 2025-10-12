@@ -60,13 +60,21 @@ jobs:
       packages: read
     outputs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
+      image: ${{ steps.resolve.outputs.image }}
     steps:
+      - name: Resolve CI image (ci-base)
+        id: resolve
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
       - name: Try anonymous pull (ci-base)
         id: probe
         shell: bash
+        env:
+          IMAGE_REF: ${{ steps.resolve.outputs.image }}
         run: |
           set -euo pipefail
-          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
           echo "Probing anonymous pull for $IMAGE_REF"
           # If image already present, skip pulling to save time
           if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
@@ -91,7 +99,7 @@ jobs:
     if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.probe-ghcr.outputs.image }}
       options: --user 0:0
     defaults:
       run:

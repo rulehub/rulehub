@@ -31,6 +31,7 @@ sections:
       - betting.player_funds_segregation
       - betting.source_of_funds_checks
       - betting.source_of_funds_thresholds
+      - betting.license_check_agco_on
   2. Market Integrity:
     title: Integrity, Data, and Youth Protection
     policies:
@@ -50,6 +51,9 @@ sections:
       - betting.rng_certification_gli11
       - betting.rtp_disclosure_to_players
       - betting.suspicious_betting_reporting_uk
+      - betting.slots_min_spin_speed_uk
+      - betting.slots_no_autoplay_uk
+      - betting.slots_no_losses_disguised_as_wins
   3. AML Monitoring:
     title: Ongoing Monitoring & Anomalies
     policies:
@@ -72,3 +76,5 @@ sections:
       - betting.self_exclusion_se_spelpaus
       - betting.self_exclusion_uk_gamstop
       - betting.session_time_limits_controls
+      - betting.self_exclusion_on_igaming
+      - betting.au_iga_no_prohibited_services

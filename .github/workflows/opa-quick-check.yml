@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub policy image (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub policy image (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
 
@@ -27,7 +27,7 @@ jobs:
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
   probe-ghcr:
     name: Probe GHCR access (ci-policy)
-    needs: guard
+    needs: [guard, resolve]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -40,21 +40,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+          IMAGE_REF="${{ needs.resolve.outputs.image }}"
           echo "Probing anonymous pull for $IMAGE_REF"
           if docker pull "$IMAGE_REF"; then
             echo "can_pull=true" >> "$GITHUB_OUTPUT"
           else
             echo "can_pull=false" >> "$GITHUB_OUTPUT"
           fi
+  resolve:
+    name: Resolve CI image (ci-policy)
+    needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: policy
 
   quick:
     name: OPA quick check
     runs-on: ubuntu-latest
-    needs: [guard, probe-ghcr]
+    needs: [guard, resolve, probe-ghcr]
     if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: "${{ needs.resolve.outputs.image }}"
       options: --user 0:0
     defaults:
       run:

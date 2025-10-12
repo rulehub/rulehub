@@ -51,20 +51,44 @@ Thank you for helping improve RuleHub! This guide lists concise rules and conven
 
 ## Tooling Summary
 
-| Area            | Enforcement                                          |
-| --------------- | ---------------------------------------------------- |
-| Rego formatting | `opa fmt` (pre-commit)                               |
-| deny[] rule usage  | `make deny-usage-scan` (CI + hook)                 |
-| Docs build      | GitHub Action `docs-build` (`mkdocs build --strict`) |
-| Links           | Scheduled + PR link checker (`lychee`)               |
-| Markdown style  | markdownlint (pre-commit)                            |
-| Language style  | Vale (pre-commit)                                    |
-| Spelling        | cspell (pre-commit)                                  |
-| Python          | Ruff (lint/format), mypy                             |
-| Compliance maps | Schema + duplicate check hooks                       |
-| References idx  | Auto-generation hook (`refs-index`)                  |
+| Area              | Enforcement                                          |
+| ----------------- | ---------------------------------------------------- |
+| Rego formatting   | `opa fmt` (pre-commit)                               |
+| deny[] rule usage | `make deny-usage-scan` (CI + hook)                   |
+| Docs build        | GitHub Action `docs-build` (`mkdocs build --strict`) |
+| Links             | Scheduled + PR link checker (`lychee`)               |
+| Markdown style    | markdownlint (pre-commit)                            |
+| Language style    | Vale (pre-commit)                                    |
+| Spelling          | cspell (pre-commit)                                  |
+| Python            | Ruff (lint/format), mypy                             |
+| Compliance maps   | Schema + duplicate check hooks                       |
+| References idx    | Auto-generation hook (`refs-index`)                  |
 
 If a hook fails, fix the underlying issue instead of skipping it.
+
+### CI image tag resolution (one place)
+
+RuleHub GitHub Actions workflows run inside container images published from
+`rulehub-ci-images` (ci-base, ci-policy, ci-charts, ci-frontend). To avoid
+editing many YAML files when bumping the immutable tag, tag resolution is
+centralized via a composite action:
+
+- `.github/actions/resolve-ci-image/action.yml`
+  - Inputs: `ci_image_tag` (optional), `kind` (`base|policy|charts|frontend`)
+  - Resolution order: `inputs.ci_image_tag` → repository/org variable `CI_IMAGE_TAG` → pinned fallback inside the action
+  - Outputs: `image` (e.g., `ghcr.io/<owner>/ci-base:<tag>`), `tag`
+
+How to change the CI image tag:
+
+1. Preferred: set repo/org variable `CI_IMAGE_TAG` to the new immutable tag
+   (e.g., YYYY.MM.DD-<sha> or vX.Y.Z). No workflow edits needed.
+2. Fallback pin: update the single default in
+   `.github/actions/resolve-ci-image/action.yml` if you need a hardcoded safe
+   default.
+
+A growing set of workflows already use this action (e.g.,
+`policy-tests.yml`, `opa-bundle-publish.yml`, `link-audit.yml`). When adding
+new workflows, depend on the resolver instead of hardcoding tags.
 
 ### Updating documentation tool versions
 
@@ -92,7 +116,9 @@ Rules:
 4. A weekly scheduled workflow opens an automated PR refreshing the locks; review for major version jumps before merging.
 5. Consumers installing locally / CI prefer the lock files when present to ensure reproducible, hash-verified installs.
 
-Security note: Lock files include hashes (`--generate-hashes`) so pip will verify downloaded packages. If a supply chain alert requires pinning a specific version, update the source `.txt`, regenerate, and merge promptly.
+Security note: Lock files include hashes (`--generate-hashes`) so pip will
+verify downloaded packages. If a supply chain alert requires pinning a
+specific version, update the source `.txt`, regenerate, and merge promptly.
 
 ## Releases
 

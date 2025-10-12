@@ -43,6 +43,25 @@ jobs:
       - name: Ensure ci_image_tag or CI_IMAGE_TAG is set and not 'latest'
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+
+  resolve:
+    name: Resolve CI images
+    needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      base: ${{ steps.base.outputs.image }}
+      policy: ${{ steps.policy.outputs.image }}
+    steps:
+      - id: base
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
+      - id: policy
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: policy
   # changes:
   #   name: Detect Changes
   #   runs-on: ubuntu-latest
@@ -72,7 +91,7 @@ jobs:
 
   metadata:
     name: Metadata Validate
-    needs: guard
+    needs: [guard, resolve]
     # Run for smoke testing - skip change detection
     # if: >-
     #   ${{ needs.changes.outputs.metadata == 'true' &&
@@ -80,7 +99,7 @@ jobs:
     #       needs.changes.outputs.gatekeeper != 'true' }}
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.resolve.outputs.base }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -107,13 +126,13 @@ jobs:
 
   kyverno-tests:
     name: Kyverno Tests
-    needs: guard
+    needs: [guard, resolve]
     # Run for smoke testing - skip change detection
     # needs: changes
     # if: needs.changes.outputs.kyverno == 'true'
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.resolve.outputs.policy }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -149,13 +168,13 @@ jobs:
 
   gatekeeper-tests:
     name: Gatekeeper OPA Tests
-    needs: guard
+    needs: [guard, resolve]
     # Run for smoke testing - skip change detection
     # needs: changes
     # if: needs.changes.outputs.gatekeeper == 'true'
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-policy:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.resolve.outputs.policy }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -191,13 +210,13 @@ jobs:
 
   policy-test-pairs:
     name: Policy Test Pairs
-    needs: guard
+    needs: [guard, resolve]
     # Run for smoke testing - skip change detection
     # needs: gatekeeper-tests
     # if: needs.changes.outputs.gatekeeper == 'true'
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.resolve.outputs.base }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -221,13 +240,13 @@ jobs:
 
   policy-test-threshold:
     name: Policy Test Threshold
-    needs: guard
+    needs: [guard, resolve]
     # Run for smoke testing - skip change detection
     # needs: [changes, gatekeeper-tests, policy-test-pairs]
     # if: needs.changes.outputs.gatekeeper == 'true'
     runs-on: ubuntu-latest
     container:
-      image: "ghcr.io/${{ github.repository_owner }}/ci-base:${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5') }}"
+      image: ${{ needs.resolve.outputs.base }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}

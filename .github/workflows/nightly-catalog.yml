@@ -11,9 +11,10 @@ jobs:
     if: ${{ !contains(github.actor, 'nektos/act') }}
     continue-on-error: ${{ contains(github.actor, 'nektos/act') }}
     name: Generate catalog index
+    needs: [resolve]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/ci-base:2025.10.03-f072ceb5
+      image: ${{ needs.resolve.outputs.image }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
@@ -57,3 +58,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "[act] nightly-catalog skipped."
+  resolve:
+    if: ${{ !contains(github.actor, 'nektos/act') }}
+    name: Resolve CI image (ci-base)
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ""
+          kind: base

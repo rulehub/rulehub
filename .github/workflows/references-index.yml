@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
   pull_request:
@@ -34,14 +34,28 @@ jobs:
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
-  build-index:
+  resolve:
+    name: Resolve CI image (base)
     needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.resolve.outputs.image }}
+      tag: ${{ steps.resolve.outputs.tag }}
+    steps:
+      - name: Resolve CI image tag and ref
+        id: resolve
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
+  build-index:
+    needs: [guard, resolve]
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
     container:
-      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5')) }}
+      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || needs.resolve.outputs.image }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -70,7 +84,7 @@ jobs:
 
   # Run artifact upload in a separate job so act does not need to fetch the action when skipped
   upload-index:
-    needs: build-index
+    needs: [resolve, build-index]
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
     defaults:
@@ -81,7 +95,7 @@ jobs:
       actions: write
       packages: read
     container:
-      image: ${{ github.actor == 'nektos/act' && 'ghcr.io/catthehacker/ubuntu:act-22.04' || format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, inputs.ci_image_tag != '' && inputs.ci_image_tag || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG || '2025.10.03-f072ceb5')) }}
+      image: ${{ needs.resolve.outputs.image }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}

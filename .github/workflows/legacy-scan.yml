@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       ci_image_tag:
-        description: "CI image tag for RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
+        description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
   pull_request:
@@ -38,9 +38,23 @@ jobs:
           else
             echo "is_act=false" >> "$GITHUB_OUTPUT"
           fi
+  resolve:
+    name: Resolve CI image (ci-base)
+    needs: guard
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
   probe-ghcr:
     name: Probe GHCR access (ci-base)
-    needs: guard
+    needs: [guard, resolve]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,7 +67,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          IMAGE_REF="ghcr.io/${{ github.repository_owner }}/ci-base:${{ (inputs.ci_image_tag != '' && inputs.ci_image_tag) || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG) || '2025.10.03-f072ceb5' }}"
+          IMAGE_REF="${{ needs.resolve.outputs.image }}"
           echo "Probing anonymous pull for $IMAGE_REF"
           # If the image already exists locally, consider pullable without network
           if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
@@ -78,14 +92,14 @@ jobs:
 
   legacy:
     name: Legacy violation[] scan
-    needs: [guard, probe-ghcr]
+    needs: [guard, resolve, probe-ghcr]
     if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' && needs.guard.outputs.is_act != 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
     container:
-      image: ${{ format('ghcr.io/{0}/ci-base:{1}', github.repository_owner, (inputs.ci_image_tag != '' && inputs.ci_image_tag) || (vars.CI_IMAGE_TAG != '' && vars.CI_IMAGE_TAG) || '2025.10.03-f072ceb5') }}
+      image: ${{ needs.resolve.outputs.image }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
