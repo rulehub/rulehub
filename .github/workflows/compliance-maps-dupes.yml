@@ -45,10 +45,29 @@ jobs:
     steps:
       - name: Resolve CI image tag and ref
         id: resolve
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: base
+        shell: bash
+        env:
+          INPUT_TAG: ${{ inputs.ci_image_tag }}
+          VARS_TAG: ${{ vars.CI_IMAGE_TAG }}
+        run: |
+          set -euo pipefail
+          tag="${INPUT_TAG:-}"
+          if [ -z "${tag}" ] && [ -n "${VARS_TAG:-}" ]; then
+            tag="${VARS_TAG}"
+          fi
+          if [ -z "${tag}" ] && [ -n "${CI_IMAGE_TAG:-}" ]; then
+            tag="${CI_IMAGE_TAG}"
+          fi
+          # Under act, tag should be injected by the runner (CI_IMAGE_TAG). We still fail if empty to avoid drift.
+          if [ -z "${tag}" ]; then
+            echo "ERROR: No CI image tag provided. Set workflow input ci_image_tag or repository/org variable CI_IMAGE_TAG." >&2
+            exit 1
+          fi
+          image_ref="ghcr.io/rulehub/ci-base:${tag}"
+          {
+            echo "image=${image_ref}"
+            echo "tag=${tag}"
+          } >> "$GITHUB_OUTPUT"
   check-dupes:
     needs: [guard, resolve]
     runs-on: ubuntu-latest
@@ -69,8 +88,12 @@ jobs:
           # Ensure a YAML library is available (prefer ruamel.yaml; fallback to PyYAML)
           python - <<'PY' || pip install --no-input pyyaml
           import importlib.util, sys
-          spec1 = importlib.util.find_spec('ruamel.yaml')
-          spec2 = importlib.util.find_spec('yaml')
-          sys.exit(0 if (spec1 or spec2) else 1)
+          def has_mod(name: str) -> bool:
+              try:
+                  return importlib.util.find_spec(name) is not None
+              except ModuleNotFoundError:
+                  return False
+          ok = has_mod('ruamel.yaml') or has_mod('yaml')
+          sys.exit(0 if ok else 1)
           PY
           python tools/fix_compliance_map_dupes.py --check
