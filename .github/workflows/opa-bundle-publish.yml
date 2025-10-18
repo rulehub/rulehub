@@ -18,35 +18,30 @@ on:
 permissions:
   contents: read
   packages: read
-
 env:
   IMAGE: ghcr.io/${{ github.repository_owner }}/rulehub-bundle
   # Set to '1' (e.g. via: act -s SKIP_SUPPLYCHAIN=1) to skip OIDC-dependent supply-chain steps locally.
   SKIP_SUPPLYCHAIN: "0"
-
 jobs:
   guard:
     name: Require CI image tag (no drift)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Enforce non-latest CI image tag
-        shell: bash
-        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: policy
 
   resolve:
     name: Resolve CI image (policy)
     needs: guard
     runs-on: ubuntu-latest
     outputs:
-      policy: ${{ steps.policy.outputs.image }}
+      policy: ${{ steps.passthrough.outputs.policy }}
     steps:
-      - id: policy
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: policy
+      - name: Emit outputs
+        id: passthrough
+        shell: bash
+        run: |
+          echo "policy=${{ needs.guard.outputs.image }}" >> "$GITHUB_OUTPUT"
   probe-ghcr:
     if: ${{ github.actor != 'nektos/act' }}
     name: Probe GHCR access (ci-policy)
@@ -66,12 +61,7 @@ jobs:
           IMAGE_REF: ${{ needs.resolve.outputs.policy }}
         run: |
           set -euo pipefail
-          echo "Probing anonymous pull for $IMAGE_REF"
-          if docker pull "$IMAGE_REF"; then
-            echo "can_pull=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "can_pull=false" >> "$GITHUB_OUTPUT"
-          fi
+          bash .github/scripts/ghcr-probe.sh "$IMAGE_REF"
 
   build-and-push-gh:
     needs: [guard, resolve, probe-ghcr]
@@ -133,131 +123,32 @@ jobs:
           oras version || echo "oras not found"
 
       - name: Build OPA bundle
-        run: |
-          set -euo pipefail
-          mkdir -p dist
-          # Try native OPA bundle build; if running under act and it fails, fall back to a tar.gz of policies to keep CI green
-          if ! opa build -b policies -o dist/opa-bundle.tar.gz; then
-            # Detect nektos/act either via default actor or the injected IS_ACT flag
-            if [ "${GITHUB_ACTOR:-}" = "nektos/act" ] || [ "${IS_ACT:-}" = "true" ]; then
-              echo "[act] opa build failed; falling back to tar.gz of policies for local CI" >&2
-              if [ -d policies ]; then
-                tar czf dist/opa-bundle.tar.gz -C policies . || (echo "Fallback tar failed" >&2; : > dist/opa-bundle.tar.gz)
-              else
-                echo "policies/ not found; emitting empty bundle to unblock act" >&2
-                : > dist/opa-bundle.tar.gz
-              fi
-            else
-              echo "opa build failed on GitHub runner" >&2
-              exit 1
-            fi
-          fi
-          ls -lh dist/opa-bundle.tar.gz || true
+        run: bash .github/scripts/build-opa-bundle.sh
 
       - name: Generate manifest
-        run: |
-          set -euo pipefail
-          . .venv/bin/activate
-          python tools/generate_bundle_manifest.py --output dist/opa-bundle.manifest.json --exclude-tests
-          head -n 30 dist/opa-bundle.manifest.json || true
+        run: bash .github/scripts/generate-manifest.sh dist/opa-bundle.manifest.json
 
       - name: Generate references index (md+json)
-        run: |
-          set -euo pipefail
-          # Prefer .venv but fall back to CI base venv Python if PyYAML isn't available there (avoid runtime installs)
-          if [ -x .venv/bin/python ]; then
-            . .venv/bin/activate
-            if python -c "import yaml" >/dev/null 2>&1; then
-              python tools/generate_refs_index.py --format both || true
-            else
-              # .venv lacks PyYAML (seen under act when venv cannot see base venv packages). Use base Python from CI image.
-              deactivate || true
-              echo "[ci] .venv missing PyYAML; using base Python for refs-index generation" >&2
-              if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
-                /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
-              else
-                echo "[ci] base Python also missing PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
-              fi
-            fi
-          else
-            if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
-              /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
-            else
-              echo "[ci] Python lacks PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
-            fi
-          fi
-          ls -lh docs/references-index.md dist/references-index.json || true
+        run: bash .github/scripts/generate-refs-index.sh --format both
 
       # Syft preinstalled in CI image
 
       - name: Generate CycloneDX SBOM
-        run: |
-          syft packages file:dist/opa-bundle.tar.gz -o cyclonedx-json > dist/opa-bundle.sbom.cdx.json
-          echo "CycloneDX SBOM generated"
+        run: bash .github/scripts/generate-sboms.sh
 
       - name: Generate SPDX SBOM
-        run: |
-          syft packages file:dist/opa-bundle.tar.gz -o spdx-json > dist/opa-bundle.sbom.spdx.json
-          echo "SPDX SBOM generated"
+        if: ${{ always() }}
+        run: echo "SBOMs handled by generate-sboms.sh"
 
       - name: Compute bundle digest & SLSA subjects
         id: digest
-        run: |
-          set -euo pipefail
-          SHA256=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
-          SUBJECTS_JSON="[{\"name\":\"rulehub/opa-bundle.tar.gz\",\"digest\":{\"sha256\":\"$SHA256\"}}]"
-          if base64 --help 2>&1 | grep -q '\-w'; then SUBJECTS_B64=$(echo -n "$SUBJECTS_JSON" | base64 -w0); else SUBJECTS_B64=$(echo -n "$SUBJECTS_JSON" | base64); fi
-          echo "bundle_sha256=$SHA256" >> "$GITHUB_OUTPUT"
-          echo "subjects_b64=$SUBJECTS_B64" >> "$GITHUB_OUTPUT"
+        run: bash .github/scripts/compute-digests.sh
 
       # Cosign preinstalled in CI image
 
       - name: Sign OPA bundle (keyless)
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-          COSIGN_YES: "true"
-        run: |
-          cosign sign-blob --yes --output-signature dist/opa-bundle.tar.gz.sig --output-certificate dist/opa-bundle.tar.gz.cert dist/opa-bundle.tar.gz
-
-      - name: Sign manifest (keyless)
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-          COSIGN_YES: "true"
-        run: |
-          cosign sign-blob --yes --output-signature dist/opa-bundle.manifest.json.sig --output-certificate dist/opa-bundle.manifest.json.cert dist/opa-bundle.manifest.json
-
-      - name: Sign SBOMs (keyless)
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-          COSIGN_YES: "true"
-        run: |
-          cosign sign-blob --yes --output-signature dist/opa-bundle.sbom.cdx.json.sig --output-certificate dist/opa-bundle.sbom.cdx.json.cert dist/opa-bundle.sbom.cdx.json
-          cosign sign-blob --yes --output-signature dist/opa-bundle.sbom.spdx.json.sig --output-certificate dist/opa-bundle.sbom.spdx.json.cert dist/opa-bundle.sbom.spdx.json
-
-      - name: Self-verify signatures (pre-push)
-        # Ensures generated signatures & certs are valid (OIDC subject/issuer) before publishing to OCI
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-        run: |
-          set -euo pipefail
-          for base in dist/opa-bundle.tar.gz dist/opa-bundle.manifest.json dist/opa-bundle.sbom.cdx.json dist/opa-bundle.sbom.spdx.json; do
-            sig="${base}.sig"; cert="${base}.cert";
-            if [ -s "$sig" ] && [ -s "$cert" ]; then
-              echo "Verifying $base" >&2
-              cosign verify-blob \
-                --certificate "$cert" \
-                --signature "$sig" \
-                --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
-                --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
-                "$base"
-            else
-              echo "Missing signature or cert for $base" >&2; exit 1
-            fi
-          done
+        run: bash .github/scripts/sign-artifacts.sh
 
       - name: Log in to GHCR (oras)
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
@@ -268,14 +159,7 @@ jobs:
 
       - name: Compute tag
         id: tag
-        run: |
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            echo "tag=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.ref_type }}" == "branch" && "${{ github.ref_name }}" == "main" ]]; then
-            echo "tag=main-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          else
-            echo "tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          fi
+        run: bash .github/scripts/compute-tag.sh
 
       - name: Push bundle via ORAS
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
@@ -287,14 +171,11 @@ jobs:
             --annotation org.opencontainers.image.revision="${{ github.sha }}" \
             --annotation io.rulehub.manifest.sha256="$(sha256sum dist/opa-bundle.manifest.json | cut -d' ' -f1)"
 
-      - name: Attest SBOMs
+      - name: Attest artifacts
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
         env:
-          COSIGN_EXPERIMENTAL: "1"
-          COSIGN_YES: "true"
-        run: |
-          cosign attest --yes --predicate dist/opa-bundle.sbom.cdx.json --type cyclonedx ${IMAGE}:${{ steps.tag.outputs.tag }}
-          cosign attest --yes --predicate dist/opa-bundle.sbom.spdx.json --type spdx ${IMAGE}:${{ steps.tag.outputs.tag }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: bash .github/scripts/attest-artifacts.sh
 
       - name: Upload artifacts (full)
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
@@ -435,51 +316,12 @@ jobs:
 
       # Cosign preinstalled in CI image
 
-      - name: Verify manifest signature
+      - name: Verify signatures
         if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-        run: |
-          cosign verify-blob \
-            --certificate dist/opa-bundle.manifest.json.cert \
-            --signature dist/opa-bundle.manifest.json.sig \
-            --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
-            --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
-            dist/opa-bundle.manifest.json
+        run: bash .github/scripts/verify-signatures.sh
 
-      # No fallback for build/publish verify: if GHCR image is not available, we intentionally skip these steps.
-
-      - name: Verify SBOM signatures
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-        run: |
-          for base in dist/opa-bundle.sbom.cdx.json dist/opa-bundle.sbom.spdx.json; do
-            cosign verify-blob \
-              --certificate ${base}.cert \
-              --signature ${base}.sig \
-              --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
-              --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
-              ${base}
-          done
-
-      - name: Verify bundle signature
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        env:
-          COSIGN_EXPERIMENTAL: "1"
-        run: |
-          cosign verify-blob \
-            --certificate dist/opa-bundle.tar.gz.cert \
-            --signature dist/opa-bundle.tar.gz.sig \
-            --certificate-identity-regexp "https://github.com/${{ github.repository }}/.*" \
-            --certificate-oidc-issuer-regexp '^https://token.actions.githubusercontent.com$' \
-            dist/opa-bundle.tar.gz
-
-      - name: Check SBOM presence (minimal)
-        if: ${{ env.SKIP_SUPPLYCHAIN != '1' }}
-        run: |
-          test -s dist/opa-bundle.sbom.cdx.json
-          test -s dist/opa-bundle.sbom.spdx.json
+      - name: Verify integrity (manifest/bundle)
+        run: bash .github/scripts/verify-integrity.sh
 
       # jq included in CI image
 
@@ -546,63 +388,20 @@ jobs:
           oras version || echo "oras not found"
 
       - name: Build OPA bundle
-        run: |
-          set -euo pipefail
-          mkdir -p dist
-          if ! opa build -b policies -o dist/opa-bundle.tar.gz; then
-            echo "[act] opa build failed; falling back to tar.gz of policies for local CI" >&2
-            if [ -d policies ]; then
-              tar czf dist/opa-bundle.tar.gz -C policies . || (echo "Fallback tar failed" >&2; : > dist/opa-bundle.tar.gz)
-            else
-              echo "policies/ not found; emitting empty bundle to unblock act" >&2
-              : > dist/opa-bundle.tar.gz
-            fi
-          fi
-          ls -lh dist/opa-bundle.tar.gz || true
+        run: bash .github/scripts/build-opa-bundle.sh
 
       - name: Generate manifest
-        run: |
-          set -euo pipefail
-          . .venv/bin/activate
-          python tools/generate_bundle_manifest.py --output dist/opa-bundle.manifest.json --exclude-tests
-          head -n 30 dist/opa-bundle.manifest.json || true
+        run: bash .github/scripts/generate-manifest.sh dist/opa-bundle.manifest.json
 
       - name: Generate references index (md+json)
-        run: |
-          set -euo pipefail
-          # Prefer .venv but fall back to CI base venv Python if PyYAML isn't available there (avoid runtime installs)
-          if [ -x .venv/bin/python ]; then
-            . .venv/bin/activate
-            if python -c "import yaml" >/dev/null 2>&1; then
-              python tools/generate_refs_index.py --format both || true
-            else
-              deactivate || true
-              echo "[act] .venv missing PyYAML; using base Python for refs-index generation" >&2
-              if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
-                /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
-              else
-                echo "[act] base Python also missing PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
-              fi
-            fi
-          else
-            if [ -x /opt/ci-venv/bin/python ] && /opt/ci-venv/bin/python -c "import yaml" >/dev/null 2>&1; then
-              /opt/ci-venv/bin/python tools/generate_refs_index.py --format both || true
-            else
-              echo "[act] Python lacks PyYAML; skipping refs-index generation and reusing existing artifacts" >&2
-            fi
-          fi
-          ls -lh docs/references-index.md dist/references-index.json || true
+        run: bash .github/scripts/generate-refs-index.sh --format both
 
       - name: Generate CycloneDX SBOM
-        run: |
-          syft packages file:dist/opa-bundle.tar.gz -o cyclonedx-json > dist/opa-bundle.sbom.cdx.json || echo "syft not available"
+        run: bash .github/scripts/generate-sboms.sh || true
 
       - name: Generate SPDX SBOM
-        run: |
-          syft packages file:dist/opa-bundle.tar.gz -o spdx-json > dist/opa-bundle.sbom.spdx.json || echo "syft not available"
+        if: ${{ always() }}
+        run: echo "SBOMs handled by generate-sboms.sh"
 
       - name: Compute bundle digest & summary
-        run: |
-          set -euo pipefail
-          SHA256=$(sha256sum dist/opa-bundle.tar.gz | cut -d' ' -f1)
-          printf "Bundle SHA256: %s\n" "$SHA256" | tee dist/digest-summary.txt
+        run: bash .github/scripts/compute-digests.sh --no-subjects-b64 || true

@@ -26,27 +26,24 @@ permissions:
 jobs:
   guard:
     name: Require CI image tag (no drift)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Enforce non-latest CI image tag
-        shell: bash
-        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: base
   resolve:
-    name: Resolve CI image
+    name: Resolve CI image (base)
     needs: guard
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.resolve.outputs.image }}
-      tag: ${{ steps.resolve.outputs.tag }}
+      image: ${{ steps.passthrough.outputs.image }}
+      tag: ${{ steps.passthrough.outputs.tag }}
     steps:
-      - name: Resolve CI image tag and ref
-        id: resolve
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: base
+      - name: Emit outputs
+        id: passthrough
+        shell: bash
+        run: |
+          echo "image=${{ needs.guard.outputs.image }}" >> "$GITHUB_OUTPUT"
+          echo "tag=${{ needs.guard.outputs.tag }}" >> "$GITHUB_OUTPUT"
   mypy:
     needs: [guard, resolve]
     runs-on: ubuntu-latest
@@ -72,10 +69,4 @@ jobs:
       - name: Run mypy
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: |
-          set -euo pipefail
-          # Use mypy preinstalled in the CI image (/opt/ci-venv on PATH)
-          export MYPY_CACHE_DIR=${MYPY_CACHE_DIR:-/tmp/mypy_cache}
-          mkdir -p "$MYPY_CACHE_DIR"
-          mypy --version || true
-          mypy --config-file mypy.ini
+        run: bash .github/scripts/run-mypy.sh

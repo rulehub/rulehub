@@ -1,0 +1,73 @@
+name: 'Build Catalog'
+description: 'Install deps, build RuleHub catalog index, summarize stats'
+author: 'rulehub'
+inputs:
+  min-packages:
+    description: 'Minimum expected packages count (warning if below)'
+    required: false
+    default: '5'
+  make-target:
+    description: 'Make target to generate catalog'
+    required: false
+    default: 'catalog'
+  summary:
+    description: 'Whether to append stats to step summary'
+    required: false
+    default: 'true'
+outputs:
+  packages:
+    description: 'Number of packages in index'
+    value: ${{ steps.summary.outputs.packages }}
+  build-seconds:
+    description: 'Catalog build duration seconds'
+    value: ${{ steps.build.outputs.seconds }}
+  sha256:
+    description: 'SHA256 (first 16 chars) of index.json'
+    value: ${{ steps.summary.outputs.sha16 }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        python-venv-install
+    - name: Build
+      id: build
+      shell: bash
+      run: |
+        set -euo pipefail
+        . .venv/bin/activate
+        start_ts=$(date +%s)
+        make "${{ inputs.make-target }}"
+        test -f dist/index.json
+        end_ts=$(date +%s)
+        seconds=$((end_ts-start_ts))
+        echo "seconds=$seconds" >> "$GITHUB_OUTPUT"
+        echo "catalog_build_seconds=$seconds" | tee -a "$GITHUB_STEP_SUMMARY" || true
+    - name: Summarize
+      id: summary
+      shell: bash
+      run: |
+        set -euo pipefail
+        python3 - <<'EOF'
+        import json,hashlib,os,sys
+        p='dist/index.json'
+        if not os.path.exists(p):
+            print('ERROR: index.json missing', file=sys.stderr)
+            sys.exit(1)
+        data=open(p,'rb').read()
+        sha=hashlib.sha256(data).hexdigest()
+        obj=json.loads(data)
+        pkgs=obj.get('packages',[]) or []
+        print(f"index.json size={len(data)} bytes sha256={sha[:16]} packages={len(pkgs)}")
+        # Outputs
+        with open(os.environ['GITHUB_OUTPUT'],'a') as fh:
+            fh.write(f"packages={len(pkgs)}\n")
+            fh.write(f"sha16={sha[:16]}\n")
+        min_expected=int(os.environ.get('MIN_EXPECTED_PACKAGES', os.environ.get('INPUT_MIN-PACKAGES','5')))
+        if len(pkgs)<min_expected:
+            print(f"WARNING: packages count {len(pkgs)} < {min_expected}", file=sys.stderr)
+        EOF
+        if [ "${{ inputs.summary }}" = "true" ]; then
+          echo "Packages: ${{ steps.summary.outputs.packages }} (sha16=${{ steps.summary.outputs.sha16 }})" >> "$GITHUB_STEP_SUMMARY" || true
+        fi

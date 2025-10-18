@@ -21,6 +21,10 @@ on:
       - ".github/workflows/docs-build.yml"
       - "README.md"
 
+concurrency:
+  group: docs-build-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: read
@@ -29,6 +33,7 @@ jobs:
   guard:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       is_act: ${{ steps.detect.outputs.is_act }}
     steps:
@@ -52,10 +57,13 @@ jobs:
     name: Resolve CI image (ci-base)
     needs: guard
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -66,6 +74,7 @@ jobs:
     name: Probe GHCR access (ci-base)
     needs: [guard, resolve]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
       packages: read
@@ -80,32 +89,12 @@ jobs:
         run: |
           set -euo pipefail
           IMAGE_REF="${{ needs.resolve.outputs.image }}"
-          echo "Probing anonymous pull for $IMAGE_REF"
           if [ "${IS_ACT}" = "true" ]; then
             echo "act detected; assuming image available via local map or prefetch"
             echo "can_pull=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # If the image already exists locally, consider pullable without network
-          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
-            echo "Image present locally; skipping pull"
-            echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          # Time-bound the pull to avoid hangs on problematic registries
-          if command -v timeout >/dev/null 2>&1; then
-            if timeout 120s docker pull "$IMAGE_REF"; then
-              echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "can_pull=false" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            if docker pull "$IMAGE_REF"; then
-              echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "can_pull=false" >> "$GITHUB_OUTPUT"
-            fi
-          fi
+          bash .github/scripts/ghcr-probe.sh "$IMAGE_REF"
 
   build-docs:
     needs: [guard, resolve, probe-ghcr]
@@ -123,19 +112,7 @@ jobs:
           python-venv-install
       - name: Build (strict)
         shell: bash
-        run: |
-          set -euo pipefail
-          if command -v mkdocs >/dev/null 2>&1; then
-            MK=mkdocs
-          elif [ -x /opt/ci-venv/bin/mkdocs ]; then
-            MK=/opt/ci-venv/bin/mkdocs
-            export PATH=/opt/ci-venv/bin:$PATH
-          else
-            echo "mkdocs not found in PATH or /opt/ci-venv/bin" >&2
-            exit 127
-          fi
-          "$MK" --version
-          "$MK" build --strict --verbose
+        run: bash .github/scripts/mkdocs-build.sh
 
   build-docs-fallback:
     name: Build docs (fallback, no container)
@@ -143,6 +120,7 @@ jobs:
     # Run fallback only when pull is not possible
     if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Setup Python (no network)
@@ -153,4 +131,9 @@ jobs:
           echo "Fallback path: no deps installed to avoid network under act"
       - name: Build (strict) on host
         run: |
-          mkdocs build --strict --verbose
+          set -euo pipefail
+          if ! command -v mkdocs >/dev/null 2>&1; then
+            echo "mkdocs not available on host; skipping fallback build";
+            exit 0;
+          fi
+          bash .github/scripts/mkdocs-build.sh

@@ -47,6 +47,9 @@ jobs:
       image: ${{ steps.resolve.outputs.image }}
       tag: ${{ steps.resolve.outputs.tag }}
     steps:
+      - name: Checkout (required for local composite actions)
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
       - name: Resolve CI image tag and ref
         id: resolve
         uses: ./.github/actions/resolve-ci-image
@@ -80,6 +83,4 @@ jobs:
         run: |
           set -euo pipefail
           . .venv/bin/activate
-          # Ensure minimal deps are present if image skipped installs
-          python -c "import yaml, jsonschema" 2>/dev/null || pip install --no-input pyyaml jsonschema
           python tools/validate_compliance_maps.py

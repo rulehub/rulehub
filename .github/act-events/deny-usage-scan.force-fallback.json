@@ -1,0 +1,7 @@
+{
+  "ref": "refs/heads/main",
+  "inputs": {
+    "force_fallback": "true",
+    "ci_image_tag": ""
+  }
+}

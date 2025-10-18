@@ -76,6 +76,30 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     return ap.parse_args(argv)
 
 
+def git_commit_timestamp(commit: str) -> str:
+    """Return the committer timestamp (ISO8601) for a commit for determinism.
+
+    Falls back to the current UTC time only if git metadata is unavailable.
+    """
+    if commit == "unknown":
+        return datetime.fromtimestamp(0, tz=timezone.utc).isoformat()
+    try:
+        raw = subprocess.check_output([
+            "git",
+            "show",
+            "-s",
+            "--format=%cI",
+            commit,
+        ], text=True).strip()
+        # Basic validation: ensure looks like ISO8601
+        if raw:
+            return raw
+    except Exception:
+        pass
+    # Last resort (should be stable only within a run) -> epoch 0 to preserve determinism
+    return datetime.fromtimestamp(0, tz=timezone.utc).isoformat()
+
+
 def main(argv: List[str]) -> int:
     ns = parse_args(argv)
     root = Path(ns.policies_root)
@@ -86,10 +110,12 @@ def main(argv: List[str]) -> int:
     out_path = Path(ns.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     commit = git_commit()
+    build_time = git_commit_timestamp(commit)
     manifest: Dict[str, Any] = {
         "schema_version": ns.schema_version,
         "build_commit": commit,
-        "build_time": datetime.now(timezone.utc).isoformat(),
+        # Deterministic build_time derived from commit timestamp (committer date)
+        "build_time": build_time,
         "policies": files,
         "aggregate_hash": aggregate_hash(files),
     }

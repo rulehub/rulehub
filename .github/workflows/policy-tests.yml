@@ -24,6 +24,21 @@ on:
         description: "CI image tag for all RuleHub CI images (e.g., 2025.10.03-a1b2c3d4 or v1.2.3). Falls back to repo variable CI_IMAGE_TAG or latest."
         required: false
         default: ""
+      run_metadata_only:
+        description: "Run only metadata validation"
+        required: false
+        type: boolean
+        default: false
+      run_kyverno_only:
+        description: "Run only Kyverno tests"
+        required: false
+        type: boolean
+        default: false
+      run_gatekeeper_only:
+        description: "Run only Gatekeeper tests"
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: policy-tests-${{ github.ref }}
@@ -36,73 +51,82 @@ permissions:
 jobs:
   guard:
     name: Require CI image tag (no drift)
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: base
+
+  resolve-policy:
+    name: Resolve CI image (policy)
+    needs: guard
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: policy
+
+  resolve:
+    name: Collect resolved images
+    needs: [guard, resolve-policy]
     runs-on: ubuntu-latest
+    outputs:
+      base: ${{ steps.out.outputs.base }}
+      policy: ${{ steps.out.outputs.policy }}
+    steps:
+      - name: Emit outputs
+        id: out
+        shell: bash
+        run: |
+          echo "base=${{ needs.guard.outputs.image }}" >> "$GITHUB_OUTPUT"
+          echo "policy=${{ needs.resolve-policy.outputs.image }}" >> "$GITHUB_OUTPUT"
+
+  changes:
+    name: Detect Changes (PRs)
+    runs-on: ubuntu-latest
+    outputs:
+      changed_metadata: ${{ steps.set.outputs.changed_metadata }}
+      changed_kyverno: ${{ steps.set.outputs.changed_kyverno }}
+      changed_gatekeeper: ${{ steps.set.outputs.changed_gatekeeper }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Ensure ci_image_tag or CI_IMAGE_TAG is set and not 'latest'
+        with:
+          fetch-depth: 0
+      - name: Compute change flags
+        id: set
         shell: bash
-        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
-
-  resolve:
-    name: Resolve CI images
-    needs: guard
-    runs-on: ubuntu-latest
-    outputs:
-      base: ${{ steps.base.outputs.image }}
-      policy: ${{ steps.policy.outputs.image }}
-    steps:
-      - id: base
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: base
-      - id: policy
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: policy
-  # changes:
-  #   name: Detect Changes
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     metadata: ${{ steps.filter.outputs.metadata }}
-  #     kyverno: ${{ steps.filter.outputs.kyverno }}
-  #     gatekeeper: ${{ steps.filter.outputs.gatekeeper }}
-  #   steps:
-  #     - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-  #     - id: filter
-  #       uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
-  #       with:
-  #         base: 'main'
-  #         filters: |
-  #           metadata:
-  #             - 'policies/**'
-  #             - 'tools/validate_metadata.py'
-  #             - 'requirements.txt'
-  #             - 'requirements.lock'
-  #           kyverno:
-  #             - 'tests/kyverno/**'
-  #             - 'policies/**'
-  #           gatekeeper:
-  #             - 'tests/gatekeeper/**'
-  #             - 'addons/k8s-gatekeeper/**'
-  #             - 'policies/**'
-
+        run: |
+          set -euo pipefail
+          cm=true; ck=true; cg=true
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            cm=false; ck=false; cg=false
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.sha }}"
+            git fetch --no-tags --depth=100 origin "$BASE" "$HEAD" || true
+            CHANGED=$(git diff --name-only "$BASE" "$HEAD" || true)
+            while IFS= read -r f; do
+              [ -z "$f" ] && continue
+              case "$f" in
+                policies/*|tools/validate_metadata.py|requirements.txt|requirements.lock) cm=true ;;
+              esac
+              case "$f" in
+                tests/kyverno/*|policies/*) ck=true ;;
+              esac
+              case "$f" in
+                tests/gatekeeper/*|addons/k8s-gatekeeper/*|policies/*) cg=true ;;
+              esac
+            done <<< "$CHANGED"
+          fi
+          echo "changed_metadata=$cm" >> "$GITHUB_OUTPUT"
+          echo "changed_kyverno=$ck" >> "$GITHUB_OUTPUT"
+          echo "changed_gatekeeper=$cg" >> "$GITHUB_OUTPUT"
   metadata:
     name: Metadata Validate
-    needs: [guard, resolve]
-    # Run for smoke testing - skip change detection
-    # if: >-
-    #   ${{ needs.changes.outputs.metadata == 'true' &&
-    #       needs.changes.outputs.kyverno != 'true' &&
-    #       needs.changes.outputs.gatekeeper != 'true' }}
+    needs: [guard, resolve, changes]
+    # Run on PR when metadata changed; otherwise use manual toggles or default-all behavior
+    if: ${{ inputs.run_metadata_only || (github.event_name == 'pull_request' && needs.changes.outputs.changed_metadata == 'true') || (github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && !inputs.run_kyverno_only && !inputs.run_gatekeeper_only && !inputs.run_metadata_only) }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.base }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -126,16 +150,11 @@ jobs:
 
   kyverno-tests:
     name: Kyverno Tests
-    needs: [guard, resolve]
-    # Run for smoke testing - skip change detection
-    # needs: changes
-    # if: needs.changes.outputs.kyverno == 'true'
+    needs: [guard, resolve, changes]
+    if: ${{ inputs.run_kyverno_only || (github.event_name == 'pull_request' && needs.changes.outputs.changed_kyverno == 'true') || (github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && !inputs.run_gatekeeper_only && !inputs.run_metadata_only && !inputs.run_kyverno_only) }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.policy }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -168,16 +187,11 @@ jobs:
 
   gatekeeper-tests:
     name: Gatekeeper OPA Tests
-    needs: [guard, resolve]
-    # Run for smoke testing - skip change detection
-    # needs: changes
-    # if: needs.changes.outputs.gatekeeper == 'true'
+    needs: [guard, resolve, changes]
+    if: ${{ inputs.run_gatekeeper_only || (github.event_name == 'pull_request' && needs.changes.outputs.changed_gatekeeper == 'true') || (github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && !inputs.run_kyverno_only && !inputs.run_metadata_only && !inputs.run_gatekeeper_only) }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.policy }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -210,16 +224,11 @@ jobs:
 
   policy-test-pairs:
     name: Policy Test Pairs
-    needs: [guard, resolve]
-    # Run for smoke testing - skip change detection
-    # needs: gatekeeper-tests
-    # if: needs.changes.outputs.gatekeeper == 'true'
+    needs: [guard, resolve, changes]
+    if: ${{ inputs.run_kyverno_only || inputs.run_gatekeeper_only || (github.event_name == 'pull_request' && (needs.changes.outputs.changed_gatekeeper == 'true' || needs.changes.outputs.changed_kyverno == 'true')) || (github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && (!inputs.run_metadata_only && (!inputs.run_kyverno_only || !inputs.run_gatekeeper_only))) }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.base }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -240,16 +249,11 @@ jobs:
 
   policy-test-threshold:
     name: Policy Test Threshold
-    needs: [guard, resolve]
-    # Run for smoke testing - skip change detection
-    # needs: [changes, gatekeeper-tests, policy-test-pairs]
-    # if: needs.changes.outputs.gatekeeper == 'true'
+    needs: [guard, resolve, changes, gatekeeper-tests, policy-test-pairs]
+    if: ${{ inputs.run_gatekeeper_only || (github.event_name == 'pull_request' && needs.changes.outputs.changed_gatekeeper == 'true') || (github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && !inputs.run_metadata_only && !inputs.run_kyverno_only && !inputs.run_gatekeeper_only) }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.base }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -262,32 +266,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       # Ensure Python deps installed in venv before enforcing thresholds
-      - name: Prepare Python env (venv with baked deps)
-        run: |
-          bash .github/scripts/python-venv-install.sh
-      - name: Enforce thresholds (dual-direction 100%, no multi gaps)
-        run: |
-          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/policy_test_coverage.py >/dev/null
-          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/enforce_policy_test_thresholds.py
-      # - name: Upload coverage artifacts
-      #   if: always() && github.repository != ''
-      #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      #   with:
-      #     name: policy-test-coverage
-      #     path: |
-      #       dist/policy-test-coverage.json
-      #       dist/policy-test-priorities.md
-      - name: Summary
-        if: always()
-        run: |
-          if [ -f dist/policy-test-coverage.json ]; then
-            dual=$(jq -r '.dual_direction.percent' dist/policy-test-coverage.json)
-            inadequate=$(jq -r '.multi_rule.count_inadequate' dist/policy-test-coverage.json)
-            echo "### Policy Test Threshold\n" >> $GITHUB_STEP_SUMMARY
-            echo "Dual-direction: ${dual}%" >> $GITHUB_STEP_SUMMARY
-            echo "Multi-rule inadequacies: ${inadequate}" >> $GITHUB_STEP_SUMMARY
-            if [ "$inadequate" != "0" ]; then
-              echo '\nFailures (first 10):' >> $GITHUB_STEP_SUMMARY
-              jq -r '.multi_rule.list_inadequate[:10][] | "- \(.policy) deny_rules=\(.deny_rules) tests=\(.deny_test_assertions)"' dist/policy-test-coverage.json >> $GITHUB_STEP_SUMMARY || true
-            fi
-          fi
+      - name: Enforce thresholds (dual-direction 100%, no multi-rule gaps)
+        run: bash .github/scripts/enforce-policy-thresholds.sh

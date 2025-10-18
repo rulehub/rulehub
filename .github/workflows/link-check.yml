@@ -10,59 +10,26 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: link-check-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lychee-gh:
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
+    container: ghcr.io/rulehub/ci-base:latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Login to GHCR (for lychee image pull)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -n "${GITHUB_TOKEN:-}" ]; then
-            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "${GITHUB_ACTOR:-github-actions}" --password-stdin || true
-          fi
       - name: Prepare classification runtime (Python already on runner)
         run: |
           python3 --version || true
-      - name: Detect Docker availability
-        id: docker
-        run: |
-          if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-          fi
 
       - name: Run link check (lychee pinned w/ retries)
-        if: ${{ steps.docker.outputs.available == 'true' }}
         run: |
-          set -e
-          ATTEMPTS=3
-          for i in $(seq 1 $ATTEMPTS); do
-            echo "[lychee] attempt $i/$ATTEMPTS";
-            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
-              lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
-                --exclude-path dist --exclude-path site \
-                --exclude "https://github.com/rulehub/rulehub-charts" \
-                **/*.md && success=1 && break || success=0
-            echo "[lychee] attempt $i failed; sleeping 10s before retry"; sleep 10;
-          done
-          if [ "$success" != "1" ]; then
-            echo "[lychee] final classification run (JSON output)";
-            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
-              lychee --format json --no-progress --max-concurrency 8 --timeout 20s \
-                --exclude-path dist --exclude-path site \
-                --exclude "https://github.com/rulehub/rulehub-charts" \
-                **/*.md > lychee.json || true
-            python3 .github/scripts/classify_lychee.py lychee.json || exit 1
-          fi
+          bash .github/scripts/run_lychee.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Note when Docker is unavailable
-        if: ${{ steps.docker.outputs.available != 'true' }}
-        run: echo "::notice::Docker not available; skipping lychee run locally."
       - name: Upload lychee.json (if present)
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -74,9 +41,12 @@ jobs:
         if: ${{ always() }}
         run: |
           if [ -f lychee.json ]; then
-            HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
-            SOFT=$(jq '[.errors[] | select((.status|type=="number") and ((.status==429) or (.status>=500 and .status<=599)))] | length' lychee.json || echo 0)
+            JQ_ERRS='def errs: if (.errors|type=="array") then .errors elif (.failures|type=="array") then .failures elif (.fail_map|type=="object") then ([.fail_map[]]|add) else [] end;'
+            TOTAL=$(jq "$JQ_ERRS errs | length" lychee.json || echo 0)
+            HARD=$(jq "$JQ_ERRS [errs[] | select((.status|type!=\"number\") or ((.status|type==\"number\") and (.status!=429) and (.status<500 or .status>599)))] | length" lychee.json || echo 0)
+            SOFT=$(jq "$JQ_ERRS [errs[] | select((.status|type==\"number\") and ((.status==429) or (.status>=500 and .status<=599)))] | length" lychee.json || echo 0)
             echo "### Link Check Summary" >> $GITHUB_STEP_SUMMARY
+            echo "Total failures considered: $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "Hard failures: $HARD" >> $GITHUB_STEP_SUMMARY
             echo "Soft (ignored) failures: $SOFT" >> $GITHUB_STEP_SUMMARY
             if [ "$HARD" -gt 0 ]; then echo "\n> :x: Hard failures require fixes." >> $GITHUB_STEP_SUMMARY; fi
@@ -89,54 +59,20 @@ jobs:
   lychee-act:
     if: ${{ github.actor == 'nektos/act' }}
     runs-on: ubuntu-latest
+    container: ghcr.io/rulehub/ci-base:latest
     env:
       ACT: "true"
+      # Reduce load and speed up under act
+      LYCHEE_MAX_CONCURRENCY: "4"
+      LYCHEE_TIMEOUT_SEC: "15"
+      LYCHEE_RETRIES: "1"
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Prepare classification runtime (Python already on runner)
         run: |
           python3 --version || true
-      - name: Detect Docker availability
-        id: docker
-        run: |
-          if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-          fi
 
       - name: Run link check (lychee pinned w/ retries)
-        if: ${{ steps.docker.outputs.available == 'true' }}
+        continue-on-error: true
         run: |
-          set -e
-          export LYCHEE_ACT_MODE=1
-          ATTEMPTS=3
-          for i in $(seq 1 $ATTEMPTS); do
-            echo "[lychee] attempt $i/$ATTEMPTS";
-            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
-              lychee --verbose --no-progress --max-concurrency 8 --timeout 20s \
-                --exclude-path dist --exclude-path site \
-                --exclude "https://github.com/rulehub/rulehub-charts" \
-                **/*.md && success=1 && break || success=0
-            echo "[lychee] attempt $i failed; sleeping 10s before retry"; sleep 10;
-          done
-          if [ "$success" != "1" ]; then
-            echo "[lychee] final classification run (JSON output)";
-            docker run --rm -v "$PWD:/workspace" -w /workspace ghcr.io/lycheeverse/lychee:v0.15.1 \
-              lychee --format json --no-progress --max-concurrency 8 --timeout 20s \
-                --exclude-path dist --exclude-path site \
-                --exclude "https://github.com/rulehub/rulehub-charts" \
-                **/*.md > lychee.json || true
-            python3 .github/scripts/classify_lychee.py lychee.json || echo "[act] classification indicates failures";
-            HARD=$(jq '[.errors[] | select((.status|type=="number") and (.status!=429) and (.status<500 or .status>599))] | length' lychee.json || echo 0)
-            if [ "$HARD" -gt 0 ]; then
-              echo "[act] hard link failures detected: $HARD" >&2
-              exit 1
-            else
-              echo "[act] only soft link failures (or none); ignoring under act"
-              exit 0
-            fi
-          fi
-      - name: Note when Docker is unavailable
-        if: ${{ steps.docker.outputs.available != 'true' }}
-        run: echo "::notice::Docker not available; skipping lychee run locally."
+          ACT=true bash .github/scripts/run_lychee.sh

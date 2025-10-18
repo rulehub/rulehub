@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Run Trivy IaC scan via Docker and produce SARIF output.
+# Run Trivy IaC scan and produce SARIF output.
+# Prefers locally installed 'trivy' (from ci-base image) for determinism; falls back to Docker.
 # Env:
 #   TRIVY_VERSION       - optional, default 0.56.2
 #   TRIVY_IMAGE_DIGEST  - optional, if set, uses digest instead of tag
@@ -12,18 +13,43 @@ if [ -n "${TRIVY_IMAGE_DIGEST:-}" ]; then
   IMG="aquasecurity/trivy@${TRIVY_IMAGE_DIGEST}"
 fi
 
-echo "Running Trivy IaC using Docker image ${IMG}"
 mkdir -p "$HOME/.cache/trivy"
-# Detect Docker availability; skip gracefully under act if unavailable
-if ! command -v docker >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
-  echo "Docker not available; skipping Trivy IaC run and generating minimal SARIF." >&2
-else
+
+run_trivy_local() {
+  if command -v trivy >/dev/null 2>&1; then
+    echo "Running Trivy IaC using local binary: $(trivy --version | head -n1)"
+    # Prefer modern 'config' subcommand; fallback to legacy 'iac' if unavailable
+    if trivy help config >/dev/null 2>&1; then
+      trivy config --format sarif -o trivy-results.sarif . || true
+    else
+      trivy iac --format sarif -o trivy-results.sarif . || true
+    fi
+    return 0
+  fi
+  return 1
+}
+
+run_trivy_docker() {
+  echo "Running Trivy IaC using Docker image ${IMG}"
+  # Detect Docker availability; skip gracefully if unavailable
+  if ! command -v docker >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
+    echo "Docker not available; skipping Trivy IaC run and generating minimal SARIF." >&2
+    return 1
+  fi
   docker run --rm \
-  -v "$PWD:/workspace" -w /workspace \
-  -v "$HOME/.cache/trivy:/root/.cache/trivy" \
-  "${IMG}" \
-  iac --format sarif --output trivy-results.sarif . || true
-fi
+    -v "$PWD:/workspace" -w /workspace \
+    -v "$HOME/.cache/trivy:/root/.cache/trivy" \
+    "${IMG}" \
+    sh -ec '
+      if trivy help config >/dev/null 2>&1; then
+        trivy config --format sarif -o trivy-results.sarif .
+      else
+        trivy iac --format sarif -o trivy-results.sarif .
+      fi
+    ' || true
+}
+
+run_trivy_local || run_trivy_docker || true
 
 # Ensure we always produce a valid SARIF even if the docker run failed or we're offline under ACT.
 ensure_min_sarif() {
@@ -46,11 +72,8 @@ ensure_min_sarif() {
 EOF
 }
 
-# If ACT is present or output file is missing/invalid, write a stub SARIF.
-if [ "${ACT:-}" = "true" ]; then
-  echo "Detected ACT environment; generating minimal SARIF stub."
-  ensure_min_sarif
-elif [ ! -s trivy-results.sarif ]; then
+# If output file is missing/invalid, write a stub SARIF.
+if [ ! -s trivy-results.sarif ]; then
   echo "Trivy SARIF not found or empty; generating minimal SARIF stub."
   ensure_min_sarif
 else

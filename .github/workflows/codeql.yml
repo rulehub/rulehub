@@ -12,19 +12,23 @@ permissions:
   contents: read
   security-events: write
 
+# Avoid duplicate work on repeated pushes to the same ref
+concurrency:
+  group: codeql-${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   analyze:
     name: Analyze (Python, JavaScript)
     # Skip CodeQL when running under nektos/act locally; requires GitHub services
     if: ${{ github.actor != 'nektos/act' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
       - name: Checkout repository
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: Initialize CodeQL
-        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/init@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           languages: python, javascript
@@ -32,11 +36,11 @@ jobs:
       # For JavaScript/TypeScript projects, this attempts a best-effort build.
       # For Python, no build is required.
       - name: Autobuild
-        if: ${{ github.actor != 'nektos/act' }}
+        # Only run if a JS project is present; saves time for pure-Python repos
+        if: ${{ hashFiles('**/package-lock.json') != '' || hashFiles('**/yarn.lock') != '' || hashFiles('**/pnpm-lock.yaml') != '' }}
         uses: github/codeql-action/autobuild@528ca598d956c91826bd742262cdfc5d02b77710
 
       - name: Perform CodeQL Analysis
-        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/analyze@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           category: "/language:multi"

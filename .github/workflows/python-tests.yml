@@ -25,38 +25,39 @@ permissions:
   contents: read
   packages: read
 
+concurrency:
+  group: python-tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   guard:
     name: Require CI image tag (no drift)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Enforce non-latest CI image tag
-        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: base
   resolve:
     name: Resolve CI image (base)
     needs: guard
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
-      image: ${{ steps.resolve.outputs.image }}
-      tag: ${{ steps.resolve.outputs.tag }}
+      image: ${{ steps.passthrough.outputs.image }}
+      tag: ${{ steps.passthrough.outputs.tag }}
     steps:
-      - name: Resolve CI image tag and ref
-        id: resolve
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: base
+      - name: Emit outputs
+        id: passthrough
+        shell: bash
+        run: |
+          echo "image=${{ needs.guard.outputs.image }}" >> "$GITHUB_OUTPUT"
+          echo "tag=${{ needs.guard.outputs.tag }}" >> "$GITHUB_OUTPUT"
   tests:
     needs: [guard, resolve]
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -68,4 +69,4 @@ jobs:
       - name: Run pytest (tools)
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: bash .github/scripts/python-ensure-and-run.sh "import pytest, yaml, jsonschema" pytest -q tests/tools
+        run: bash .github/scripts/python-ensure-and-run.sh "import pytest, yaml, jsonschema, ruamel.yaml" pytest -q tests/tools

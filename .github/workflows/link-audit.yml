@@ -62,6 +62,8 @@ jobs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
       image: ${{ steps.resolve.outputs.image }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve CI image (ci-base)
         id: resolve
         uses: ./.github/actions/resolve-ci-image
@@ -75,21 +77,15 @@ jobs:
           IMAGE_REF: ${{ steps.resolve.outputs.image }}
         run: |
           set -euo pipefail
-          echo "Probing anonymous pull for $IMAGE_REF"
-          # If image already present, skip pulling to save time
-          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
-            echo "Image already present locally; skipping pull."
-            echo "can_pull=true" >> "$GITHUB_OUTPUT"
-          elif command -v timeout >/dev/null 2>&1; then
-            # Bound the pull to 120 seconds to avoid long hangs
-            if timeout 120s docker pull "$IMAGE_REF"; then
-              echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "can_pull=false" >> "$GITHUB_OUTPUT"
-            fi
-          elif docker pull "$IMAGE_REF"; then
-            echo "can_pull=true" >> "$GITHUB_OUTPUT"
+          chmod +x .github/scripts/probe-image-pull.sh || true
+          out=$(PROBE_IMAGE="$IMAGE_REF" .github/scripts/probe-image-pull.sh)
+          echo "$out"
+          # Extract only the key=value line for GITHUB_OUTPUT
+          cp_line=$(echo "$out" | awk -F= '/^can_pull=(true|false)$/ {print $0; exit}')
+          if [[ -n "${cp_line}" ]]; then
+            echo "$cp_line" >> "$GITHUB_OUTPUT"
           else
+            # Safe default
             echo "can_pull=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -114,11 +110,9 @@ jobs:
           python-venv-install
       - name: Run link audit
         run: |
-          . .venv/bin/activate
           set -euo pipefail
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json
-          # Compare against baseline; honors FAIL_LINK_AUDIT=1 to fail on drift
-          python tools/compare_links_baseline.py | tee link_audit_output.txt
+          chmod +x .github/scripts/run-link-audit.sh || true
+          .github/scripts/run-link-audit.sh
 
   audit-fallback:
     name: Link audit (fallback, no container)
@@ -140,8 +134,8 @@ jobs:
       - name: Run link audit (host)
         run: |
           set -euo pipefail
-          python tools/analyze_links.py --export links_export.json --json links_audit_report.json
-          python tools/compare_links_baseline.py | tee link_audit_output.txt
+          chmod +x .github/scripts/run-link-audit.sh || true
+          .github/scripts/run-link-audit.sh
 
   upload-artifacts:
     name: Upload audit artifacts

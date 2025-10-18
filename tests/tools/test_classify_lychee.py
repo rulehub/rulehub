@@ -18,7 +18,7 @@ def _import(name: str, path: Path):  # reuse minimal dynamic import
 clf = _import("classify_lychee", SCRIPT)
 
 
-def _write(tmp_path: Path, payload: dict) -> Path:
+def _write(tmp_path, payload):  # type: ignore[no-untyped-def]
     p = tmp_path / "lychee.json"
     p.write_text(json.dumps(payload))
     return p
@@ -53,3 +53,43 @@ def test_malformed(tmp_path):  # type: ignore[no-untyped-def]
     bad = tmp_path / "lychee.json"
     bad.write_text("not json")
     assert clf.main(str(bad)) == 2
+
+
+def test_fail_map_schema(tmp_path):  # type: ignore[no-untyped-def]
+    js = _write(tmp_path, {
+        "errors": 2,
+        "fail_map": {
+            "README.md": [
+                {"status": 404, "link": "https://example.com/missing"},
+                {"status": 429, "link": "https://ratelimited.example"},
+            ]
+        }
+    })
+    # One hard (404) and one soft (429) -> exit 1
+    assert clf.main(str(js)) == 1
+
+
+def test_failures_array_schema(tmp_path):  # type: ignore[no-untyped-def]
+    js = _write(tmp_path, {
+        "failures": [
+            {"status": 500, "link": "https://server-error.example"},
+            {"status": 404, "link": "https://missing.example"},
+        ]
+    })
+    # Contains a hard 404 -> exit 1
+    assert clf.main(str(js)) == 1
+
+
+def test_numeric_errors_only(tmp_path):  # type: ignore[no-untyped-def]
+    # Numeric errors with no detail should be treated conservatively as hard
+    js = _write(tmp_path, {"errors": 3})
+    assert clf.main(str(js)) == 1
+
+
+def test_missing_status_treated_hard(tmp_path):  # type: ignore[no-untyped-def]
+    js = _write(tmp_path, {
+        "errors": [
+            {"link": "https://unknown-status.example"}
+        ]
+    })
+    assert clf.main(str(js)) == 1

@@ -1,14 +1,23 @@
 name: Nightly Catalog Build
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force run full catalog build even under act"
+        required: false
+        default: "false"
 
 permissions:
   contents: read
   actions: write
+concurrency:
+  group: nightly-catalog
+  cancel-in-progress: true
 jobs:
   build-catalog:
-    if: ${{ !contains(github.actor, 'nektos/act') }}
+    # Skip on act unless workflow_dispatch input force == true
+    if: ${{ !contains(github.actor, 'nektos/act') || github.event.inputs.force == 'true' }}
     continue-on-error: ${{ contains(github.actor, 'nektos/act') }}
     name: Generate catalog index
     needs: [resolve]
@@ -21,15 +30,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Install dependencies
-        run: |
-          python-venv-install
-
-      - name: Generate catalog (dist/index.json)
-        run: |
-          . .venv/bin/activate
-          make catalog
-          test -f dist/index.json
+      - name: Build catalog
+        id: build_catalog
+        uses: ./.github/actions/build-catalog
+        with:
+          min-packages: 5
+          make-target: catalog
 
       - name: Upload index artifact
         if: ${{ github.actor != 'nektos/act' }}
@@ -39,19 +45,9 @@ jobs:
           path: dist/index.json
           if-no-files-found: error
           retention-days: 7
-
-      - name: Show index summary
+      - name: Catalog stats (outputs)
         run: |
-          python3 - <<'EOF'
-          import json, hashlib
-          p = 'dist/index.json'
-          with open(p,'rb') as f:
-              data = f.read()
-          print(f"index.json size={len(data)} bytes sha256={hashlib.sha256(data).hexdigest()[:16]}...")
-          obj = json.loads(data)
-          print("keys:", sorted(obj.keys()))
-          print("packages:", len(obj.get('packages', [])))
-          EOF
+          echo "packages=${{ steps.build_catalog.outputs.packages }} sha16=${{ steps.build_catalog.outputs.sha256 }} seconds=${{ steps.build_catalog.outputs['build-seconds'] }}"
 
   noop-act:
     if: ${{ contains(github.actor, 'nektos/act') }}
@@ -59,7 +55,7 @@ jobs:
     steps:
       - run: echo "[act] nightly-catalog skipped."
   resolve:
-    if: ${{ !contains(github.actor, 'nektos/act') }}
+    if: ${{ !contains(github.actor, 'nektos/act') || github.event.inputs.force == 'true' }}
     name: Resolve CI image (ci-base)
     runs-on: ubuntu-latest
     outputs:

@@ -37,22 +37,11 @@ jobs:
       - name: Run Checkov (Docker) and produce SARIF
         if: ${{ steps.docker.outputs.available == 'true' }}
         env:
-          # Pinned image digest is required. Prefer repository variable, but allow secrets/env for act or local runs.
-          CHECKOV_IMAGE_DIGEST: ${{ vars.CHECKOV_IMAGE_DIGEST || secrets.CHECKOV_IMAGE_DIGEST || env.CHECKOV_IMAGE_DIGEST }}
+          # Pinned image digest is required. Prefer repository variable or secret; local env handled by script under act.
+          CHECKOV_IMAGE_DIGEST: ${{ vars.CHECKOV_IMAGE_DIGEST || secrets.CHECKOV_IMAGE_DIGEST }}
         run: |
           set -euo pipefail
-          REPO="bridgecrew/checkov"
-          if [ -n "${CHECKOV_IMAGE_DIGEST:-}" ]; then
-            IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
-          else
-            echo "ERROR: CHECKOV_IMAGE_DIGEST is required (sha256:...) and must be pinned; refusing to use ':latest'."
-            exit 1
-          fi
-          docker run --rm -v "$PWD:/workspace" -w /workspace "$IMG" \
-            checkov -d . --framework kubernetes \
-            --skip-path tests/kyverno --skip-path tests/gatekeeper \
-            --output sarif --output-file-path checkov.sarif \
-            --quiet || true
+          bash tools/ci/checkov-run.sh
 
       - name: Note when Docker is unavailable
         if: ${{ steps.docker.outputs.available != 'true' }}
@@ -88,6 +77,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: ${{ env.CKV_SUMMARY }}
+          edit-mode: replace
 
   checkov-scan-act:
     if: ${{ github.actor == 'nektos/act' }}
@@ -111,20 +101,7 @@ jobs:
         if: ${{ steps.docker.outputs.available == 'true' }}
         env:
           ACT: "true"
-          # Pinned image digest is required for act runs too; accept repo var, secret, or env.
-          CHECKOV_IMAGE_DIGEST: ${{ vars.CHECKOV_IMAGE_DIGEST || secrets.CHECKOV_IMAGE_DIGEST || env.CHECKOV_IMAGE_DIGEST }}
+          # Under act, the script will no-op if CHECKOV_IMAGE_DIGEST isn't set in the environment.
         run: |
           set -euo pipefail
-          REPO="bridgecrew/checkov"
-          if [ -n "${CHECKOV_IMAGE_DIGEST:-}" ]; then
-            IMG="$REPO@${CHECKOV_IMAGE_DIGEST}"
-          else
-            echo "[act] CHECKOV_IMAGE_DIGEST not provided; skipping Checkov scan under act (no network pulls)." >&2
-            echo "Hint: provide via repository Variables, or pass to act with --secret-file (CHECKOV_IMAGE_DIGEST=sha256:<digest>) or --env CHECKOV_IMAGE_DIGEST=sha256:<digest> to enable the scan locally." >&2
-            exit 0
-          fi
-          docker run --rm -v "$PWD:/workspace" -w /workspace "$IMG" \
-            checkov -d . --framework kubernetes \
-            --skip-path tests/kyverno --skip-path tests/gatekeeper \
-            --output sarif --output-file-path checkov.sarif \
-            --quiet || true
+          bash tools/ci/checkov-run.sh

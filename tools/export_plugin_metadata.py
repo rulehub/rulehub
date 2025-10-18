@@ -191,7 +191,7 @@ def _format_industry_display(val: Any) -> Any:
         return " ".join(p[:1].upper() + p[1:] for p in parts) if parts else raw
 
     if isinstance(val, list):
-        seq = cast(List[Any], val)
+        seq: List[Any] = val
         out: List[str] = [_fmt_one(str(x)) for x in seq if x is not None]
         # preserve shape; de-dup while keeping order
         seen: Set[str] = set()

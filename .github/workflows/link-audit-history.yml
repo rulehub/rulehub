@@ -30,6 +30,8 @@ jobs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -70,7 +72,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --history links_audit_history.csv | tee link_audit_history_run.txt
+          bash .github/scripts/run-link-audit-history.sh
 
       - name: Show last 5 history rows
         if: always()
@@ -129,7 +131,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --history links_audit_history.csv | tee link_audit_history_run.txt
+          bash .github/scripts/run-link-audit-history.sh
 
       - name: Show last 5 history rows
         if: always()

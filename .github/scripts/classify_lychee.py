@@ -9,14 +9,78 @@ Exit codes:
  1 - Hard failures present (non-soft HTTP codes)
  2 - Invalid input / parsing error
 """
-from __future__ import annotations
-
 import json
 import sys
 from pathlib import Path
+from typing import Any, Dict, List, Optional, cast
 
 
 SOFT_STATUSES = {429} | set(range(500, 600))
+
+
+def _normalize_error(src: Optional[str], err: Dict[str, Any]) -> Dict[str, Any]:
+    """Return a normalized error dict with keys: status (any), link (str), source (str), line (int|None)."""
+    status = err.get("status") or err.get("code") or err.get("status_code") or err.get("statusCode")
+    link = err.get("link") or err.get("uri") or err.get("url") or err.get("target")
+    line = err.get("line") or err.get("line_no") or err.get("lineNumber")
+    return {
+        "status": status,
+        "link": link,
+        "source": err.get("source") or err.get("file") or src,
+        "line": line,
+    }
+
+
+def _extract_errors(data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Best-effort extraction of error entries from lychee JSON across versions.
+
+    Supports both:
+    - legacy schema with top-level "errors" array of entries
+    - newer schema where "errors" is a count and details live under "fail_map" (per-source arrays)
+      or a flat "failures" array.
+    """
+    raw_any = data.get("errors")
+    if isinstance(raw_any, list):
+        # Already an array of error entries
+        raw_list: List[Any] = cast(List[Any], raw_any)
+        out: List[Dict[str, Any]] = []
+        for item in raw_list:
+            if isinstance(item, dict):
+                item_dict: Dict[str, Any] = cast(Dict[str, Any], item)
+                src_val_any = item_dict.get("source")
+                src_val: Optional[str] = src_val_any if isinstance(src_val_any, str) else None
+                out.append(_normalize_error(src_val, item_dict))
+        return out
+
+    # Try fail_map: { source: [ {status, link, ...}, ...], ... }
+    fm_any = data.get("fail_map")
+    if isinstance(fm_any, dict):
+        out2: List[Dict[str, Any]] = []
+        fm_dict: Dict[str, Any] = cast(Dict[str, Any], fm_any)
+        for src_key, arr_any in fm_dict.items():
+            if isinstance(arr_any, list):
+                arr_list: List[Any] = cast(List[Any], arr_any)
+                for item in arr_list:
+                    if isinstance(item, dict):
+                        item_dict: Dict[str, Any] = cast(Dict[str, Any], item)
+                        out2.append(_normalize_error(str(src_key), item_dict))
+        return out2
+
+    # Try failures: [ {status, link, source?, ...}, ... ]
+    failures_any = data.get("failures")
+    if isinstance(failures_any, list):
+        out3: List[Dict[str, Any]] = []
+        fl_list: List[Any] = cast(List[Any], failures_any)
+        for item in fl_list:
+            if isinstance(item, dict):
+                item_dict2: Dict[str, Any] = cast(Dict[str, Any], item)
+                src_val_any2 = item_dict2.get("source")
+                src_val2: Optional[str] = src_val_any2 if isinstance(src_val_any2, str) else None
+                out3.append(_normalize_error(src_val2, item_dict2))
+        return out3
+
+    # Last resort: empty list; caller will fall back to count-only logic
+    return []
 
 
 def main(path: str) -> int:
@@ -28,15 +92,25 @@ def main(path: str) -> int:
             f"[classify-lychee] Failed to read/parse JSON: {e}", file=sys.stderr)
         return 2
 
-    errors = data.get("errors") or []
-    if not errors:
-        print(
-            "[classify-lychee] No errors remaining (previous attempts likely transient)")
-        return 0
+    entries: List[Dict[str, Any]] = _extract_errors(cast(Dict[str, Any], data))
+    # If no entries extracted, fall back to count semantics if available
+    if not entries:
+        count = data.get("errors")
+        try:
+            count_int = int(count)
+        except Exception:
+            count_int = 0
+        if count_int <= 0:
+            print("[classify-lychee] No errors remaining (previous attempts likely transient)")
+            return 0
+        # Without per-entry details, we can't separate soft vs hard reliably.
+        # Be conservative and treat as hard failures.
+        print(f"[classify-lychee] {count_int} errors reported but details not found; treating as hard failures.")
+        return 1
 
-    soft = []
-    hard = []
-    for err in errors:
+    soft: List[Dict[str, Any]] = []
+    hard: List[Dict[str, Any]] = []
+    for err in entries:
         status = err.get("status")
         # status may be string (e.g. "Timeout") or int
         if isinstance(status, int) and status in SOFT_STATUSES:

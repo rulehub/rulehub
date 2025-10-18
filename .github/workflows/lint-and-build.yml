@@ -20,6 +20,8 @@ jobs:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
@@ -31,6 +33,8 @@ jobs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -58,31 +62,32 @@ jobs:
 
       - name: Run Spectral (JSON->SARIF)
         run: |
-          npx --yes @stoplight/spectral lint --ruleset .spectral.yml --format json . \
-            | python3 tools/convert_spectral_to_sarif.py - --output spectral.sarif || true
+          bash .github/scripts/spectral-lint.sh --ruleset .spectral.yml --out spectral.sarif || true
         continue-on-error: true
-
-      - name: Upload Spectral SARIF artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: spectral-sarif
-          path: spectral.sarif
-          if-no-files-found: ignore
 
   upload-sarif:
     name: Upload SARIF to code scanning
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest
-    needs: yamllint
+    needs: [yamllint, resolve]
     permissions:
       contents: read
       security-events: write
+    container:
+      image: ${{ needs.resolve.outputs.image }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      options: --user 0:0
     steps:
-      - name: Download Spectral SARIF artifact
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
-        with:
-          name: spectral-sarif
-          path: .
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Recreate Spectral SARIF (JSON->SARIF)
+        run: |
+          bash .github/scripts/spectral-lint.sh --ruleset .spectral.yml --out spectral.sarif || true
+        continue-on-error: true
+
       - name: Upload Spectral SARIF
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:

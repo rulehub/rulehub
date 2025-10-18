@@ -30,8 +30,6 @@ runs:
         INPUT_TAG: ${{ inputs.ci_image_tag }}
         OWNER: ${{ github.repository_owner }}
         KIND: ${{ inputs.kind }}
-        # Allow org/repo variables to define CI_IMAGE_TAG without hardcoding here
-        FALLBACK_TAG: ${{ vars.CI_IMAGE_TAG }}
       run: |
         set -euo pipefail
         kind="${KIND:-base}"
@@ -44,9 +42,6 @@ runs:
         tag="${INPUT_TAG:-}"
         if [ -z "$tag" ] && [ -n "$ENV_TAG" ]; then
           tag="$ENV_TAG"
-        fi
-        if [ -z "$tag" ] && [ -n "${FALLBACK_TAG:-}" ]; then
-          tag="$FALLBACK_TAG"
         fi
         if [ -z "$tag" ]; then tag="latest"; fi
 

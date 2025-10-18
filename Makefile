@@ -64,6 +64,7 @@ help:
 	@echo "  act-python-tests       Run python-tests workflow (single py 3.11)"
 	@echo "  act-python-tests-all   Run python-tests workflow (all matrix)"
 	@echo "  act-opa-bundle         Run opa-bundle-publish (SKIP_SUPPLYCHAIN=1)"
+	@echo "  supply-chain-dry-run   Build bundle + manifest + SBOM locally (skip signing)"
 	@echo "  act-run                Generic act runner (WF=... EVENT=push JOB=name)"
 	@echo "  act-all-push           Run all workflows with event 'push' sequentially"
 	@echo "  opa-quick-check        Fast static Rego parse/type + pattern scan"
@@ -112,6 +113,16 @@ include mk/docs.mk
 include mk/maps.mk
 include mk/validate.mk
 include mk/release.mk
+
+.PHONY: supply-chain-dry-run
+supply-chain-dry-run: ## Build bundle + manifest + SBOM locally (skip signing)
+	@echo "[supply-chain-dry-run] Building OPA bundle (skip signing)"
+	$(MAKE) opa-bundle
+	$(MAKE) opa-bundle-manifest
+	$(MAKE) sbom-opa-bundle || true
+	@echo "Artifacts in dist/:"
+	ls -lh dist/opa-bundle.tar.gz dist/opa-bundle.manifest.json 2>/dev/null || true
+	@echo "Done."
 
 .PHONY: export-plugin-metadata
 export-plugin-metadata: ## Export dist/plugin-index-metadata.json for Backstage plugin enrichment

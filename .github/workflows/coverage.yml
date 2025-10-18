@@ -22,7 +22,10 @@ on:
 
 permissions:
   contents: read
-  actions: write
+
+concurrency:
+  group: coverage-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   act-noop:
@@ -37,6 +40,8 @@ jobs:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
@@ -49,6 +54,8 @@ jobs:
       image: ${{ steps.resolve.outputs.image }}
       tag: ${{ steps.resolve.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve CI image tag and ref
         id: resolve
         uses: ./.github/actions/resolve-ci-image
@@ -79,45 +86,10 @@ jobs:
         run: |
           python-venv-install
 
-      - name: Generate coverage artifacts
+      - name: Generate coverage and validate (container)
         if: ${{ github.actor != 'nektos/act' }}
         run: |
-          . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/coverage_map.py
-
-      - name: Validate plugin index schema
-        if: ${{ github.actor != 'nektos/act' }}
-        run: |
-          . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import json, jsonschema" python - <<'EOF'
-          import json, sys
-          import jsonschema
-          schema = json.load(open('tools/schemas/plugin-index.schema.json'))
-          data = json.load(open('dist/index.json'))
-          jsonschema.validate(data, schema)
-          print('dist/index.json schema validation OK')
-          EOF
-
-      - name: Enforce committed artifacts up-to-date
-        if: ${{ github.actor != 'nektos/act' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ "${ACT:-}" = "true" ]; then
-            echo "[act] Skipping artifact enforcement (dist/index.json may be untracked locally)";
-            exit 0;
-          fi
-          # Show git status before diff
-          git status --short || true
-          # If generation changed tracked artifacts, fail with guidance
-          CHANGED=$(git diff --name-only docs/coverage.md dist/index.json || true)
-          if [ -n "$CHANGED" ]; then
-            echo 'ERROR: Generated artifacts are out of date:'
-            echo "$CHANGED"
-            echo 'Run locally: make coverage (or python3 tools/coverage_map.py) and commit updated docs/coverage.md & dist/index.json.'
-            exit 1
-          fi
-          echo 'Artifact check passed: docs/coverage.md and dist/index.json are up to date.'
+          bash .github/scripts/coverage-enforce.sh
 
       - name: Upload artifacts
         if: ${{ github.actor != 'nektos/act' }}

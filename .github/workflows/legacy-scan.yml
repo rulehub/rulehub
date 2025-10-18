@@ -46,6 +46,8 @@ jobs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -62,33 +64,14 @@ jobs:
     outputs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Try anonymous pull (ci-base)
         id: probe
         shell: bash
         run: |
           set -euo pipefail
-          IMAGE_REF="${{ needs.resolve.outputs.image }}"
-          echo "Probing anonymous pull for $IMAGE_REF"
-          # If the image already exists locally, consider pullable without network
-          if docker image inspect "$IMAGE_REF" >/dev/null 2>&1; then
-            echo "Image present locally; skipping pull"
-            echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          # Time-bound the pull to avoid hangs on problematic registries
-          if command -v timeout >/dev/null 2>&1; then
-            if timeout 120s docker pull "$IMAGE_REF"; then
-              echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "can_pull=false" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            if docker pull "$IMAGE_REF"; then
-              echo "can_pull=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "can_pull=false" >> "$GITHUB_OUTPUT"
-            fi
-          fi
+          bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
 
   legacy:
     name: Legacy violation[] scan
@@ -121,18 +104,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Setup Python venv
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 --version || true
-          python3 -m venv .venv
-          . .venv/bin/activate
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt || pip install pyyaml
       - name: Run deny-usage scan (host)
         shell: bash
         run: |
           set -euo pipefail
-          . .venv/bin/activate
-          python tools/deny_usage_scan.py
+          # Ensure minimal deps, prefer existing venv if present; install only what's missing.
+          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema, ruamel.yaml, requests" \
+            python tools/deny_usage_scan.py

@@ -79,51 +79,7 @@ jobs:
           RENOVATE_DRY_RUN: full
           # Avoid GitHub API calls failing under act; platform=local should not require this
           GITHUB_COM_TOKEN: ""
-        run: |
-          set -euo pipefail
-          mkdir -p dist
-          cat > dist/renovate.local.json <<'JSON'
-          {
-            "extends": ["config:recommended"],
-            "dependencyDashboard": false,
-            "prHourlyLimit": 0
-          }
-          JSON
-          # Limit scope under act for speed/stability
-          MANAGERS="github-actions"
-          echo "Using managers: ${MANAGERS}"
-          # Use dockerized renovate to avoid job.container issues under act
-          DOCKER_IMG="ghcr.io/renovatebot/renovate:37"
-          # Print-config (best-effort)
-          docker run --rm -u 0:0 \
-            -v "${GITHUB_WORKSPACE:-$PWD}":/repo \
-            -w /repo \
-            -e LOG_LEVEL \
-            -e RENOVATE_DRY_RUN \
-            -e GITHUB_COM_TOKEN \
-            "$DOCKER_IMG" \
-            renovate --platform=local --local-dir=/repo --require-config=true \
-            --config-file=/repo/dist/renovate.local.json \
-            --enabled-managers="${MANAGERS}" \
-            --print-config > dist/renovate.print-config.json || true
-          # Best-effort dry-run with timeout if available
-          TOUT=""
-          if command -v timeout >/dev/null 2>&1; then
-            TOUT="timeout -k 10 300s"
-            echo "Using timeout wrapper: ${TOUT}"
-          fi
-          ${TOUT} docker run --rm -u 0:0 \
-            -v "${GITHUB_WORKSPACE:-$PWD}":/repo \
-            -w /repo \
-            -e LOG_LEVEL \
-            -e RENOVATE_DRY_RUN \
-            -e GITHUB_COM_TOKEN \
-            "$DOCKER_IMG" \
-            renovate --platform=local --local-dir=/repo --require-config=true --dry-run \
-            --config-file=/repo/dist/renovate.local.json \
-            --enabled-managers="${MANAGERS}" \
-            --log-file=/repo/dist/renovate.log || true
-          echo "Renovate dry-run (act) completed. See dist/renovate.log if present." > dist/renovate-summary.txt
+        run: bash .github/scripts/renovate-dry-run.sh
 
       - name: Show summary (act-friendly)
         if: ${{ always() }}

@@ -113,34 +113,13 @@ jobs:
 
       - name: Enforce policy test thresholds
         run: |
-          set -euo pipefail
-          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/policy_test_coverage.py >/dev/null
-          bash .github/scripts/python-ensure-and-run.sh "import json" python tools/enforce_policy_test_thresholds.py
+          bash .github/scripts/enforce-policy-thresholds.sh --no-summary || bash .github/scripts/enforce-policy-thresholds.sh --no-summary
 
       - name: Run guardrails aggregate
         env:
           FAIL_LINK_AUDIT: "0"
         run: |
-          set -euo pipefail
-          # Generic-only test guardrail
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/enforce_no_generic_only_tests.py
-          # Metadata paths guardrail
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/guardrail_metadata_paths.py
-          # Test pairs guardrail
-          bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/enforce_policy_test_pairs.py
-          # Schema validation
-          bash .github/scripts/python-ensure-and-run.sh "import jsonschema" python tools/validate_metadata_schema.py
-          # Link normalization (non-fatal)
-          bash .github/scripts/python-ensure-and-run.sh "import yaml" python tools/normalize_links.py --check --eli || echo "[guardrails] link-normalize-check non-fatal issues"
-          # Link audit
-          if [ "${FAIL_LINK_AUDIT}" = "1" ]; then
-            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null
-            python tools/compare_links_baseline.py || exit 1
-          else
-            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null || true
-            python tools/compare_links_baseline.py || echo "[guardrails] link-audit non-fatal"
-          fi
-          echo "[guardrails] complete"
+          bash .github/scripts/guardrails-aggregate.sh || (echo "[guardrails] aggregate script failed" >&2; exit 1)
 
       - name: Upload coverage artifacts
         if: ${{ always() && github.actor != 'nektos/act' }}
@@ -175,6 +154,8 @@ jobs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -194,37 +175,21 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install deps
+      - name: Install deps (venv)
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt || true
+          bash .github/scripts/python-venv-install.sh
       - name: Install OPA (host)
         run: |
-          set -euo pipefail
-          curl -sSL -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
-          chmod +x opa
-          sudo mv opa /usr/local/bin/opa
+          bash .github/scripts/install-opa.sh
       - name: Run gatekeeper tests (host)
         run: |
           opa test tests/gatekeeper/policies tests/gatekeeper/tests -v || exit 1
       - name: Enforce policy test thresholds (host)
         run: |
-          python tools/policy_test_coverage.py >/dev/null
-          python tools/enforce_policy_test_thresholds.py
+          bash .github/scripts/enforce-policy-thresholds.sh --no-summary || bash .github/scripts/enforce-policy-thresholds.sh --no-summary
       - name: Run guardrails aggregate (host)
         env:
           FAIL_LINK_AUDIT: "0"
         run: |
-          python tools/enforce_no_generic_only_tests.py
-          python tools/guardrail_metadata_paths.py
-          python tools/enforce_policy_test_pairs.py
-          python tools/validate_metadata_schema.py
-          python tools/normalize_links.py --check --eli || echo "[guardrails] link-normalize-check non-fatal issues"
-          if [ "${FAIL_LINK_AUDIT}" = "1" ]; then
-            python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null
-            python tools/compare_links_baseline.py || exit 1
-          else
-            python tools/analyze_links.py --export links_export.json --json links_audit_report.json >/dev/null || true
-            python tools/compare_links_baseline.py || echo "[guardrails] link-audit non-fatal"
-          fi
+          bash .github/scripts/guardrails-aggregate.sh || (echo "[guardrails] aggregate script failed" >&2; exit 1)
           echo "[guardrails] complete (fallback)"

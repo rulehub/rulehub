@@ -36,27 +36,24 @@ concurrency:
 jobs:
   guard:
     name: Require CI image tag (no drift)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Enforce non-latest CI image tag
-        shell: bash
-        run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+    uses: ./.github/workflows/resolve-ci-image.yml
+    with:
+      ci_image_tag: ${{ inputs.ci_image_tag }}
+      kind: base
   resolve:
     name: Resolve CI image (ci-base)
     needs: guard
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.r.outputs.image }}
-      tag: ${{ steps.r.outputs.tag }}
+      image: ${{ steps.passthrough.outputs.image }}
+      tag: ${{ steps.passthrough.outputs.tag }}
     steps:
-      - name: Resolve image
-        id: r
-        uses: ./.github/actions/resolve-ci-image
-        with:
-          ci_image_tag: ${{ inputs.ci_image_tag }}
-          kind: base
+      - name: Emit outputs
+        id: passthrough
+        shell: bash
+        run: |
+          echo "image=${{ needs.guard.outputs.image }}" >> "$GITHUB_OUTPUT"
+          echo "tag=${{ needs.guard.outputs.tag }}" >> "$GITHUB_OUTPUT"
   scan-gh:
     if: ${{ github.actor != 'nektos/act' }}
     needs: [guard, resolve]
@@ -72,27 +69,9 @@ jobs:
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: pip-audit (requirements)
-        run: |
-          set -euo pipefail
-          if [ -f requirements.lock ]; then BASE_REQ=requirements.lock; else BASE_REQ=requirements.txt; fi
-          pip-audit -r "$BASE_REQ" -f json -o pip-audit.json || true
-          if [ -f requirements-dev.txt ]; then pip-audit -r requirements-dev.txt -f json -o pip-audit-dev.json || true; fi
-          if [ ! -f pip-audit.json ]; then echo '{"vulns": []}' > pip-audit.json; fi
-          if [ ! -f pip-audit-dev.json ]; then echo '{"vulns": []}' > pip-audit-dev.json; fi
-          jq -s '[.[] | if type=="object" then ( (.vulns // .vulnerabilities // ( [ (.dependencies[]?.vulns[]?) ] )) ) else [] end | .[] ] | {vulns: .}' pip-audit.json pip-audit-dev.json 2>/dev/null > pip-audit-combined.json || cp pip-audit.json pip-audit-combined.json
-          HIGH_COUNT=$(jq '[.vulns[]? | select((.severity // "") | ascii_upcase == "HIGH" or (.severity // "") | ascii_upcase == "CRITICAL")] | length' pip-audit-combined.json || echo 0)
-          TOTAL=$(jq '.vulns | length' pip-audit-combined.json || echo 0)
-          echo "pip-audit: total=$TOTAL high+critical=$HIGH_COUNT"
-          if [ "${HIGH_COUNT}" -gt 0 ]; then
-            echo "::error::High severity vulnerabilities detected ($HIGH_COUNT).";
-            jq -r '.vulns[]? | select((.severity // "") | ascii_upcase == "HIGH" or (.severity // "") | ascii_upcase == "CRITICAL") | "- \(.id) \(.severity) \(.package // \"?\") \(.version // \"?\")"' pip-audit-combined.json || true;
-            exit 1;
-          fi
-
-      - name: pip-audit SARIF (best-effort)
-        run: |
-          set -euo pipefail
-          if [ -f requirements.txt ]; then pip-audit -r requirements.txt -f sarif -o pip-audit.sarif || true; fi
+        env:
+          SARIF_OUT: pip-audit.sarif
+        run: bash .github/scripts/pip-audit-run.sh
 
       - name: Upload SARIF
         if: ${{ always() }}
@@ -117,25 +96,7 @@ jobs:
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: pip-audit (requirements)
-        run: |
-          set -euo pipefail
-          # Under ACT, avoid pip's --require-hashes strictness on some lockfiles
-          BASE_REQ=requirements.txt
-          pip-audit -r "$BASE_REQ" -f json -o pip-audit.json || true
-          if [ -f requirements-dev.txt ]; then pip-audit -r requirements-dev.txt -f json -o pip-audit-dev.json || true; fi
-          if [ ! -f pip-audit.json ]; then echo '{"vulns": []}' > pip-audit.json; fi
-          if [ ! -f pip-audit-dev.json ]; then echo '{"vulns": []}' > pip-audit-dev.json; fi
-          jq -s '[.[] | if type=="object" then ( (.vulns // .vulnerabilities // ( [ (.dependencies[]?.vulns[]?) ] )) ) else [] end | .[] ] | {vulns: .}' pip-audit.json pip-audit-dev.json 2>/dev/null > pip-audit-combined.json || cp pip-audit.json pip-audit-combined.json
-          HIGH_COUNT=$(jq '[.vulns[]? | select((.severity // "") | ascii_upcase == "HIGH" or (.severity // "") | ascii_upcase == "CRITICAL")] | length' pip-audit-combined.json || echo 0)
-          TOTAL=$(jq '.vulns | length' pip-audit-combined.json || echo 0)
-          echo "pip-audit: total=$TOTAL high+critical=$HIGH_COUNT"
-          if [ "${HIGH_COUNT}" -gt 0 ]; then
-            echo "::error::High severity vulnerabilities detected ($HIGH_COUNT).";
-            jq -r '.vulns[]? | select((.severity // "") | ascii_upcase == "HIGH" or (.severity // "") | ascii_upcase == "CRITICAL") | "- \(.id) \(.severity) \(.package // \"?\") \(.version // \"?\")"' pip-audit-combined.json || true;
-            exit 1;
-          fi
-
-      - name: pip-audit SARIF (best-effort)
-        run: |
-          set -euo pipefail
-          if [ -f requirements.txt ]; then pip-audit -r requirements.txt -f sarif -o pip-audit.sarif || true; fi
+        env:
+          ACT: "true"
+          SARIF_OUT: pip-audit.sarif
+        run: bash .github/scripts/pip-audit-run.sh

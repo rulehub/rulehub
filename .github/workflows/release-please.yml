@@ -4,14 +4,20 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      act_full:
+        description: "Allow running under nektos/act (for local testing)."
+        required: false
+        default: "false"
 
 permissions:
   contents: read
 
 jobs:
   release:
-    if: ${{ github.actor != 'nektos/act' }}
+    # By default skip under nektos/act; allow explicit override when manually dispatched with act_full=true
+    if: ${{ github.actor != 'nektos/act' || (github.event_name == 'workflow_dispatch' && inputs.act_full == 'true') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

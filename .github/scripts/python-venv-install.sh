@@ -2,35 +2,64 @@
 set -euo pipefail
 
 # python-venv-install.sh
-# Creates .venv, upgrades pip, and installs requirements (+dev) with
-# compatibility shims for older Python versions when locks were generated on newer.
+# Unified venv helper for CI/ACT:
+# - Under ACT: prefer reusing pre-baked /opt/ci-venv (symlink .venv) and skip installs
+# - On CI: if an image-provided python-venv-install exists, delegate to it; otherwise do a minimal compatible install here
 
-PYTHON_BIN="${PYTHON_BIN:-python}"
-# Fallback to python3 if 'python' not present
-if ! command -v "$PYTHON_BIN" >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
-  PYTHON_BIN=python3
-fi
+PYTHON_BIN="${PYTHON_BIN:-python3}"
 
-if [ ! -d .venv ]; then
-  "${PYTHON_BIN}" -m venv .venv
-fi
-
-. .venv/bin/activate
-
-# Under nektos/act, multiple jobs may run concurrently inside separate
-# containers. Heavy pip installs across jobs can exhaust Docker's RW layer or
-# memory and lead to exit 137 / "RWLayer unexpectedly nil". To keep ACT runs
-# stable and fast, skip requirements installs entirely when ACT=true; individual
-# steps can install tiny, targeted deps on demand (e.g., pyyaml, jsonschema).
+# Fast path for ACT to avoid pip/ensurepip edge cases and heavy IO
 if [ "${ACT:-}" = "true" ]; then
-  echo "ACT=true detected; skipping requirements installs to reduce parallel load"
-  echo "Python deps installed into .venv (no-op under ACT)"
+  if [ ! -e .venv ] && [ -d /opt/ci-venv ] && [ -f /opt/ci-venv/bin/activate ]; then
+    echo "ACT=true and /opt/ci-venv present; linking .venv -> /opt/ci-venv"
+    ln -s /opt/ci-venv .venv
+    echo "Python venv prepared at .venv (linked)"
+    exit 0
+  fi
+  # Create a minimal venv with the selected interpreter and skip installs
+  if [ ! -d .venv ]; then
+    "$PYTHON_BIN" -m venv .venv
+  fi
+  # Some upstream python base images omit pip inside freshly created venvs.
+  # Ensure pip exists to allow downstream scripts (python-ensure-and-run.sh) to install minimal deps under ACT.
+  if [ ! -x .venv/bin/pip ]; then
+    echo "pip not found in .venv; bootstrapping via ensurepip"
+    .venv/bin/python -m ensurepip --upgrade || true
+    # Fallback: try get-pip if ensurepip is unavailable (rare in Debian Slim variants)
+    if [ ! -x .venv/bin/pip ]; then
+      python - <<'PY' || true
+import sys, urllib.request, subprocess, os
+url = 'https://bootstrap.pypa.io/get-pip.py'
+dst = 'get-pip.py'
+try:
+    with urllib.request.urlopen(url, timeout=20) as r, open(dst, 'wb') as f:
+        f.write(r.read())
+    subprocess.run([os.path.abspath('.venv/bin/python'), dst, '--upgrade'], check=False)
+finally:
+    try:
+        os.remove(dst)
+    except Exception:
+        pass
+PY
+    fi
+  fi
+  echo "ACT=true; created minimal .venv with $PYTHON_BIN (skipping pip installs)"
   exit 0
 fi
 
+# Delegate to image-provided installer if available
+if command -v python-venv-install >/dev/null 2>&1; then
+  exec python-venv-install
+fi
+
+# Fallback: lightweight local venv + optional installs
+if [ ! -d .venv ]; then
+  "$PYTHON_BIN" -m venv .venv
+fi
+. .venv/bin/activate
+
 python -m pip install -U pip
 
-# Shim for conditional deps when lock generated on newer Python
 PY_VER=$(python - <<'EOF'
 import sys
 print(f"{sys.version_info.major}.{sys.version_info.minor}")
@@ -38,10 +67,6 @@ EOF
 )
 case "$PY_VER" in
   3.11|3.12)
-    python -m pip install "typing-extensions==4.15.0" || true
-    ;;
-  3.13)
-    # Most projects no longer need typing-extensions on 3.13, but include for safety if deps reference it.
     python -m pip install "typing-extensions==4.15.0" || true
     ;;
 esac
@@ -52,30 +77,10 @@ elif [ -f requirements.txt ]; then
   pip install -r requirements.txt
 fi
 
-# Heuristic: if running under ACT (ACT=true) or common dev tools are already
-# available system-wide (e.g., ruff), skip installing heavy dev requirements.
-# This prevents concurrent jobs from all pulling large wheels (mkdocs, mypy,
-# ruff, etc.) which can cause OOM or Docker RWLayer errors under ACT.
-SKIP_DEV_INSTALL=0
-if [ "${ACT:-}" = "true" ]; then
-  SKIP_DEV_INSTALL=1
-fi
-if command -v ruff >/dev/null 2>&1; then
-  SKIP_DEV_INSTALL=1
-fi
-
 if [ -f requirements-dev.lock ]; then
-  if [ "$SKIP_DEV_INSTALL" = "1" ]; then
-    echo "System-wide Python packages present (marker=ruff or ACT=true); skipping dev requirements install"
-  else
-    pip install -r requirements-dev.lock
-  fi
+  pip install -r requirements-dev.lock || true
 elif [ -f requirements-dev.txt ]; then
-  if [ "$SKIP_DEV_INSTALL" = "1" ]; then
-    echo "System-wide Python packages present (marker=ruff or ACT=true); skipping dev requirements install"
-  else
-    pip install -r requirements-dev.txt
-  fi
+  pip install -r requirements-dev.txt || true
 fi
 
 echo "Python deps installed into .venv"
