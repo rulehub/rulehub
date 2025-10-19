@@ -21,12 +21,25 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
+    outputs:
+      is_act: ${{ steps.detect.outputs.is_act }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
+      - name: Detect act runtime
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${ACT:-}" = "true" ] || [ "${IS_ACT:-}" = "true" ]; then
+            echo "Detected act environment"
+            echo "is_act=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_act=false" >> "$GITHUB_OUTPUT"
+          fi
   resolve:
     name: Resolve CI image (ci-policy)
     needs: guard
@@ -72,7 +85,7 @@ jobs:
     name: OPA quick check
     runs-on: ubuntu-latest
     needs: [guard, resolve, probe-ghcr]
-    if: ${{ needs.guard.outputs.is_act != 'true' }}
+    if: ${{ needs.guard.outputs.is_act != 'true' && needs.probe-ghcr.outputs.can_pull == 'true' }}
     container:
       image: "${{ needs.resolve.outputs.image }}"
       credentials:
@@ -107,7 +120,7 @@ jobs:
     name: OPA quick check (fallback, no container)
     runs-on: ubuntu-latest
     needs: [guard, resolve, probe-ghcr]
-    if: ${{ needs.guard.outputs.is_act == 'true' }}
+    if: ${{ needs.guard.outputs.is_act == 'true' || needs.probe-ghcr.outputs.can_pull != 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -116,7 +129,14 @@ jobs:
           set -euo pipefail
           # Load centralized versions if available to obtain OPA_VERSION
           if [[ -f .github/versions.env ]]; then source .github/versions.env; fi
-          bash .github/scripts/install-opa.sh "${OPA_VERSION:-1.8.0}"
+          # Retry install to mitigate transient network/checksum hiccups
+          for i in 1 2 3; do
+            if bash .github/scripts/install-opa.sh "${OPA_VERSION:-1.8.0}"; then
+              break
+            fi
+            echo "install-opa.sh failed (attempt $i), retrying..." >&2
+            sleep $((2*i))
+          done
           opa version
       - name: Parse & type check
         run: bash .github/scripts/opa-parse-typecheck.sh policies

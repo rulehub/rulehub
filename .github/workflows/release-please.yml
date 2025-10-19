@@ -16,8 +16,9 @@ permissions:
 
 jobs:
   release:
-    # By default skip under nektos/act; allow explicit override when manually dispatched with act_full=true
-    if: ${{ github.actor != 'nektos/act' || (github.event_name == 'workflow_dispatch' && inputs.act_full == 'true') }}
+    # Run only when manually dispatched with act_full=true and not under nektos/act.
+    # This avoids failing under org policies that block Actions from creating PRs on push.
+    if: ${{ github.actor != 'nektos/act' && github.event_name == 'workflow_dispatch' && inputs.act_full == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
