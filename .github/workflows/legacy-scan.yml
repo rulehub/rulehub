@@ -73,6 +73,9 @@ jobs:
       - name: Try anonymous pull (ci-base)
         id: probe
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           set -euo pipefail
           bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
@@ -112,6 +115,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Ensure minimal deps, prefer existing venv if present; install only what's missing.
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema, ruamel.yaml, requests" \
+          # Prefer using a pre-existing venv if present; under GitHub CI we avoid ad-hoc installs.
+          if [[ -d .venv ]]; then
+            . .venv/bin/activate
             python tools/deny_usage_scan.py
+          else
+            # Under ACT we allow minimal installs for local convenience; in GitHub CI this will refuse to install and fail fast (expected).
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema, ruamel.yaml, requests" \
+              python tools/deny_usage_scan.py

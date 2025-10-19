@@ -61,6 +61,9 @@ jobs:
       - name: Try anonymous pull (ci-policy)
         id: probe
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           set -euo pipefail
           bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
@@ -111,7 +114,9 @@ jobs:
       - name: Setup OPA (host)
         run: |
           set -euo pipefail
-          bash .github/scripts/install-opa.sh
+          # Load centralized versions if available to obtain OPA_VERSION
+          if [[ -f .github/versions.env ]]; then source .github/versions.env; fi
+          bash .github/scripts/install-opa.sh "${OPA_VERSION:-1.8.0}"
           opa version
       - name: Parse & type check
         run: bash .github/scripts/opa-parse-typecheck.sh policies
