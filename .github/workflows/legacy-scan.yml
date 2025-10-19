@@ -121,5 +121,4 @@ jobs:
             python tools/deny_usage_scan.py
           else
             # Under ACT we allow minimal installs for local convenience; in GitHub CI this will refuse to install and fail fast (expected).
-            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema, ruamel.yaml, requests" \
-              python tools/deny_usage_scan.py
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema, ruamel.yaml, requests" python tools/deny_usage_scan.py

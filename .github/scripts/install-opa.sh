@@ -1,54 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# install-opa.sh: Fetch and install a specific OPA version into /usr/local/bin/opa
-# Usage: ./install-opa.sh <version>
-# Env (optional):
-#   OPA_SHA256  - expected sha256 checksum for the downloaded binary
-#   OPA_ARCH    - override architecture (default: auto-detect amd64/arm64)
-#   OPA_CACHE   - cache directory for downloaded binaries (default: /root/.cache/opa)
-
-VERSION="${1:-}"
-if [[ -z "${VERSION}" ]]; then
-  echo "ERROR: OPA version is required, e.g. ./install-opa.sh 1.7.1" >&2
-  exit 2
-fi
-
-ARCH_INPUT="${OPA_ARCH:-}"
-if [[ -z "${ARCH_INPUT}" ]]; then
-  case "$(uname -m)" in
-    x86_64|amd64) ARCH_INPUT=amd64 ;;
-    aarch64|arm64) ARCH_INPUT=arm64 ;;
-    *) ARCH_INPUT=amd64 ;;
-  esac
-fi
-
-CACHE_DIR="${OPA_CACHE:-/root/.cache/opa}"
-mkdir -p "${CACHE_DIR}"
-
-DEST=/usr/local/bin/opa
-TMP="${CACHE_DIR}/opa_${VERSION}_${ARCH_INPUT}"
-URL_PRIMARY="https://openpolicyagent.org/downloads/v${VERSION}/opa_linux_${ARCH_INPUT}_static"
-URL_FALLBACK="https://github.com/open-policy-agent/opa/releases/download/v${VERSION}/opa_linux_${ARCH_INPUT}_static"
-
-echo "Installing OPA v${VERSION} (${ARCH_INPUT})…"
-if [[ ! -s "${TMP}" ]]; then
-  if ! curl -fSL --retry 10 --retry-delay 5 --retry-connrefused -C - -o "${TMP}" "${URL_PRIMARY}"; then
-    curl -fSL --retry 10 --retry-delay 5 --retry-connrefused -C - -o "${TMP}" "${URL_FALLBACK}"
-  fi
-fi
-
-if [[ -n "${OPA_SHA256:-}" ]]; then
-  echo "${OPA_SHA256}  ${TMP}" | sha256sum -c -
-else
-  echo "WARNING: OPA_SHA256 not provided; skipping checksum verification" >&2
-fi
-
-install -m 0755 "${TMP}" "${DEST}"
-"${DEST}" version
-#!/usr/bin/env bash
-set -euo pipefail
-
 # install-opa.sh — deterministic, cached OPA installer
 # Env/args:
 #   $1 or OPA_VERSION   Version to install (default: 1.8.0)
