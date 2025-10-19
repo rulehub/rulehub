@@ -10,14 +10,12 @@
         {
           "type": "json",
           "path": ".release-please-manifest.json",
-          "jsonpath": "$.['.']"
+          "jsonpath": "$['.']"
         }
       ]
     }
   },
-  "plugins": [
-    { "type": "sentence-case" }
-  ],
+  "plugins": [{ "type": "sentence-case" }],
   "include-component-in-tag": false,
   "pull-request-title-pattern": "chore: release ${version}",
   "draft": false
