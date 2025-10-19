@@ -29,6 +29,10 @@ jobs:
     guard:
         name: Guard CI image tag
         runs-on: ubuntu-latest
+        # Propagate repository/org variable vars.CI_IMAGE_TAG (or explicit input) into the environment
+        # so the guard script can enforce pinned tags reliably on GitHub-hosted runners.
+        env:
+            CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
         steps:
             - name: Checkout
               uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -40,6 +44,9 @@ jobs:
         name: Resolve image
         needs: guard
         runs-on: ubuntu-latest
+        # Use the same propagation so the composite action can fall back to CI_IMAGE_TAG when input is empty.
+        env:
+            CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
         outputs:
             image: ${{ steps.r.outputs.image }}
             tag: ${{ steps.r.outputs.tag }}

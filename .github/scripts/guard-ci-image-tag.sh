@@ -82,7 +82,7 @@ if [[ -z "${INPUT_TAG}" ]]; then
 
   # Real GitHub Actions: require CI_IMAGE_TAG and disallow 'latest'
   if [[ -z "${ENV_TAG}" ]]; then
-    echo "ci_image_tag input not provided and CI_IMAGE_TAG is unset. Set repository/org variable CI_IMAGE_TAG to an immutable tag to avoid drift." >&2
+    echo "ci_image_tag input not provided and CI_IMAGE_TAG is unset. Set a repository/organization variable CI_IMAGE_TAG to an immutable tag (Settings → Secrets and variables → Actions → Variables) to avoid drift." >&2
     exit 1
   fi
   if [[ "${ENV_TAG}" == "latest" ]]; then
