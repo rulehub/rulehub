@@ -9,7 +9,7 @@ on:
       act_full:
         description: "Allow running under nektos/act (for local testing)."
         required: false
-        default: "false"
+        default: "true"
 
 permissions:
   contents: read
