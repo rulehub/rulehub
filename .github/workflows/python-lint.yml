@@ -70,8 +70,24 @@ jobs:
           ruff check tools --output-format sarif | tee ruff.sarif
         continue-on-error: true # still upload SARIF even if failures
 
+  # Separate upload job to avoid cloning actions in the ruff job under ACT
+  upload-sarif:
+    if: ${{ github.actor != 'nektos/act' }}
+    needs: [guard, resolve]
+    runs-on: ubuntu-latest
+    container:
+      image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      options: --user 0:0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Ruff check (tools/*.py) to SARIF (upload job)
+        run: |
+          ruff check tools --output-format sarif > ruff.sarif || true
       - name: Upload SARIF to Code Scanning
-        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           sarif_file: ruff.sarif

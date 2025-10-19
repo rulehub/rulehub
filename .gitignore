@@ -166,4 +166,8 @@ _temp/
 
 # Local runner secret/env files (never commit real values)
 .github/act.secrets
+.github/act.secrets.*
 .github/act.env
+# Always keep example templates tracked
+!.github/act.secrets.example
+!.github/act.env.example
