@@ -46,12 +46,35 @@ jobs:
           ci_image_tag: ${{ inputs.ci_image_tag }}
           kind: policy
 
+  probe-ghcr:
+    name: Probe GHCR access (ci-policy)
+    needs: [guard, resolve]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
+
   quick:
     name: OPA quick check
     runs-on: ubuntu-latest
-    needs: [guard, resolve]
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     container:
       image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     defaults:
       run:
@@ -76,3 +99,28 @@ jobs:
         run: |
           echo "OPA quick check complete"
           echo "::notice title=OPA Quick Check::Parse+Type, Forbidden Scan, Format OK"
+
+  quick-fallback:
+    name: OPA quick check (fallback, no container)
+    runs-on: ubuntu-latest
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup OPA (host)
+        run: |
+          set -euo pipefail
+          bash .github/scripts/install-opa.sh
+          opa version
+      - name: Parse & type check
+        run: bash .github/scripts/opa-parse-typecheck.sh policies
+      - name: Forbidden pattern scan
+        run: bash .github/scripts/opa-forbidden-scan.sh policies
+      - name: OPA fmt check
+        run: bash .github/scripts/opa-fmt-check.sh policies
+      - name: Summary
+        if: always()
+        run: |
+          echo "OPA quick check (host) complete"
+          echo "::notice title=OPA Quick Check (host)::Parse+Type, Forbidden Scan, Format OK"

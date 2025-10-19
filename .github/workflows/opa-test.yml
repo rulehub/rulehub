@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 concurrency:
   group: opa-test-${{ github.ref }}
@@ -46,11 +47,34 @@ jobs:
           ci_image_tag: ${{ inputs.ci_image_tag }}
           kind: policy
 
-  test:
+  probe-ghcr:
+    name: Probe GHCR access (ci-policy)
     needs: [guard, resolve]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Try anonymous pull (ci-policy)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
+
+  test:
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     # Assumes ci-policy image already built & published by ci-images build-publish workflow.
     # Local act: override via CI_IMAGE_TAG=dev-local and -P image remap.
@@ -63,8 +87,8 @@ jobs:
 
   test-fallback:
     name: OPA tests (fallback, no container)
-    needs: [guard, test]
-    if: ${{ needs.test.result == 'failure' }}
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955

@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   security-events: write # to upload SARIF
+  packages: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -51,18 +52,41 @@ jobs:
           ci_image_tag: ${{ inputs.ci_image_tag }}
           kind: base
 
-  trivy-iac-gh:
-    if: ${{ github.actor != 'nektos/act' }}
+  probe-ghcr:
+    name: Probe GHCR access (ci-base)
     needs: [guard, resolve]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Try anonymous pull (ci-base)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
+
+  trivy-iac-gh:
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull == 'true' }}
+    needs: [guard, resolve, probe-ghcr]
     name: Trivy IaC (config) scan (GH)
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     timeout-minutes: 20
     permissions:
       pull-requests: write # to create/update PR comments
       contents: read
       security-events: write
+      packages: read
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -121,3 +145,44 @@ jobs:
           TRIVY_VERSION: 0.56.2
           ACT: "true"
         run: bash .github/scripts/trivy-iac.sh
+
+  trivy-iac-fallback:
+    name: Trivy IaC (config) scan (fallback, no container)
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull != 'true' }}
+    needs: [guard, resolve, probe-ghcr]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Trivy IaC (host) produce SARIF
+        env:
+          TRIVY_VERSION: 0.56.2
+        run: bash .github/scripts/trivy-iac.sh
+      - name: Upload SARIF to Code Scanning
+        uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          sarif_file: trivy-results.sarif
+      - name: Prepare PR comment body
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: bash
+        run: |
+          SUMMARY=$(node .github/scripts/trivy-summary.js trivy-results.sarif || echo "")
+          printf "TRIVY_SUMMARY<<'EOF'\n%s\nEOF\n" "$SUMMARY" >> "$GITHUB_ENV"
+      - name: Create or update PR comment
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
+        env:
+          TRIVY_SUMMARY: ${{ env.TRIVY_SUMMARY }}
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ env.TRIVY_SUMMARY }}
+      - name: Upload SARIF as artifact (optional)
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: trivy-sarif
+          path: trivy-results.sarif

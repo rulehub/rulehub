@@ -17,8 +17,13 @@ is_act_env() {
   return 1
 }
 
+# Allow forcing strict behavior under act: when ACT_STRICT=1, treat as real CI (no relaxations)
 ACT_MODE=false
-if is_act_env; then ACT_MODE=true; fi
+if [[ "${ACT_STRICT:-}" == "1" ]]; then
+  ACT_MODE=false
+else
+  if is_act_env; then ACT_MODE=true; fi
+fi
 
 # Valid immutable tag patterns:
 #  - SemVer: vMAJOR.MINOR.PATCH with optional pre-release/build (e.g., v1.2.3, v1.2.3-rc.1)

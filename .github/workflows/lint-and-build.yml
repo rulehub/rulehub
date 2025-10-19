@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   security-events: write
+  packages: read
 
 jobs:
   guard:
@@ -46,9 +47,29 @@ jobs:
           ci_image_tag: ${{ inputs.ci_image_tag }}
           kind: base
 
+  probe-ghcr:
+    name: Probe GHCR access (ci-base)
+    needs: [guard, resolve]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      can_pull: ${{ steps.probe.outputs.can_pull }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Try anonymous pull (ci-base)
+        id: probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash .github/scripts/ghcr-probe.sh "${{ needs.resolve.outputs.image }}"
+
   yamllint:
     name: Lint YAML files (Spectral + yamllint)
-    needs: [guard, resolve]
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
     container:
       image: ${{ needs.resolve.outputs.image }}
@@ -71,9 +92,9 @@ jobs:
 
   upload-sarif:
     name: Upload SARIF to code scanning
-    if: ${{ github.actor != 'nektos/act' }}
+    if: ${{ github.actor != 'nektos/act' && needs.probe-ghcr.outputs.can_pull == 'true' }}
     runs-on: ubuntu-latest
-    needs: [yamllint, resolve]
+    needs: [yamllint, resolve, probe-ghcr]
     permissions:
       contents: read
       security-events: write
@@ -93,6 +114,33 @@ jobs:
         continue-on-error: true
 
       - name: Upload Spectral SARIF
+        uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
+        with:
+          sarif_file: spectral.sarif
+
+  yamllint-fallback:
+    name: Lint YAML files (fallback, host)
+    needs: [guard, resolve, probe-ghcr]
+    if: ${{ needs.probe-ghcr.outputs.can_pull != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Setup Spectral (npx) and yamllint
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --user yamllint
+          npm --version || true
+      - name: Run yamllint (parsable)
+        run: |
+          ~/.local/bin/yamllint . -f parsable
+      - name: Run Spectral (JSON->SARIF)
+        run: |
+          npx --yes @stoplight/spectral-cli@6.11.1 lint --ruleset .spectral.yml --format sarif --output spectral.sarif || true
+        continue-on-error: true
+      - name: Upload Spectral SARIF (host)
+        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
         with:
           sarif_file: spectral.sarif
