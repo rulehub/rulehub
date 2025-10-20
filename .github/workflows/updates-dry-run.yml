@@ -2,11 +2,18 @@ name: updates-dry-run
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "updates-dry-run is manual by design; noop on push for visibility."
   renovate-dry-run-gh:
     if: ${{ github.actor != 'nektos/act' }}
     runs-on: ubuntu-latest

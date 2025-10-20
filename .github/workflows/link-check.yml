@@ -6,6 +6,12 @@ on:
       - "**/*.md"
       - ".github/workflows/link-check.yml"
   workflow_dispatch:
+  # Temporary: run on push to main; parts may move to tag triggers later
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - ".github/workflows/link-check.yml"
 
 permissions:
   contents: read

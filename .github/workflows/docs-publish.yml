@@ -14,11 +14,19 @@ on:
         default: ""
   release:
     types: [published]
+  # Temporary: run on push to main; will primarily be driven by release tags later
+  push:
+    branches: [main]
 
 permissions:
   contents: write
 
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-publish runs on release/manual; noop on push for visibility."
   guard:
     if: ${{ github.actor != 'nektos/act' }}
     name: Require CI image tag (no drift)

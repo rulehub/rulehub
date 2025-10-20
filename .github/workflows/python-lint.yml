@@ -11,8 +11,9 @@ on:
     paths:
       - "tools/**.py"
       - "ruff.toml"
+  # Temporary: run on push to main; may switch to tag triggers later
   push:
-    branches: [main, master]
+    branches: [main]
     paths:
       - "tools/**.py"
       - "ruff.toml"

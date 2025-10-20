@@ -12,8 +12,9 @@ on:
       - "tools/**.py"
       - "mypy.ini"
       - ".github/workflows/python-mypy.yml"
+  # Temporary: run on push to main; may switch to tag triggers later
   push:
-    branches: [main, master]
+    branches: [main]
     paths:
       - "tools/**.py"
       - "mypy.ini"

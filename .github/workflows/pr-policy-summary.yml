@@ -4,11 +4,18 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "PR Policy Summary runs on PR; noop on push for visibility."
   noop-act:
     if: ${{ github.actor == 'nektos/act' }}
     runs-on: ubuntu-latest

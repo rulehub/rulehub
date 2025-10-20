@@ -3,8 +3,9 @@ name: security-checkov
 on:
   workflow_dispatch:
   pull_request:
+  # Temporary: run on push to main; when we switch to tag-based flow, some jobs may move to tag triggers
   push:
-    branches: [main, master]
+    branches: [main]
 
 permissions:
   contents: read

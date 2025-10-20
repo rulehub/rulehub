@@ -8,8 +8,9 @@ on:
       - "requirements.lock"
       - "requirements-dev.lock"
       - ".github/workflows/python-lock-verify.yml"
+  # Temporary: run on push to main; may move verification to tag events later
   push:
-    branches: [main, master]
+    branches: [main]
     paths:
       - "requirements.txt"
       - "requirements-dev.txt"

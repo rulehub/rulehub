@@ -2,11 +2,18 @@ name: "policy-catalog: disabled (moved to separate repo)"
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "policy-catalog-pack is disabled; noop on push for visibility."
   noop:
     if: ${{ github.actor != 'nektos/act' }}
     name: No-op

@@ -9,8 +9,9 @@ on:
       - "requirements-dev.lock"
       - "pyproject.toml"
       - "setup.cfg"
+  # Temporary: run on push to main; some checks may switch to tag triggers later
   push:
-    branches: [main, master]
+    branches: [main]
     paths:
       - "requirements.txt"
       - "requirements.lock"

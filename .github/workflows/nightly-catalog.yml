@@ -7,6 +7,8 @@ on:
         description: "Force run full catalog build even under act"
         required: false
         default: "false"
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -15,6 +17,11 @@ concurrency:
   group: nightly-catalog
   cancel-in-progress: true
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "nightly-catalog is manual/scheduled; noop on push for visibility."
   build-catalog:
     # Skip on act unless workflow_dispatch input force == true
     if: ${{ !contains(github.actor, 'nektos/act') || github.event.inputs.force == 'true' }}

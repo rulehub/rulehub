@@ -7,11 +7,18 @@ on:
         description: "CI image tag for RuleHub CI image (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
+  noop-push:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "python-lock-update is manual; noop on push for visibility."
   guard:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest

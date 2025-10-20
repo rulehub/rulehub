@@ -15,6 +15,19 @@ permissions:
   contents: read
 
 jobs:
+  # On push events we don't actually execute release-please due to org policies.
+  # To avoid a "skipped" conclusion (which can be misread as a CI error),
+  # run a tiny no-op job so the workflow completes successfully on push.
+  noop:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: release-please disabled on push
+        run: |
+          echo "release-please is gated and only runs via workflow_dispatch."
+          echo "This no-op step ensures the workflow is marked successful on push."
+
   release:
     # Run only when manually dispatched with act_full=true and not under nektos/act.
     # This avoids failing under org policies that block Actions from creating PRs on push.

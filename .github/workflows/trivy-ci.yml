@@ -2,8 +2,9 @@ name: security-trivy
 
 on:
   pull_request:
+  # Temporary: run on push to main; plan to move some scans to tag triggers later
   push:
-    branches: [main, master]
+    branches: [main]
   workflow_dispatch:
     inputs:
       ci_image_tag:

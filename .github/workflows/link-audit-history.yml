@@ -7,6 +7,8 @@ on:
         description: "CI image tag for RuleHub CI images (e.g., YYYY.MM.DD-<sha> or v1.2.3). Falls back to repo/org variable CI_IMAGE_TAG or the repository's pinned fallback."
         required: false
         default: ""
+  push:
+    branches: [main]
 
 permissions:
   contents: read
