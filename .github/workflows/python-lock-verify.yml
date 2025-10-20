@@ -31,9 +31,6 @@ jobs:
     needs: resolve
     container:
       image: ${{ needs.resolve.outputs.image }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     steps:
       - name: Checkout

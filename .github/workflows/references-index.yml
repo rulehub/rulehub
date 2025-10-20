@@ -60,9 +60,6 @@ jobs:
       # Always use the resolved RuleHub CI image (also under nektos/act) to ensure
       # a consistent pre-baked Python toolchain and avoid runtime installs.
       image: ${{ needs.resolve.outputs.image }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     steps:
       - name: Checkout
@@ -96,9 +93,6 @@ jobs:
       packages: read
     container:
       image: ${{ needs.resolve.outputs.image }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     steps:
       - name: Checkout
