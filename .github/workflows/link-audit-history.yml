@@ -12,12 +12,15 @@ on:
 
 permissions:
   contents: read
+  packages: read
   actions: write
 
 jobs:
   guard:
     name: Require CI image tag (no drift)
     runs-on: ubuntu-latest
+    env:
+      CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -28,6 +31,8 @@ jobs:
     name: Resolve CI image (ci-base)
     needs: guard
     runs-on: ubuntu-latest
+    env:
+      CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
     outputs:
       image: ${{ steps.r.outputs.image }}
       tag: ${{ steps.r.outputs.tag }}
@@ -47,6 +52,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
@@ -106,6 +114,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
       options: --user 0:0
     timeout-minutes: 10
     steps:
