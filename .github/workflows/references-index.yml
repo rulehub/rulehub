@@ -22,7 +22,7 @@ on:
 
 permissions:
   contents: read
-  packages: read
+  # Do not request packages:read to avoid registry logins for public GHCR pulls
 
 jobs:
   guard:
@@ -33,6 +33,8 @@ jobs:
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
+        env:
+          CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
   resolve:
     name: Resolve CI image (base)

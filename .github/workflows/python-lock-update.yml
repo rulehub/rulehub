@@ -12,7 +12,7 @@ on:
 
 permissions:
   contents: read
-  packages: read
+  # Avoid registry login; images are public and pulled anonymously
 
 jobs:
   noop-push:

@@ -21,7 +21,7 @@ on:
 
 permissions:
   contents: read
-  packages: read
+  # Avoid packages:read to prevent registry login (public GHCR pulls)
 
 jobs:
   verify:
