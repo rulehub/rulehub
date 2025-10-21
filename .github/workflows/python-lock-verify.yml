@@ -21,7 +21,8 @@ on:
 
 permissions:
   contents: read
-  # Avoid packages:read to prevent registry login (public GHCR pulls)
+  packages: read
+  # packages:read allows authenticated GHCR pulls for CI images
 
 jobs:
   verify:
@@ -32,6 +33,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - name: Login to GHCR (read-only)
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin || echo "GHCR login failed; continuing anonymously"
 
       - name: Verify lock files up to date (inside CI image)
         run: |

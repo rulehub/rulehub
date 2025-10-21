@@ -57,12 +57,19 @@ jobs:
     needs: [guard, resolve]
     permissions:
       pull-requests: write
+      packages: read
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
         with:
           fetch-depth: 0
+      - name: Login to GHCR (read-only)
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin || echo "GHCR login failed; continuing anonymously"
       - name: Install deps (runtime only)
         run: |
           docker run --rm -u 0:0 \

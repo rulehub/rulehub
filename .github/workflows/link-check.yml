@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 concurrency:
   group: link-check-${{ github.ref }}
@@ -58,6 +59,13 @@ jobs:
       - name: Prepare classification runtime (Python already on runner)
         run: |
           python3 --version || true
+
+      - name: Login to GHCR (public pull auth)
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin || echo "GHCR login failed; continuing anonymously"
 
       - name: Run link check (lychee pinned w/ retries)
         run: |

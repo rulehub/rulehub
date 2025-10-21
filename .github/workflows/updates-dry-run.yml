@@ -45,13 +45,12 @@ jobs:
           echo "Using managers: ${MANAGERS}"
           renovate \
             --platform=local \
-            --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" \
             --require-config=true \
             --config-file=dist/renovate.local.json \
             --enabled-managers="${MANAGERS}" \
             --print-config > dist/renovate.print-config.json
           # Produce JSON report of detected updates
-          renovate --platform=local --local-dir="${GITHUB_WORKSPACE:-/github/workspace}" --require-config=true --dry-run \
+          renovate --platform=local --require-config=true --dry-run \
             --config-file=dist/renovate.local.json \
             --enabled-managers="${MANAGERS}" \
             --log-file=dist/renovate.log || true

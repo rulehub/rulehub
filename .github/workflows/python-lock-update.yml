@@ -12,7 +12,8 @@ on:
 
 permissions:
   contents: read
-  # Avoid registry login; images are public and pulled anonymously
+  packages: read
+  # packages:read enables authenticated GHCR pulls for CI images
 
 jobs:
   noop-push:
@@ -46,6 +47,12 @@ jobs:
 
       # pip-tools provided by CI container image
 
+      - name: Login to GHCR (read-only)
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin || echo "GHCR login failed; continuing anonymously"
       - name: Regenerate locks inside CI image
         run: |
           docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc 'make lock lock-dev'
