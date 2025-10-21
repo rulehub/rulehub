@@ -29,15 +29,13 @@ jobs:
     # Skip under nektos/act to avoid noisy diffs from environment variance; run in real CI
     if: ${{ github.actor != 'nektos/act' }}
     needs: resolve
-    container:
-      image: ${{ needs.resolve.outputs.image }}
-      options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Verify lock files up to date
-        run: bash .github/scripts/verify_python_locks.sh
+      - name: Verify lock files up to date (inside CI image)
+        run: |
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc 'bash .github/scripts/verify_python_locks.sh'
 
   resolve:
     name: Resolve CI image (ci-base)

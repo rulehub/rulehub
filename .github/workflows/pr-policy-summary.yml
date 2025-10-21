@@ -57,9 +57,6 @@ jobs:
     needs: [guard, resolve]
     permissions:
       pull-requests: write
-    container:
-      image: ${{ needs.resolve.outputs.image }}
-      options: --user 0:0
     timeout-minutes: 10
     steps:
       - name: Checkout
@@ -67,16 +64,28 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install deps (runtime only)
-        run: python-venv-install
-      - name: Generate coverage JSON
-        run: bash tools/ci/venv-run.sh make policy-test-coverage
-      - name: Generate PR summary markdown
-        id: gen
         run: |
-          bash tools/ci/venv-run.sh python tools/pr_comment_policy_summary.py \
-            --base-ref "${{ github.event.pull_request.base.sha }}" \
-            --head-ref "${{ github.sha }}" > pr_summary.md
-          bash tools/ci/gha-write-output.sh summary pr_summary.md
+          docker run --rm -u 0:0 \
+            -v "$PWD:/workspace" -w /workspace \
+            "${{ needs.resolve.outputs.image }}" \
+            bash -lc 'python-venv-install'
+      - name: Generate coverage JSON
+        run: |
+          docker run --rm -u 0:0 \
+            -v "$PWD:/workspace" -w /workspace \
+            "${{ needs.resolve.outputs.image }}" \
+            bash -lc 'bash tools/ci/venv-run.sh make policy-test-coverage'
+      - name: Generate PR summary markdown (container)
+        run: |
+          docker run --rm -u 0:0 \
+            -v "$PWD:/workspace" -w /workspace \
+            -e BASE_REF="${{ github.event.pull_request.base.sha }}" \
+            -e HEAD_REF="${{ github.sha }}" \
+            "${{ needs.resolve.outputs.image }}" \
+            bash -lc 'bash tools/ci/venv-run.sh python tools/pr_comment_policy_summary.py --base-ref "$BASE_REF" --head-ref "$HEAD_REF" > pr_summary.md'
+      - name: Capture summary output
+        id: gen
+        run: bash tools/ci/gha-write-output.sh summary pr_summary.md
       - name: Upsert PR comment
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
         with:

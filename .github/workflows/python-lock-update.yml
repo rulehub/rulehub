@@ -35,9 +35,6 @@ jobs:
     if: ${{ github.actor != 'nektos/act' }}
     needs: [guard, resolve]
     runs-on: ubuntu-latest
-    container:
-      image: "${{ needs.resolve.outputs.image }}"
-      options: --user 0:0
     permissions:
       contents: write
       pull-requests: write
@@ -49,9 +46,9 @@ jobs:
 
       # pip-tools provided by CI container image
 
-      - name: Regenerate locks
+      - name: Regenerate locks inside CI image
         run: |
-          make lock lock-dev
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc 'make lock lock-dev'
 
       - name: Detect changes
         id: gitdiff

@@ -58,28 +58,22 @@ jobs:
     defaults:
       run:
         shell: bash
-    container:
-      # Always use the resolved RuleHub CI image (also under nektos/act) to ensure
-      # a consistent pre-baked Python toolchain and avoid runtime installs.
-      image: ${{ needs.resolve.outputs.image }}
-      options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Prepare Python env (venv with baked deps)
+      - name: Generate references index (md+json) inside CI image
         run: |
-          set -euo pipefail
-          if command -v python-venv-install >/dev/null 2>&1; then
-            python-venv-install
-          else
-            # Fallback to repo helper (no apt-get). Requires Python to be present in the container.
-            bash .github/scripts/python-venv-install.sh
-          fi
-      - name: Generate references index (md+json)
-        run: |
-          . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/generate_refs_index.py --format both --fail-missing-links
-          ls -l docs/references-index.md dist/references-index.json || true
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc '
+            set -euo pipefail
+            if command -v python-venv-install >/dev/null 2>&1; then
+              python-venv-install
+            else
+              bash .github/scripts/python-venv-install.sh
+            fi
+            . .venv/bin/activate
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/generate_refs_index.py --format both --fail-missing-links
+            ls -l docs/references-index.md dist/references-index.json || true
+          '
 
   # Run artifact upload in a separate job so act does not need to fetch the action when skipped
   upload-index:
@@ -92,27 +86,22 @@ jobs:
     permissions:
       contents: read
       actions: write
-      packages: read
-    container:
-      image: ${{ needs.resolve.outputs.image }}
-      options: --user 0:0
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
-      - name: Prepare Python env (venv with baked deps)
+      - name: Generate references index (md+json) inside CI image
         run: |
-          set -euo pipefail
-          if command -v python-venv-install >/dev/null 2>&1; then
-            python-venv-install
-          else
-            # Fallback to repo helper (no apt-get). Requires Python to be present in the container.
-            bash .github/scripts/python-venv-install.sh
-          fi
-      - name: Generate references index (md+json)
-        run: |
-          . .venv/bin/activate
-          bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/generate_refs_index.py --format both --fail-missing-links
-          ls -l docs/references-index.md dist/references-index.json || true
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc '
+            set -euo pipefail
+            if command -v python-venv-install >/dev/null 2>&1; then
+              python-venv-install
+            else
+              bash .github/scripts/python-venv-install.sh
+            fi
+            . .venv/bin/activate
+            bash .github/scripts/python-ensure-and-run.sh "import yaml, jsonschema" python tools/generate_refs_index.py --format both --fail-missing-links
+            ls -l docs/references-index.md dist/references-index.json || true
+          '
       - name: Upload artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

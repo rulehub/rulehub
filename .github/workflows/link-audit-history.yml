@@ -49,17 +49,14 @@ jobs:
     if: ${{ github.actor != 'nektos/act' }}
     needs: [guard, resolve]
     runs-on: ubuntu-latest
-    container:
-      image: "${{ needs.resolve.outputs.image }}"
-      options: --user 0:0
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
-      - name: Install dependencies
+      - name: Install dependencies (inside CI image)
         run: |
-          python-venv-install
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc 'python-venv-install'
 
       - name: Check if today's row already exists
         id: check
@@ -72,13 +69,12 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Run link audit history append
+      - name: Run link audit history append (inside CI image)
         if: steps.check.outputs.skip != 'true'
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          . .venv/bin/activate
-          bash .github/scripts/run-link-audit-history.sh
+          docker run --rm -u 0:0 -v "$PWD:/workspace" -w /workspace "${{ needs.resolve.outputs.image }}" bash -lc '. .venv/bin/activate && bash .github/scripts/run-link-audit-history.sh'
 
       - name: Show last 5 history rows
         if: always()
@@ -108,9 +104,6 @@ jobs:
     if: ${{ github.actor == 'nektos/act' }}
     needs: [guard, resolve]
     runs-on: ubuntu-latest
-    container:
-      image: "${{ needs.resolve.outputs.image }}"
-      options: --user 0:0
     timeout-minutes: 10
     steps:
       - name: Checkout
