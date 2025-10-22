@@ -32,8 +32,8 @@ jobs:
           GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p dist
-          # Provide minimal local config to satisfy --require-config
-          cat > dist/renovate.local.json <<'JSON'
+          # Provide minimal local config to satisfy --require-config (use default file name)
+          cat > renovate.json <<'JSON'
           {
             "extends": ["config:recommended"],
             "dependencyDashboard": false,
@@ -46,12 +46,10 @@ jobs:
           renovate \
             --platform=local \
             --require-config=true \
-            --config=dist/renovate.local.json \
             --enabled-managers="${MANAGERS}" \
             --print-config > dist/renovate.print-config.json
           # Produce JSON report of detected updates
           renovate --platform=local --require-config=true --dry-run \
-            --config=dist/renovate.local.json \
             --enabled-managers="${MANAGERS}" \
             --log-file=dist/renovate.log || true
           # Summarize key findings (best-effort)
