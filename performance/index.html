@@ -1,0 +1,1855 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)">
+      
+      
+      
+        <link rel="canonical" href="https://rulehub.github.io/rulehub/performance/">
+      
+      
+        <link rel="prev" href="../opa-bundle-usage/">
+      
+      
+        <link rel="next" href="../policy-test-quality/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Performance - RuleHub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#performance-scaling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="RuleHub" class="md-header__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RuleHub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Performance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="RuleHub" class="md-nav__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RuleHub
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coverage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compliance-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compliance Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugin Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Policies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Policies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8s Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Supply Chain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Supply Chain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Info
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-provenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Provenance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Release Process
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versioning & Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Runbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-integrity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integrity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Link Quality Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editorial-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editorial Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aggregated References
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extras
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle format
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Performance
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#baseline-current-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Baseline (Current Repository)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projection-5-policies-1415" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projection: ×5 Policies (~1415)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ci-metrics-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI Metrics &amp; Thresholds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-optimizations-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Optimizations (If Needed)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpreting-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpreting Failures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-pagination-plan-distindexjson-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Pagination Plan (dist/index.json Chunking)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index Pagination Plan (dist/index.json Chunking)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drivers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manifest-schema-index-pagesjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manifest Schema (index-pages.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-file-schema-index-page-njson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page File Schema (index-page-N.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ordering-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ordering &amp; Determinism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrity-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrity &amp; Caching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-size-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Size Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generation-algorithm-pseudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generation Algorithm (Pseudo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-consumption-flow-plugin-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Consumption Flow (Plugin Upgrade)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure / Edge Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-changes-deferred-not-implemented-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling Changes (Deferred / Not Implemented Yet)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-test-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy test quality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-title-sync-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy title sync plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-threat-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security threat model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#baseline-current-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Baseline (Current Repository)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projection-5-policies-1415" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projection: ×5 Policies (~1415)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ci-metrics-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI Metrics &amp; Thresholds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-optimizations-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Optimizations (If Needed)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpreting-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpreting Failures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-pagination-plan-distindexjson-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Pagination Plan (dist/index.json Chunking)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index Pagination Plan (dist/index.json Chunking)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drivers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manifest-schema-index-pagesjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manifest Schema (index-pages.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-file-schema-index-page-njson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page File Schema (index-page-N.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ordering-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ordering &amp; Determinism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrity-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrity &amp; Caching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-size-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Size Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generation-algorithm-pseudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generation Algorithm (Pseudo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-consumption-flow-plugin-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Consumption Flow (Plugin Upgrade)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure / Edge Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-changes-deferred-not-implemented-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling Changes (Deferred / Not Implemented Yet)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rationale-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/rulehub/rulehub/edit/main/docs/performance.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="performance-scaling">Performance &amp; Scaling<a class="headerlink" href="#performance-scaling" title="Permanent link">&para;</a></h1>
+<h2 id="baseline-current-repository">Baseline (Current Repository)<a class="headerlink" href="#baseline-current-repository" title="Permanent link">&para;</a></h2>
+<p>Measured via <code>python tools/coverage_map.py --profile</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Duration (s)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>load_metadata_index</td>
+<td>~0.456</td>
+<td>YAML parsing + disk I/O (283 policies)</td>
+</tr>
+<tr>
+<td>load_mappings</td>
+<td>~0.028</td>
+<td>Few compliance map YAML files</td>
+</tr>
+<tr>
+<td>compute_policy_test_coverage</td>
+<td>~0.039</td>
+<td>Filesystem glob + existence checks</td>
+</tr>
+<tr>
+<td>build_markdown</td>
+<td>~0.003</td>
+<td>String assembly only</td>
+</tr>
+<tr>
+<td>build_mermaid</td>
+<td>~0.001</td>
+<td>Minimal graph text</td>
+</tr>
+<tr>
+<td>write_json_outputs</td>
+<td>~0.066</td>
+<td>JSON + CSV serialization + path existence caching</td>
+</tr>
+<tr>
+<td>total</td>
+<td>~0.594</td>
+<td>End-to-end generation</td>
+</tr>
+</tbody>
+</table>
+<p>Per-policy cost (dominant stage): ~0.456 s / 283 ≈ <strong>1.61 ms</strong> per policy metadata file.</p>
+<h2 id="projection-5-policies-1415">Projection: ×5 Policies (~1415)<a class="headerlink" href="#projection-5-policies-1415" title="Permanent link">&para;</a></h2>
+<p>Assuming near-linear scaling for metadata loading and negligible growth in constant stages:</p>
+<pre><code class="language-text">Projected metadata load ≈ 0.456 * 5 ≈ 2.28 s
+Projected total ≈ (total - metadata) + projected_metadata ≈ (0.594 - 0.456) + 2.28 ≈ 2.42 s
+Add 25% CI variance buffer ⇒ ≈ 3.0 s expected ceiling
+</code></pre>
+<h2 id="ci-metrics-thresholds">CI Metrics &amp; Thresholds<a class="headerlink" href="#ci-metrics-thresholds" title="Permanent link">&para;</a></h2>
+<p>A lightweight guard ensures performance regression detection:</p>
+<ol>
+<li>Run <code>make perf-coverage</code> (invokes <code>tools/perf_check_coverage.py</code>).</li>
+<li>Script parses <code>--profile</code> output; compares <code>total</code> against thresholds.</li>
+<li>Environment variables:</li>
+<li><code>COVERAGE_MAX_SECONDS</code> (default 5.0) - hard fail (exit 5) if exceeded.</li>
+<li><code>COVERAGE_WARN_SECONDS</code> (default 75% of max) - soft warning (exit 3) if exceeded.</li>
+<li>CI job marks build unstable (treat exit 3 as warn); blocks merge on exit 5.</li>
+</ol>
+<p>Initial recommended settings:</p>
+<ul>
+<li>WARN: 3.75 s (default 0.75 * 5.0)</li>
+<li>FAIL: 5.00 s</li>
+</ul>
+<p>These accommodate ×5 growth plus additional headroom for variance. Revisit once policy count approaches 1400 or if
+refactors reduce baseline substantially.</p>
+<h2 id="future-optimizations-if-needed">Future Optimizations (If Needed)<a class="headerlink" href="#future-optimizations-if-needed" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pre-load &amp; cache YAML parse results to a serialized artifact keyed by file mtimes (incremental build).</li>
+<li>Batch file existence checks (already mitigated by <code>_path_exists</code> caching; could pre-stat via <code>os.scandir</code>).</li>
+<li>Parallel metadata parsing (multiprocessing) if single-core bottlenecks emerge (&gt;5k policies).</li>
+<li>Optional skip of Mermaid / markdown for performance runs via a <code>--no-markdown</code> flag (not yet necessary).</li>
+</ul>
+<h2 id="interpreting-failures">Interpreting Failures<a class="headerlink" href="#interpreting-failures" title="Permanent link">&para;</a></h2>
+<p>If <code>perf-coverage</code> fails:</p>
+<ol>
+<li>Inspect stage percentages; if a single stage &gt;50% examine recent changes in that logic.</li>
+<li>Confirm runner class (GitHub hosted vs local) to rule out environmental slowdown.</li>
+<li>Consider raising thresholds only after justifying why optimization is impractical.</li>
+</ol>
+<hr />
+<p>Generated &amp; maintained manually; update when thresholds or architecture evolve.</p>
+<h2 id="index-pagination-plan-distindexjson-chunking">Index Pagination Plan (dist/index.json Chunking)<a class="headerlink" href="#index-pagination-plan-distindexjson-chunking" title="Permanent link">&para;</a></h2>
+<p>Goal: Prepare for future scale where <code>dist/index.json</code> (currently a single JSON with all <code>packages</code>) becomes large (memory &amp; latency impact in Backstage plugin). Provide a backward compatible paging design requiring no immediate plugin changes, while enabling an opt‑in multi-file consumption path.</p>
+<h3 id="drivers">Drivers<a class="headerlink" href="#drivers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>JSON size growth: O(policy_count); at several thousand policies &gt;1-2 MB may affect initial page load &amp; caching.</li>
+<li>Differential fetch: allow clients to only pull needed segment(s) (e.g., lazy search index construction).</li>
+<li>Integrity: enable per-page hashing so partial corruption is detectable.</li>
+</ul>
+<h3 id="design-overview">Design Overview<a class="headerlink" href="#design-overview" title="Permanent link">&para;</a></h3>
+<p>Artifacts (new optional files alongside existing single file):</p>
+<ol>
+<li><code>dist/index.json</code> (UNCHANGED for compatibility) - still contains full <code>{"packages": [...]}</code> list.</li>
+<li><code>dist/index-pages.json</code> (manifest) - metadata describing paging set.</li>
+<li><code>dist/index-page-&lt;n&gt;.json</code> - individual page files containing a slice of packages array.</li>
+</ol>
+<p>The paging artifacts are additive; existing consumers continue reading monolithic <code>index.json</code> until upgraded.</p>
+<h3 id="manifest-schema-index-pagesjson">Manifest Schema (index-pages.json)<a class="headerlink" href="#manifest-schema-index-pagesjson" title="Permanent link">&para;</a></h3>
+<pre><code class="language-jsonc">{
+   &quot;schema&quot;: &quot;rulehub.index.pages/1&quot;,
+   &quot;generated&quot;: &quot;2025-08-27T12:34:56Z&quot;,        // ISO8601
+   &quot;total_packages&quot;: 1234,
+   &quot;page_size&quot;: 200,                            // target (last page may be smaller)
+   &quot;pages&quot;: [
+      {
+         &quot;number&quot;: 1,
+         &quot;file&quot;: &quot;index-page-1.json&quot;,
+         &quot;offset&quot;: 0,
+         &quot;count&quot;: 200,
+         &quot;sha256&quot;: &quot;&lt;hex&gt;&quot;,
+         &quot;first_id&quot;: &quot;aml.customer_due_diligence&quot;,
+         &quot;last_id&quot;:  &quot;betting.underage_block&quot;
+      },
+      { &quot;number&quot;: 2, &quot;file&quot;: &quot;index-page-2.json&quot;, &quot;offset&quot;: 200, &quot;count&quot;: 200 }
+   ],
+   &quot;aggregate&quot;: {
+      &quot;sha256_all&quot;: &quot;&lt;sha256(concatenated page sha256s or canonical re-serialization)&gt;&quot;
+   },
+   &quot;monolith&quot;: {                                 // backlink + integrity for monolithic fallback file
+      &quot;file&quot;: &quot;index.json&quot;,
+      &quot;sha256&quot;: &quot;&lt;hex&gt;&quot;,
+      &quot;packages&quot;: 1234
+   }
+}
+</code></pre>
+<h3 id="page-file-schema-index-page-njson">Page File Schema (index-page-N.json)<a class="headerlink" href="#page-file-schema-index-page-njson" title="Permanent link">&para;</a></h3>
+<pre><code class="language-jsonc">{
+   &quot;schema&quot;: &quot;rulehub.index.page/1&quot;,
+   &quot;page&quot;: 1,
+   &quot;page_size&quot;: 200,
+   &quot;total_pages&quot;: 7,
+   &quot;total_packages&quot;: 1234,
+   &quot;packages&quot;: [ { /* same package objects as monolith */ } ]
+}
+</code></pre>
+<p>Package object remains unchanged to preserve plugin data contract.</p>
+<h3 id="ordering-determinism">Ordering &amp; Determinism<a class="headerlink" href="#ordering-determinism" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Page ordering uses a stable sort by <code>id</code> (case-insensitive) to ensure consistent diffing and caching.</li>
+<li>Monolithic file may retain historical insertion order for now; future: optionally also sorted once consumers updated.</li>
+</ul>
+<h3 id="backward-compatibility-strategy">Backward Compatibility Strategy<a class="headerlink" href="#backward-compatibility-strategy" title="Permanent link">&para;</a></h3>
+<p>Phase 0 (Current): Only <code>index.json</code> produced.</p>
+<p>Phase 1 (Additive - Proposed): Produce both monolith and paged set (flag <code>PAGED_INDEX=1</code> or
+auto when <code>len(packages) &gt; PAGE_THRESHOLD</code>). Plugin continues to read monolith; experimental
+plugin reads manifest first if present.</p>
+<p>Phase 2 (Opt-In Consumption): Document plugin upgrade path: try manifest -&gt; fall back to
+monolith. Provide feature flag <code>USE_PAGED_INDEX</code> in plugin config.</p>
+<p>Phase 3 (Future Optional): If size exceeds hard threshold (e.g., 5 MB), monolith may contain
+only:</p>
+<pre><code class="language-jsonc">{ &quot;schema&quot;: &quot;rulehub.index.redirect/1&quot;, &quot;manifest&quot;: &quot;index-pages.json&quot; }
+</code></pre>
+<p>Only after broad adoption; not planned yet.</p>
+<h3 id="integrity-caching">Integrity &amp; Caching<a class="headerlink" href="#integrity-caching" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Each page individually hashable; CDN / HTTP caches can validate per-page ETag / checksum.</li>
+<li>Manifest records per-page hash enabling full set verification without loading all pages simultaneously (stream verify).</li>
+<li>Optional aggregated hash provides a single fingerprint for entire logical index (can be reproducible build target).</li>
+</ul>
+<h3 id="page-size-selection">Page Size Selection<a class="headerlink" href="#page-size-selection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Default target: 200 packages per page (env <code>INDEX_PAGE_SIZE</code>). Balances ~50-150 KB compressed per
+   page (estimate) vs request overhead.</li>
+<li>Hard minimum: 50 (avoid too many small requests). Hard maximum: 1000 (avoid large transfers defeating purpose).</li>
+</ul>
+<h3 id="generation-algorithm-pseudo">Generation Algorithm (Pseudo)<a class="headerlink" href="#generation-algorithm-pseudo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Build full list <code>packages</code> (existing logic) in memory.</li>
+<li>If paging enabled (flag OR len &gt; threshold):
+    a. <code>sorted_packages = sorted(packages, key=lambda p: p['id'].lower())</code>.
+    b. Chunk: for i in range(0, len(sorted_packages), page_size): write <code>index-page-{page}.json</code> with slice.
+    c. Compute sha256 for each written page (streaming to avoid double memory use).
+    d. Write manifest <code>index-pages.json</code>.</li>
+<li>Always write monolithic <code>index.json</code> (fallback) unless Phase 3 redirect mode engaged.</li>
+</ol>
+<h3 id="client-consumption-flow-plugin-upgrade">Client Consumption Flow (Plugin Upgrade)<a class="headerlink" href="#client-consumption-flow-plugin-upgrade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Attempt fetch <code>index-pages.json</code>.</li>
+<li>If 404 -&gt; load fallback monolithic <code>index.json</code>.</li>
+<li>Else parse manifest, optionally validate <code>monolith.sha256</code> (defense-in-depth), then lazily fetch
+   pages (e.g., first page for summary; others for search / detail view).</li>
+<li>Optionally verify each page hash after download.</li>
+</ol>
+<h3 id="failure-edge-cases">Failure / Edge Cases<a class="headerlink" href="#failure-edge-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Missing or corrupt page (hash mismatch): client can retry or fall back to monolith.</li>
+<li>Partial publish (manifest present but page absent): treat as error; display degraded mode using monolith if available.</li>
+<li>Page size change between runs: manifest <code>generated</code> timestamp + aggregate hash distinguish
+   generations; clients should discard cached pages when manifest hash changes.</li>
+</ul>
+<h3 id="tooling-changes-deferred-not-implemented-yet">Tooling Changes (Deferred / Not Implemented Yet)<a class="headerlink" href="#tooling-changes-deferred-not-implemented-yet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Extend <code>coverage_map.py</code> with new flags:</li>
+<li><code>--paged-index</code> (bool)</li>
+<li><code>--index-page-size N</code></li>
+<li><code>--index-page-threshold N</code> (auto-enable if total &gt; threshold)</li>
+<li>Helper function <code>write_paged_index(packages, out_dir) -&gt; None</code> encapsulating logic.
+   (Implementation intentionally deferred until a real size pressure occurs.)</li>
+</ul>
+<h3 id="migration-checklist">Migration Checklist<a class="headerlink" href="#migration-checklist" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Owner</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Add plan (this document)</td>
+<td>docs</td>
+<td>DONE</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Implement generator flags</td>
+<td>tooling</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Publish both formats</td>
+<td>CI</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Update Backstage plugin to prefer paged</td>
+<td>plugin</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Monitor size; decide Phase 3</td>
+<td>maintainers</td>
+<td>FUTURE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rationale-summary">Rationale Summary<a class="headerlink" href="#rationale-summary" title="Permanent link">&para;</a></h3>
+<p>This phased approach avoids breaking consumers, needs minimal code (one manifest writer + chunk
+loop), and provides clear upgrade semantics with cryptographic integrity for each page.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © {{ git_committers_time | date('YYYY') }} RuleHub contributors
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rulehub/rulehub" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

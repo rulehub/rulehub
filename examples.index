@@ -1,0 +1,14 @@
+# docs/examples.index
+# Format (pipe-delimited with optional whitespace):
+# <markdown_file>#L<start>-L<end> | id=<slug> | expect=<regex?> | flags=<comma_separated?>
+# - markdown_file: relative path under docs/
+# - line ranges are 1-based inclusive, usually matching a fenced code block WITHOUT the backticks.
+# - id: stable identifier used in reports.
+# - expect (optional): a regular expression that MUST appear in stdout of the snippet (after execution). If absent, only exit code 0 is required.
+# - flags (optional): future extensions (e.g., skip, allow-network) — currently ignored.
+# Comments (# ...) and blank lines are ignored.
+# Placeholders below illustrate usage; adjust line numbers if docs change.
+
+getting-started.md#L21-L25 | id=validate-basics | expect=coverage
+README.md#L66-L74 | id=quick-start | expect=validate
+README.md#L95-L103 | id=integrity-digest | expect=cosign

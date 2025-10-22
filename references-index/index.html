@@ -1,0 +1,3260 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)">
+      
+      
+      
+        <link rel="canonical" href="https://rulehub.github.io/rulehub/references-index/">
+      
+      
+        <link rel="prev" href="../editorial-checklist/">
+      
+      
+        <link rel="next" href="../documentation-index/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Aggregated References - RuleHub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#references-index-generated" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="RuleHub" class="md-header__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RuleHub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Aggregated References
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="RuleHub" class="md-nav__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RuleHub
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coverage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compliance-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compliance Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugin Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Policies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Policies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8s Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Supply Chain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Supply Chain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Info
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-provenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Provenance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Release Process
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versioning & Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Runbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-integrity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integrity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Link Quality Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editorial-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editorial Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aggregated References
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aggregated References
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extras
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle format
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-test-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy test quality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-title-sync-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy title sync plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-threat-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security threat model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/rulehub/rulehub/edit/main/docs/references-index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="references-index-generated">References Index (Generated)<a class="headerlink" href="#references-index-generated" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>This file is auto-generated from policy metadata. Do not edit manually.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Policy ID</th>
+<th>Regions</th>
+<th>Countries</th>
+<th>Scope</th>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aml.address_verification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf" title="https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf">www.eba.europa.eu/sites/default/files/document_library/Publications/G…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/13" title="https://www.legislation.gov.uk/eudr/2015/849/article/13">www.legislation.gov.uk/eudr/2015/849/article/13</a></td>
+</tr>
+<tr>
+<td><code>aml.high_risk_country_edd</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/18a" title="https://www.legislation.gov.uk/eudr/2015/849/article/18a">www.legislation.gov.uk/eudr/2015/849/article/18a</a></td>
+</tr>
+<tr>
+<td><code>aml.kyc_basic_cdd</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/13" title="https://www.legislation.gov.uk/eudr/2015/849/article/13">www.legislation.gov.uk/eudr/2015/849/article/13</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L0849" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L0849">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>aml.minimum_age</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/13" title="https://www.legislation.gov.uk/eudr/2015/849/article/13">www.legislation.gov.uk/eudr/2015/849/article/13</a></td>
+</tr>
+<tr>
+<td><code>aml.pep_screening_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/20" title="https://www.legislation.gov.uk/eudr/2015/849/article/20">www.legislation.gov.uk/eudr/2015/849/article/20</a></td>
+</tr>
+<tr>
+<td><code>aml.sanctions_check</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en" title="https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en">data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-…</a><br><a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list" title="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list">main.un.org/securitycouncil/en/content/un-sc-consolidated-list</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Bpp-finsanctions-tf-r6.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Bpp-finsanctions-tf-r6.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Bpp-finsanctio…</a></td>
+</tr>
+<tr>
+<td><code>aml.txn_monitoring_thresholds</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/33" title="https://www.legislation.gov.uk/eudr/2015/849/article/33">www.legislation.gov.uk/eudr/2015/849/article/33</a></td>
+</tr>
+<tr>
+<td><code>aml.ubo_identification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/13" title="https://www.legislation.gov.uk/eudr/2015/849/article/13">www.legislation.gov.uk/eudr/2015/849/article/13</a><br><a href="https://www.legislation.gov.uk/eudr/2015/849/article/3" title="https://www.legislation.gov.uk/eudr/2015/849/article/3">www.legislation.gov.uk/eudr/2015/849/article/3</a></td>
+</tr>
+<tr>
+<td><code>betting.adr_provider_listed_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr" title="https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr">www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-bu…</a></td>
+</tr>
+<tr>
+<td><code>betting.ads_bonus_terms_fair_clear</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gov.uk/government/organisations/competition-and-markets-authority" title="https://www.gov.uk/government/organisations/competition-and-markets-authority">www.gov.uk/government/organisations/competition-and-markets-authority</a><br><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.ads_no_minors_targeting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.asa.org.uk/codes-and-rulings/advertising-codes.html" title="https://www.asa.org.uk/codes-and-rulings/advertising-codes.html">www.asa.org.uk/codes-and-rulings/advertising-codes.html</a></td>
+</tr>
+<tr>
+<td><code>betting.affordability_checks_uk</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.age_verification_before_gambling_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.aml_high_risk_country_restrictions</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/" title="https://www.fatf-gafi.org/">www.fatf-gafi.org/</a></td>
+</tr>
+<tr>
+<td><code>betting.aml_sar_reporting_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars" title="https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars">www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-launder…</a></td>
+</tr>
+<tr>
+<td><code>betting.au_iga_no_prohibited_services</code></td>
+<td>Global</td>
+<td>AU</td>
+<td>AU</td>
+<td><a href="https://www.legislation.gov.au/Series/C2004A00771" title="https://www.legislation.gov.au/Series/C2004A00771">www.legislation.gov.au/Series/C2004A00771</a><br><a href="https://www.acma.gov.au/interactive-gambling" title="https://www.acma.gov.au/interactive-gambling">www.acma.gov.au/interactive-gambling</a></td>
+</tr>
+<tr>
+<td><code>betting.complaints_process_published</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.credit_card_gambling_ban_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.data_integrity_audits</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ibia.bet/" title="https://ibia.bet/">ibia.bet/</a></td>
+</tr>
+<tr>
+<td><code>betting.deposit_limit_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a><br><a href="https://anj.fr/" title="https://anj.fr/">anj.fr/</a></td>
+</tr>
+<tr>
+<td><code>betting.game_rules_visible_before_play</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.geofencing_regulated_markets</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.in_play_delay_controls</code></td>
+<td>Europe</td>
+<td>EU, EEA, UK, MT</td>
+<td>Regional</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a><br><a href="https://www.mga.org.mt/" title="https://www.mga.org.mt/">www.mga.org.mt/</a></td>
+</tr>
+<tr>
+<td><code>betting.kyc_on_withdrawal</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.mga.org.mt/" title="https://www.mga.org.mt/">www.mga.org.mt/</a><br><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.kyc_onboarding</code></td>
+<td>Europe</td>
+<td>EU, EEA, UK</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_adm_it</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.adm.gov.it/portale/" title="https://www.adm.gov.it/portale/">www.adm.gov.it/portale/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_agco_on</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.agco.ca/igaming" title="https://www.agco.ca/igaming">www.agco.ca/igaming</a><br><a href="https://igamingontario.ca/" title="https://igamingontario.ca/">igamingontario.ca/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_anj_fr</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://anj.fr/" title="https://anj.fr/">anj.fr/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_au_nt</code></td>
+<td>APAC</td>
+<td>AU-NT</td>
+<td>State</td>
+<td><a href="https://nt.gov.au/" title="https://nt.gov.au/">nt.gov.au/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_brazil_14790</code></td>
+<td>LatAm</td>
+<td>BR</td>
+<td>National</td>
+<td><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm" title="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm">www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_ca_on_igaming</code></td>
+<td>North America</td>
+<td>CA-ON</td>
+<td>Province</td>
+<td><a href="https://www.agco.ca/igaming" title="https://www.agco.ca/igaming">www.agco.ca/igaming</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_coljuegos_co</code></td>
+<td>LatAm</td>
+<td>CO</td>
+<td>National</td>
+<td><a href="https://www.coljuegos.gov.co/" title="https://www.coljuegos.gov.co/">www.coljuegos.gov.co/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_dgoj_es</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ordenacionjuego.es/en" title="https://www.ordenacionjuego.es/en">www.ordenacionjuego.es/en</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_ggl_de</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gluecksspiel-behoerde.de/" title="https://www.gluecksspiel-behoerde.de/">www.gluecksspiel-behoerde.de/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_gra_sg</code></td>
+<td>APAC</td>
+<td>SG</td>
+<td>National</td>
+<td><a href="https://www.gra.gov.sg/" title="https://www.gra.gov.sg/">www.gra.gov.sg/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_ksa_nl</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kansspelautoriteit.nl/" title="https://kansspelautoriteit.nl/">kansspelautoriteit.nl/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_mga</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.mga.org.mt/" title="https://www.mga.org.mt/">www.mga.org.mt/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_spelinspektionen_se</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.spelinspektionen.se/" title="https://www.spelinspektionen.se/">www.spelinspektionen.se/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_spillemyndigheden_dk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.spillemyndigheden.dk/" title="https://www.spillemyndigheden.dk/">www.spillemyndigheden.dk/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_ukgc</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_us_co_division</code></td>
+<td>North America</td>
+<td>US-CO</td>
+<td>State</td>
+<td><a href="https://sbg.colorado.gov/" title="https://sbg.colorado.gov/">sbg.colorado.gov/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_us_nj_dge</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.nj.gov/oag/ge/" title="https://www.nj.gov/oag/ge/">www.nj.gov/oag/ge/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_us_nv_ngcb</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://gaming.nv.gov/" title="https://gaming.nv.gov/">gaming.nv.gov/</a></td>
+</tr>
+<tr>
+<td><code>betting.license_check_us_pa_pgcb</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://gamingcontrolboard.pa.gov/" title="https://gamingcontrolboard.pa.gov/">gamingcontrolboard.pa.gov/</a></td>
+</tr>
+<tr>
+<td><code>betting.loss_limit_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.spelinspektionen.se/" title="https://www.spelinspektionen.se/">www.spelinspektionen.se/</a><br><a href="https://www.spillemyndigheden.dk/" title="https://www.spillemyndigheden.dk/">www.spillemyndigheden.dk/</a></td>
+</tr>
+<tr>
+<td><code>betting.market_restrictions_youth</code></td>
+<td>Europe</td>
+<td>EU, EEA, FR</td>
+<td>Regional</td>
+<td><a href="https://anj.fr/" title="https://anj.fr/">anj.fr/</a></td>
+</tr>
+<tr>
+<td><code>betting.match_fixing_monitoring</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ibia.bet/" title="https://ibia.bet/">ibia.bet/</a><br><a href="https://sportradar.com/" title="https://sportradar.com/">sportradar.com/</a></td>
+</tr>
+<tr>
+<td><code>betting.no_bets_by_participants</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.official_data_only</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.ongoing_aml_monitoring</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/" title="https://eur-lex.europa.eu/">eur-lex.europa.eu/</a><br><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.player_funds_segregation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a><br><a href="https://kansspelautoriteit.nl/" title="https://kansspelautoriteit.nl/">kansspelautoriteit.nl/</a></td>
+</tr>
+<tr>
+<td><code>betting.reality_checks_elapsed_time</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.reverse_withdrawal_ban_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.rng_certification_gli11</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://gaminglabs.com/gli-standards/" title="https://gaminglabs.com/gli-standards/">gaminglabs.com/gli-standards/</a></td>
+</tr>
+<tr>
+<td><code>betting.rtp_disclosure_to_players</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.safer_gambling_interactions</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.sanctions_screening_global</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://sanctionssearch.ofac.treas.gov/" title="https://sanctionssearch.ofac.treas.gov/">sanctionssearch.ofac.treas.gov/</a><br><a href="https://www.eeas.europa.eu/_en" title="https://www.eeas.europa.eu/_en">www.eeas.europa.eu/_en</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_de_oasis</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gluecksspiel-behoerde.de/" title="https://www.gluecksspiel-behoerde.de/">www.gluecksspiel-behoerde.de/</a><br><a href="https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis" title="https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis">www.gluecksspiel-behoerde.de/de/aufsicht/oasis</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_dk_rofus</code></td>
+<td>Europe</td>
+<td>DK</td>
+<td>National</td>
+<td><a href="https://www.spillemyndigheden.dk/" title="https://www.spillemyndigheden.dk/">www.spillemyndigheden.dk/</a><br><a href="https://www.spillemyndigheden.dk/en/rofus" title="https://www.spillemyndigheden.dk/en/rofus">www.spillemyndigheden.dk/en/rofus</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_es_rgiaj</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ordenacionjuego.es/en" title="https://www.ordenacionjuego.es/en">www.ordenacionjuego.es/en</a><br><a href="https://www.ordenacionjuego.es/en/rgiaj" title="https://www.ordenacionjuego.es/en/rgiaj">www.ordenacionjuego.es/en/rgiaj</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_nl_cruks</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kansspelautoriteit.nl/" title="https://kansspelautoriteit.nl/">kansspelautoriteit.nl/</a><br><a href="https://cruksregister.nl/" title="https://cruksregister.nl/">cruksregister.nl/</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_on_igaming</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.agco.ca/igaming" title="https://www.agco.ca/igaming">www.agco.ca/igaming</a><br><a href="https://igamingontario.ca/en" title="https://igamingontario.ca/en">igamingontario.ca/en</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_se_spelpaus</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.spelinspektionen.se/" title="https://www.spelinspektionen.se/">www.spelinspektionen.se/</a><br><a href="https://www.spelpaus.se/" title="https://www.spelpaus.se/">www.spelpaus.se/</a></td>
+</tr>
+<tr>
+<td><code>betting.self_exclusion_uk_gamstop</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamstop.co.uk/for-operators" title="https://www.gamstop.co.uk/for-operators">www.gamstop.co.uk/for-operators</a><br><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.session_time_limits_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.anj.fr/" title="https://www.anj.fr/">www.anj.fr/</a><br><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.slots_min_spin_speed_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.slots_no_autoplay_uk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.slots_no_losses_disguised_as_wins</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.source_of_funds_checks</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.source_of_funds_thresholds</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.suspicious_betting_reporting_uk</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>betting.txn_monitoring_anomalies</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/" title="https://www.fatf-gafi.org/">www.fatf-gafi.org/</a></td>
+</tr>
+<tr>
+<td><code>edtech.au_app_11_security_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.oaic.gov.au/privacy/australian-privacy-principles" title="https://www.oaic.gov.au/privacy/australian-privacy-principles">www.oaic.gov.au/privacy/australian-privacy-principles</a></td>
+</tr>
+<tr>
+<td><code>edtech.au_app_5_notice_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.oaic.gov.au/privacy/australian-privacy-principles" title="https://www.oaic.gov.au/privacy/australian-privacy-principles">www.oaic.gov.au/privacy/australian-privacy-principles</a></td>
+</tr>
+<tr>
+<td><code>edtech.au_ndb_breach_notification_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.oaic.gov.au/privacy/notifiable-data-breaches" title="https://www.oaic.gov.au/privacy/notifiable-data-breaches">www.oaic.gov.au/privacy/notifiable-data-breaches</a></td>
+</tr>
+<tr>
+<td><code>edtech.br_lgpd_children_consent_best_interest</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm" title="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm">www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm</a></td>
+</tr>
+<tr>
+<td><code>edtech.ca_pipeda_consent_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://laws-lois.justice.gc.ca/eng/acts/P-8.6/" title="https://laws-lois.justice.gc.ca/eng/acts/P-8.6/">laws-lois.justice.gc.ca/eng/acts/P-8.6/</a></td>
+</tr>
+<tr>
+<td><code>edtech.ca_sopipa_no_sale_of_student_data</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=" title="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=">leginfo.legislature.ca.gov/faces/codes_displayText.xhtml</a></td>
+</tr>
+<tr>
+<td><code>edtech.ca_sopipa_no_targeted_advertising</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=" title="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=">leginfo.legislature.ca.gov/faces/codes_displayText.xhtml</a></td>
+</tr>
+<tr>
+<td><code>edtech.co_student_data_transparency</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://coag.gov/office-sections/consumer-protection/student-data-privacy/" title="https://coag.gov/office-sections/consumer-protection/student-data-privacy/">coag.gov/office-sections/consumer-protection/student-data-privacy/</a></td>
+</tr>
+<tr>
+<td><code>edtech.coppa_data_minimization</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa" title="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa">www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-prote…</a></td>
+</tr>
+<tr>
+<td><code>edtech.coppa_delete_on_parent_request</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa" title="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa">www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-prote…</a></td>
+</tr>
+<tr>
+<td><code>edtech.coppa_parental_consent_under_13</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa" title="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa">www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-prote…</a></td>
+</tr>
+<tr>
+<td><code>edtech.ct_student_data_privacy</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy" title="https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy">portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy</a></td>
+</tr>
+<tr>
+<td><code>edtech.edtech_access_least_privilege</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" title="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final">csrc.nist.gov/publications/detail/sp/800-53/rev-5/final</a></td>
+</tr>
+<tr>
+<td><code>edtech.edtech_audit_logs_student_record_access</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/publications/detail/sp/800-92/final" title="https://csrc.nist.gov/publications/detail/sp/800-92/final">csrc.nist.gov/publications/detail/sp/800-92/final</a></td>
+</tr>
+<tr>
+<td><code>edtech.edtech_encryption_at_rest</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" title="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final">csrc.nist.gov/pubs/sp/800/53/r5/upd1/final</a></td>
+</tr>
+<tr>
+<td><code>edtech.edtech_encryption_in_transit</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/pubs/sp/800/52/r2/final" title="https://csrc.nist.gov/pubs/sp/800/52/r2/final">csrc.nist.gov/pubs/sp/800/52/r2/final</a></td>
+</tr>
+<tr>
+<td><code>edtech.edtech_retention_after_course_completion</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/62542.html" title="https://www.iso.org/standard/62542.html">www.iso.org/standard/62542.html</a></td>
+</tr>
+<tr>
+<td><code>edtech.eu_dpia_high_risk_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>edtech.eu_eprivacy_cookie_consent_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/dir/2002/58/oj" title="https://eur-lex.europa.eu/eli/dir/2002/58/oj">eur-lex.europa.eu/eli/dir/2002/58/oj</a></td>
+</tr>
+<tr>
+<td><code>edtech.eu_gdpr_minors_consent_education</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>edtech.eu_scc_transfers_edplatform</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj" title="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj">eur-lex.europa.eu/eli/dec_impl/2021/914/oj</a></td>
+</tr>
+<tr>
+<td><code>edtech.ferpa_consent_or_exception_for_disclosure</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://studentprivacy.ed.gov/" title="https://studentprivacy.ed.gov/">studentprivacy.ed.gov/</a><br><a href="https://www.ecfr.gov/current/title-34/part-99/subpart-D" title="https://www.ecfr.gov/current/title-34/part-99/subpart-D">www.ecfr.gov/current/title-34/part-99/subpart-D</a></td>
+</tr>
+<tr>
+<td><code>edtech.ferpa_directory_info_optout_respected</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://studentprivacy.ed.gov/" title="https://studentprivacy.ed.gov/">studentprivacy.ed.gov/</a></td>
+</tr>
+<tr>
+<td><code>edtech.ferpa_parent_access_rights</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://studentprivacy.ed.gov/" title="https://studentprivacy.ed.gov/">studentprivacy.ed.gov/</a><br><a href="https://www.ecfr.gov/current/title-34/subtitle-A/part-99" title="https://www.ecfr.gov/current/title-34/subtitle-A/part-99">www.ecfr.gov/current/title-34/subtitle-A/part-99</a></td>
+</tr>
+<tr>
+<td><code>edtech.il_soppa_breach_notification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&ChapterID=17" title="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&ChapterID=17">www.ilga.gov/legislation/ilcs/ilcs3.asp</a></td>
+</tr>
+<tr>
+<td><code>edtech.in_dpdpa_children_verifiable_consent</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://egazette.nic.in/WriteReadData/2023/248775.pdf" title="https://egazette.nic.in/WriteReadData/2023/248775.pdf">egazette.nic.in/WriteReadData/2023/248775.pdf</a></td>
+</tr>
+<tr>
+<td><code>edtech.kr_pipa_guardian_consent_under_14</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pipc.go.kr/eng/" title="https://www.pipc.go.kr/eng/">www.pipc.go.kr/eng/</a></td>
+</tr>
+<tr>
+<td><code>edtech.ny_edlaw2d_encryption_and_contracts</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf" title="https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf">www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law…</a><br><a href="https://www.nysed.gov/data-privacy-security/laws-regulations" title="https://www.nysed.gov/data-privacy-security/laws-regulations">www.nysed.gov/data-privacy-security/laws-regulations</a></td>
+</tr>
+<tr>
+<td><code>edtech.nz_notice_at_collection_edtech</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.privacy.org.nz/your-rights/privacy-principles/" title="https://www.privacy.org.nz/your-rights/privacy-principles/">www.privacy.org.nz/your-rights/privacy-principles/</a></td>
+</tr>
+<tr>
+<td><code>edtech.ppra_parental_consent_sensitive_surveys</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://studentprivacy.ed.gov/resources/ppra-general-guidance" title="https://studentprivacy.ed.gov/resources/ppra-general-guidance">studentprivacy.ed.gov/resources/ppra-general-guidance</a></td>
+</tr>
+<tr>
+<td><code>edtech.uk_aadc_privacy_by_default</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ico.org.uk/for-organisations/childrens-code-design-guidance/" title="https://ico.org.uk/for-organisations/childrens-code-design-guidance/">ico.org.uk/for-organisations/childrens-code-design-guidance/</a></td>
+</tr>
+<tr>
+<td><code>edtech.uk_aadc_profiling_and_geolocation_off</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ico.org.uk/for-organisations/childrens-code-design-guidance/" title="https://ico.org.uk/for-organisations/childrens-code-design-guidance/">ico.org.uk/for-organisations/childrens-code-design-guidance/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_account_freeze_on_hit</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_adverse_media_screening</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_customer_risk_tiering</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_duplicate_account_detection</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_geolocation_restrictions</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_manual_review_queue</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_ongoing_monitoring</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_pep_periodic_review</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_pep_screening</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_risk_scoring_model</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_sanctions_rescreening_frequency</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_sanctions_screening</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a><br><a href="https://ofac.treasury.gov/sanctions-programs-and-country-information" title="https://ofac.treasury.gov/sanctions-programs-and-country-information">ofac.treasury.gov/sanctions-programs-and-country-information</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_transaction_velocity_limits</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_unusual_activity_alerting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.aml_watchlist_management</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.bitlicense_compliance</code></td>
+<td>North America</td>
+<td>US-NY</td>
+<td>State</td>
+<td><a href="https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses" title="https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses">www.dfs.ny.gov/industry_guidance/virtual_currency_businesses</a></td>
+</tr>
+<tr>
+<td><code>fintech.card_tokenization_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3d-secure/" title="https://www.emvco.com/emv-technologies/3d-secure/">www.emvco.com/emv-technologies/3d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.chain_analysis_risk_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.chargeback_monitoring</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3d-secure/" title="https://www.emvco.com/emv-technologies/3d-secure/">www.emvco.com/emv-technologies/3d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.cold_storage_ratio</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.custody_asset_segregation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.device_fingerprinting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3-d-secure/" title="https://www.emvco.com/emv-technologies/3-d-secure/">www.emvco.com/emv-technologies/3-d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.fapi_compliance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://openid.net/specs/" title="https://openid.net/specs/">openid.net/specs/</a></td>
+</tr>
+<tr>
+<td><code>fintech.fraud_velocity_checks</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3d-secure/" title="https://www.emvco.com/emv-technologies/3d-secure/">www.emvco.com/emv-technologies/3d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.geofencing_restricted_markets</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3d-secure/" title="https://www.emvco.com/emv-technologies/3d-secure/">www.emvco.com/emv-technologies/3d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.hot_wallet_limits</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.ip_geolocation_consistency</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3d-secure/" title="https://www.emvco.com/emv-technologies/3d-secure/">www.emvco.com/emv-technologies/3d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.jwt_expiry_policy</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://datatracker.ietf.org/doc/html/rfc7519" title="https://datatracker.ietf.org/doc/html/rfc7519">datatracker.ietf.org/doc/html/rfc7519</a></td>
+</tr>
+<tr>
+<td><code>fintech.kyc_biometric_liveness</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.kyc_document_verification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.kyc_reverification_schedule</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.kyc_source_of_funds</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.kyc_source_of_wealth</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommend…</a><br><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843">eur-lex.europa.eu/legal-content/EN/TXT/</a></td>
+</tr>
+<tr>
+<td><code>fintech.mcc_whitelisting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3-d-secure/" title="https://www.emvco.com/emv-technologies/3-d-secure/">www.emvco.com/emv-technologies/3-d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.mtls_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://datatracker.ietf.org/doc/html/rfc8705" title="https://datatracker.ietf.org/doc/html/rfc8705">datatracker.ietf.org/doc/html/rfc8705</a></td>
+</tr>
+<tr>
+<td><code>fintech.oauth2_pkce_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://datatracker.ietf.org/doc/html/rfc7636" title="https://datatracker.ietf.org/doc/html/rfc7636">datatracker.ietf.org/doc/html/rfc7636</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_audit_logging</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_consent_expiry_90d</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_consent_revocation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_data_minimization</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_rate_limits</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>fintech.ob_tpp_eidas_cert_validation</code></td>
+<td>Europe</td>
+<td>EU, EEA</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2014/910/oj" title="https://eur-lex.europa.eu/eli/reg/2014/910/oj">eur-lex.europa.eu/eli/reg/2014/910/oj</a></td>
+</tr>
+<tr>
+<td><code>fintech.pan_masking_in_logs</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3-d-secure/" title="https://www.emvco.com/emv-technologies/3-d-secure/">www.emvco.com/emv-technologies/3-d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_account_lockout</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_default_passwords_changed</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_file_integrity_monitoring</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_https_only</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_key_management</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_log_retention</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_malware_protection</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_mfa_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_network_segmentation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_pan_masking_in_logs</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_secure_coding_practices</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_session_timeout</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_storage_encryption</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_tls_min_version</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.pci_vulnerability_scanning</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>fintech.proof_of_reserves_reporting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.psd2_sca</code></td>
+<td>Europe</td>
+<td>EU</td>
+<td>EU</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366">eur-lex.europa.eu/legal-content/EN/TXT/</a><br><a href="https://www.styra.com/opa-rego-style-guide/" title="https://www.styra.com/opa-rego-style-guide/">www.styra.com/opa-rego-style-guide/</a></td>
+</tr>
+<tr>
+<td><code>fintech.psd2_sca_enforced</code></td>
+<td>Europe</td>
+<td>EU, EEA</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366">eur-lex.europa.eu/legal-content/EN/TXT/</a><br><a href="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj" title="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj">eur-lex.europa.eu/eli/reg_del/2018/389/oj</a></td>
+</tr>
+<tr>
+<td><code>fintech.psd2_sca_exemptions_controls</code></td>
+<td>Europe</td>
+<td>EU, EEA</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366">eur-lex.europa.eu/legal-content/EN/TXT/</a><br><a href="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj" title="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj">eur-lex.europa.eu/eli/reg_del/2018/389/oj</a></td>
+</tr>
+<tr>
+<td><code>fintech.psd2_transaction_risk_analysis</code></td>
+<td>Europe</td>
+<td>EU, EEA</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366" title="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366">eur-lex.europa.eu/legal-content/EN/TXT/</a><br><a href="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj" title="https://eur-lex.europa.eu/eli/reg_del/2018/389/oj">eur-lex.europa.eu/eli/reg_del/2018/389/oj</a></td>
+</tr>
+<tr>
+<td><code>fintech.rbi_ekyc_risk</code></td>
+<td>APAC</td>
+<td>IN</td>
+<td>IN</td>
+<td><a href="https://www.rbi.org.in/" title="https://www.rbi.org.in/">www.rbi.org.in/</a></td>
+</tr>
+<tr>
+<td><code>fintech.stablecoin_reserve_ratio</code></td>
+<td>Europe</td>
+<td>EU, EEA</td>
+<td>Regional</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.three_ds_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3-d-secure/" title="https://www.emvco.com/emv-technologies/3-d-secure/">www.emvco.com/emv-technologies/3-d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.transaction_limits_per_risk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.emvco.com/emv-technologies/3-d-secure/" title="https://www.emvco.com/emv-technologies/3-d-secure/">www.emvco.com/emv-technologies/3-d-secure/</a></td>
+</tr>
+<tr>
+<td><code>fintech.travel_rule_compliance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.us_mtl_license</code></td>
+<td>North America</td>
+<td>US</td>
+<td>US</td>
+<td><a href="https://www.upguard.com/blog/cybersecurity-regulations-financial-industry" title="https://www.upguard.com/blog/cybersecurity-regulations-financial-industry">www.upguard.com/blog/cybersecurity-regulations-financial-industry</a><br><a href="https://www.fincen.gov/msb-state-law-regulatory-framework" title="https://www.fincen.gov/msb-state-law-regulatory-framework">www.fincen.gov/msb-state-law-regulatory-framework</a></td>
+</tr>
+<tr>
+<td><code>fintech.vasp_license_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.withdrawal_address_whitelist</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" title="https://eur-lex.europa.eu/eli/reg/2023/1114/oj">eur-lex.europa.eu/eli/reg/2023/1114/oj</a><br><a href="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html" title="https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html">www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-t…</a></td>
+</tr>
+<tr>
+<td><code>fintech.xs2a_api_security</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.openbanking.org.uk/" title="https://www.openbanking.org.uk/">www.openbanking.org.uk/</a><br><a href="https://openid.net/specs/openid-connect-core-1_0.html" title="https://openid.net/specs/openid-connect-core-1_0.html">openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td><code>gdpr.consent_required</code></td>
+<td>Europe</td>
+<td>EU</td>
+<td>EU</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a><br><a href="https://www.legislation.gov.uk/eudr/2016/679/article/6" title="https://www.legislation.gov.uk/eudr/2016/679/article/6">www.legislation.gov.uk/eudr/2016/679/article/6</a><br><a href="https://www.legislation.gov.uk/eudr/2016/679/article/7" title="https://www.legislation.gov.uk/eudr/2016/679/article/7">www.legislation.gov.uk/eudr/2016/679/article/7</a></td>
+</tr>
+<tr>
+<td><code>gdpr.data_minimization</code></td>
+<td>Europe</td>
+<td>EU</td>
+<td>EU</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a><br><a href="https://www.legislation.gov.uk/eudr/2016/679/article/5" title="https://www.legislation.gov.uk/eudr/2016/679/article/5">www.legislation.gov.uk/eudr/2016/679/article/5</a></td>
+</tr>
+<tr>
+<td><code>gdpr.data_retention</code></td>
+<td>Europe</td>
+<td>EU</td>
+<td>EU</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a><br><a href="https://www.legislation.gov.uk/eudr/2016/679/article/5" title="https://www.legislation.gov.uk/eudr/2016/679/article/5">www.legislation.gov.uk/eudr/2016/679/article/5</a></td>
+</tr>
+<tr>
+<td><code>igaming.deposit_limit_controls</code></td>
+<td>Europe</td>
+<td>EU, EEA, UK</td>
+<td>Regional</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>igaming.geofencing_regulated_markets</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_adm_it</code></td>
+<td>Europe</td>
+<td>IT</td>
+<td>National</td>
+<td><a href="https://www.adm.gov.it/portale/" title="https://www.adm.gov.it/portale/">www.adm.gov.it/portale/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_anj_fr</code></td>
+<td>Europe</td>
+<td>FR</td>
+<td>National</td>
+<td><a href="https://anj.fr/" title="https://anj.fr/">anj.fr/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_dgoj_es</code></td>
+<td>Europe</td>
+<td>ES</td>
+<td>National</td>
+<td><a href="https://www.ordenacionjuego.es/en" title="https://www.ordenacionjuego.es/en">www.ordenacionjuego.es/en</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_ukgc</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_us_nj_dge</code></td>
+<td>North America</td>
+<td>US-NJ</td>
+<td>State</td>
+<td><a href="https://www.nj.gov/oag/ge/" title="https://www.nj.gov/oag/ge/">www.nj.gov/oag/ge/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_us_nv_ngcb</code></td>
+<td>North America</td>
+<td>US-NV</td>
+<td>State</td>
+<td><a href="https://www.gaming.nv.gov/" title="https://www.gaming.nv.gov/">www.gaming.nv.gov/</a></td>
+</tr>
+<tr>
+<td><code>igaming.license_check_us_pa_pgcb</code></td>
+<td>North America</td>
+<td>US-PA</td>
+<td>State</td>
+<td><a href="https://gamingcontrolboard.pa.gov/" title="https://gamingcontrolboard.pa.gov/">gamingcontrolboard.pa.gov/</a></td>
+</tr>
+<tr>
+<td><code>igaming.self_exclusion_uk_gamstop</code></td>
+<td>Europe</td>
+<td>UK</td>
+<td>National</td>
+<td><a href="https://www.gamstop.co.uk/for-operators" title="https://www.gamstop.co.uk/for-operators">www.gamstop.co.uk/for-operators</a></td>
+</tr>
+<tr>
+<td><code>k8s.ban_hostnetwork</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" title="https://kubernetes.io/docs/concepts/security/pod-security-standards/">kubernetes.io/docs/concepts/security/pod-security-standards/</a></td>
+</tr>
+<tr>
+<td><code>k8s.block_hostpath</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" title="https://kubernetes.io/docs/concepts/security/pod-security-standards/">kubernetes.io/docs/concepts/security/pod-security-standards/</a><br><a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath" title="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath">kubernetes.io/docs/concepts/storage/volumes/</a></td>
+</tr>
+<tr>
+<td><code>k8s.disallow_latest</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/containers/images/" title="https://kubernetes.io/docs/concepts/containers/images/">kubernetes.io/docs/concepts/containers/images/</a><br><a href="https://kubernetes.io/docs/concepts/security/security-checklist/" title="https://kubernetes.io/docs/concepts/security/security-checklist/">kubernetes.io/docs/concepts/security/security-checklist/</a></td>
+</tr>
+<tr>
+<td><code>k8s.limit_capabilities</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" title="https://kubernetes.io/docs/concepts/security/pod-security-standards/">kubernetes.io/docs/concepts/security/pod-security-standards/</a><br><a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/" title="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">kubernetes.io/docs/tasks/configure-pod-container/security-context/</a></td>
+</tr>
+<tr>
+<td><code>k8s.no_privileged</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" title="https://kubernetes.io/docs/concepts/security/pod-security-standards/">kubernetes.io/docs/concepts/security/pod-security-standards/</a><br><a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/" title="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">kubernetes.io/docs/tasks/configure-pod-container/security-context/</a></td>
+</tr>
+<tr>
+<td><code>k8s.no_run_as_root</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" title="https://kubernetes.io/docs/concepts/security/pod-security-standards/">kubernetes.io/docs/concepts/security/pod-security-standards/</a><br><a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/" title="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">kubernetes.io/docs/tasks/configure-pod-container/security-context/</a></td>
+</tr>
+<tr>
+<td><code>k8s.require_imagepullpolicy_always</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/containers/images/" title="https://kubernetes.io/docs/concepts/containers/images/">kubernetes.io/docs/concepts/containers/images/</a><br><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/" title="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/">kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/</a></td>
+</tr>
+<tr>
+<td><code>k8s.require_resources</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/" title="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a><br><a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/" title="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/">kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-d…</a></td>
+</tr>
+<tr>
+<td><code>legaltech.aba_model_rule_1_6_confidentiality</code></td>
+<td>North America</td>
+<td>US</td>
+<td>Federal</td>
+<td><a href="https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/" title="https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/">www.americanbar.org/groups/professional_responsibility/publications/m…</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ae_pdpl_consent_notice</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law" title="https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law">u.ae/en/about-the-uae/digital-uae/data/data-protection-law</a></td>
+</tr>
+<tr>
+<td><code>legaltech.au_app_notice_at_collection</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.oaic.gov.au/privacy/australian-privacy-principles" title="https://www.oaic.gov.au/privacy/australian-privacy-principles">www.oaic.gov.au/privacy/australian-privacy-principles</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ca_qc_law25_privacy_governance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1" title="https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1">www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ccpa_notice_at_collection</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://oag.ca.gov/privacy/ccpa" title="https://oag.ca.gov/privacy/ccpa">oag.ca.gov/privacy/ccpa</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ccpa_opt_out_enabled</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://cppa.ca.gov/" title="https://cppa.ca.gov/">cppa.ca.gov/</a><br><a href="https://oag.ca.gov/privacy/ccpa" title="https://oag.ca.gov/privacy/ccpa">oag.ca.gov/privacy/ccpa</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ccpa_verification_of_requests</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://oag.ca.gov/privacy/ccpa" title="https://oag.ca.gov/privacy/ccpa">oag.ca.gov/privacy/ccpa</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ch_fadp_records_of_processing</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fedlex.admin.ch/eli/cc/2022/491/en" title="https://www.fedlex.admin.ch/eli/cc/2022/491/en">www.fedlex.admin.ch/eli/cc/2022/491/en</a></td>
+</tr>
+<tr>
+<td><code>legaltech.cpra_sensitive_data_limited_use</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://cppa.ca.gov/" title="https://cppa.ca.gov/">cppa.ca.gov/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.data_residency_requirements_enforced</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/27001.html" title="https://www.iso.org/standard/27001.html">www.iso.org/standard/27001.html</a></td>
+</tr>
+<tr>
+<td><code>legaltech.ediscovery_frcp_26_34_37</code></td>
+<td>North America</td>
+<td>US</td>
+<td>Federal</td>
+<td><a href="https://www.law.cornell.edu/rules/frcp/rule_26" title="https://www.law.cornell.edu/rules/frcp/rule_26">www.law.cornell.edu/rules/frcp/rule_26</a></td>
+</tr>
+<tr>
+<td><code>legaltech.encryption_at_rest_enabled</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" title="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final">csrc.nist.gov/publications/detail/sp/800-53/rev-5/final</a></td>
+</tr>
+<tr>
+<td><code>legaltech.encryption_in_transit_enabled</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/pubs/sp/800/52/r2/final" title="https://csrc.nist.gov/pubs/sp/800/52/r2/final">csrc.nist.gov/pubs/sp/800/52/r2/final</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_breach_72h</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_consent_valid</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_cookie_consent_eprivacy</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/dir/2002/58/oj" title="https://eur-lex.europa.eu/eli/dir/2002/58/oj">eur-lex.europa.eu/eli/dir/2002/58/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_data_minimization</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_dpia_required_high_risk</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_dsar_timeline_30d</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_lawful_basis_required</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_records_of_processing</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_retention_limit</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.gdpr_transfer_scc</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj" title="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj">eur-lex.europa.eu/eli/dec_impl/2021/914/oj</a></td>
+</tr>
+<tr>
+<td><code>legaltech.id_pdp_cross_border_transfer</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://jdih.setneg.go.id/" title="https://jdih.setneg.go.id/">jdih.setneg.go.id/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.kr_pipa_breach_notification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pipc.go.kr/eng/" title="https://www.pipc.go.kr/eng/">www.pipc.go.kr/eng/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.legal_hold_no_delete_enforced</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.law.cornell.edu/rules/frcp/rule_37" title="https://www.law.cornell.edu/rules/frcp/rule_37">www.law.cornell.edu/rules/frcp/rule_37</a></td>
+</tr>
+<tr>
+<td><code>legaltech.lgpd_brazil_compliance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm" title="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm">www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm</a></td>
+</tr>
+<tr>
+<td><code>legaltech.mx_lfpdppp_notice_at_collection</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf" title="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf">www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf</a></td>
+</tr>
+<tr>
+<td><code>legaltech.my_pdpa_retention_principle</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.malaysia.gov.my/portal/content/654" title="https://www.malaysia.gov.my/portal/content/654">www.malaysia.gov.my/portal/content/654</a></td>
+</tr>
+<tr>
+<td><code>legaltech.nz_breach_notification</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.privacy.org.nz/for-organisations/privacy-breaches/" title="https://www.privacy.org.nz/for-organisations/privacy-breaches/">www.privacy.org.nz/for-organisations/privacy-breaches/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.pdpa_sg_consent_purposes</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://sso.agc.gov.sg/Act/PDPA2012" title="https://sso.agc.gov.sg/Act/PDPA2012">sso.agc.gov.sg/Act/PDPA2012</a></td>
+</tr>
+<tr>
+<td><code>legaltech.pipeda_ca_consent</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://laws-lois.justice.gc.ca/eng/acts/P-8.6/" title="https://laws-lois.justice.gc.ca/eng/acts/P-8.6/">laws-lois.justice.gc.ca/eng/acts/P-8.6/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.pipl_cn_cross_border_assessment</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.npc.gov.cn/englishnpc/" title="https://www.npc.gov.cn/englishnpc/">www.npc.gov.cn/englishnpc/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.popia_za_security_measures</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.justice.gov.za/inforeg/" title="https://www.justice.gov.za/inforeg/">www.justice.gov.za/inforeg/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.records_classification_scheme_applied</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/62542.html" title="https://www.iso.org/standard/62542.html">www.iso.org/standard/62542.html</a></td>
+</tr>
+<tr>
+<td><code>legaltech.sa_pdpl_breach_notify</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://sdaia.gov.sa/" title="https://sdaia.gov.sa/">sdaia.gov.sa/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.th_pdpa_breach_notify</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pdpc.or.th/en/home/" title="https://www.pdpc.or.th/en/home/">www.pdpc.or.th/en/home/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.tr_kvkk_verbis_registration</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://verbis.kvkk.gov.tr/" title="https://verbis.kvkk.gov.tr/">verbis.kvkk.gov.tr/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.uk_gdpr_minor_consent</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ico.org.uk/" title="https://ico.org.uk/">ico.org.uk/</a></td>
+</tr>
+<tr>
+<td><code>legaltech.vn_pdpd_notice_and_consent</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.mps.gov.vn/" title="https://www.mps.gov.vn/">www.mps.gov.vn/</a></td>
+</tr>
+<tr>
+<td><code>medtech.au_myr_health_privacy</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.health.gov.au/initiatives-and-programs/my-health-record" title="https://www.health.gov.au/initiatives-and-programs/my-health-record">www.health.gov.au/initiatives-and-programs/my-health-record</a><br><a href="https://www.legislation.gov.au/Series/C2012A00063" title="https://www.legislation.gov.au/Series/C2012A00063">www.legislation.gov.au/Series/C2012A00063</a></td>
+</tr>
+<tr>
+<td><code>medtech.backup_and_recovery_rto_rpo</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/44379.html" title="https://www.iso.org/standard/44379.html">www.iso.org/standard/44379.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.ca_phipa_health_data</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ontario.ca/laws/statute/04p03" title="https://www.ontario.ca/laws/statute/04p03">www.ontario.ca/laws/statute/04p03</a></td>
+</tr>
+<tr>
+<td><code>medtech.device_data_integrity_hashing</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity" title="https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity">www.fda.gov/medical-devices/digital-health-center-excellence/cybersec…</a></td>
+</tr>
+<tr>
+<td><code>medtech.dicom_network_security_basic</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.dicomstandard.org/" title="https://www.dicomstandard.org/">www.dicomstandard.org/</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_ivdr_clinical_performance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2017/746/oj" title="https://eur-lex.europa.eu/eli/reg/2017/746/oj">eur-lex.europa.eu/eli/reg/2017/746/oj</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_mdr_ce_marking_and_udi</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2017/745/oj" title="https://eur-lex.europa.eu/eli/reg/2017/745/oj">eur-lex.europa.eu/eli/reg/2017/745/oj</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_mdr_clinical_evaluation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2017/745/oj" title="https://eur-lex.europa.eu/eli/reg/2017/745/oj">eur-lex.europa.eu/eli/reg/2017/745/oj</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_mdr_eudamed_registration</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://ec.europa.eu/health/medical-devices-eudamed/overview_en" title="https://ec.europa.eu/health/medical-devices-eudamed/overview_en">ec.europa.eu/health/medical-devices-eudamed/overview_en</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_mdr_pms_psur</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2017/745/oj" title="https://eur-lex.europa.eu/eli/reg/2017/745/oj">eur-lex.europa.eu/eli/reg/2017/745/oj</a></td>
+</tr>
+<tr>
+<td><code>medtech.eu_vigilance_incident_reporting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en" title="https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en">health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-a…</a></td>
+</tr>
+<tr>
+<td><code>medtech.fda_cybersecurity_524b_sbom</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity" title="https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity">www.fda.gov/medical-devices/digital-health-center-excellence/cybersec…</a></td>
+</tr>
+<tr>
+<td><code>medtech.fda_mdr_event_reporting</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803" title="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803">www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803</a></td>
+</tr>
+<tr>
+<td><code>medtech.fda_part11_audit_trail</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11" title="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11">www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11</a></td>
+</tr>
+<tr>
+<td><code>medtech.fda_part11_esign_linkage</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11" title="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11">www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11</a></td>
+</tr>
+<tr>
+<td><code>medtech.fda_part11_system_validation</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11" title="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11">www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11</a></td>
+</tr>
+<tr>
+<td><code>medtech.fhir_smart_app_authz</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://hl7.org/fhir/smart-app-launch/" title="https://hl7.org/fhir/smart-app-launch/">hl7.org/fhir/smart-app-launch/</a></td>
+</tr>
+<tr>
+<td><code>medtech.gdpr_art9_special_category_safeguards</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a><br><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" title="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu/eli/reg/2016/679/oj</a></td>
+</tr>
+<tr>
+<td><code>medtech.health_data_cross_border_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj" title="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj">eur-lex.europa.eu/eli/dec_impl/2021/914/oj</a><br><a href="https://www.hhs.gov/hipaa/" title="https://www.hhs.gov/hipaa/">www.hhs.gov/hipaa/</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_access_audit_logging</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" title="https://www.hhs.gov/hipaa/for-professionals/security/index.html">www.hhs.gov/hipaa/for-professionals/security/index.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_baa_with_vendors</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html" title="https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html">www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-…</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_mfa_privileged_access</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" title="https://www.hhs.gov/hipaa/for-professionals/security/index.html">www.hhs.gov/hipaa/for-professionals/security/index.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_minimum_necessary</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html" title="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html">www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessar…</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_security_admin_safeguards</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" title="https://www.hhs.gov/hipaa/for-professionals/security/index.html">www.hhs.gov/hipaa/for-professionals/security/index.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.hipaa_security_tech_encryption</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" title="https://www.hhs.gov/hipaa/for-professionals/security/index.html">www.hhs.gov/hipaa/for-professionals/security/index.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.hitech_breach_notification_60d</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html" title="https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html">www.hhs.gov/hipaa/for-professionals/breach-notification/index.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.iec_62304_scm_prp_processes</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://webstore.iec.ch/en/publication/24950" title="https://webstore.iec.ch/en/publication/24950">webstore.iec.ch/en/publication/24950</a></td>
+</tr>
+<tr>
+<td><code>medtech.iec_62304_software_safety_class</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://webstore.iec.ch/en/publication/24950" title="https://webstore.iec.ch/en/publication/24950">webstore.iec.ch/en/publication/24950</a></td>
+</tr>
+<tr>
+<td><code>medtech.iec_62366_usability_summative_eval</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://webstore.iec.ch/en/publication/26023" title="https://webstore.iec.ch/en/publication/26023">webstore.iec.ch/en/publication/26023</a></td>
+</tr>
+<tr>
+<td><code>medtech.iso_13485_document_control</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/59752.html" title="https://www.iso.org/standard/59752.html">www.iso.org/standard/59752.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.iso_14971_risk_management_file</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/72704.html" title="https://www.iso.org/standard/72704.html">www.iso.org/standard/72704.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.iso_27001_isms_scope_and_controls</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.iso.org/standard/27001.html" title="https://www.iso.org/standard/27001.html">www.iso.org/standard/27001.html</a></td>
+</tr>
+<tr>
+<td><code>medtech.log_retention_for_clinical_events</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://csrc.nist.gov/pubs/sp/800/92/final" title="https://csrc.nist.gov/pubs/sp/800/92/final">csrc.nist.gov/pubs/sp/800/92/final</a></td>
+</tr>
+<tr>
+<td><code>medtech.onc_cures_api_fhir_r4</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.healthit.gov/curesrule/" title="https://www.healthit.gov/curesrule/">www.healthit.gov/curesrule/</a><br><a href="https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi" title="https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi">www.healthit.gov/isa/united-states-core-data-interoperability-uscdi</a></td>
+</tr>
+<tr>
+<td><code>medtech.onc_information_blocking_prohibited</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.healthit.gov/curesrule/" title="https://www.healthit.gov/curesrule/">www.healthit.gov/curesrule/</a></td>
+</tr>
+<tr>
+<td><code>medtech.sg_hcsa_pdpa_health_data</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://sso.agc.gov.sg/Act/HCSA2020" title="https://sso.agc.gov.sg/Act/HCSA2020">sso.agc.gov.sg/Act/HCSA2020</a><br><a href="https://sso.agc.gov.sg/Act/PDPA2012" title="https://sso.agc.gov.sg/Act/PDPA2012">sso.agc.gov.sg/Act/PDPA2012</a></td>
+</tr>
+<tr>
+<td><code>medtech.uk_dtac_compliance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-criteria-dtac/" title="https://www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-criteria-dtac/">www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-…</a></td>
+</tr>
+<tr>
+<td><code>medtech.uk_mhra_post_market_surveillance</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements" title="https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements">www.gov.uk/guidance/medical-devices-post-market-surveillance-requirem…</a></td>
+</tr>
+<tr>
+<td><code>pci.ebs_encryption</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>pci.https_only</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/" title="https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/">www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/d…</a><br><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>pci.iam_password_policy</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf" title="https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf">www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidanc…</a><br><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>pci.logging_enabled</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf" title="https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf">www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring…</a></td>
+</tr>
+<tr>
+<td><code>pci.storage_encryption</code></td>
+<td>Global</td>
+<td>*</td>
+<td>Global</td>
+<td><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a><br><a href="https://www.pcisecuritystandards.org/document_library" title="https://www.pcisecuritystandards.org/document_library">www.pcisecuritystandards.org/document_library</a></td>
+</tr>
+<tr>
+<td><code>rg.au_audit_trails</code></td>
+<td>APAC</td>
+<td>AU</td>
+<td>AU</td>
+<td><a href="https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215" title="https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215">www.coe.int/en/web/conventions/full-list</a></td>
+</tr>
+<tr>
+<td><code>rg.self_exclusion_enforced</code></td>
+<td>Europe</td>
+<td>GB</td>
+<td>GB</td>
+<td><a href="https://www.gamblingcommission.gov.uk/" title="https://www.gamblingcommission.gov.uk/">www.gamblingcommission.gov.uk/</a></td>
+</tr>
+<tr>
+<td><code>rg.uigea_payment_blocks</code></td>
+<td>North America</td>
+<td>US</td>
+<td>US</td>
+<td><a href="https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm" title="https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm">www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Total policies: 283</p>
+<p>Policies with links: 283</p>
+<p>Unique source URLs: 165</p>
+<p>Frequent URLs (count &gt; 5):</p>
+<ul>
+<li>https://www.pcisecuritystandards.org/document_library (x34)</li>
+<li>https://www.gamblingcommission.gov.uk/ (x31)</li>
+<li>https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html (x27)</li>
+<li>https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843 (x21)</li>
+<li>https://eur-lex.europa.eu/eli/reg/2016/679/oj (x15)</li>
+<li>https://eur-lex.europa.eu/eli/reg/2023/1114/oj (x9)</li>
+<li>https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html (x9)</li>
+<li>https://openid.net/specs/openid-connect-core-1_0.html (x6)</li>
+<li>https://www.openbanking.org.uk/ (x6)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © {{ git_committers_time | date('YYYY') }} RuleHub contributors
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rulehub/rulehub" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
