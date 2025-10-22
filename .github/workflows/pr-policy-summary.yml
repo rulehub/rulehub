@@ -52,7 +52,7 @@ jobs:
 
   summary:
     # Guard against act and non-PR events (where pull_request fields are undefined)
-    if: ${{ github.actor != 'nektos/act' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false) }}
+    if: ${{ github.actor != 'nektos/act' && github.event_name == 'pull_request' && github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest
     needs: [guard, resolve]
     permissions:

@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload SARIF to code scanning
-        uses: github/codeql-action/upload-sarif@528ca598d956c91826bd742262cdfc5d02b77710
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
 

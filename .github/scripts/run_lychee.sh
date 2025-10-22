@@ -48,8 +48,22 @@ run_lychee() {
   if command -v lychee >/dev/null 2>&1; then
     lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"
   else
-    docker run --rm -v "$PWD:/workspace" -w /workspace "$LYCHEE_IMAGE" \
-      lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"
+    # Try primary image first; on manifest issues, retry once without the leading 'v' in tag.
+    if docker run --rm -v "$PWD:/workspace" -w /workspace "$LYCHEE_IMAGE" \
+      lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"; then
+      return 0
+    fi
+    # If image tag has a leading 'v', try a fallback without it.
+    if [[ "$LYCHEE_IMAGE" =~ :(v[0-9].*)$ ]]; then
+      local _tag_with_v="${BASH_REMATCH[1]}"
+      local _fallback_image="${LYCHEE_IMAGE/:$_tag_with_v/:${_tag_with_v#v}}"
+      echo "[run_lychee] primary image failed; attempting fallback image: $_fallback_image" >&2
+      docker run --rm -v "$PWD:/workspace" -w /workspace "$_fallback_image" \
+        lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"
+      return
+    fi
+    # No fallback applicable; propagate failure
+    return 1
   fi
 }
 

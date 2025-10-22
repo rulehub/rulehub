@@ -68,6 +68,8 @@ jobs:
 
       - name: Create PR
         if: steps.gitdiff.outputs.changed == 'true'
+        id: cpr
+        continue-on-error: true
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
           commit-message: "chore(deps): update python lock files"
@@ -76,6 +78,13 @@ jobs:
           branch: chore/update-python-locks
           labels: dependencies, automated-pr
           signoff: true
+
+      - name: PR creation result note
+        if: ${{ steps.gitdiff.outputs.changed == 'true' && steps.cpr.outcome != 'success' }}
+        run: |
+          echo "Note: PR creation may be blocked by org policy when using GITHUB_TOKEN."
+          echo "To enable automated PRs, configure a fine-scoped PAT (contents & pull-requests: write) for a bot account and set it via the 'token' input on the action."
+          echo "Alternatively, run this workflow manually with a repository that allows action-created PRs."
 
       - name: No changes
         if: steps.gitdiff.outputs.changed != 'true'
