@@ -18,6 +18,7 @@
 It brings together policies (OPA / Kyverno), compliance mappings, tests, and signed bundles into a single reproducible workflow.
 
 RuleHub connects:
+
 - **Policy-as-Code:** encode safety and regulatory requirements as reusable policies.
 - **MLSec module:** dataset, model, and training pipeline security.
 - **LLMSec module:** prompt and output guardrails for LLM/RAG systems.
@@ -28,13 +29,13 @@ RuleHub connects:
 
 ## What RuleHub does
 
-| Problem | How RuleHub helps |
-|----------|------------------|
-| Fragmented AI security & compliance tools | Unified Policy-as-Code workflow |
-| Manual reviews & audits | Automated, testable policies with CI gates |
-| Missing AI supply-chain visibility | SBOM / AIBOM + cosign-signed artifacts |
-| No reproducible evidence trail | Provenance and compliance exports |
-| Lack of developer-friendly guardrails | Open, YAML-based policies and SDKs |
+| Problem                                   | How RuleHub helps                          |
+| ----------------------------------------- | ------------------------------------------ |
+| Fragmented AI security & compliance tools | Unified Policy-as-Code workflow            |
+| Manual reviews & audits                   | Automated, testable policies with CI gates |
+| Missing AI supply-chain visibility        | SBOM / AIBOM + cosign-signed artifacts     |
+| No reproducible evidence trail            | Provenance and compliance exports          |
+| Lack of developer-friendly guardrails     | Open, YAML-based policies and SDKs         |
 
 <p align="center">
   <img src="docs/assets/value-loop.svg" alt="RuleHub value loop" width="760"/>
@@ -171,24 +172,33 @@ Optional next steps:
 - Integrity, SBOM, signing: docs/security-integrity.md and docs/security-provenance.md
 - Policy quality & coverage: docs/policy-test-quality.md and docs/coverage.md
 
+## Backstage Plugin Index
+
+The RuleHub Backstage Plugin consumes a published JSON index describing available policies and metadata.
+
+- Canonical JSON: [plugin-index/index.json](https://rulehub.github.io/rulehub/plugin-index/index.json)
+- HTML preview: [plugin-index/index.html](https://rulehub.github.io/rulehub/plugin-index/index.html)
+
+Notes:
+
+- The index is rebuilt and published on every push to `main` via GitHub Actions.
+- The JSON is validated against `tools/schemas/plugin-index.schema.json` during CI; invalid schemas fail the workflow.
+
 ## Roadmap
 
-| Milestone | Target | Artifacts |
-|------------|---------|-----------|
-| **M1** | Core release + policy framework, Helm chart, Backstage plugin | `rulehub`, `rulehub-charts`, `rulehub-backstage-plugin` |
-| **M2** | MLSec / LLMSec modules + AIBOM support | `rulehub-mlsec`, `rulehub-llmsec` |
-| **M3** | Cloud registry + telemetry agent + docs site | `rulehub-cloud`, `rulehub-observability-agent`, `rulehub-docs` |
+| Milestone | Target                                                        | Artifacts                                                      |
+| --------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
+| **M1**    | Core release + policy framework, Helm chart, Backstage plugin | `rulehub`, `rulehub-charts`, `rulehub-backstage-plugin`        |
+| **M2**    | MLSec / LLMSec modules + AIBOM support                        | `rulehub-mlsec`, `rulehub-llmsec`                              |
+| **M3**    | Cloud registry + telemetry agent + docs site                  | `rulehub-cloud`, `rulehub-observability-agent`, `rulehub-docs` |
 
 ## Repository Structure
 
-| Repo | Purpose |
-|------|----------|
-| [`rulehub/rulehub`](https://github.com/rulehub/rulehub) | Core Policy-as-Code engine |
-| [`rulehub-charts`](https://github.com/rulehub/rulehub-charts) | Helm charts and release bundles |
-| [`rulehub-backstage-plugin`](https://github.com/rulehub/rulehub-backstage-plugin) | Backstage UI plugin |
-| [`rulehub-mlsec`](https://github.com/rulehub/rulehub-mlsec) | ML pipeline security policies |
-| [`rulehub-llmsec`](https://github.com/rulehub/rulehub-llmsec) | LLM guardrails and runtime policies |
-| [`rulehub-observability-agent`](https://github.com/rulehub/rulehub-observability-agent) | Telemetry collector |
+| Repo                                                                                    | Purpose                             |
+| --------------------------------------------------------------------------------------- | ----------------------------------- |
+| [`rulehub/rulehub`](https://github.com/rulehub/rulehub)                                 | Core Policy-as-Code engine          |
+| [`rulehub-charts`](https://github.com/rulehub/rulehub-charts)                           | Helm charts and release bundles     |
+| [`rulehub-backstage-plugin`](https://github.com/rulehub/rulehub-backstage-plugin)       | Backstage UI plugin                 |
 
 ---
 

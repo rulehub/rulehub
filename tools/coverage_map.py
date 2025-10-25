@@ -121,7 +121,8 @@ def load_metadata_index():
 
 def load_mappings():
     maps = []
-    for mp in MAPS_DIR.glob("*.yml"):
+    # Deterministic order: sort files by path
+    for mp in sorted(MAPS_DIR.glob("*.yml")):
         with open(mp, "r", encoding="utf-8") as f:
             maps.append(yaml.safe_load(f) or {})
     return maps
@@ -235,7 +236,9 @@ def validate_paths(meta_idx):
 def build_policies_index(meta_idx, path_status):
     """Return list of policy objects for OUT_INDEX_JSON (no sorting to preserve current order)."""
     policies = []
-    for pid, meta in meta_idx.items():
+    # Deterministic order: iterate by sorted policy id
+    for pid in sorted(meta_idx.keys()):
+        meta = meta_idx[pid]
         framework = meta.get("framework")
         severity = meta.get("severity")
         paths = meta.get("path") or []
@@ -591,7 +594,9 @@ def write_json_outputs(maps, meta_idx):
         return uniq_sorted
 
     packages: list[dict[str, Any]] = []
-    for pid, meta in meta_idx.items():
+    # Deterministic order: iterate by sorted policy id
+    for pid in sorted(meta_idx.keys()):
+        meta = meta_idx[pid]
         # Base required fields (sanitize placeholders with heuristics)
         std_val = meta.get("standard")
         ver_val = meta.get("version")

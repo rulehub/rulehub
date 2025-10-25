@@ -1,0 +1,73 @@
+name: publish-plugin-index
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - "tools/**"
+            - "policies/**"
+            - "compliance/maps/**"
+            - "requirements*.txt"
+            - ".github/workflows/publish-plugin-index.yml"
+
+permissions:
+    contents: write
+
+concurrency:
+    group: publish-plugin-index
+    cancel-in-progress: false
+
+jobs:
+    build-validate-publish:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        steps:
+            - name: Checkout
+              uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+            - name: Set up Python 3.11
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+
+            - name: Generate plugin index and reports
+              env:
+                  # Ensure deterministic repo URL base (default already points to main)
+                  RULEHUB_REPO_URL_BASE: https://github.com/rulehub/rulehub/blob/main/
+              run: |
+                  python tools/coverage_map.py
+
+            - name: Validate plugin index schema
+              run: |
+                  python tools/plugin_index_validate.py --schema tools/schemas/plugin-index.schema.json --index dist/index.json
+
+            - name: Produce checksum for index.json
+              run: |
+                  shasum -a 256 dist/index.json | awk '{print $1}' > dist/index.json.sha256
+
+            - name: Upload artifact (plugin-index dist)
+              uses: actions/upload-artifact@v4
+              with:
+                  name: plugin-index-dist
+                  if-no-files-found: error
+                  path: |
+                      dist/index.json
+                      dist/index.json.sha256
+                      dist/policies.csv
+                      dist/coverage.json
+
+            - name: Publish to gh-pages (plugin-index/)
+              if: ${{ github.ref == 'refs/heads/main' }}
+              uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_branch: gh-pages
+                  publish_dir: ./dist
+                  destination_dir: plugin-index
+                  keep_files: true
+                  commit_message: "ci(publish-plugin-index): update plugin-index artifacts"
