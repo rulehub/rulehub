@@ -71,9 +71,11 @@ deps:
 # Generate lock files with pip-tools, using Python marker and hashes for reproducibility
 lock:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
-	$(PIP) install -U pip >/dev/null
-	# Pin pip-tools to a version compatible with modern pip (avoid use_pep517 attr errors)
-	$(PIP) install "pip-tools>=7.9,<9" >/dev/null
+	# Ensure a pip/pip-tools combo known to be compatible with Python 3.12 and avoids
+	# AttributeError: 'InstallRequirement' has no attribute 'use_pep517' in pip-tools.
+	# pip-tools 7.5.1 supports pip 24.x; later pip (25.x) can break older pip-tools.
+	$(PIP) install -U "pip<25" >/dev/null
+	$(PIP) install "pip-tools==7.5.1" >/dev/null
 	$(VENV)/bin/pip-compile \
 	  --upgrade \
 	  --generate-hashes \
@@ -84,9 +86,9 @@ lock:
 
 lock-dev:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
-	$(PIP) install -U pip >/dev/null
-	# Pin pip-tools to a version compatible with modern pip (avoid use_pep517 attr errors)
-	$(PIP) install "pip-tools>=7.9,<9" >/dev/null
+	# Match pip/pip-tools versions to avoid resolver API breakage (see lock target)
+	$(PIP) install -U "pip<25" >/dev/null
+	$(PIP) install "pip-tools==7.5.1" >/dev/null
 	$(VENV)/bin/pip-compile \
 	  --upgrade \
 	  --generate-hashes \
