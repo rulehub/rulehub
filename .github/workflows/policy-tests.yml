@@ -48,6 +48,10 @@ permissions:
   contents: read
   packages: read
 
+env:
+  # Default empty; nektos/act sets ACT=true in jobs. This allows using env.ACT in conditions without linter complaints.
+  ACT: ""
+
 jobs:
   guard:
     name: Require CI image tag (no drift)
@@ -88,6 +92,7 @@ jobs:
       changed_gatekeeper: ${{ steps.set.outputs.changed_gatekeeper }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
         with:
           fetch-depth: 0
@@ -136,6 +141,7 @@ jobs:
       PYTHONPATH: /github/workspace
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       # Node & Python are provided by the CI container image
       - name: Prepare Python env (venv with baked deps)
@@ -164,6 +170,7 @@ jobs:
       PYTHONPATH: /github/workspace
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Record start time
         run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
@@ -201,6 +208,7 @@ jobs:
       PYTHONPATH: /github/workspace
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Record start time
         run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
@@ -238,6 +246,7 @@ jobs:
       PYTHONPATH: /github/workspace
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       # Node & Python are provided by the CI container image
       - name: Prepare Python env (venv with baked deps)
@@ -264,6 +273,7 @@ jobs:
       ALLOW_MULTI_INADEQUATE: 200
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       # Ensure Python deps installed in venv before enforcing thresholds
       - name: Enforce thresholds (dual-direction 100%, no multi-rule gaps)

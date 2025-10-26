@@ -140,7 +140,7 @@ jobs:
         steps:
             - name: Resolve
               id: r
-              uses: rulehub/rulehub/.github/actions/resolve-ci-image@main
+              uses: ./.github/actions/resolve-ci-image
               with:
                   ci_image_tag: ${{ inputs.ci_image_tag }}
                   kind: ${{ inputs.kind }}

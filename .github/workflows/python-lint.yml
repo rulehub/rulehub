@@ -30,10 +30,17 @@ concurrency:
 jobs:
   guard:
     name: Require CI image tag (no drift)
-    uses: ./.github/workflows/resolve-ci-image.yml
-    with:
-      ci_image_tag: ${{ inputs.ci_image_tag }}
-      kind: base
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.r.outputs.image }}
+      tag: ${{ steps.r.outputs.tag }}
+    steps:
+      - name: Resolve CI image
+        id: r
+        uses: ./.github/actions/resolve-ci-image
+        with:
+          ci_image_tag: ${{ inputs.ci_image_tag }}
+          kind: base
 
   resolve:
     name: Resolve CI image (base)
@@ -51,7 +58,7 @@ jobs:
           echo "tag=${{ needs.guard.outputs.tag }}" >> "$GITHUB_OUTPUT"
 
   ruff:
-    needs: [guard, resolve]
+    needs: [resolve]
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"
@@ -74,7 +81,7 @@ jobs:
   # Separate upload job to avoid cloning actions in the ruff job under ACT
   upload-sarif:
     if: ${{ github.actor != 'nektos/act' }}
-    needs: [guard, resolve]
+    needs: [resolve]
     runs-on: ubuntu-latest
     container:
       image: "${{ needs.resolve.outputs.image }}"

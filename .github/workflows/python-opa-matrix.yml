@@ -22,6 +22,10 @@ permissions:
   contents: read
   packages: read
 
+env:
+  # Default empty; nektos/act sets ACT=true in jobs. Our act runner also exports ACT=true.
+  ACT: ""
+
 jobs:
   matrix-compat:
     name: Python ${{ matrix.python-version }} / OPA ${{ matrix.opa-version }}
@@ -36,10 +40,9 @@ jobs:
       matrix:
         python-version: ["3.11", "3.12", "3.13"]
         opa-version: ["1.6.0", "1.7.1"]
-    # Skip under ACT to avoid network-dependent setup steps
-    if: ${{ github.actor != 'nektos/act' }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: Resolve Python interpreter for ${{ matrix.python-version }}
@@ -76,6 +79,7 @@ jobs:
           fi
 
       - name: Install Python deps (minimal)
+        if: ${{ env.ACT != 'true' }}
         env:
           PYTHON_BIN: ${{ env.PYTHON_BIN }}
         run: bash .github/scripts/python-venv-install.sh
@@ -109,9 +113,4 @@ jobs:
         run: |
           echo "python=${{ matrix.python-version }} opa=${{ matrix.opa-version }} status=${{ job.status }}"
 
-  noop-act:
-    # Lightweight success path for local ACT runs
-    if: ${{ github.actor == 'nektos/act' }}
-    runs-on: ubuntu-latest
-    steps:
       - run: echo "[act] python-opa-matrix skipped."

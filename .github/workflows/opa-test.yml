@@ -13,6 +13,10 @@ permissions:
   contents: read
   packages: read
 
+env:
+  # Default empty; nektos/act sets ACT=true in jobs. This allows using env.ACT in conditions without linter complaints.
+  ACT: ""
+
 concurrency:
   group: opa-test-${{ github.ref }}
   cancel-in-progress: true
@@ -24,6 +28,7 @@ jobs:
       CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
@@ -39,6 +44,7 @@ jobs:
       tag: ${{ steps.r.outputs.tag }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve image
         id: r
@@ -58,6 +64,7 @@ jobs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Try anonymous pull (ci-policy)
         id: probe
@@ -83,6 +90,7 @@ jobs:
     # Local act: override via CI_IMAGE_TAG=dev-local and -P image remap.
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        if: ${{ env.ACT != 'true' }}
       - name: OPA version (from CI image)
         run: opa version
       - name: Run OPA tests (betting)
@@ -95,6 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        if: ${{ env.ACT != 'true' }}
       - name: Setup OPA (host)
         run: |
           set -euo pipefail

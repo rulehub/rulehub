@@ -28,6 +28,10 @@ permissions:
   actions: write
   packages: read
 
+env:
+  # Default empty; nektos/act sets ACT=true in jobs. This allows using env.ACT in conditions without linter complaints.
+  ACT: ""
+
 jobs:
   guard:
     name: Require CI image tag (no drift)
@@ -36,6 +40,7 @@ jobs:
       is_act: ${{ steps.detect.outputs.is_act }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Enforce non-latest CI image tag
         shell: bash
@@ -63,6 +68,7 @@ jobs:
       image: ${{ steps.resolve.outputs.image }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Resolve CI image (ci-base)
         id: resolve
@@ -104,6 +110,7 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Checkout
+        if: ${{ env.ACT != 'true' }}
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       - name: Prepare Python env (venv with baked deps)
         run: |
