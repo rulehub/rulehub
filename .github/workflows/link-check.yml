@@ -87,6 +87,10 @@ jobs:
             TOTAL=$(jq "$JQ_ERRS errs | length" lychee.json || echo 0)
             HARD=$(jq "$JQ_ERRS [errs[] | select((.status|type!=\"number\") or ((.status|type==\"number\") and (.status!=429) and (.status<500 or .status>599)))] | length" lychee.json || echo 0)
             SOFT=$(jq "$JQ_ERRS [errs[] | select((.status|type==\"number\") and ((.status==429) or (.status>=500 and .status<=599)))] | length" lychee.json || echo 0)
+            # Coerce empty values to 0 to avoid integer expression errors
+            TOTAL=${TOTAL:-0}
+            HARD=${HARD:-0}
+            SOFT=${SOFT:-0}
             echo "### Link Check Summary" >> $GITHUB_STEP_SUMMARY
             echo "Total failures considered: $TOTAL" >> $GITHUB_STEP_SUMMARY
             echo "Hard failures: $HARD" >> $GITHUB_STEP_SUMMARY

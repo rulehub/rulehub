@@ -72,7 +72,8 @@ deps:
 lock:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
 	$(PIP) install -U pip >/dev/null
-	$(PIP) install pip-tools >/dev/null
+	# Pin pip-tools to a version compatible with modern pip (avoid use_pep517 attr errors)
+	$(PIP) install "pip-tools>=7.4,<9" >/dev/null
 	$(VENV)/bin/pip-compile \
 	  --upgrade \
 	  --generate-hashes \
@@ -84,7 +85,8 @@ lock:
 lock-dev:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
 	$(PIP) install -U pip >/dev/null
-	$(PIP) install pip-tools >/dev/null
+	# Pin pip-tools to a version compatible with modern pip (avoid use_pep517 attr errors)
+	$(PIP) install "pip-tools>=7.4,<9" >/dev/null
 	$(VENV)/bin/pip-compile \
 	  --upgrade \
 	  --generate-hashes \

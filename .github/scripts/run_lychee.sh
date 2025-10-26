@@ -48,21 +48,43 @@ run_lychee() {
   if command -v lychee >/dev/null 2>&1; then
     lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"
   else
-    # Try primary image first; on manifest issues, retry once without the leading 'v' in tag.
+    # Try primary image first; on manifest issues, try progressively resilient fallbacks.
     if docker run --rm -v "$PWD:/workspace" -w /workspace "$LYCHEE_IMAGE" \
       lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"; then
       return 0
     fi
     # If image tag has a leading 'v', try a fallback without it.
+    local tried_no_v=false
     if [[ "$LYCHEE_IMAGE" =~ :(v[0-9].*)$ ]]; then
       local _tag_with_v="${BASH_REMATCH[1]}"
       local _fallback_image="${LYCHEE_IMAGE/:$_tag_with_v/:${_tag_with_v#v}}"
       echo "[run_lychee] primary image failed; attempting fallback image: $_fallback_image" >&2
-      docker run --rm -v "$PWD:/workspace" -w /workspace "$_fallback_image" \
-        lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"
-      return
+      if docker run --rm -v "$PWD:/workspace" -w /workspace "$_fallback_image" \
+        lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"; then
+        return 0
+      fi
+      tried_no_v=true
     fi
-    # No fallback applicable; propagate failure
+    # Try Docker Hub mirror if GHCR tag is unavailable
+    # Preserve tag part from LYCHEE_IMAGE
+    local _img_repo_tag="${LYCHEE_IMAGE#ghcr.io/}"
+    local _tag_part="${_img_repo_tag##*:}"
+    local _dockerhub_img="docker.io/lycheeverse/lychee:${_tag_part}"
+    echo "[run_lychee] attempting docker hub image: $_dockerhub_img" >&2
+    if docker run --rm -v "$PWD:/workspace" -w /workspace "$_dockerhub_img" \
+      lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"; then
+      return 0
+    fi
+    # If we haven't already tried no-'v' tag and tag starts with v, try docker hub without 'v'
+    if [[ "$tried_no_v" == false && "$_tag_part" =~ ^v[0-9].* ]]; then
+      local _dockerhub_img_nov="docker.io/lycheeverse/lychee:${_tag_part#v}"
+      echo "[run_lychee] attempting docker hub image without 'v': $_dockerhub_img_nov" >&2
+      if docker run --rm -v "$PWD:/workspace" -w /workspace "$_dockerhub_img_nov" \
+        lychee "${COMMON_ARGS[@]}" "${extra[@]}" "${inputs[@]}"; then
+        return 0
+      fi
+    fi
+    # All attempts failed
     return 1
   fi
 }
