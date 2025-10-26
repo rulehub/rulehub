@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 # Run lychee link checker via docker image with retries and classification.
 # Env vars:
-#   LYCHEE_IMAGE   - image ref (default ghcr.io/lycheeverse/lychee:v0.15.1)
+#   LYCHEE_IMAGE   - image ref (default ghcr.io/lycheeverse/lychee:v0.16.1)
 #   LYCHEE_RETRIES - retry attempts for non-json runs (default 3)
 #   LYCHEE_JSON    - output JSON path (default lychee.json)
 #   LYCHEE_MAX_CONCURRENCY - lychee concurrency (default 8)
@@ -11,7 +11,7 @@ set -Eeuo pipefail
 #   LYCHEE_INPUTS          - input glob(s) for lychee (default '**/*.md')
 #   ACT            - if set to "true", use relaxed behavior under act (ignore soft failures and image pull issues)
 
-LYCHEE_IMAGE=${LYCHEE_IMAGE:-ghcr.io/lycheeverse/lychee:v0.15.1}
+LYCHEE_IMAGE=${LYCHEE_IMAGE:-ghcr.io/lycheeverse/lychee:v0.16.1}
 LYCHEE_RETRIES=${LYCHEE_RETRIES:-3}
 LYCHEE_JSON=${LYCHEE_JSON:-lychee.json}
 LYCHEE_MAX_CONCURRENCY=${LYCHEE_MAX_CONCURRENCY:-8}
