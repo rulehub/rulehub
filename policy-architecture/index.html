@@ -1,0 +1,1894 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Compliance & policy hub (OPA Gatekeeper, Kyverno, domain coverage maps)">
+      
+      
+      
+        <link rel="canonical" href="https://rulehub.github.io/rulehub/policy-architecture/">
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../metadata/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Policy Architecture - RuleHub</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#policy-as-code-architecture-opa-bundles-oci-gatekeeper-kyverno" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="RuleHub" class="md-header__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            RuleHub
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Policy Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="RuleHub" class="md-nav__button md-logo" aria-label="RuleHub" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    RuleHub
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rulehub/rulehub" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rulehub/rulehub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Policy Architecture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy Architecture
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-flow-author-test-bundle-publish-consume" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-end Flow (author -&gt; test -&gt; bundle -&gt; publish -&gt; consume)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-structure-and-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository structure and naming
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository structure and naming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimal-file-scaffolds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimal file scaffolds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributor-path-add-a-policy-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributor path: Add a policy (step-by-step)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consumer-path-use-a-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumer path: Use a policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makeci-steps-validate-test-bundle-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make/CI steps (validate -&gt; test -&gt; bundle -&gt; publish)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rego-style-guide-repository-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rego Style Guide (Repository Conventions)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rego Style Guide (Repository Conventions)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mandatory-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mandatory Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prohibited-constructs-auto-scanned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prohibited constructs (auto-scanned)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-examples-violation-deny" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rewrite examples (violation[...] -&gt; deny[...])
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test style
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deny-rule-normalization-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deny rule normalization patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling enforcement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-checklists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality checklists
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-primary-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      References (primary sources)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coverage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compliance-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compliance Maps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugin Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes Policies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Kubernetes Policies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    K8s Policies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security & Supply Chain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Security & Supply Chain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build Info
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-provenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Provenance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Release Process
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Versioning & Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Runbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-integrity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integrity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../link-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Link Quality Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editorial-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Editorial Checklist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aggregated References
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extras
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Extras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle format
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opa-bundle-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OPA bundle usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Performance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-test-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy test quality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-title-sync-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Policy title sync plan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-threat-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security threat model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-flow-author-test-bundle-publish-consume" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-end Flow (author -&gt; test -&gt; bundle -&gt; publish -&gt; consume)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-structure-and-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository structure and naming
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository structure and naming">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimal-file-scaffolds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimal file scaffolds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributor-path-add-a-policy-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributor path: Add a policy (step-by-step)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consumer-path-use-a-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumer path: Use a policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makeci-steps-validate-test-bundle-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make/CI steps (validate -&gt; test -&gt; bundle -&gt; publish)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rego-style-guide-repository-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rego Style Guide (Repository Conventions)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rego Style Guide (Repository Conventions)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mandatory-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mandatory Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prohibited-constructs-auto-scanned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prohibited constructs (auto-scanned)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-examples-violation-deny" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rewrite examples (violation[...] -&gt; deny[...])
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test style
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deny-rule-normalization-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deny rule normalization patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooling-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tooling enforcement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-checklists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality checklists
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-primary-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      References (primary sources)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/rulehub/rulehub/edit/main/docs/policy-architecture.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="policy-as-code-architecture-opa-bundles-oci-gatekeeper-kyverno">Policy-as-Code Architecture (OPA Bundles, OCI, Gatekeeper, Kyverno)<a class="headerlink" href="#policy-as-code-architecture-opa-bundles-oci-gatekeeper-kyverno" title="Permanent link">&para;</a></h1>
+<p>This document specifies how to add, package, publish, and use RuleHub policies as OPA bundles in OCI registries, in Kubernetes (Gatekeeper, Kyverno), and in CI pipelines.</p>
+<h2 id="end-to-end-flow-author-test-bundle-publish-consume">End-to-end Flow (author -&gt; test -&gt; bundle -&gt; publish -&gt; consume)<a class="headerlink" href="#end-to-end-flow-author-test-bundle-publish-consume" title="Permanent link">&para;</a></h2>
+<p>Figure (text alternative for the following mermaid diagram, for screen readers): The lifecycle proceeds linearly: Author policy (create Rego, metadata, and tests) -&gt; Validate (format, schema) -&gt; Unit tests (opa / kyverno / gatekeeper) -&gt; Build OPA bundle (tar artifact) -&gt; Publish to OCI registry -&gt; Two parallel consumption paths: (a) CI pipelines (conftest / opa eval) and (b) Kubernetes admission controllers (Gatekeeper / Kyverno). This describes how authored policies become consumable artifacts.</p>
+<pre><code class="language-mermaid">flowchart LR
+  A[Author policy\n- Rego module(s)\n- metadata.yaml\n- tests] --&gt; B[Validate\n- opa fmt/regal\n- metadata schema]
+  B --&gt; C[Unit tests\n- opa test\n- kyverno test\n- conftest (if applicable)]
+  C --&gt; D[Build OPA bundle\n- opa build -b policies\n- dist/opa-bundle.tar.gz]
+  D --&gt; E[Publish to OCI\n- ORAS push to GHCR\n- mediaType: application/vnd.opa.bundle.layer.v1+tar]
+  E --&gt; F[Consume in CI\n- conftest / opa eval\n- IaC checks]
+  E --&gt; G[Consume in K8s\n- Gatekeeper (ConstraintTemplate/Constraint)\n- Kyverno (Policy/ClusterPolicy)\n- Optional: OPA sidecar loads bundle]
+</code></pre>
+<h2 id="repository-structure-and-naming">Repository structure and naming<a class="headerlink" href="#repository-structure-and-naming" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Policies live under <code>policies/&lt;domain&gt;/&lt;policy_id&gt;/</code></li>
+<li><code>policy.rego</code> - Rego module(s)</li>
+<li><code>policy_test.rego</code> - unit tests for rules</li>
+<li><code>metadata.yaml</code> - id, title, description, references to standards (PCI/GDPR/etc.), coverage, paths</li>
+<li>Metadata schema under <code>tools/schemas/policy-metadata.schema.json</code> (already present)</li>
+<li>K8s integration examples under <code>addons/</code>:</li>
+<li>Gatekeeper ConstraintTemplates and Constraints: <code>addons/k8s-gatekeeper/{templates,constraints}/*.yaml</code></li>
+<li>Kyverno policies: <code>addons/kyverno/policies/*.yaml</code></li>
+<li>Helm chart for policy sets: external repository (<code>rulehub/rulehub-charts</code>)</li>
+<li>Docs: <code>docs/</code> (this page, coverage, metadata docs)</li>
+<li>CI workflows: <code>.github/workflows/**</code></li>
+</ul>
+<p>Naming conventions:</p>
+<ul>
+<li>Rego package: <code>package rulehub.&lt;domain&gt;.&lt;policy_id&gt;</code></li>
+<li>Policy ID: <code>&lt;domain&gt;.&lt;slug&gt;</code>; do not mix kebab/underscore inside the same identifier. Prefer dot-separated package path and snake_case rule names if needed.</li>
+<li>Versioning:</li>
+<li>Record standard versions (e.g., PCI DSS 4.0) in <code>metadata.yaml</code> under <code>references</code>.</li>
+<li>OPA bundle tag: semantic version or a short SHA label. OCI reference example: <code>oci://ghcr.io/rulehub/rulehub-bundle:&lt;tag&gt;</code></li>
+</ul>
+<h3 id="minimal-file-scaffolds">Minimal file scaffolds<a class="headerlink" href="#minimal-file-scaffolds" title="Permanent link">&para;</a></h3>
+<p><code>policies/&lt;domain&gt;/&lt;policy_id&gt;/policy.rego</code></p>
+<ul>
+<li>Contract:</li>
+<li>Input: depends on use case (e.g., Kubernetes object for admission, or IaC document for CI)</li>
+<li>Output: decision rules with boolean/objects</li>
+</ul>
+<p>Example skeleton:</p>
+<pre><code class="language-rego">package rulehub.k8s.no_run_as_root
+
+default deny := false
+
+deny[msg] {
+  input.kind == &quot;Pod&quot;
+  some c
+  c := input.spec.containers[_]
+  not c.securityContext.runAsNonRoot
+  msg := &quot;Containers must set securityContext.runAsNonRoot=true&quot;
+}
+</code></pre>
+<p><code>policies/&lt;domain&gt;/&lt;policy_id&gt;/policy_test.rego</code></p>
+<pre><code class="language-rego">package rulehub.k8s.no_run_as_root
+
+import data.rulehub.k8s.no_run_as_root as pol
+
+# happy path
+test_all_containers_run_as_non_root {
+  input := {
+    &quot;kind&quot;: &quot;Pod&quot;,
+    &quot;spec&quot;: {&quot;containers&quot;: [{&quot;securityContext&quot;: {&quot;runAsNonRoot&quot;: true}}]}
+  }
+  not pol.deny[_]
+}
+
+# violation
+test_violation_when_missing_flag {
+  input := {
+    &quot;kind&quot;: &quot;Pod&quot;,
+    &quot;spec&quot;: {&quot;containers&quot;: [{&quot;name&quot;: &quot;c1&quot;}]}
+  }
+  count(pol.deny) == 1
+}
+</code></pre>
+<p><code>policies/&lt;domain&gt;/&lt;policy_id&gt;/metadata.yaml</code> (fields per existing schema; example):</p>
+<pre><code class="language-yaml">id: k8s.no_run_as_root
+name: 'K8s: Disallow root user'
+version: 1.0.0
+owner: platform-security
+path:
+  - policies/k8s/no_run_as_root/policy.rego
+  - policies/k8s/no_run_as_root/policy_test.rego
+references:
+  - standard: Kubernetes
+    section: SecurityContext
+  - standard: GDPR
+    section: Art. 5(1)(f)
+  - standard: PCI DSS
+    version: '4.0'
+    section: 2.2
+</code></pre>
+<h2 id="contributor-path-add-a-policy-step-by-step">Contributor path: Add a policy (step-by-step)<a class="headerlink" href="#contributor-path-add-a-policy-step-by-step" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Create a directory: <code>policies/&lt;domain&gt;/&lt;policy_id&gt;/</code></li>
+<li>Add <code>policy.rego</code> following Styra Rego Style Guide (packages, rule naming, comments)</li>
+<li>Add <code>policy_test.rego</code> with unit tests (<code>opa test</code>)</li>
+<li>Add <code>metadata.yaml</code> valid per <code>tools/schemas/policy-metadata.schema.json</code></li>
+<li>Run local checks:</li>
+<li>Format: <code>opa fmt -w policies/&lt;domain&gt;/&lt;policy_id&gt;/policy.rego</code></li>
+<li>Validate metadata: <code>make validate</code></li>
+<li>Unit tests: <code>opa test -v policies</code></li>
+<li>If applicable, add K8s examples in <code>addons/</code>; external chart repo manages packaging.</li>
+<li>Update compliance maps in <code>compliance/maps/*.yml</code> if this policy contributes to coverage</li>
+<li>Submit PR; CI runs validate -&gt; test -&gt; bundle (if Rego present) -&gt; optionally publish on main</li>
+</ul>
+<h2 id="consumer-path-use-a-policy">Consumer path: Use a policy<a class="headerlink" href="#consumer-path-use-a-policy" title="Permanent link">&para;</a></h2>
+<p>In CI (IaC validation):</p>
+<ul>
+<li>
+<p>Pull the bundle from OCI and evaluate against files using Conftest or OPA:</p>
+</li>
+<li>
+<p>Conftest example:</p>
+<ul>
+<li>Fetch bundle artifact (e.g., using <code>oras pull</code> to <code>dist/opa-bundle.tar.gz</code>)</li>
+<li>Run: <code>conftest test -p dist/opa-bundle.tar.gz path/to/manifests/</code></li>
+</ul>
+</li>
+<li>
+<p>OPA example:</p>
+<ul>
+<li><code>opa eval -b dist/opa-bundle.tar.gz -i input.json "data.rulehub.k8s.no_run_as_root.deny"</code></li>
+</ul>
+</li>
+</ul>
+<p>In Kubernetes:</p>
+<ul>
+<li>Gatekeeper</li>
+<li>Apply ConstraintTemplate with embedded Rego, then create Constraint targeting resources</li>
+<li>Example ConstraintTemplate (excerpt):</li>
+</ul>
+<pre><code class="language-yaml">apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srunasnonroot
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRunAsNonRoot
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srunasnonroot
+        violation[{&quot;msg&quot;: msg}] {
+          some c
+          c := input.review.object.spec.containers[_]
+          not c.securityContext.runAsNonRoot
+          msg := &quot;Containers must set securityContext.runAsNonRoot=true&quot;
+        }
+</code></pre>
+<ul>
+<li>Example Constraint:</li>
+</ul>
+<pre><code class="language-yaml">apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRunAsNonRoot
+metadata:
+  name: disallow-root-users
+spec:
+  match:
+    kinds:
+      - apiGroups: ['']
+        kinds: ['Pod']
+</code></pre>
+<ul>
+<li>Kyverno</li>
+</ul>
+<pre><code class="language-yaml">apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-root-users
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: disallow-root
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+      validate:
+        message: 'Containers must set securityContext.runAsNonRoot=true'
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  runAsNonRoot: true
+</code></pre>
+<p>Optional runtime OPA: configure OPA sidecar to pull bundles from OCI registry as a bundle source (see OPA docs) and evaluate decisions through its API.</p>
+<h2 id="makeci-steps-validate-test-bundle-publish">Make/CI steps (validate -&gt; test -&gt; bundle -&gt; publish)<a class="headerlink" href="#makeci-steps-validate-test-bundle-publish" title="Permanent link">&para;</a></h2>
+<p>Make targets (see repo <code>Makefile</code>):</p>
+<ul>
+<li><code>make validate</code> - validate metadata against JSON Schema</li>
+<li><code>make test</code> - run Kyverno and Gatekeeper tests</li>
+<li><code>make opa-bundle</code> - build <code>dist/opa-bundle.tar.gz</code> from <code>policies/</code> (if <code>.rego</code> files exist)</li>
+<li><code>make oras-publish IMAGE=ghcr.io/rulehub/rulehub-bundle TAG=&lt;tag&gt;</code> - publish the bundle to OCI with correct mediaType</li>
+</ul>
+<p>GitHub Actions workflow <code>.github/workflows/opa-bundle-publish.yml</code> publishes on pushes to <code>main</code> and releases.</p>
+<h2 id="rego-style-guide-repository-conventions">Rego Style Guide (Repository Conventions)<a class="headerlink" href="#rego-style-guide-repository-conventions" title="Permanent link">&para;</a></h2>
+<p>This repository locks in a subset of the Styra / community style plus additional safety constraints aligned with Rego v1 parsing rules enforced by our current OPA version.</p>
+<p>Goals:</p>
+<ul>
+<li>Deterministic parsing across OPA minor upgrades</li>
+<li>Readable, uniform violation structure</li>
+<li>Early surfacing of logic errors (parse/type) before bundle build</li>
+</ul>
+<h3 id="mandatory-patterns">Mandatory Patterns<a class="headerlink" href="#mandatory-patterns" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Atomic deny rules</li>
+</ol>
+<p>Prefer multiple small <code>deny["&lt;id&gt;"]</code> or <code>deny[msg]</code> (fixed message form) rules over one large rule with boolean chains.</p>
+<ol>
+<li>Control (allow) rule</li>
+</ol>
+<p>Pattern for policies using an <code>allow</code> decision:</p>
+<pre><code class="language-rego">package rulehub.&lt;domain&gt;.&lt;policy_id&gt;
+
+deny[&quot;&lt;short_reason&gt;&quot;] { &lt;atomic condition 1&gt; }
+deny[&quot;&lt;other_reason&gt;&quot;] { &lt;atomic condition 2&gt; }
+
+# Allow when nothing denied
+allow if count(deny) == 0
+</code></pre>
+<p>Alternative boolean default (<code>default allow := true</code> then set <code>allow := false</code>) is discouraged for consistency.</p>
+<ol>
+<li>Formatting</li>
+</ol>
+<p>All Rego sources must pass <code>opa fmt</code> (pre-commit <code>opa-fmt</code>, CI quick check).</p>
+<ol>
+<li>Package naming</li>
+</ol>
+<p><code>package rulehub.&lt;domain&gt;.&lt;policy_id&gt;</code> (lowercase, dotted). No hyphens inside segments.</p>
+<ol>
+<li>Tests colocated</li>
+</ol>
+<p><code>policy_test.rego</code> MUST use same package (and may alias: <code>import data.rulehub.&lt;domain&gt;.&lt;policy_id&gt; as pol</code>).</p>
+<h3 id="prohibited-constructs-auto-scanned">Prohibited constructs (auto-scanned)<a class="headerlink" href="#prohibited-constructs-auto-scanned" title="Permanent link">&para;</a></h3>
+<p>The quick check (<code>make opa-quick-check</code> and workflow <code>opa-quick-check.yml</code>) fails on these textual patterns:</p>
+<ul>
+<li><code>(not</code> - Parenthesized negation grouping inside composite boolean expressions.</li>
+<li><code>and not</code> - Inline conjunction + negation; expand to separate rule or explicit equality lines.</li>
+<li><code>not (</code> - Leading <code>not</code> applied to grouped expression containing <code>and</code> / <code>or</code>.</li>
+<li><code>not in {</code> - Negated membership; rewrite as chained inequalities or explicit whitelist set.</li>
+</ul>
+<p>Rationale: Older / stricter Rego parser modes and future optimizations reject or mis-handle certain parenthesized negations; splitting conditions keeps each violation predicate simple and avoids hidden precedence errors.</p>
+<h3 id="rewrite-examples-violation-deny">Rewrite examples (<code>violation[...]</code> -&gt; <code>deny[...]</code>)<a class="headerlink" href="#rewrite-examples-violation-deny" title="Permanent link">&para;</a></h3>
+<p>Anti-pattern:</p>
+<pre><code class="language-rego">violation[msg] { (not input.enabled) or (not input.flag); msg := &quot;...&quot; } # example
+</code></pre>
+<p>Preferred:</p>
+<pre><code class="language-rego">deny[&quot;feature_disabled&quot;] { input.enabled == false }
+deny[&quot;flag_missing&quot;] { input.flag == false }
+</code></pre>
+<p>Anti-pattern:</p>
+<pre><code class="language-rego">deny { input.a and not input.b }
+</code></pre>
+<p>Preferred:</p>
+<pre><code class="language-rego">deny[&quot;b_missing_when_a&quot;] { input.a == true; input.b == false }
+</code></pre>
+<p>Anti-pattern:</p>
+<pre><code class="language-rego">violation { not (input.x and input.y) }
+</code></pre>
+<p>Preferred: separate violations (one per missing predicate) or explicit positive checks then count(violation)==0 for allow.</p>
+<p>Anti-pattern:</p>
+<pre><code class="language-rego">input.status not in {&quot;A&quot;,&quot;B&quot;}
+</code></pre>
+<p>Preferred:</p>
+<pre><code class="language-rego">input.status != &quot;A&quot;
+input.status != &quot;B&quot;
+</code></pre>
+<p>or</p>
+<pre><code class="language-rego">allowed := {&quot;A&quot;,&quot;B&quot;}
+not allowed[input.status]
+</code></pre>
+<h3 id="test-style">Test style<a class="headerlink" href="#test-style" title="Permanent link">&para;</a></h3>
+<p>Each test case should:</p>
+<ul>
+<li>Create a self-contained <code>input := {...}</code> object (no reliance on global state)</li>
+<li>Assert absence/presence of denies explicitly (<code>not pol.deny[_]</code> or <code>count(pol.deny) == N</code>)</li>
+<li>Cover at least one happy path and one failing path per policy</li>
+</ul>
+<h3 id="deny-rule-normalization-patterns">Deny rule normalization patterns<a class="headerlink" href="#deny-rule-normalization-patterns" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Split disjunctions (OR) across separate <code>deny[...]</code> rules.</li>
+<li>Convert <code>A and not B</code> into a single deny block listing both atomic lines (<code>A == true</code> and <code>B == false</code>).</li>
+<li>Replace negated group <code>not (A and B and C)</code> with multiple atomic deny rules (one per missing/false predicate) unless semantic meaning differs.</li>
+<li>Replace <code>X not in { ... }</code> with either explicit inequalities or a positive membership check plus <code>not</code> on the set (<code>allowed[X]</code> pattern) - but avoid negative set membership in a single expression.</li>
+</ol>
+<h3 id="tooling-enforcement">Tooling enforcement<a class="headerlink" href="#tooling-enforcement" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Mechanism</th>
+<th>Invocation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formatting</td>
+<td><code>opa fmt -l</code> via pre-commit <code>opa-fmt</code></td>
+<td><code>pre-commit run opa-fmt</code></td>
+</tr>
+<tr>
+<td>Forbidden patterns</td>
+<td>grep scan (see Makefile)</td>
+<td><code>make opa-quick-check</code></td>
+</tr>
+<tr>
+<td>Parse/type errors</td>
+<td><code>opa check policies</code></td>
+<td><code>make opa-quick-check</code></td>
+</tr>
+<tr>
+<td>deny[] rule usage scan</td>
+<td><code>tools/deny_usage_scan.py</code></td>
+<td>(add to CI before bundle)</td>
+</tr>
+<tr>
+<td>Unit tests</td>
+<td><code>opa test</code> / <code>make test-gatekeeper</code></td>
+<td>CI &amp; local</td>
+</tr>
+</tbody>
+</table>
+<p>Violations of style should be fixed in-place rather than waived.</p>
+<h2 id="quality-checklists">Quality checklists<a class="headerlink" href="#quality-checklists" title="Permanent link">&para;</a></h2>
+<p>Rego</p>
+<ul>
+<li>Formatted (<code>opa fmt</code>), optional <code>regal</code> lint</li>
+<li>Clear package names: <code>rulehub.&lt;domain&gt;.&lt;policy_id&gt;</code></li>
+<li>Tests cover happy path and violations; no magic constants without context</li>
+</ul>
+<p>Metadata</p>
+<ul>
+<li>Valid per schema; <code>path</code> includes all relevant files</li>
+<li>References to standards include version/section where possible</li>
+</ul>
+<p>Bundle</p>
+<ul>
+<li>Built via <code>opa build -b policies -o dist/opa-bundle.tar.gz</code></li>
+<li>Contents verified with <code>tar tzf dist/opa-bundle.tar.gz</code></li>
+<li>Media type used for OCI: <code>application/vnd.opa.bundle.layer.v1+tar</code></li>
+</ul>
+<p>Publication</p>
+<ul>
+<li>ORAS push uses semantic or SHA tags</li>
+<li>Artifact annotated with repository and commit information</li>
+</ul>
+<p>Kubernetes</p>
+<ul>
+<li>Gatekeeper: provide <code>ConstraintTemplate</code> and <code>Constraint</code> examples with parameter schema where needed (use <code>deny[msg]</code>; avoid <code>violation[...]</code>)</li>
+<li>Kyverno: <code>validationFailureAction</code> set appropriately; include test fixtures if applicable</li>
+</ul>
+<h2 id="references-primary-sources">References (primary sources)<a class="headerlink" href="#references-primary-sources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OPA Bundles &amp; distribution</li>
+<li><a href="https://www.openpolicyagent.org/docs/latest/management-bundles/">OPA Bundles</a></li>
+<li><a href="https://oras.land/">ORAS CLI</a> (ORAS CLI)</li>
+<li>Rego Style Guide</li>
+<li><a href="https://github.com/StyraInc/rego-style-guide">Styra Rego Style Guide</a></li>
+<li>Gatekeeper</li>
+<li><a href="https://open-policy-agent.github.io/gatekeeper/website/">Gatekeeper</a></li>
+<li>Kyverno</li>
+<li><a href="https://kyverno.io/docs/">Kyverno</a></li>
+<li>Conftest</li>
+<li><a href="https://www.conftest.dev/">Conftest</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © {{ git_committers_time | date('YYYY') }} RuleHub contributors
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rulehub/rulehub" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
