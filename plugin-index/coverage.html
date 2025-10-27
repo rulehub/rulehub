@@ -1,0 +1,1270 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>RuleHub Coverage</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head><body>
+<h1>Compliance Coverage</h1>
+<div class="mermaid">flowchart LR
+EU_AMLD_5/6(["EU AMLD 5/6"])
+EU_AMLD_5/6_Article_13["Article 13: Customer due diligence"]
+EU_AMLD_5/6 --> EU_AMLD_5/6_Article_13
+aml_address_verification["Address verification
+(aml.address_verification)"]:::node
+class aml_address_verification present;
+EU_AMLD_5/6_Article_13 --> aml_address_verification
+aml_kyc_basic_cdd["Basic customer due diligence (KYC)
+(aml.kyc_basic_cdd)"]:::node
+class aml_kyc_basic_cdd present;
+EU_AMLD_5/6_Article_13 --> aml_kyc_basic_cdd
+aml_minimum_age["Minimum age check
+(aml.minimum_age)"]:::node
+class aml_minimum_age present;
+EU_AMLD_5/6_Article_13 --> aml_minimum_age
+aml_ubo_identification["Ultimate Beneficial Owner identification
+(aml.ubo_identification)"]:::node
+class aml_ubo_identification present;
+EU_AMLD_5/6_Article_13 --> aml_ubo_identification
+EU_AMLD_5/6_Article_18["Article 18: Enhanced due diligence"]
+EU_AMLD_5/6 --> EU_AMLD_5/6_Article_18
+aml_high_risk_country_edd["Enhanced due diligence for high-risk countries
+(aml.high_risk_country_edd)"]:::node
+class aml_high_risk_country_edd present;
+EU_AMLD_5/6_Article_18 --> aml_high_risk_country_edd
+aml_sanctions_check["Sanctions list screening
+(aml.sanctions_check)"]:::node
+class aml_sanctions_check present;
+EU_AMLD_5/6_Article_18 --> aml_sanctions_check
+EU_AMLD_5/6_Article_20["Article 20: PEP"]
+EU_AMLD_5/6 --> EU_AMLD_5/6_Article_20
+aml_pep_screening_required["PEP screening required
+(aml.pep_screening_required)"]:::node
+class aml_pep_screening_required present;
+EU_AMLD_5/6_Article_20 --> aml_pep_screening_required
+EU_AMLD_5/6_Article_33["Article 33: Transaction monitoring"]
+EU_AMLD_5/6 --> EU_AMLD_5/6_Article_33
+aml_txn_monitoring_thresholds["Transaction monitoring thresholds
+(aml.txn_monitoring_thresholds)"]:::node
+class aml_txn_monitoring_thresholds present;
+EU_AMLD_5/6_Article_33 --> aml_txn_monitoring_thresholds
+Betting_(multi-jurisdiction)_current(["Betting (multi-jurisdiction) current"])
+Betting_(multi-jurisdiction)_current_1__Operator_Controls["1. Operator Controls: Licensing, KYC and Core Controls"]
+Betting_(multi-jurisdiction)_current --> Betting_(multi-jurisdiction)_current_1__Operator_Controls
+betting_adr_provider_listed_uk["<Policy Title>
+(betting.adr_provider_listed_uk)"]:::node
+class betting_adr_provider_listed_uk present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_adr_provider_listed_uk
+betting_affordability_checks_uk["Affordability Checks (UK)
+(betting.affordability_checks_uk)"]:::node
+class betting_affordability_checks_uk present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_affordability_checks_uk
+betting_complaints_process_published["<Policy Title>
+(betting.complaints_process_published)"]:::node
+class betting_complaints_process_published present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_complaints_process_published
+betting_kyc_onboarding["KYC Onboarding
+(betting.kyc_onboarding)"]:::node
+class betting_kyc_onboarding present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_kyc_onboarding
+betting_kyc_on_withdrawal["<Policy Title>
+(betting.kyc_on_withdrawal)"]:::node
+class betting_kyc_on_withdrawal present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_kyc_on_withdrawal
+betting_license_check_adm_it["<Policy Title>
+(betting.license_check_adm_it)"]:::node
+class betting_license_check_adm_it present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_adm_it
+betting_license_check_anj_fr["<Policy Title>
+(betting.license_check_anj_fr)"]:::node
+class betting_license_check_anj_fr present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_anj_fr
+betting_license_check_au_nt["License Check — AU Northern Territory
+(betting.license_check_au_nt)"]:::node
+class betting_license_check_au_nt present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_au_nt
+betting_license_check_brazil_14790["License Check — Brazil 14.790/2023
+(betting.license_check_brazil_14790)"]:::node
+class betting_license_check_brazil_14790 present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_brazil_14790
+betting_license_check_ca_on_igaming["License Check — Ontario iGaming
+(betting.license_check_ca_on_igaming)"]:::node
+class betting_license_check_ca_on_igaming present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_ca_on_igaming
+betting_license_check_coljuegos_co["License Check — Coljuegos (CO)
+(betting.license_check_coljuegos_co)"]:::node
+class betting_license_check_coljuegos_co present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_coljuegos_co
+betting_license_check_dgoj_es["<Policy Title>
+(betting.license_check_dgoj_es)"]:::node
+class betting_license_check_dgoj_es present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_dgoj_es
+betting_license_check_ggl_de["<Policy Title>
+(betting.license_check_ggl_de)"]:::node
+class betting_license_check_ggl_de present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_ggl_de
+betting_license_check_gra_sg["License Check — GRA (SG)
+(betting.license_check_gra_sg)"]:::node
+class betting_license_check_gra_sg present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_gra_sg
+betting_license_check_ksa_nl["<Policy Title>
+(betting.license_check_ksa_nl)"]:::node
+class betting_license_check_ksa_nl present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_ksa_nl
+betting_license_check_mga["<Policy Title>
+(betting.license_check_mga)"]:::node
+class betting_license_check_mga present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_mga
+betting_license_check_spelinspektionen_se["<Policy Title>
+(betting.license_check_spelinspektionen_se)"]:::node
+class betting_license_check_spelinspektionen_se present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_spelinspektionen_se
+betting_license_check_spillemyndigheden_dk["<Policy Title>
+(betting.license_check_spillemyndigheden_dk)"]:::node
+class betting_license_check_spillemyndigheden_dk present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_spillemyndigheden_dk
+betting_license_check_ukgc["<Policy Title>
+(betting.license_check_ukgc)"]:::node
+class betting_license_check_ukgc present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_ukgc
+betting_license_check_us_co_division["License Check — CO Division
+(betting.license_check_us_co_division)"]:::node
+class betting_license_check_us_co_division present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_us_co_division
+betting_license_check_us_nj_dge["<Policy Title>
+(betting.license_check_us_nj_dge)"]:::node
+class betting_license_check_us_nj_dge present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_us_nj_dge
+betting_license_check_us_nv_ngcb["<Policy Title>
+(betting.license_check_us_nv_ngcb)"]:::node
+class betting_license_check_us_nv_ngcb present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_us_nv_ngcb
+betting_license_check_us_pa_pgcb["<Policy Title>
+(betting.license_check_us_pa_pgcb)"]:::node
+class betting_license_check_us_pa_pgcb present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_us_pa_pgcb
+betting_player_funds_segregation["<Policy Title>
+(betting.player_funds_segregation)"]:::node
+class betting_player_funds_segregation present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_player_funds_segregation
+betting_source_of_funds_checks["<Policy Title>
+(betting.source_of_funds_checks)"]:::node
+class betting_source_of_funds_checks present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_source_of_funds_checks
+betting_source_of_funds_thresholds["Source of Funds — Thresholds
+(betting.source_of_funds_thresholds)"]:::node
+class betting_source_of_funds_thresholds present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_source_of_funds_thresholds
+betting_license_check_agco_on["<Policy Title>
+(betting.license_check_agco_on)"]:::node
+class betting_license_check_agco_on present;
+Betting_(multi-jurisdiction)_current_1__Operator_Controls --> betting_license_check_agco_on
+Betting_(multi-jurisdiction)_current_2__Market_Integrity["2. Market Integrity: Integrity, Data, and Youth Protection"]
+Betting_(multi-jurisdiction)_current --> Betting_(multi-jurisdiction)_current_2__Market_Integrity
+betting_ads_bonus_terms_fair_clear["<Policy Title>
+(betting.ads_bonus_terms_fair_clear)"]:::node
+class betting_ads_bonus_terms_fair_clear present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_ads_bonus_terms_fair_clear
+betting_ads_no_minors_targeting["Ads — no minors targeting
+(betting.ads_no_minors_targeting)"]:::node
+class betting_ads_no_minors_targeting present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_ads_no_minors_targeting
+betting_age_verification_before_gambling_uk["<Policy Title>
+(betting.age_verification_before_gambling_uk)"]:::node
+class betting_age_verification_before_gambling_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_age_verification_before_gambling_uk
+betting_credit_card_gambling_ban_uk["<Policy Title>
+(betting.credit_card_gambling_ban_uk)"]:::node
+class betting_credit_card_gambling_ban_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_credit_card_gambling_ban_uk
+betting_data_integrity_audits["Data Integrity Audits
+(betting.data_integrity_audits)"]:::node
+class betting_data_integrity_audits present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_data_integrity_audits
+betting_game_rules_visible_before_play["<Policy Title>
+(betting.game_rules_visible_before_play)"]:::node
+class betting_game_rules_visible_before_play present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_game_rules_visible_before_play
+betting_geofencing_regulated_markets["<Policy Title>
+(betting.geofencing_regulated_markets)"]:::node
+class betting_geofencing_regulated_markets present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_geofencing_regulated_markets
+betting_in_play_delay_controls["In-Play Delay Controls
+(betting.in_play_delay_controls)"]:::node
+class betting_in_play_delay_controls present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_in_play_delay_controls
+betting_market_restrictions_youth["Market Restrictions — Youth/Underage
+(betting.market_restrictions_youth)"]:::node
+class betting_market_restrictions_youth present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_market_restrictions_youth
+betting_match_fixing_monitoring["Match-Fixing Monitoring
+(betting.match_fixing_monitoring)"]:::node
+class betting_match_fixing_monitoring present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_match_fixing_monitoring
+betting_no_bets_by_participants["No Bets By Participants
+(betting.no_bets_by_participants)"]:::node
+class betting_no_bets_by_participants present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_no_bets_by_participants
+betting_official_data_only["Official Data Only
+(betting.official_data_only)"]:::node
+class betting_official_data_only present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_official_data_only
+betting_reverse_withdrawal_ban_uk["<Policy Title>
+(betting.reverse_withdrawal_ban_uk)"]:::node
+class betting_reverse_withdrawal_ban_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_reverse_withdrawal_ban_uk
+betting_rng_certification_gli11["<Policy Title>
+(betting.rng_certification_gli11)"]:::node
+class betting_rng_certification_gli11 present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_rng_certification_gli11
+betting_rtp_disclosure_to_players["<Policy Title>
+(betting.rtp_disclosure_to_players)"]:::node
+class betting_rtp_disclosure_to_players present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_rtp_disclosure_to_players
+betting_suspicious_betting_reporting_uk["Suspicious Betting — Reporting (UK)
+(betting.suspicious_betting_reporting_uk)"]:::node
+class betting_suspicious_betting_reporting_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_suspicious_betting_reporting_uk
+betting_slots_min_spin_speed_uk["Slots Minimum Spin Speed (UK)
+(betting.slots_min_spin_speed_uk)"]:::node
+class betting_slots_min_spin_speed_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_slots_min_spin_speed_uk
+betting_slots_no_autoplay_uk["Slots No Autoplay (UK)
+(betting.slots_no_autoplay_uk)"]:::node
+class betting_slots_no_autoplay_uk present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_slots_no_autoplay_uk
+betting_slots_no_losses_disguised_as_wins["<Policy Title>
+(betting.slots_no_losses_disguised_as_wins)"]:::node
+class betting_slots_no_losses_disguised_as_wins present;
+Betting_(multi-jurisdiction)_current_2__Market_Integrity --> betting_slots_no_losses_disguised_as_wins
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring["3. AML Monitoring: Ongoing Monitoring & Anomalies"]
+Betting_(multi-jurisdiction)_current --> Betting_(multi-jurisdiction)_current_3__AML_Monitoring
+betting_aml_high_risk_country_restrictions["<Policy Title>
+(betting.aml_high_risk_country_restrictions)"]:::node
+class betting_aml_high_risk_country_restrictions present;
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring --> betting_aml_high_risk_country_restrictions
+betting_aml_sar_reporting_uk["AML SAR Reporting (UK)
+(betting.aml_sar_reporting_uk)"]:::node
+class betting_aml_sar_reporting_uk present;
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring --> betting_aml_sar_reporting_uk
+betting_ongoing_aml_monitoring["<Policy Title>
+(betting.ongoing_aml_monitoring)"]:::node
+class betting_ongoing_aml_monitoring present;
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring --> betting_ongoing_aml_monitoring
+betting_sanctions_screening_global["<Policy Title>
+(betting.sanctions_screening_global)"]:::node
+class betting_sanctions_screening_global present;
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring --> betting_sanctions_screening_global
+betting_txn_monitoring_anomalies["Transaction Monitoring — Anomalies
+(betting.txn_monitoring_anomalies)"]:::node
+class betting_txn_monitoring_anomalies present;
+Betting_(multi-jurisdiction)_current_3__AML_Monitoring --> betting_txn_monitoring_anomalies
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits["4. Player Protection & Limits: Player Protection & Limits"]
+Betting_(multi-jurisdiction)_current --> Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits
+betting_deposit_limit_controls["Deposit Limit Controls
+(betting.deposit_limit_controls)"]:::node
+class betting_deposit_limit_controls present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_deposit_limit_controls
+betting_loss_limit_controls["<Policy Title>
+(betting.loss_limit_controls)"]:::node
+class betting_loss_limit_controls present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_loss_limit_controls
+betting_reality_checks_elapsed_time["<Policy Title>
+(betting.reality_checks_elapsed_time)"]:::node
+class betting_reality_checks_elapsed_time present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_reality_checks_elapsed_time
+betting_safer_gambling_interactions["<Policy Title>
+(betting.safer_gambling_interactions)"]:::node
+class betting_safer_gambling_interactions present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_safer_gambling_interactions
+betting_self_exclusion_de_oasis["<Policy Title>
+(betting.self_exclusion_de_oasis)"]:::node
+class betting_self_exclusion_de_oasis present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_de_oasis
+betting_self_exclusion_dk_rofus["Self-exclusion (ROFUS - Denmark)
+(betting.self_exclusion_dk_rofus)"]:::node
+class betting_self_exclusion_dk_rofus present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_dk_rofus
+betting_self_exclusion_es_rgiaj["<Policy Title>
+(betting.self_exclusion_es_rgiaj)"]:::node
+class betting_self_exclusion_es_rgiaj present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_es_rgiaj
+betting_self_exclusion_nl_cruks["<Policy Title>
+(betting.self_exclusion_nl_cruks)"]:::node
+class betting_self_exclusion_nl_cruks present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_nl_cruks
+betting_self_exclusion_se_spelpaus["<Policy Title>
+(betting.self_exclusion_se_spelpaus)"]:::node
+class betting_self_exclusion_se_spelpaus present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_se_spelpaus
+betting_self_exclusion_uk_gamstop["<Policy Title>
+(betting.self_exclusion_uk_gamstop)"]:::node
+class betting_self_exclusion_uk_gamstop present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_uk_gamstop
+betting_session_time_limits_controls["<Policy Title>
+(betting.session_time_limits_controls)"]:::node
+class betting_session_time_limits_controls present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_session_time_limits_controls
+betting_self_exclusion_on_igaming["<Policy Title>
+(betting.self_exclusion_on_igaming)"]:::node
+class betting_self_exclusion_on_igaming present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_self_exclusion_on_igaming
+betting_au_iga_no_prohibited_services["AU IGA No Prohibited Services
+(betting.au_iga_no_prohibited_services)"]:::node
+class betting_au_iga_no_prohibited_services present;
+Betting_(multi-jurisdiction)_current_4__Player_Protection_&_Limits --> betting_au_iga_no_prohibited_services
+EdTech_(multi-jurisdiction)_current(["EdTech (multi-jurisdiction) current"])
+EdTech_(multi-jurisdiction)_current_US_Federal["US Federal: US Federal Student Privacy"]
+EdTech_(multi-jurisdiction)_current --> EdTech_(multi-jurisdiction)_current_US_Federal
+edtech_coppa_data_minimization["<Policy Title>
+(edtech.coppa_data_minimization)"]:::node
+class edtech_coppa_data_minimization present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_coppa_data_minimization
+edtech_coppa_delete_on_parent_request["COPPA Deletion on Parent Request
+(edtech.coppa_delete_on_parent_request)"]:::node
+class edtech_coppa_delete_on_parent_request present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_coppa_delete_on_parent_request
+edtech_coppa_parental_consent_under_13["<Policy Title>
+(edtech.coppa_parental_consent_under_13)"]:::node
+class edtech_coppa_parental_consent_under_13 present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_coppa_parental_consent_under_13
+edtech_ferpa_consent_or_exception_for_disclosure["<Policy Title>
+(edtech.ferpa_consent_or_exception_for_disclosure)"]:::node
+class edtech_ferpa_consent_or_exception_for_disclosure present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_ferpa_consent_or_exception_for_disclosure
+edtech_ferpa_directory_info_optout_respected["<Policy Title>
+(edtech.ferpa_directory_info_optout_respected)"]:::node
+class edtech_ferpa_directory_info_optout_respected present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_ferpa_directory_info_optout_respected
+edtech_ferpa_parent_access_rights["<Policy Title>
+(edtech.ferpa_parent_access_rights)"]:::node
+class edtech_ferpa_parent_access_rights present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_ferpa_parent_access_rights
+edtech_ppra_parental_consent_sensitive_surveys["<Policy Title>
+(edtech.ppra_parental_consent_sensitive_surveys)"]:::node
+class edtech_ppra_parental_consent_sensitive_surveys present;
+EdTech_(multi-jurisdiction)_current_US_Federal --> edtech_ppra_parental_consent_sensitive_surveys
+EdTech_(multi-jurisdiction)_current_US_States["US States: US State-Level Laws"]
+EdTech_(multi-jurisdiction)_current --> EdTech_(multi-jurisdiction)_current_US_States
+edtech_ca_sopipa_no_sale_of_student_data["<Policy Title>
+(edtech.ca_sopipa_no_sale_of_student_data)"]:::node
+class edtech_ca_sopipa_no_sale_of_student_data present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_ca_sopipa_no_sale_of_student_data
+edtech_ca_sopipa_no_targeted_advertising["<Policy Title>
+(edtech.ca_sopipa_no_targeted_advertising)"]:::node
+class edtech_ca_sopipa_no_targeted_advertising present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_ca_sopipa_no_targeted_advertising
+edtech_co_student_data_transparency["<Policy Title>
+(edtech.co_student_data_transparency)"]:::node
+class edtech_co_student_data_transparency present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_co_student_data_transparency
+edtech_ct_student_data_privacy["<Policy Title>
+(edtech.ct_student_data_privacy)"]:::node
+class edtech_ct_student_data_privacy present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_ct_student_data_privacy
+edtech_il_soppa_breach_notification["<Policy Title>
+(edtech.il_soppa_breach_notification)"]:::node
+class edtech_il_soppa_breach_notification present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_il_soppa_breach_notification
+edtech_ny_edlaw2d_encryption_and_contracts["<Policy Title>
+(edtech.ny_edlaw2d_encryption_and_contracts)"]:::node
+class edtech_ny_edlaw2d_encryption_and_contracts present;
+EdTech_(multi-jurisdiction)_current_US_States --> edtech_ny_edlaw2d_encryption_and_contracts
+EdTech_(multi-jurisdiction)_current_International["International: International and Non-US Regulations"]
+EdTech_(multi-jurisdiction)_current --> EdTech_(multi-jurisdiction)_current_International
+edtech_au_app_11_security_edtech["<Policy Title>
+(edtech.au_app_11_security_edtech)"]:::node
+class edtech_au_app_11_security_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_au_app_11_security_edtech
+edtech_au_app_5_notice_edtech["<Policy Title>
+(edtech.au_app_5_notice_edtech)"]:::node
+class edtech_au_app_5_notice_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_au_app_5_notice_edtech
+edtech_au_ndb_breach_notification_edtech["<Policy Title>
+(edtech.au_ndb_breach_notification_edtech)"]:::node
+class edtech_au_ndb_breach_notification_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_au_ndb_breach_notification_edtech
+edtech_br_lgpd_children_consent_best_interest["<Policy Title>
+(edtech.br_lgpd_children_consent_best_interest)"]:::node
+class edtech_br_lgpd_children_consent_best_interest present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_br_lgpd_children_consent_best_interest
+edtech_ca_pipeda_consent_edtech["<Policy Title>
+(edtech.ca_pipeda_consent_edtech)"]:::node
+class edtech_ca_pipeda_consent_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_ca_pipeda_consent_edtech
+edtech_eu_dpia_high_risk_edtech["<Policy Title>
+(edtech.eu_dpia_high_risk_edtech)"]:::node
+class edtech_eu_dpia_high_risk_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_eu_dpia_high_risk_edtech
+edtech_eu_eprivacy_cookie_consent_edtech["<Policy Title>
+(edtech.eu_eprivacy_cookie_consent_edtech)"]:::node
+class edtech_eu_eprivacy_cookie_consent_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_eu_eprivacy_cookie_consent_edtech
+edtech_eu_gdpr_minors_consent_education["<Policy Title>
+(edtech.eu_gdpr_minors_consent_education)"]:::node
+class edtech_eu_gdpr_minors_consent_education present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_eu_gdpr_minors_consent_education
+edtech_eu_scc_transfers_edplatform["<Policy Title>
+(edtech.eu_scc_transfers_edplatform)"]:::node
+class edtech_eu_scc_transfers_edplatform present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_eu_scc_transfers_edplatform
+edtech_in_dpdpa_children_verifiable_consent["<Policy Title>
+(edtech.in_dpdpa_children_verifiable_consent)"]:::node
+class edtech_in_dpdpa_children_verifiable_consent present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_in_dpdpa_children_verifiable_consent
+edtech_kr_pipa_guardian_consent_under_14["<Policy Title>
+(edtech.kr_pipa_guardian_consent_under_14)"]:::node
+class edtech_kr_pipa_guardian_consent_under_14 present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_kr_pipa_guardian_consent_under_14
+edtech_nz_notice_at_collection_edtech["<Policy Title>
+(edtech.nz_notice_at_collection_edtech)"]:::node
+class edtech_nz_notice_at_collection_edtech present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_nz_notice_at_collection_edtech
+edtech_uk_aadc_privacy_by_default["<Policy Title>
+(edtech.uk_aadc_privacy_by_default)"]:::node
+class edtech_uk_aadc_privacy_by_default present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_uk_aadc_privacy_by_default
+edtech_uk_aadc_profiling_and_geolocation_off["<Policy Title>
+(edtech.uk_aadc_profiling_and_geolocation_off)"]:::node
+class edtech_uk_aadc_profiling_and_geolocation_off present;
+EdTech_(multi-jurisdiction)_current_International --> edtech_uk_aadc_profiling_and_geolocation_off
+EdTech_(multi-jurisdiction)_current_Security_&_Ops["Security & Ops: Security and Operational Baseline"]
+EdTech_(multi-jurisdiction)_current --> EdTech_(multi-jurisdiction)_current_Security_&_Ops
+edtech_edtech_access_least_privilege["<Policy Title>
+(edtech.edtech_access_least_privilege)"]:::node
+class edtech_edtech_access_least_privilege present;
+EdTech_(multi-jurisdiction)_current_Security_&_Ops --> edtech_edtech_access_least_privilege
+edtech_edtech_audit_logs_student_record_access["<Policy Title>
+(edtech.edtech_audit_logs_student_record_access)"]:::node
+class edtech_edtech_audit_logs_student_record_access present;
+EdTech_(multi-jurisdiction)_current_Security_&_Ops --> edtech_edtech_audit_logs_student_record_access
+edtech_edtech_encryption_at_rest["<Policy Title>
+(edtech.edtech_encryption_at_rest)"]:::node
+class edtech_edtech_encryption_at_rest present;
+EdTech_(multi-jurisdiction)_current_Security_&_Ops --> edtech_edtech_encryption_at_rest
+edtech_edtech_encryption_in_transit["<Policy Title>
+(edtech.edtech_encryption_in_transit)"]:::node
+class edtech_edtech_encryption_in_transit present;
+EdTech_(multi-jurisdiction)_current_Security_&_Ops --> edtech_edtech_encryption_in_transit
+edtech_edtech_retention_after_course_completion["<Policy Title>
+(edtech.edtech_retention_after_course_completion)"]:::node
+class edtech_edtech_retention_after_course_completion present;
+EdTech_(multi-jurisdiction)_current_Security_&_Ops --> edtech_edtech_retention_after_course_completion
+PSD2_2015/2366(["PSD2 2015/2366"])
+PSD2_2015/2366_SCA["SCA: Strong Customer Authentication"]
+PSD2_2015/2366 --> PSD2_2015/2366_SCA
+fintech_psd2_sca["PSD2 SCA (Strong Customer Authentication)
+(fintech.psd2_sca)"]:::node
+class fintech_psd2_sca present;
+PSD2_2015/2366_SCA --> fintech_psd2_sca
+RBI_eKYC_placeholder(["RBI eKYC placeholder"])
+RBI_eKYC_placeholder_High-risk_eKYC["High-risk eKYC: High-risk eKYC controls required"]
+RBI_eKYC_placeholder --> RBI_eKYC_placeholder_High-risk_eKYC
+fintech_rbi_ekyc_risk["RBI eKYC — High-risk controls
+(fintech.rbi_ekyc_risk)"]:::node
+class fintech_rbi_ekyc_risk present;
+RBI_eKYC_placeholder_High-risk_eKYC --> fintech_rbi_ekyc_risk
+Fintech_Max_2025-08-17(["Fintech Max 2025-08-17"])
+Fintech_Max_2025-08-17_AML/KYC_Core["AML/KYC Core: Screening, risk, monitoring"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_AML/KYC_Core
+fintech_aml_account_freeze_on_hit["AML Account Freeze On Sanctions Hit
+(fintech.aml_account_freeze_on_hit)"]:::node
+class fintech_aml_account_freeze_on_hit present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_account_freeze_on_hit
+fintech_aml_adverse_media_screening["AML Adverse Media Screening
+(fintech.aml_adverse_media_screening)"]:::node
+class fintech_aml_adverse_media_screening present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_adverse_media_screening
+fintech_aml_customer_risk_tiering["AML Customer Risk Tiering
+(fintech.aml_customer_risk_tiering)"]:::node
+class fintech_aml_customer_risk_tiering present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_customer_risk_tiering
+fintech_aml_duplicate_account_detection["AML Duplicate Account Detection
+(fintech.aml_duplicate_account_detection)"]:::node
+class fintech_aml_duplicate_account_detection present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_duplicate_account_detection
+fintech_aml_geolocation_restrictions["AML Geolocation Restrictions
+(fintech.aml_geolocation_restrictions)"]:::node
+class fintech_aml_geolocation_restrictions present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_geolocation_restrictions
+fintech_aml_ongoing_monitoring["AML Ongoing Monitoring
+(fintech.aml_ongoing_monitoring)"]:::node
+class fintech_aml_ongoing_monitoring present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_ongoing_monitoring
+fintech_aml_pep_screening["AML PEP Screening
+(fintech.aml_pep_screening)"]:::node
+class fintech_aml_pep_screening present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_pep_screening
+fintech_aml_risk_scoring_model["AML Risk Scoring Model
+(fintech.aml_risk_scoring_model)"]:::node
+class fintech_aml_risk_scoring_model present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_risk_scoring_model
+fintech_aml_sanctions_rescreening_frequency["AML Sanctions Re-Screening Frequency
+(fintech.aml_sanctions_rescreening_frequency)"]:::node
+class fintech_aml_sanctions_rescreening_frequency present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_sanctions_rescreening_frequency
+fintech_aml_sanctions_screening["AML Sanctions Screening
+(fintech.aml_sanctions_screening)"]:::node
+class fintech_aml_sanctions_screening present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_sanctions_screening
+fintech_aml_transaction_velocity_limits["AML Transaction Velocity Limits
+(fintech.aml_transaction_velocity_limits)"]:::node
+class fintech_aml_transaction_velocity_limits present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_transaction_velocity_limits
+fintech_aml_unusual_activity_alerting["AML Unusual Activity Alerting
+(fintech.aml_unusual_activity_alerting)"]:::node
+class fintech_aml_unusual_activity_alerting present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_unusual_activity_alerting
+fintech_aml_watchlist_management["AML Watchlist Management
+(fintech.aml_watchlist_management)"]:::node
+class fintech_aml_watchlist_management present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_watchlist_management
+fintech_aml_pep_periodic_review["AML PEP Periodic Review
+(fintech.aml_pep_periodic_review)"]:::node
+class fintech_aml_pep_periodic_review present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_pep_periodic_review
+fintech_aml_manual_review_queue["AML Manual Review Queue
+(fintech.aml_manual_review_queue)"]:::node
+class fintech_aml_manual_review_queue present;
+Fintech_Max_2025-08-17_AML/KYC_Core --> fintech_aml_manual_review_queue
+Fintech_Max_2025-08-17_KYC_Process["KYC Process: Identity verification & lifecycle"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_KYC_Process
+fintech_kyc_biometric_liveness["KYC Biometric Liveness
+(fintech.kyc_biometric_liveness)"]:::node
+class fintech_kyc_biometric_liveness present;
+Fintech_Max_2025-08-17_KYC_Process --> fintech_kyc_biometric_liveness
+fintech_kyc_document_verification["KYC Document Verification
+(fintech.kyc_document_verification)"]:::node
+class fintech_kyc_document_verification present;
+Fintech_Max_2025-08-17_KYC_Process --> fintech_kyc_document_verification
+fintech_kyc_reverification_schedule["KYC Re-Verification Schedule
+(fintech.kyc_reverification_schedule)"]:::node
+class fintech_kyc_reverification_schedule present;
+Fintech_Max_2025-08-17_KYC_Process --> fintech_kyc_reverification_schedule
+fintech_kyc_source_of_funds["KYC Source of Funds
+(fintech.kyc_source_of_funds)"]:::node
+class fintech_kyc_source_of_funds present;
+Fintech_Max_2025-08-17_KYC_Process --> fintech_kyc_source_of_funds
+fintech_kyc_source_of_wealth["KYC Source of Wealth
+(fintech.kyc_source_of_wealth)"]:::node
+class fintech_kyc_source_of_wealth present;
+Fintech_Max_2025-08-17_KYC_Process --> fintech_kyc_source_of_wealth
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2["Open Banking / PSD2: SCA, exemptions, APIs and consent"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_Open_Banking_/_PSD2
+fintech_fapi_compliance["FAPI Compliance
+(fintech.fapi_compliance)"]:::node
+class fintech_fapi_compliance present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_fapi_compliance
+fintech_ob_audit_logging["Open Banking Audit Logging
+(fintech.ob_audit_logging)"]:::node
+class fintech_ob_audit_logging present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_audit_logging
+fintech_ob_consent_expiry_90d["Open Banking Consent Expiry 90d
+(fintech.ob_consent_expiry_90d)"]:::node
+class fintech_ob_consent_expiry_90d present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_consent_expiry_90d
+fintech_ob_consent_revocation["Open Banking Consent Revocation
+(fintech.ob_consent_revocation)"]:::node
+class fintech_ob_consent_revocation present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_consent_revocation
+fintech_ob_data_minimization["Open Banking Data Minimization
+(fintech.ob_data_minimization)"]:::node
+class fintech_ob_data_minimization present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_data_minimization
+fintech_ob_rate_limits["Open Banking API Rate Limits
+(fintech.ob_rate_limits)"]:::node
+class fintech_ob_rate_limits present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_rate_limits
+fintech_ob_tpp_eidas_cert_validation["Open Banking TPP eIDAS Validation
+(fintech.ob_tpp_eidas_cert_validation)"]:::node
+class fintech_ob_tpp_eidas_cert_validation present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_ob_tpp_eidas_cert_validation
+fintech_psd2_sca_enforced["PSD2 SCA Enforced
+(fintech.psd2_sca_enforced)"]:::node
+class fintech_psd2_sca_enforced present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_psd2_sca_enforced
+fintech_psd2_sca_exemptions_controls["PSD2 SCA Exemptions Controls
+(fintech.psd2_sca_exemptions_controls)"]:::node
+class fintech_psd2_sca_exemptions_controls present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_psd2_sca_exemptions_controls
+fintech_psd2_transaction_risk_analysis["PSD2 Transaction Risk Analysis
+(fintech.psd2_transaction_risk_analysis)"]:::node
+class fintech_psd2_transaction_risk_analysis present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_psd2_transaction_risk_analysis
+fintech_xs2a_api_security["Open Banking XS2A API Security
+(fintech.xs2a_api_security)"]:::node
+class fintech_xs2a_api_security present;
+Fintech_Max_2025-08-17_Open_Banking_/_PSD2 --> fintech_xs2a_api_security
+Fintech_Max_2025-08-17_Auth_&_API_Security["Auth & API Security: Strong auth and secure APIs"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_Auth_&_API_Security
+fintech_jwt_expiry_policy["JWT Expiry Policy
+(fintech.jwt_expiry_policy)"]:::node
+class fintech_jwt_expiry_policy present;
+Fintech_Max_2025-08-17_Auth_&_API_Security --> fintech_jwt_expiry_policy
+fintech_mtls_required["mTLS Required For APIs
+(fintech.mtls_required)"]:::node
+class fintech_mtls_required present;
+Fintech_Max_2025-08-17_Auth_&_API_Security --> fintech_mtls_required
+fintech_oauth2_pkce_required["OAuth2 PKCE Required
+(fintech.oauth2_pkce_required)"]:::node
+class fintech_oauth2_pkce_required present;
+Fintech_Max_2025-08-17_Auth_&_API_Security --> fintech_oauth2_pkce_required
+fintech_three_ds_required["3DS Required
+(fintech.three_ds_required)"]:::node
+class fintech_three_ds_required present;
+Fintech_Max_2025-08-17_Auth_&_API_Security --> fintech_three_ds_required
+Fintech_Max_2025-08-17_PCI_/_AppSec["PCI / AppSec: PCI DSS and application security controls"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_PCI_/_AppSec
+fintech_pci_account_lockout["PCI DSS — Account Lockout
+(fintech.pci_account_lockout)"]:::node
+class fintech_pci_account_lockout present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_account_lockout
+fintech_pci_default_passwords_changed["PCI DSS — Default Passwords Changed
+(fintech.pci_default_passwords_changed)"]:::node
+class fintech_pci_default_passwords_changed present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_default_passwords_changed
+fintech_pci_file_integrity_monitoring["PCI DSS — File Integrity Monitoring
+(fintech.pci_file_integrity_monitoring)"]:::node
+class fintech_pci_file_integrity_monitoring present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_file_integrity_monitoring
+fintech_pci_https_only["PCI DSS — HTTPS Only
+(fintech.pci_https_only)"]:::node
+class fintech_pci_https_only present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_https_only
+fintech_pci_key_management["PCI DSS — Key Management
+(fintech.pci_key_management)"]:::node
+class fintech_pci_key_management present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_key_management
+fintech_pci_log_retention["PCI DSS — Log Retention
+(fintech.pci_log_retention)"]:::node
+class fintech_pci_log_retention present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_log_retention
+fintech_pci_malware_protection["PCI DSS — Malware Protection
+(fintech.pci_malware_protection)"]:::node
+class fintech_pci_malware_protection present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_malware_protection
+fintech_pci_mfa_required["PCI DSS — MFA Required
+(fintech.pci_mfa_required)"]:::node
+class fintech_pci_mfa_required present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_mfa_required
+fintech_pci_network_segmentation["PCI DSS — Network Segmentation
+(fintech.pci_network_segmentation)"]:::node
+class fintech_pci_network_segmentation present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_network_segmentation
+fintech_pci_pan_masking_in_logs["PCI DSS — PAN Masking in Logs
+(fintech.pci_pan_masking_in_logs)"]:::node
+class fintech_pci_pan_masking_in_logs present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_pan_masking_in_logs
+fintech_pci_secure_coding_practices["PCI DSS — Secure Coding Practices
+(fintech.pci_secure_coding_practices)"]:::node
+class fintech_pci_secure_coding_practices present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_secure_coding_practices
+fintech_pci_session_timeout["PCI DSS — Session Timeout
+(fintech.pci_session_timeout)"]:::node
+class fintech_pci_session_timeout present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_session_timeout
+fintech_pci_storage_encryption["PCI DSS — Storage Encryption
+(fintech.pci_storage_encryption)"]:::node
+class fintech_pci_storage_encryption present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_storage_encryption
+fintech_pci_tls_min_version["PCI DSS — TLS Min Version
+(fintech.pci_tls_min_version)"]:::node
+class fintech_pci_tls_min_version present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_tls_min_version
+fintech_pci_vulnerability_scanning["PCI DSS — Vulnerability Scanning
+(fintech.pci_vulnerability_scanning)"]:::node
+class fintech_pci_vulnerability_scanning present;
+Fintech_Max_2025-08-17_PCI_/_AppSec --> fintech_pci_vulnerability_scanning
+Fintech_Max_2025-08-17_Crypto_/_VASP["Crypto / VASP: Virtual asset service provider controls"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_Crypto_/_VASP
+fintech_bitlicense_compliance["NYDFS BitLicense Compliance
+(fintech.bitlicense_compliance)"]:::node
+class fintech_bitlicense_compliance present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_bitlicense_compliance
+fintech_chain_analysis_risk_controls["Blockchain Analytics Risk Controls
+(fintech.chain_analysis_risk_controls)"]:::node
+class fintech_chain_analysis_risk_controls present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_chain_analysis_risk_controls
+fintech_cold_storage_ratio["Cold Storage Ratio
+(fintech.cold_storage_ratio)"]:::node
+class fintech_cold_storage_ratio present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_cold_storage_ratio
+fintech_custody_asset_segregation["Custody Asset Segregation
+(fintech.custody_asset_segregation)"]:::node
+class fintech_custody_asset_segregation present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_custody_asset_segregation
+fintech_hot_wallet_limits["Hot Wallet Limits
+(fintech.hot_wallet_limits)"]:::node
+class fintech_hot_wallet_limits present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_hot_wallet_limits
+fintech_proof_of_reserves_reporting["Proof of Reserves Reporting
+(fintech.proof_of_reserves_reporting)"]:::node
+class fintech_proof_of_reserves_reporting present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_proof_of_reserves_reporting
+fintech_stablecoin_reserve_ratio["Stablecoin Reserve Ratio
+(fintech.stablecoin_reserve_ratio)"]:::node
+class fintech_stablecoin_reserve_ratio present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_stablecoin_reserve_ratio
+fintech_travel_rule_compliance["Travel Rule Compliance
+(fintech.travel_rule_compliance)"]:::node
+class fintech_travel_rule_compliance present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_travel_rule_compliance
+fintech_vasp_license_required["VASP License Required
+(fintech.vasp_license_required)"]:::node
+class fintech_vasp_license_required present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_vasp_license_required
+fintech_withdrawal_address_whitelist["Withdrawal Address Whitelist
+(fintech.withdrawal_address_whitelist)"]:::node
+class fintech_withdrawal_address_whitelist present;
+Fintech_Max_2025-08-17_Crypto_/_VASP --> fintech_withdrawal_address_whitelist
+Fintech_Max_2025-08-17_Fraud_&_Commerce["Fraud & Commerce: Fraud prevention and payments hygiene"]
+Fintech_Max_2025-08-17 --> Fintech_Max_2025-08-17_Fraud_&_Commerce
+fintech_card_tokenization_required["Card Tokenization Required
+(fintech.card_tokenization_required)"]:::node
+class fintech_card_tokenization_required present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_card_tokenization_required
+fintech_chargeback_monitoring["Chargeback Monitoring
+(fintech.chargeback_monitoring)"]:::node
+class fintech_chargeback_monitoring present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_chargeback_monitoring
+fintech_device_fingerprinting["Device Fingerprinting
+(fintech.device_fingerprinting)"]:::node
+class fintech_device_fingerprinting present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_device_fingerprinting
+fintech_fraud_velocity_checks["Fraud Velocity Checks
+(fintech.fraud_velocity_checks)"]:::node
+class fintech_fraud_velocity_checks present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_fraud_velocity_checks
+fintech_geofencing_restricted_markets["Geofencing Restricted Markets
+(fintech.geofencing_restricted_markets)"]:::node
+class fintech_geofencing_restricted_markets present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_geofencing_restricted_markets
+fintech_ip_geolocation_consistency["IP Geolocation Consistency
+(fintech.ip_geolocation_consistency)"]:::node
+class fintech_ip_geolocation_consistency present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_ip_geolocation_consistency
+fintech_mcc_whitelisting["MCC Whitelisting
+(fintech.mcc_whitelisting)"]:::node
+class fintech_mcc_whitelisting present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_mcc_whitelisting
+fintech_pan_masking_in_logs["PAN Masking In Logs
+(fintech.pan_masking_in_logs)"]:::node
+class fintech_pan_masking_in_logs present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_pan_masking_in_logs
+fintech_transaction_limits_per_risk["Transaction Limits per Risk Tier
+(fintech.transaction_limits_per_risk)"]:::node
+class fintech_transaction_limits_per_risk present;
+Fintech_Max_2025-08-17_Fraud_&_Commerce --> fintech_transaction_limits_per_risk
+US_FinReg_MTL(["US FinReg MTL"])
+US_FinReg_MTL_State_MTL["State MTL: Money Transmitter Licenses"]
+US_FinReg_MTL --> US_FinReg_MTL_State_MTL
+fintech_us_mtl_license["US Money Transmitter Licensing (MTL)
+(fintech.us_mtl_license)"]:::node
+class fintech_us_mtl_license present;
+US_FinReg_MTL_State_MTL --> fintech_us_mtl_license
+GDPR_2016/679(["GDPR 2016/679"])
+GDPR_2016/679_Art_51c["Art.5(1)(c): Data minimization"]
+GDPR_2016/679 --> GDPR_2016/679_Art_51c
+gdpr_data_minimization["Data minimization
+(gdpr.data_minimization)"]:::node
+class gdpr_data_minimization present;
+GDPR_2016/679_Art_51c --> gdpr_data_minimization
+GDPR_2016/679_Art_51e["Art.5(1)(e): Storage limitation"]
+GDPR_2016/679 --> GDPR_2016/679_Art_51e
+gdpr_data_retention["Storage limitation (data retention)
+(gdpr.data_retention)"]:::node
+class gdpr_data_retention present;
+GDPR_2016/679_Art_51e --> gdpr_data_retention
+GDPR_2016/679_Art_6["Art.6: Lawfulness of processing"]
+GDPR_2016/679 --> GDPR_2016/679_Art_6
+gdpr_consent_required["Consent required
+(gdpr.consent_required)"]:::node
+class gdpr_consent_required present;
+GDPR_2016/679_Art_6 --> gdpr_consent_required
+iGaming_(multi-jurisdiction)_current(["iGaming (multi-jurisdiction) current"])
+iGaming_(multi-jurisdiction)_current_Licensing["Licensing: Licensing checks (per regulator)"]
+iGaming_(multi-jurisdiction)_current --> iGaming_(multi-jurisdiction)_current_Licensing
+igaming_license_check_adm_it["License Check — ADM (IT)
+(igaming.license_check_adm_it)"]:::node
+class igaming_license_check_adm_it present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_adm_it
+igaming_license_check_anj_fr["License Check — ANJ (FR)
+(igaming.license_check_anj_fr)"]:::node
+class igaming_license_check_anj_fr present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_anj_fr
+igaming_license_check_dgoj_es["License Check — DGOJ (ES)
+(igaming.license_check_dgoj_es)"]:::node
+class igaming_license_check_dgoj_es present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_dgoj_es
+igaming_license_check_ukgc["License Check — UKGC
+(igaming.license_check_ukgc)"]:::node
+class igaming_license_check_ukgc present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_ukgc
+igaming_license_check_us_nj_dge["License Check — NJ DGE
+(igaming.license_check_us_nj_dge)"]:::node
+class igaming_license_check_us_nj_dge present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_us_nj_dge
+igaming_license_check_us_nv_ngcb["License Check — NV NGCB
+(igaming.license_check_us_nv_ngcb)"]:::node
+class igaming_license_check_us_nv_ngcb present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_us_nv_ngcb
+igaming_license_check_us_pa_pgcb["License Check — PA PGCB
+(igaming.license_check_us_pa_pgcb)"]:::node
+class igaming_license_check_us_pa_pgcb present;
+iGaming_(multi-jurisdiction)_current_Licensing --> igaming_license_check_us_pa_pgcb
+iGaming_(multi-jurisdiction)_current_Player_Protection["Player Protection: Responsible gambling controls"]
+iGaming_(multi-jurisdiction)_current --> iGaming_(multi-jurisdiction)_current_Player_Protection
+igaming_deposit_limit_controls["Deposit Limits — Controls
+(igaming.deposit_limit_controls)"]:::node
+class igaming_deposit_limit_controls present;
+iGaming_(multi-jurisdiction)_current_Player_Protection --> igaming_deposit_limit_controls
+igaming_self_exclusion_uk_gamstop["Self-Exclusion — GAMSTOP (UK)
+(igaming.self_exclusion_uk_gamstop)"]:::node
+class igaming_self_exclusion_uk_gamstop present;
+iGaming_(multi-jurisdiction)_current_Player_Protection --> igaming_self_exclusion_uk_gamstop
+iGaming_(multi-jurisdiction)_current_Market_Access_&_Geo["Market Access & Geo: Regulated market geofencing"]
+iGaming_(multi-jurisdiction)_current --> iGaming_(multi-jurisdiction)_current_Market_Access_&_Geo
+igaming_geofencing_regulated_markets["Geofencing — Regulated Markets Only
+(igaming.geofencing_regulated_markets)"]:::node
+class igaming_geofencing_regulated_markets present;
+iGaming_(multi-jurisdiction)_current_Market_Access_&_Geo --> igaming_geofencing_regulated_markets
+Kubernetes_Security_Baseline_v1(["Kubernetes Security Baseline v1"])
+Kubernetes_Security_Baseline_v1_Workload_hardening["Workload hardening: Restrict privileged escalation and root"]
+Kubernetes_Security_Baseline_v1 --> Kubernetes_Security_Baseline_v1_Workload_hardening
+k8s_no_privileged["Disallow privileged pods
+(k8s.no_privileged)"]:::node
+class k8s_no_privileged present;
+Kubernetes_Security_Baseline_v1_Workload_hardening --> k8s_no_privileged
+k8s_no_run_as_root["Disallow running as root
+(k8s.no_run_as_root)"]:::node
+class k8s_no_run_as_root present;
+Kubernetes_Security_Baseline_v1_Workload_hardening --> k8s_no_run_as_root
+k8s_limit_capabilities["Limit container capabilities
+(k8s.limit_capabilities)"]:::node
+class k8s_limit_capabilities present;
+Kubernetes_Security_Baseline_v1_Workload_hardening --> k8s_limit_capabilities
+k8s_ban_hostnetwork["Disallow hostNetwork in Pods
+(k8s.ban_hostnetwork)"]:::node
+class k8s_ban_hostnetwork present;
+Kubernetes_Security_Baseline_v1_Workload_hardening --> k8s_ban_hostnetwork
+k8s_block_hostpath["Block hostPath volumes
+(k8s.block_hostpath)"]:::node
+class k8s_block_hostpath present;
+Kubernetes_Security_Baseline_v1_Workload_hardening --> k8s_block_hostpath
+Kubernetes_Security_Baseline_v1_Image_&_supply_chain["Image & supply chain: Avoid mutable tags and ensure fresh images"]
+Kubernetes_Security_Baseline_v1 --> Kubernetes_Security_Baseline_v1_Image_&_supply_chain
+k8s_disallow_latest["Disallow image tag latest
+(k8s.disallow_latest)"]:::node
+class k8s_disallow_latest present;
+Kubernetes_Security_Baseline_v1_Image_&_supply_chain --> k8s_disallow_latest
+k8s_require_imagepullpolicy_always["Require imagePullPolicy: Always
+(k8s.require_imagepullpolicy_always)"]:::node
+class k8s_require_imagepullpolicy_always present;
+Kubernetes_Security_Baseline_v1_Image_&_supply_chain --> k8s_require_imagepullpolicy_always
+Kubernetes_Security_Baseline_v1_Resource_governance["Resource governance: Enforce resource requests and limits"]
+Kubernetes_Security_Baseline_v1 --> Kubernetes_Security_Baseline_v1_Resource_governance
+k8s_require_resources["Require resource requests/limits
+(k8s.require_resources)"]:::node
+class k8s_require_resources present;
+Kubernetes_Security_Baseline_v1_Resource_governance --> k8s_require_resources
+LegalTech_(multi-jurisdiction)_current(["LegalTech (multi-jurisdiction) current"])
+LegalTech_(multi-jurisdiction)_current_GDPR_Core["GDPR Core: GDPR principles and data subject rights"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_GDPR_Core
+legaltech_gdpr_breach_72h["GDPR: Breach 72H
+(legaltech.gdpr_breach_72h)"]:::node
+class legaltech_gdpr_breach_72h present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_breach_72h
+legaltech_gdpr_consent_valid["GDPR: Consent Valid
+(legaltech.gdpr_consent_valid)"]:::node
+class legaltech_gdpr_consent_valid present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_consent_valid
+legaltech_gdpr_cookie_consent_eprivacy["GDPR: Cookie Consent Eprivacy
+(legaltech.gdpr_cookie_consent_eprivacy)"]:::node
+class legaltech_gdpr_cookie_consent_eprivacy present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_cookie_consent_eprivacy
+legaltech_gdpr_data_minimization["GDPR: Data Minimization
+(legaltech.gdpr_data_minimization)"]:::node
+class legaltech_gdpr_data_minimization present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_data_minimization
+legaltech_gdpr_dpia_required_high_risk["GDPR: Dpia Required High Risk
+(legaltech.gdpr_dpia_required_high_risk)"]:::node
+class legaltech_gdpr_dpia_required_high_risk present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_dpia_required_high_risk
+legaltech_gdpr_dsar_timeline_30d["GDPR: DSAR Timeline 30D
+(legaltech.gdpr_dsar_timeline_30d)"]:::node
+class legaltech_gdpr_dsar_timeline_30d present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_dsar_timeline_30d
+legaltech_gdpr_lawful_basis_required["GDPR: Lawful Basis Required
+(legaltech.gdpr_lawful_basis_required)"]:::node
+class legaltech_gdpr_lawful_basis_required present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_lawful_basis_required
+legaltech_gdpr_records_of_processing["GDPR: Records Of Processing
+(legaltech.gdpr_records_of_processing)"]:::node
+class legaltech_gdpr_records_of_processing present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_records_of_processing
+legaltech_gdpr_retention_limit["GDPR: Retention Limit
+(legaltech.gdpr_retention_limit)"]:::node
+class legaltech_gdpr_retention_limit present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_retention_limit
+legaltech_gdpr_transfer_scc["GDPR: Transfer Scc
+(legaltech.gdpr_transfer_scc)"]:::node
+class legaltech_gdpr_transfer_scc present;
+LegalTech_(multi-jurisdiction)_current_GDPR_Core --> legaltech_gdpr_transfer_scc
+LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA["US (CCPA/CPRA): California privacy (CCPA/CPRA)"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA
+legaltech_ccpa_notice_at_collection["CCPA: Notice At Collection
+(legaltech.ccpa_notice_at_collection)"]:::node
+class legaltech_ccpa_notice_at_collection present;
+LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA --> legaltech_ccpa_notice_at_collection
+legaltech_ccpa_opt_out_enabled["CCPA: Opt Out Enabled
+(legaltech.ccpa_opt_out_enabled)"]:::node
+class legaltech_ccpa_opt_out_enabled present;
+LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA --> legaltech_ccpa_opt_out_enabled
+legaltech_ccpa_verification_of_requests["CCPA: Verification Of Requests
+(legaltech.ccpa_verification_of_requests)"]:::node
+class legaltech_ccpa_verification_of_requests present;
+LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA --> legaltech_ccpa_verification_of_requests
+legaltech_cpra_sensitive_data_limited_use["CPRA: Sensitive Data Limited Use
+(legaltech.cpra_sensitive_data_limited_use)"]:::node
+class legaltech_cpra_sensitive_data_limited_use present;
+LegalTech_(multi-jurisdiction)_current_US_CCPA/CPRA --> legaltech_cpra_sensitive_data_limited_use
+LegalTech_(multi-jurisdiction)_current_Security_Controls["Security Controls: Technical and organizational measures"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Security_Controls
+legaltech_data_residency_requirements_enforced["Data Residency Requirements Enforced
+(legaltech.data_residency_requirements_enforced)"]:::node
+class legaltech_data_residency_requirements_enforced present;
+LegalTech_(multi-jurisdiction)_current_Security_Controls --> legaltech_data_residency_requirements_enforced
+legaltech_encryption_at_rest_enabled["Encryption At Rest Enabled
+(legaltech.encryption_at_rest_enabled)"]:::node
+class legaltech_encryption_at_rest_enabled present;
+LegalTech_(multi-jurisdiction)_current_Security_Controls --> legaltech_encryption_at_rest_enabled
+legaltech_encryption_in_transit_enabled["Encryption In Transit Enabled
+(legaltech.encryption_in_transit_enabled)"]:::node
+class legaltech_encryption_in_transit_enabled present;
+LegalTech_(multi-jurisdiction)_current_Security_Controls --> legaltech_encryption_in_transit_enabled
+legaltech_popia_za_security_measures["POPIA: ZA Security Measures
+(legaltech.popia_za_security_measures)"]:::node
+class legaltech_popia_za_security_measures present;
+LegalTech_(multi-jurisdiction)_current_Security_Controls --> legaltech_popia_za_security_measures
+LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery["Records & eDiscovery: Records governance and eDiscovery"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery
+legaltech_ch_fadp_records_of_processing["Ch FADP Records Of Processing
+(legaltech.ch_fadp_records_of_processing)"]:::node
+class legaltech_ch_fadp_records_of_processing present;
+LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery --> legaltech_ch_fadp_records_of_processing
+legaltech_ediscovery_frcp_26_34_37["eDiscovery — FRCP 26/34/37
+(legaltech.ediscovery_frcp_26_34_37)"]:::node
+class legaltech_ediscovery_frcp_26_34_37 present;
+LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery --> legaltech_ediscovery_frcp_26_34_37
+legaltech_legal_hold_no_delete_enforced["Legal Hold No Delete Enforced
+(legaltech.legal_hold_no_delete_enforced)"]:::node
+class legaltech_legal_hold_no_delete_enforced present;
+LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery --> legaltech_legal_hold_no_delete_enforced
+legaltech_records_classification_scheme_applied["Records Classification Scheme Applied
+(legaltech.records_classification_scheme_applied)"]:::node
+class legaltech_records_classification_scheme_applied present;
+LegalTech_(multi-jurisdiction)_current_Records_&_eDiscovery --> legaltech_records_classification_scheme_applied
+LegalTech_(multi-jurisdiction)_current_Cross-border_Transfers["Cross-border Transfers: International data transfers"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Cross-border_Transfers
+legaltech_id_pdp_cross_border_transfer["ID: Pdp Cross Border Transfer
+(legaltech.id_pdp_cross_border_transfer)"]:::node
+class legaltech_id_pdp_cross_border_transfer present;
+LegalTech_(multi-jurisdiction)_current_Cross-border_Transfers --> legaltech_id_pdp_cross_border_transfer
+legaltech_pipl_cn_cross_border_assessment["PIPL: CN Cross Border Assessment
+(legaltech.pipl_cn_cross_border_assessment)"]:::node
+class legaltech_pipl_cn_cross_border_assessment present;
+LegalTech_(multi-jurisdiction)_current_Cross-border_Transfers --> legaltech_pipl_cn_cross_border_assessment
+LegalTech_(multi-jurisdiction)_current_Children_&_Minors["Children & Minors: Child-specific consent and protections"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Children_&_Minors
+legaltech_uk_gdpr_minor_consent["UK: GDPR Minor Consent
+(legaltech.uk_gdpr_minor_consent)"]:::node
+class legaltech_uk_gdpr_minor_consent present;
+LegalTech_(multi-jurisdiction)_current_Children_&_Minors --> legaltech_uk_gdpr_minor_consent
+LegalTech_(multi-jurisdiction)_current_Country-specific["Country-specific: National privacy laws"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Country-specific
+legaltech_ca_qc_law25_privacy_governance["Ca QC Law25 Privacy Governance
+(legaltech.ca_qc_law25_privacy_governance)"]:::node
+class legaltech_ca_qc_law25_privacy_governance present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_ca_qc_law25_privacy_governance
+legaltech_au_app_notice_at_collection["AU: APP Notice At Collection
+(legaltech.au_app_notice_at_collection)"]:::node
+class legaltech_au_app_notice_at_collection present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_au_app_notice_at_collection
+legaltech_ae_pdpl_consent_notice["AE: PDPL Consent Notice
+(legaltech.ae_pdpl_consent_notice)"]:::node
+class legaltech_ae_pdpl_consent_notice present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_ae_pdpl_consent_notice
+legaltech_kr_pipa_breach_notification["KR: Pipa Breach Notification
+(legaltech.kr_pipa_breach_notification)"]:::node
+class legaltech_kr_pipa_breach_notification present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_kr_pipa_breach_notification
+legaltech_lgpd_brazil_compliance["LGPD: Brazil Compliance
+(legaltech.lgpd_brazil_compliance)"]:::node
+class legaltech_lgpd_brazil_compliance present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_lgpd_brazil_compliance
+legaltech_mx_lfpdppp_notice_at_collection["MX: LFPDPPP Notice At Collection
+(legaltech.mx_lfpdppp_notice_at_collection)"]:::node
+class legaltech_mx_lfpdppp_notice_at_collection present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_mx_lfpdppp_notice_at_collection
+legaltech_my_pdpa_retention_principle["MY: PDPA Retention Principle
+(legaltech.my_pdpa_retention_principle)"]:::node
+class legaltech_my_pdpa_retention_principle present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_my_pdpa_retention_principle
+legaltech_nz_breach_notification["NZ: Breach Notification
+(legaltech.nz_breach_notification)"]:::node
+class legaltech_nz_breach_notification present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_nz_breach_notification
+legaltech_pdpa_sg_consent_purposes["PDPA: SG Consent Purposes
+(legaltech.pdpa_sg_consent_purposes)"]:::node
+class legaltech_pdpa_sg_consent_purposes present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_pdpa_sg_consent_purposes
+legaltech_pipeda_ca_consent["PIPEDA: Ca Consent
+(legaltech.pipeda_ca_consent)"]:::node
+class legaltech_pipeda_ca_consent present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_pipeda_ca_consent
+legaltech_sa_pdpl_breach_notify["SA: PDPL Breach Notify
+(legaltech.sa_pdpl_breach_notify)"]:::node
+class legaltech_sa_pdpl_breach_notify present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_sa_pdpl_breach_notify
+legaltech_th_pdpa_breach_notify["Th PDPA Breach Notify
+(legaltech.th_pdpa_breach_notify)"]:::node
+class legaltech_th_pdpa_breach_notify present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_th_pdpa_breach_notify
+legaltech_tr_kvkk_verbis_registration["TR: KVKK VERBIS Registration
+(legaltech.tr_kvkk_verbis_registration)"]:::node
+class legaltech_tr_kvkk_verbis_registration present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_tr_kvkk_verbis_registration
+legaltech_vn_pdpd_notice_and_consent["Vn Pdpd Notice And Consent
+(legaltech.vn_pdpd_notice_and_consent)"]:::node
+class legaltech_vn_pdpd_notice_and_consent present;
+LegalTech_(multi-jurisdiction)_current_Country-specific --> legaltech_vn_pdpd_notice_and_consent
+LegalTech_(multi-jurisdiction)_current_Professional_Conduct["Professional Conduct: Legal ethics and confidentiality"]
+LegalTech_(multi-jurisdiction)_current --> LegalTech_(multi-jurisdiction)_current_Professional_Conduct
+legaltech_aba_model_rule_1_6_confidentiality["ABA Model Rule 1.6 — Confidentiality
+(legaltech.aba_model_rule_1_6_confidentiality)"]:::node
+class legaltech_aba_model_rule_1_6_confidentiality present;
+LegalTech_(multi-jurisdiction)_current_Professional_Conduct --> legaltech_aba_model_rule_1_6_confidentiality
+MedTech_(multi-jurisdiction)_current(["MedTech (multi-jurisdiction) current"])
+MedTech_(multi-jurisdiction)_current_HIPAA_US["HIPAA (US): HIPAA Security, Privacy, and Administrative Safeguards"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_HIPAA_US
+medtech_hipaa_access_audit_logging["<Policy Title>
+(medtech.hipaa_access_audit_logging)"]:::node
+class medtech_hipaa_access_audit_logging present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_access_audit_logging
+medtech_hipaa_baa_with_vendors["<Policy Title>
+(medtech.hipaa_baa_with_vendors)"]:::node
+class medtech_hipaa_baa_with_vendors present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_baa_with_vendors
+medtech_hipaa_mfa_privileged_access["<Policy Title>
+(medtech.hipaa_mfa_privileged_access)"]:::node
+class medtech_hipaa_mfa_privileged_access present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_mfa_privileged_access
+medtech_hipaa_minimum_necessary["<Policy Title>
+(medtech.hipaa_minimum_necessary)"]:::node
+class medtech_hipaa_minimum_necessary present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_minimum_necessary
+medtech_hipaa_security_admin_safeguards["<Policy Title>
+(medtech.hipaa_security_admin_safeguards)"]:::node
+class medtech_hipaa_security_admin_safeguards present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_security_admin_safeguards
+medtech_hipaa_security_tech_encryption["<Policy Title>
+(medtech.hipaa_security_tech_encryption)"]:::node
+class medtech_hipaa_security_tech_encryption present;
+MedTech_(multi-jurisdiction)_current_HIPAA_US --> medtech_hipaa_security_tech_encryption
+MedTech_(multi-jurisdiction)_current_HITECH_US["HITECH (US): HITECH Act Requirements"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_HITECH_US
+medtech_hitech_breach_notification_60d["<Policy Title>
+(medtech.hitech_breach_notification_60d)"]:::node
+class medtech_hitech_breach_notification_60d present;
+MedTech_(multi-jurisdiction)_current_HITECH_US --> medtech_hitech_breach_notification_60d
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR["FDA (US) — Part 11 and MDR: FDA 21 CFR Part 11 and Medical Device Reporting (MDR)"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR
+medtech_fda_cybersecurity_524b_sbom["<Policy Title>
+(medtech.fda_cybersecurity_524b_sbom)"]:::node
+class medtech_fda_cybersecurity_524b_sbom present;
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR --> medtech_fda_cybersecurity_524b_sbom
+medtech_fda_mdr_event_reporting["<Policy Title>
+(medtech.fda_mdr_event_reporting)"]:::node
+class medtech_fda_mdr_event_reporting present;
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR --> medtech_fda_mdr_event_reporting
+medtech_fda_part11_audit_trail["<Policy Title>
+(medtech.fda_part11_audit_trail)"]:::node
+class medtech_fda_part11_audit_trail present;
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR --> medtech_fda_part11_audit_trail
+medtech_fda_part11_esign_linkage["<Policy Title>
+(medtech.fda_part11_esign_linkage)"]:::node
+class medtech_fda_part11_esign_linkage present;
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR --> medtech_fda_part11_esign_linkage
+medtech_fda_part11_system_validation["<Policy Title>
+(medtech.fda_part11_system_validation)"]:::node
+class medtech_fda_part11_system_validation present;
+MedTech_(multi-jurisdiction)_current_FDA_US_—_Part_11_and_MDR --> medtech_fda_part11_system_validation
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU["EU MDR/IVDR (EU): EU Medical Device and IVD Regulations"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU
+medtech_eu_ivdr_clinical_performance["<Policy Title>
+(medtech.eu_ivdr_clinical_performance)"]:::node
+class medtech_eu_ivdr_clinical_performance present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_ivdr_clinical_performance
+medtech_eu_mdr_ce_marking_and_udi["<Policy Title>
+(medtech.eu_mdr_ce_marking_and_udi)"]:::node
+class medtech_eu_mdr_ce_marking_and_udi present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_mdr_ce_marking_and_udi
+medtech_eu_mdr_clinical_evaluation["<Policy Title>
+(medtech.eu_mdr_clinical_evaluation)"]:::node
+class medtech_eu_mdr_clinical_evaluation present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_mdr_clinical_evaluation
+medtech_eu_mdr_eudamed_registration["<Policy Title>
+(medtech.eu_mdr_eudamed_registration)"]:::node
+class medtech_eu_mdr_eudamed_registration present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_mdr_eudamed_registration
+medtech_eu_mdr_pms_psur["<Policy Title>
+(medtech.eu_mdr_pms_psur)"]:::node
+class medtech_eu_mdr_pms_psur present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_mdr_pms_psur
+medtech_eu_vigilance_incident_reporting["<Policy Title>
+(medtech.eu_vigilance_incident_reporting)"]:::node
+class medtech_eu_vigilance_incident_reporting present;
+MedTech_(multi-jurisdiction)_current_EU_MDR/IVDR_EU --> medtech_eu_vigilance_incident_reporting
+MedTech_(multi-jurisdiction)_current_ONC_US["ONC (US): 21st Century Cures (ONC) and Information Blocking"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_ONC_US
+medtech_onc_cures_api_fhir_r4["<Policy Title>
+(medtech.onc_cures_api_fhir_r4)"]:::node
+class medtech_onc_cures_api_fhir_r4 present;
+MedTech_(multi-jurisdiction)_current_ONC_US --> medtech_onc_cures_api_fhir_r4
+medtech_onc_information_blocking_prohibited["<Policy Title>
+(medtech.onc_information_blocking_prohibited)"]:::node
+class medtech_onc_information_blocking_prohibited present;
+MedTech_(multi-jurisdiction)_current_ONC_US --> medtech_onc_information_blocking_prohibited
+MedTech_(multi-jurisdiction)_current_Data_Protection_&_Cross-border["Data Protection & Cross-border: GDPR Article 9 and Cross-border Transfers"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_Data_Protection_&_Cross-border
+medtech_gdpr_art9_special_category_safeguards["<Policy Title>
+(medtech.gdpr_art9_special_category_safeguards)"]:::node
+class medtech_gdpr_art9_special_category_safeguards present;
+MedTech_(multi-jurisdiction)_current_Data_Protection_&_Cross-border --> medtech_gdpr_art9_special_category_safeguards
+medtech_health_data_cross_border_controls["<Policy Title>
+(medtech.health_data_cross_border_controls)"]:::node
+class medtech_health_data_cross_border_controls present;
+MedTech_(multi-jurisdiction)_current_Data_Protection_&_Cross-border --> medtech_health_data_cross_border_controls
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC["Standards (ISO/IEC): ISO/IEC QMS, Risk, Software Lifecycle, Usability, ISMS"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC
+medtech_iec_62304_scm_prp_processes["<Policy Title>
+(medtech.iec_62304_scm_prp_processes)"]:::node
+class medtech_iec_62304_scm_prp_processes present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iec_62304_scm_prp_processes
+medtech_iec_62304_software_safety_class["<Policy Title>
+(medtech.iec_62304_software_safety_class)"]:::node
+class medtech_iec_62304_software_safety_class present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iec_62304_software_safety_class
+medtech_iec_62366_usability_summative_eval["<Policy Title>
+(medtech.iec_62366_usability_summative_eval)"]:::node
+class medtech_iec_62366_usability_summative_eval present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iec_62366_usability_summative_eval
+medtech_iso_13485_document_control["<Policy Title>
+(medtech.iso_13485_document_control)"]:::node
+class medtech_iso_13485_document_control present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iso_13485_document_control
+medtech_iso_14971_risk_management_file["<Policy Title>
+(medtech.iso_14971_risk_management_file)"]:::node
+class medtech_iso_14971_risk_management_file present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iso_14971_risk_management_file
+medtech_iso_27001_isms_scope_and_controls["<Policy Title>
+(medtech.iso_27001_isms_scope_and_controls)"]:::node
+class medtech_iso_27001_isms_scope_and_controls present;
+MedTech_(multi-jurisdiction)_current_Standards_ISO/IEC --> medtech_iso_27001_isms_scope_and_controls
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls["Technical & Operational Controls: Operational and Technical Controls"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls
+medtech_backup_and_recovery_rto_rpo["<Policy Title>
+(medtech.backup_and_recovery_rto_rpo)"]:::node
+class medtech_backup_and_recovery_rto_rpo present;
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls --> medtech_backup_and_recovery_rto_rpo
+medtech_device_data_integrity_hashing["<Policy Title>
+(medtech.device_data_integrity_hashing)"]:::node
+class medtech_device_data_integrity_hashing present;
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls --> medtech_device_data_integrity_hashing
+medtech_dicom_network_security_basic["<Policy Title>
+(medtech.dicom_network_security_basic)"]:::node
+class medtech_dicom_network_security_basic present;
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls --> medtech_dicom_network_security_basic
+medtech_fhir_smart_app_authz["<Policy Title>
+(medtech.fhir_smart_app_authz)"]:::node
+class medtech_fhir_smart_app_authz present;
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls --> medtech_fhir_smart_app_authz
+medtech_log_retention_for_clinical_events["<Policy Title>
+(medtech.log_retention_for_clinical_events)"]:::node
+class medtech_log_retention_for_clinical_events present;
+MedTech_(multi-jurisdiction)_current_Technical_&_Operational_Controls --> medtech_log_retention_for_clinical_events
+MedTech_(multi-jurisdiction)_current_Country/Region-specific["Country/Region-specific: National and Regional Healthcare Regulations"]
+MedTech_(multi-jurisdiction)_current --> MedTech_(multi-jurisdiction)_current_Country/Region-specific
+medtech_au_myr_health_privacy["<Policy Title>
+(medtech.au_myr_health_privacy)"]:::node
+class medtech_au_myr_health_privacy present;
+MedTech_(multi-jurisdiction)_current_Country/Region-specific --> medtech_au_myr_health_privacy
+medtech_ca_phipa_health_data["<Policy Title>
+(medtech.ca_phipa_health_data)"]:::node
+class medtech_ca_phipa_health_data present;
+MedTech_(multi-jurisdiction)_current_Country/Region-specific --> medtech_ca_phipa_health_data
+medtech_sg_hcsa_pdpa_health_data["<Policy Title>
+(medtech.sg_hcsa_pdpa_health_data)"]:::node
+class medtech_sg_hcsa_pdpa_health_data present;
+MedTech_(multi-jurisdiction)_current_Country/Region-specific --> medtech_sg_hcsa_pdpa_health_data
+medtech_uk_dtac_compliance["<Policy Title>
+(medtech.uk_dtac_compliance)"]:::node
+class medtech_uk_dtac_compliance present;
+MedTech_(multi-jurisdiction)_current_Country/Region-specific --> medtech_uk_dtac_compliance
+medtech_uk_mhra_post_market_surveillance["<Policy Title>
+(medtech.uk_mhra_post_market_surveillance)"]:::node
+class medtech_uk_mhra_post_market_surveillance present;
+MedTech_(multi-jurisdiction)_current_Country/Region-specific --> medtech_uk_mhra_post_market_surveillance
+PCI_DSS_4.0(["PCI DSS 4.0"])
+PCI_DSS_4.0_3_4["3.4: Protect stored cardholder data"]
+PCI_DSS_4.0 --> PCI_DSS_4.0_3_4
+pci_ebs_encryption["EBS volume encryption enabled
+(pci.ebs_encryption)"]:::node
+class pci_ebs_encryption present;
+PCI_DSS_4.0_3_4 --> pci_ebs_encryption
+pci_storage_encryption["Encrypt stored cardholder data
+(pci.storage_encryption)"]:::node
+class pci_storage_encryption present;
+PCI_DSS_4.0_3_4 --> pci_storage_encryption
+PCI_DSS_4.0_4_2["4.2: Use strong cryptography for transmission"]
+PCI_DSS_4.0 --> PCI_DSS_4.0_4_2
+pci_https_only["Enforce HTTPS only
+(pci.https_only)"]:::node
+class pci_https_only present;
+PCI_DSS_4.0_4_2 --> pci_https_only
+PCI_DSS_4.0_8_2["8.2: Strong authentication"]
+PCI_DSS_4.0 --> PCI_DSS_4.0_8_2
+pci_iam_password_policy["Strong password policy
+(pci.iam_password_policy)"]:::node
+class pci_iam_password_policy present;
+PCI_DSS_4.0_8_2 --> pci_iam_password_policy
+PCI_DSS_4.0_10_2["10.2: Logging & monitoring"]
+PCI_DSS_4.0 --> PCI_DSS_4.0_10_2
+pci_logging_enabled["Logging enabled
+(pci.logging_enabled)"]:::node
+class pci_logging_enabled present;
+PCI_DSS_4.0_10_2 --> pci_logging_enabled
+PCI_DSS_4.0_12_10["12.10: Incident response monitoring"]
+PCI_DSS_4.0 --> PCI_DSS_4.0_12_10
+AU_iGaming_Hosting_placeholder(["AU iGaming Hosting placeholder"])
+AU_iGaming_Hosting_placeholder_Audit["Audit: Audit trails & secure hosting"]
+AU_iGaming_Hosting_placeholder --> AU_iGaming_Hosting_placeholder_Audit
+rg_au_audit_trails["AU — Audit trails & secure hosting controls
+(rg.au_audit_trails)"]:::node
+class rg_au_audit_trails present;
+AU_iGaming_Hosting_placeholder_Audit --> rg_au_audit_trails
+UKGC/MGA_placeholder(["UKGC/MGA placeholder"])
+UKGC/MGA_placeholder_RG-1["RG-1: Self-exclusion controls"]
+UKGC/MGA_placeholder --> UKGC/MGA_placeholder_RG-1
+rg_self_exclusion_enforced["Responsible Gambling — Self-exclusion enforced
+(rg.self_exclusion_enforced)"]:::node
+class rg_self_exclusion_enforced present;
+UKGC/MGA_placeholder_RG-1 --> rg_self_exclusion_enforced
+UIGEA_31_USC_5361(["UIGEA 31 USC 5361"])
+UIGEA_31_USC_5361_Payments["Payments: Payment blocks for unlawful internet gambling"]
+UIGEA_31_USC_5361 --> UIGEA_31_USC_5361_Payments
+rg_uigea_payment_blocks["UIGEA — Payment blocks
+(rg.uigea_payment_blocks)"]:::node
+class rg_uigea_payment_blocks present;
+UIGEA_31_USC_5361_Payments --> rg_uigea_payment_blocks
+classDef present fill:lightgreen,stroke:#333,stroke-width:1px;
+classDef missing fill:#ffcccc,stroke:#333,stroke-width:1px;</div>
+<script>mermaid.initialize({ startOnLoad: true });</script>
+</body></html>

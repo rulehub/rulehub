@@ -1,0 +1,3975 @@
+{
+  "policies": [
+    {
+      "id": "aml.address_verification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/13"
+      ]
+    },
+    {
+      "id": "aml.high_risk_country_edd",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/18a"
+      ]
+    },
+    {
+      "id": "aml.kyc_basic_cdd",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/13",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L0849"
+      ]
+    },
+    {
+      "id": "aml.minimum_age",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/13"
+      ]
+    },
+    {
+      "id": "aml.pep_screening_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/20"
+      ]
+    },
+    {
+      "id": "aml.sanctions_check",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en",
+        "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Bpp-finsanctions-tf-r6.html"
+      ]
+    },
+    {
+      "id": "aml.txn_monitoring_thresholds",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/33"
+      ]
+    },
+    {
+      "id": "aml.ubo_identification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/13",
+        "https://www.legislation.gov.uk/eudr/2015/849/article/3"
+      ]
+    },
+    {
+      "id": "betting.adr_provider_listed_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr"
+      ]
+    },
+    {
+      "id": "betting.ads_bonus_terms_fair_clear",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gov.uk/government/organisations/competition-and-markets-authority",
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.ads_no_minors_targeting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.asa.org.uk/codes-and-rulings/advertising-codes.html"
+      ]
+    },
+    {
+      "id": "betting.affordability_checks_uk",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.age_verification_before_gambling_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.aml_high_risk_country_restrictions",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/"
+      ]
+    },
+    {
+      "id": "betting.aml_sar_reporting_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars"
+      ]
+    },
+    {
+      "id": "betting.au_iga_no_prohibited_services",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "scope": "AU",
+      "links": [
+        "https://www.legislation.gov.au/Series/C2004A00771",
+        "https://www.acma.gov.au/interactive-gambling"
+      ]
+    },
+    {
+      "id": "betting.complaints_process_published",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.credit_card_gambling_ban_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.data_integrity_audits",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ibia.bet/"
+      ]
+    },
+    {
+      "id": "betting.deposit_limit_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/",
+        "https://anj.fr/"
+      ]
+    },
+    {
+      "id": "betting.game_rules_visible_before_play",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.geofencing_regulated_markets",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.in_play_delay_controls",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA",
+        "UK",
+        "MT"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/",
+        "https://www.mga.org.mt/"
+      ]
+    },
+    {
+      "id": "betting.kyc_on_withdrawal",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.mga.org.mt/",
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.kyc_onboarding",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA",
+        "UK"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "betting.license_check_adm_it",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.adm.gov.it/portale/"
+      ]
+    },
+    {
+      "id": "betting.license_check_agco_on",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.agco.ca/igaming",
+        "https://igamingontario.ca/"
+      ]
+    },
+    {
+      "id": "betting.license_check_anj_fr",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://anj.fr/"
+      ]
+    },
+    {
+      "id": "betting.license_check_au_nt",
+      "regions": [
+        "APAC"
+      ],
+      "countries": [
+        "AU-NT"
+      ],
+      "scope": "State",
+      "links": [
+        "https://nt.gov.au/"
+      ]
+    },
+    {
+      "id": "betting.license_check_brazil_14790",
+      "regions": [
+        "LatAm"
+      ],
+      "countries": [
+        "BR"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm"
+      ]
+    },
+    {
+      "id": "betting.license_check_ca_on_igaming",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "CA-ON"
+      ],
+      "scope": "Province",
+      "links": [
+        "https://www.agco.ca/igaming"
+      ]
+    },
+    {
+      "id": "betting.license_check_coljuegos_co",
+      "regions": [
+        "LatAm"
+      ],
+      "countries": [
+        "CO"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.coljuegos.gov.co/"
+      ]
+    },
+    {
+      "id": "betting.license_check_dgoj_es",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ordenacionjuego.es/en"
+      ]
+    },
+    {
+      "id": "betting.license_check_ggl_de",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gluecksspiel-behoerde.de/"
+      ]
+    },
+    {
+      "id": "betting.license_check_gra_sg",
+      "regions": [
+        "APAC"
+      ],
+      "countries": [
+        "SG"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gra.gov.sg/"
+      ]
+    },
+    {
+      "id": "betting.license_check_ksa_nl",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kansspelautoriteit.nl/"
+      ]
+    },
+    {
+      "id": "betting.license_check_mga",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.mga.org.mt/"
+      ]
+    },
+    {
+      "id": "betting.license_check_spelinspektionen_se",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.spelinspektionen.se/"
+      ]
+    },
+    {
+      "id": "betting.license_check_spillemyndigheden_dk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.spillemyndigheden.dk/"
+      ]
+    },
+    {
+      "id": "betting.license_check_ukgc",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.license_check_us_co_division",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US-CO"
+      ],
+      "scope": "State",
+      "links": [
+        "https://sbg.colorado.gov/"
+      ]
+    },
+    {
+      "id": "betting.license_check_us_nj_dge",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.nj.gov/oag/ge/"
+      ]
+    },
+    {
+      "id": "betting.license_check_us_nv_ngcb",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://gaming.nv.gov/"
+      ]
+    },
+    {
+      "id": "betting.license_check_us_pa_pgcb",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://gamingcontrolboard.pa.gov/"
+      ]
+    },
+    {
+      "id": "betting.loss_limit_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.spelinspektionen.se/",
+        "https://www.spillemyndigheden.dk/"
+      ]
+    },
+    {
+      "id": "betting.market_restrictions_youth",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA",
+        "FR"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://anj.fr/"
+      ]
+    },
+    {
+      "id": "betting.match_fixing_monitoring",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ibia.bet/",
+        "https://sportradar.com/"
+      ]
+    },
+    {
+      "id": "betting.no_bets_by_participants",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.official_data_only",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.ongoing_aml_monitoring",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/",
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.player_funds_segregation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/",
+        "https://kansspelautoriteit.nl/"
+      ]
+    },
+    {
+      "id": "betting.reality_checks_elapsed_time",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.reverse_withdrawal_ban_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.rng_certification_gli11",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://gaminglabs.com/gli-standards/"
+      ]
+    },
+    {
+      "id": "betting.rtp_disclosure_to_players",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.safer_gambling_interactions",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.sanctions_screening_global",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://sanctionssearch.ofac.treas.gov/",
+        "https://www.eeas.europa.eu/_en"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_de_oasis",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gluecksspiel-behoerde.de/",
+        "https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_dk_rofus",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "DK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.spillemyndigheden.dk/",
+        "https://www.spillemyndigheden.dk/en/rofus"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_es_rgiaj",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ordenacionjuego.es/en",
+        "https://www.ordenacionjuego.es/en/rgiaj"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_nl_cruks",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kansspelautoriteit.nl/",
+        "https://cruksregister.nl/"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_on_igaming",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.agco.ca/igaming",
+        "https://igamingontario.ca/en"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_se_spelpaus",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.spelinspektionen.se/",
+        "https://www.spelpaus.se/"
+      ]
+    },
+    {
+      "id": "betting.self_exclusion_uk_gamstop",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamstop.co.uk/for-operators",
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.session_time_limits_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.anj.fr/",
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.slots_min_spin_speed_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.slots_no_autoplay_uk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.slots_no_losses_disguised_as_wins",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.source_of_funds_checks",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.source_of_funds_thresholds",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.suspicious_betting_reporting_uk",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "betting.txn_monitoring_anomalies",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/"
+      ]
+    },
+    {
+      "id": "edtech.au_app_11_security_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.oaic.gov.au/privacy/australian-privacy-principles"
+      ]
+    },
+    {
+      "id": "edtech.au_app_5_notice_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.oaic.gov.au/privacy/australian-privacy-principles"
+      ]
+    },
+    {
+      "id": "edtech.au_ndb_breach_notification_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.oaic.gov.au/privacy/notifiable-data-breaches"
+      ]
+    },
+    {
+      "id": "edtech.br_lgpd_children_consent_best_interest",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm"
+      ]
+    },
+    {
+      "id": "edtech.ca_pipeda_consent_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/"
+      ]
+    },
+    {
+      "id": "edtech.ca_sopipa_no_sale_of_student_data",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article="
+      ]
+    },
+    {
+      "id": "edtech.ca_sopipa_no_targeted_advertising",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article="
+      ]
+    },
+    {
+      "id": "edtech.co_student_data_transparency",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://coag.gov/office-sections/consumer-protection/student-data-privacy/"
+      ]
+    },
+    {
+      "id": "edtech.coppa_data_minimization",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"
+      ]
+    },
+    {
+      "id": "edtech.coppa_delete_on_parent_request",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"
+      ]
+    },
+    {
+      "id": "edtech.coppa_parental_consent_under_13",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"
+      ]
+    },
+    {
+      "id": "edtech.ct_student_data_privacy",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy"
+      ]
+    },
+    {
+      "id": "edtech.edtech_access_least_privilege",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final"
+      ]
+    },
+    {
+      "id": "edtech.edtech_audit_logs_student_record_access",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/publications/detail/sp/800-92/final"
+      ]
+    },
+    {
+      "id": "edtech.edtech_encryption_at_rest",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+      ]
+    },
+    {
+      "id": "edtech.edtech_encryption_in_transit",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/pubs/sp/800/52/r2/final"
+      ]
+    },
+    {
+      "id": "edtech.edtech_retention_after_course_completion",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/62542.html"
+      ]
+    },
+    {
+      "id": "edtech.eu_dpia_high_risk_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "edtech.eu_eprivacy_cookie_consent_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/dir/2002/58/oj"
+      ]
+    },
+    {
+      "id": "edtech.eu_gdpr_minors_consent_education",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "edtech.eu_scc_transfers_edplatform",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj"
+      ]
+    },
+    {
+      "id": "edtech.ferpa_consent_or_exception_for_disclosure",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://studentprivacy.ed.gov/",
+        "https://www.ecfr.gov/current/title-34/part-99/subpart-D"
+      ]
+    },
+    {
+      "id": "edtech.ferpa_directory_info_optout_respected",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://studentprivacy.ed.gov/"
+      ]
+    },
+    {
+      "id": "edtech.ferpa_parent_access_rights",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://studentprivacy.ed.gov/",
+        "https://www.ecfr.gov/current/title-34/subtitle-A/part-99"
+      ]
+    },
+    {
+      "id": "edtech.il_soppa_breach_notification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&ChapterID=17"
+      ]
+    },
+    {
+      "id": "edtech.in_dpdpa_children_verifiable_consent",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://egazette.nic.in/WriteReadData/2023/248775.pdf"
+      ]
+    },
+    {
+      "id": "edtech.kr_pipa_guardian_consent_under_14",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pipc.go.kr/eng/"
+      ]
+    },
+    {
+      "id": "edtech.ny_edlaw2d_encryption_and_contracts",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf",
+        "https://www.nysed.gov/data-privacy-security/laws-regulations"
+      ]
+    },
+    {
+      "id": "edtech.nz_notice_at_collection_edtech",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.privacy.org.nz/your-rights/privacy-principles/"
+      ]
+    },
+    {
+      "id": "edtech.ppra_parental_consent_sensitive_surveys",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://studentprivacy.ed.gov/resources/ppra-general-guidance"
+      ]
+    },
+    {
+      "id": "edtech.uk_aadc_privacy_by_default",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ico.org.uk/for-organisations/childrens-code-design-guidance/"
+      ]
+    },
+    {
+      "id": "edtech.uk_aadc_profiling_and_geolocation_off",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ico.org.uk/for-organisations/childrens-code-design-guidance/"
+      ]
+    },
+    {
+      "id": "fintech.aml_account_freeze_on_hit",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_adverse_media_screening",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_customer_risk_tiering",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_duplicate_account_detection",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_geolocation_restrictions",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_manual_review_queue",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_ongoing_monitoring",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_pep_periodic_review",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_pep_screening",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_risk_scoring_model",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_sanctions_rescreening_frequency",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_sanctions_screening",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843",
+        "https://ofac.treasury.gov/sanctions-programs-and-country-information"
+      ]
+    },
+    {
+      "id": "fintech.aml_transaction_velocity_limits",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_unusual_activity_alerting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.aml_watchlist_management",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.bitlicense_compliance",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US-NY"
+      ],
+      "scope": "State",
+      "links": [
+        "https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses"
+      ]
+    },
+    {
+      "id": "fintech.card_tokenization_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.chain_analysis_risk_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.chargeback_monitoring",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.cold_storage_ratio",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.custody_asset_segregation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.device_fingerprinting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.fapi_compliance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://openid.net/specs/"
+      ]
+    },
+    {
+      "id": "fintech.fraud_velocity_checks",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.geofencing_restricted_markets",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.hot_wallet_limits",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.ip_geolocation_consistency",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.jwt_expiry_policy",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://datatracker.ietf.org/doc/html/rfc7519"
+      ]
+    },
+    {
+      "id": "fintech.kyc_biometric_liveness",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.kyc_document_verification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.kyc_reverification_schedule",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.kyc_source_of_funds",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.kyc_source_of_wealth",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html",
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843"
+      ]
+    },
+    {
+      "id": "fintech.mcc_whitelisting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.mtls_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://datatracker.ietf.org/doc/html/rfc8705"
+      ]
+    },
+    {
+      "id": "fintech.oauth2_pkce_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://datatracker.ietf.org/doc/html/rfc7636"
+      ]
+    },
+    {
+      "id": "fintech.ob_audit_logging",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "fintech.ob_consent_expiry_90d",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "fintech.ob_consent_revocation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "fintech.ob_data_minimization",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "fintech.ob_rate_limits",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "fintech.ob_tpp_eidas_cert_validation",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2014/910/oj"
+      ]
+    },
+    {
+      "id": "fintech.pan_masking_in_logs",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.pci_account_lockout",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_default_passwords_changed",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_file_integrity_monitoring",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_https_only",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_key_management",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_log_retention",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_malware_protection",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_mfa_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_network_segmentation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_pan_masking_in_logs",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_secure_coding_practices",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_session_timeout",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_storage_encryption",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_tls_min_version",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.pci_vulnerability_scanning",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "fintech.proof_of_reserves_reporting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.psd2_sca",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU"
+      ],
+      "scope": "EU",
+      "links": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366",
+        "https://www.styra.com/opa-rego-style-guide/"
+      ]
+    },
+    {
+      "id": "fintech.psd2_sca_enforced",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366",
+        "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj"
+      ]
+    },
+    {
+      "id": "fintech.psd2_sca_exemptions_controls",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366",
+        "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj"
+      ]
+    },
+    {
+      "id": "fintech.psd2_transaction_risk_analysis",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366",
+        "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj"
+      ]
+    },
+    {
+      "id": "fintech.rbi_ekyc_risk",
+      "regions": [
+        "APAC"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "scope": "IN",
+      "links": [
+        "https://www.rbi.org.in/"
+      ]
+    },
+    {
+      "id": "fintech.stablecoin_reserve_ratio",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.three_ds_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.transaction_limits_per_risk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.emvco.com/emv-technologies/3-d-secure/"
+      ]
+    },
+    {
+      "id": "fintech.travel_rule_compliance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.us_mtl_license",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US"
+      ],
+      "scope": "US",
+      "links": [
+        "https://www.upguard.com/blog/cybersecurity-regulations-financial-industry",
+        "https://www.fincen.gov/msb-state-law-regulatory-framework"
+      ]
+    },
+    {
+      "id": "fintech.vasp_license_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.withdrawal_address_whitelist",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+        "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html"
+      ]
+    },
+    {
+      "id": "fintech.xs2a_api_security",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.openbanking.org.uk/",
+        "https://openid.net/specs/openid-connect-core-1_0.html"
+      ]
+    },
+    {
+      "id": "gdpr.consent_required",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU"
+      ],
+      "scope": "EU",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+        "https://www.legislation.gov.uk/eudr/2016/679/article/6",
+        "https://www.legislation.gov.uk/eudr/2016/679/article/7"
+      ]
+    },
+    {
+      "id": "gdpr.data_minimization",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU"
+      ],
+      "scope": "EU",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+        "https://www.legislation.gov.uk/eudr/2016/679/article/5"
+      ]
+    },
+    {
+      "id": "gdpr.data_retention",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU"
+      ],
+      "scope": "EU",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+        "https://www.legislation.gov.uk/eudr/2016/679/article/5"
+      ]
+    },
+    {
+      "id": "igaming.deposit_limit_controls",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "EU",
+        "EEA",
+        "UK"
+      ],
+      "scope": "Regional",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "igaming.geofencing_regulated_markets",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_adm_it",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "IT"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.adm.gov.it/portale/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_anj_fr",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "FR"
+      ],
+      "scope": "National",
+      "links": [
+        "https://anj.fr/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_dgoj_es",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "ES"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.ordenacionjuego.es/en"
+      ]
+    },
+    {
+      "id": "igaming.license_check_ukgc",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_us_nj_dge",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US-NJ"
+      ],
+      "scope": "State",
+      "links": [
+        "https://www.nj.gov/oag/ge/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_us_nv_ngcb",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US-NV"
+      ],
+      "scope": "State",
+      "links": [
+        "https://www.gaming.nv.gov/"
+      ]
+    },
+    {
+      "id": "igaming.license_check_us_pa_pgcb",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US-PA"
+      ],
+      "scope": "State",
+      "links": [
+        "https://gamingcontrolboard.pa.gov/"
+      ]
+    },
+    {
+      "id": "igaming.self_exclusion_uk_gamstop",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "UK"
+      ],
+      "scope": "National",
+      "links": [
+        "https://www.gamstop.co.uk/for-operators"
+      ]
+    },
+    {
+      "id": "k8s.ban_hostnetwork",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/"
+      ]
+    },
+    {
+      "id": "k8s.block_hostpath",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+        "https://kubernetes.io/docs/concepts/storage/volumes/#hostpath"
+      ]
+    },
+    {
+      "id": "k8s.disallow_latest",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/containers/images/",
+        "https://kubernetes.io/docs/concepts/security/security-checklist/"
+      ]
+    },
+    {
+      "id": "k8s.limit_capabilities",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+        "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+      ]
+    },
+    {
+      "id": "k8s.no_privileged",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+        "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+      ]
+    },
+    {
+      "id": "k8s.no_run_as_root",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+        "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+      ]
+    },
+    {
+      "id": "k8s.require_imagepullpolicy_always",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/containers/images/",
+        "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/"
+      ]
+    },
+    {
+      "id": "k8s.require_resources",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+        "https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/"
+      ]
+    },
+    {
+      "id": "legaltech.aba_model_rule_1_6_confidentiality",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US"
+      ],
+      "scope": "Federal",
+      "links": [
+        "https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/"
+      ]
+    },
+    {
+      "id": "legaltech.ae_pdpl_consent_notice",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law"
+      ]
+    },
+    {
+      "id": "legaltech.au_app_notice_at_collection",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.oaic.gov.au/privacy/australian-privacy-principles"
+      ]
+    },
+    {
+      "id": "legaltech.ca_qc_law25_privacy_governance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1"
+      ]
+    },
+    {
+      "id": "legaltech.ccpa_notice_at_collection",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://oag.ca.gov/privacy/ccpa"
+      ]
+    },
+    {
+      "id": "legaltech.ccpa_opt_out_enabled",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://cppa.ca.gov/",
+        "https://oag.ca.gov/privacy/ccpa"
+      ]
+    },
+    {
+      "id": "legaltech.ccpa_verification_of_requests",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://oag.ca.gov/privacy/ccpa"
+      ]
+    },
+    {
+      "id": "legaltech.ch_fadp_records_of_processing",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fedlex.admin.ch/eli/cc/2022/491/en"
+      ]
+    },
+    {
+      "id": "legaltech.cpra_sensitive_data_limited_use",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://cppa.ca.gov/"
+      ]
+    },
+    {
+      "id": "legaltech.data_residency_requirements_enforced",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/27001.html"
+      ]
+    },
+    {
+      "id": "legaltech.ediscovery_frcp_26_34_37",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US"
+      ],
+      "scope": "Federal",
+      "links": [
+        "https://www.law.cornell.edu/rules/frcp/rule_26"
+      ]
+    },
+    {
+      "id": "legaltech.encryption_at_rest_enabled",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final"
+      ]
+    },
+    {
+      "id": "legaltech.encryption_in_transit_enabled",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/pubs/sp/800/52/r2/final"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_breach_72h",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_consent_valid",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_cookie_consent_eprivacy",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/dir/2002/58/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_data_minimization",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_dpia_required_high_risk",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_dsar_timeline_30d",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_lawful_basis_required",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_records_of_processing",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_retention_limit",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "legaltech.gdpr_transfer_scc",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj"
+      ]
+    },
+    {
+      "id": "legaltech.id_pdp_cross_border_transfer",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://jdih.setneg.go.id/"
+      ]
+    },
+    {
+      "id": "legaltech.kr_pipa_breach_notification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pipc.go.kr/eng/"
+      ]
+    },
+    {
+      "id": "legaltech.legal_hold_no_delete_enforced",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.law.cornell.edu/rules/frcp/rule_37"
+      ]
+    },
+    {
+      "id": "legaltech.lgpd_brazil_compliance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm"
+      ]
+    },
+    {
+      "id": "legaltech.mx_lfpdppp_notice_at_collection",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf"
+      ]
+    },
+    {
+      "id": "legaltech.my_pdpa_retention_principle",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.malaysia.gov.my/portal/content/654"
+      ]
+    },
+    {
+      "id": "legaltech.nz_breach_notification",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.privacy.org.nz/for-organisations/privacy-breaches/"
+      ]
+    },
+    {
+      "id": "legaltech.pdpa_sg_consent_purposes",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://sso.agc.gov.sg/Act/PDPA2012"
+      ]
+    },
+    {
+      "id": "legaltech.pipeda_ca_consent",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/"
+      ]
+    },
+    {
+      "id": "legaltech.pipl_cn_cross_border_assessment",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.npc.gov.cn/englishnpc/"
+      ]
+    },
+    {
+      "id": "legaltech.popia_za_security_measures",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.justice.gov.za/inforeg/"
+      ]
+    },
+    {
+      "id": "legaltech.records_classification_scheme_applied",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/62542.html"
+      ]
+    },
+    {
+      "id": "legaltech.sa_pdpl_breach_notify",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://sdaia.gov.sa/"
+      ]
+    },
+    {
+      "id": "legaltech.th_pdpa_breach_notify",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pdpc.or.th/en/home/"
+      ]
+    },
+    {
+      "id": "legaltech.tr_kvkk_verbis_registration",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://verbis.kvkk.gov.tr/"
+      ]
+    },
+    {
+      "id": "legaltech.uk_gdpr_minor_consent",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ico.org.uk/"
+      ]
+    },
+    {
+      "id": "legaltech.vn_pdpd_notice_and_consent",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.mps.gov.vn/"
+      ]
+    },
+    {
+      "id": "medtech.au_myr_health_privacy",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.health.gov.au/initiatives-and-programs/my-health-record",
+        "https://www.legislation.gov.au/Series/C2012A00063"
+      ]
+    },
+    {
+      "id": "medtech.backup_and_recovery_rto_rpo",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/44379.html"
+      ]
+    },
+    {
+      "id": "medtech.ca_phipa_health_data",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ontario.ca/laws/statute/04p03"
+      ]
+    },
+    {
+      "id": "medtech.device_data_integrity_hashing",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity"
+      ]
+    },
+    {
+      "id": "medtech.dicom_network_security_basic",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.dicomstandard.org/"
+      ]
+    },
+    {
+      "id": "medtech.eu_ivdr_clinical_performance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2017/746/oj"
+      ]
+    },
+    {
+      "id": "medtech.eu_mdr_ce_marking_and_udi",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2017/745/oj"
+      ]
+    },
+    {
+      "id": "medtech.eu_mdr_clinical_evaluation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2017/745/oj"
+      ]
+    },
+    {
+      "id": "medtech.eu_mdr_eudamed_registration",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://ec.europa.eu/health/medical-devices-eudamed/overview_en"
+      ]
+    },
+    {
+      "id": "medtech.eu_mdr_pms_psur",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2017/745/oj"
+      ]
+    },
+    {
+      "id": "medtech.eu_vigilance_incident_reporting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en"
+      ]
+    },
+    {
+      "id": "medtech.fda_cybersecurity_524b_sbom",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity"
+      ]
+    },
+    {
+      "id": "medtech.fda_mdr_event_reporting",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803"
+      ]
+    },
+    {
+      "id": "medtech.fda_part11_audit_trail",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11"
+      ]
+    },
+    {
+      "id": "medtech.fda_part11_esign_linkage",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11"
+      ]
+    },
+    {
+      "id": "medtech.fda_part11_system_validation",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11"
+      ]
+    },
+    {
+      "id": "medtech.fhir_smart_app_authz",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://hl7.org/fhir/smart-app-launch/"
+      ]
+    },
+    {
+      "id": "medtech.gdpr_art9_special_category_safeguards",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+        "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+      ]
+    },
+    {
+      "id": "medtech.health_data_cross_border_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj",
+        "https://www.hhs.gov/hipaa/"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_access_audit_logging",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/security/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_baa_with_vendors",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_mfa_privileged_access",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/security/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_minimum_necessary",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_security_admin_safeguards",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/security/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hipaa_security_tech_encryption",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/security/index.html"
+      ]
+    },
+    {
+      "id": "medtech.hitech_breach_notification_60d",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html"
+      ]
+    },
+    {
+      "id": "medtech.iec_62304_scm_prp_processes",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://webstore.iec.ch/en/publication/24950"
+      ]
+    },
+    {
+      "id": "medtech.iec_62304_software_safety_class",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://webstore.iec.ch/en/publication/24950"
+      ]
+    },
+    {
+      "id": "medtech.iec_62366_usability_summative_eval",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://webstore.iec.ch/en/publication/26023"
+      ]
+    },
+    {
+      "id": "medtech.iso_13485_document_control",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/59752.html"
+      ]
+    },
+    {
+      "id": "medtech.iso_14971_risk_management_file",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/72704.html"
+      ]
+    },
+    {
+      "id": "medtech.iso_27001_isms_scope_and_controls",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.iso.org/standard/27001.html"
+      ]
+    },
+    {
+      "id": "medtech.log_retention_for_clinical_events",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://csrc.nist.gov/pubs/sp/800/92/final"
+      ]
+    },
+    {
+      "id": "medtech.onc_cures_api_fhir_r4",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.healthit.gov/curesrule/",
+        "https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi"
+      ]
+    },
+    {
+      "id": "medtech.onc_information_blocking_prohibited",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.healthit.gov/curesrule/"
+      ]
+    },
+    {
+      "id": "medtech.sg_hcsa_pdpa_health_data",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://sso.agc.gov.sg/Act/HCSA2020",
+        "https://sso.agc.gov.sg/Act/PDPA2012"
+      ]
+    },
+    {
+      "id": "medtech.uk_dtac_compliance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-criteria-dtac/"
+      ]
+    },
+    {
+      "id": "medtech.uk_mhra_post_market_surveillance",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements"
+      ]
+    },
+    {
+      "id": "pci.ebs_encryption",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "pci.https_only",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/",
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "pci.iam_password_policy",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf",
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "pci.logging_enabled",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf"
+      ]
+    },
+    {
+      "id": "pci.storage_encryption",
+      "regions": [
+        "Global"
+      ],
+      "countries": [
+        "*"
+      ],
+      "scope": "Global",
+      "links": [
+        "https://www.pcisecuritystandards.org/document_library",
+        "https://www.pcisecuritystandards.org/document_library"
+      ]
+    },
+    {
+      "id": "rg.au_audit_trails",
+      "regions": [
+        "APAC"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "scope": "AU",
+      "links": [
+        "https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215"
+      ]
+    },
+    {
+      "id": "rg.self_exclusion_enforced",
+      "regions": [
+        "Europe"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "scope": "GB",
+      "links": [
+        "https://www.gamblingcommission.gov.uk/"
+      ]
+    },
+    {
+      "id": "rg.uigea_payment_blocks",
+      "regions": [
+        "North America"
+      ],
+      "countries": [
+        "US"
+      ],
+      "scope": "US",
+      "links": [
+        "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm"
+      ]
+    }
+  ],
+  "missing_links": [],
+  "link_occurrences": {
+    "https://www.coe.int/en/web/conventions/full-list?module=treaty-detail&treatynum=215": 1,
+    "https://www.gamblingcommission.gov.uk/": 31,
+    "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20081112a.htm": 1,
+    "https://www.pcisecuritystandards.org/document_library": 34,
+    "https://www.pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/does-pci-dss-define-which-versions-of-tls-must-be-used/": 1,
+    "https://www.pcisecuritystandards.org/pdfs/Multi-Factor-Authentication-Guidance-v1.pdf": 1,
+    "https://www.pcisecuritystandards.org/documents/Effective-Daily-Log-Monitoring-Guidance.pdf": 1,
+    "https://www.health.gov.au/initiatives-and-programs/my-health-record": 1,
+    "https://www.legislation.gov.au/Series/C2012A00063": 1,
+    "https://www.iso.org/standard/44379.html": 1,
+    "https://www.ontario.ca/laws/statute/04p03": 1,
+    "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity": 2,
+    "https://www.dicomstandard.org/": 1,
+    "https://eur-lex.europa.eu/eli/reg/2017/746/oj": 1,
+    "https://eur-lex.europa.eu/eli/reg/2017/745/oj": 3,
+    "https://ec.europa.eu/health/medical-devices-eudamed/overview_en": 1,
+    "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-and-templates_en": 1,
+    "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-H/part-803": 1,
+    "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11": 3,
+    "https://hl7.org/fhir/smart-app-launch/": 1,
+    "https://eur-lex.europa.eu/eli/reg/2016/679/oj": 15,
+    "https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj": 3,
+    "https://www.hhs.gov/hipaa/": 1,
+    "https://www.hhs.gov/hipaa/for-professionals/security/index.html": 4,
+    "https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html": 1,
+    "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html": 1,
+    "https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html": 1,
+    "https://webstore.iec.ch/en/publication/24950": 2,
+    "https://webstore.iec.ch/en/publication/26023": 1,
+    "https://www.iso.org/standard/59752.html": 1,
+    "https://www.iso.org/standard/72704.html": 1,
+    "https://www.iso.org/standard/27001.html": 2,
+    "https://csrc.nist.gov/pubs/sp/800/92/final": 1,
+    "https://www.healthit.gov/curesrule/": 2,
+    "https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi": 1,
+    "https://sso.agc.gov.sg/Act/HCSA2020": 1,
+    "https://sso.agc.gov.sg/Act/PDPA2012": 2,
+    "https://www.nhsx.nhs.uk/standards-and-guidance/digital-technology-assessment-criteria-dtac/": 1,
+    "https://www.gov.uk/guidance/medical-devices-post-market-surveillance-requirements": 1,
+    "https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_6_confidentiality_of_information/": 1,
+    "https://u.ae/en/about-the-uae/digital-uae/data/data-protection-law": 1,
+    "https://www.oaic.gov.au/privacy/australian-privacy-principles": 3,
+    "https://www.legisquebec.gouv.qc.ca/en/document/cs/p-39.1": 1,
+    "https://oag.ca.gov/privacy/ccpa": 3,
+    "https://cppa.ca.gov/": 2,
+    "https://www.fedlex.admin.ch/eli/cc/2022/491/en": 1,
+    "https://www.law.cornell.edu/rules/frcp/rule_26": 1,
+    "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final": 2,
+    "https://csrc.nist.gov/pubs/sp/800/52/r2/final": 2,
+    "https://eur-lex.europa.eu/eli/dir/2002/58/oj": 2,
+    "https://jdih.setneg.go.id/": 1,
+    "https://www.pipc.go.kr/eng/": 2,
+    "https://www.law.cornell.edu/rules/frcp/rule_37": 1,
+    "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2018/lei/L13709.htm": 2,
+    "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf": 1,
+    "https://www.malaysia.gov.my/portal/content/654": 1,
+    "https://www.privacy.org.nz/for-organisations/privacy-breaches/": 1,
+    "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/": 2,
+    "https://www.npc.gov.cn/englishnpc/": 1,
+    "https://www.justice.gov.za/inforeg/": 1,
+    "https://www.iso.org/standard/62542.html": 2,
+    "https://sdaia.gov.sa/": 1,
+    "https://www.pdpc.or.th/en/home/": 1,
+    "https://verbis.kvkk.gov.tr/": 1,
+    "https://ico.org.uk/": 1,
+    "https://www.mps.gov.vn/": 1,
+    "https://kubernetes.io/docs/concepts/security/pod-security-standards/": 5,
+    "https://kubernetes.io/docs/concepts/storage/volumes/#hostpath": 1,
+    "https://kubernetes.io/docs/concepts/containers/images/": 2,
+    "https://kubernetes.io/docs/concepts/security/security-checklist/": 1,
+    "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/": 3,
+    "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/": 1,
+    "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/": 1,
+    "https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/": 1,
+    "https://www.adm.gov.it/portale/": 2,
+    "https://anj.fr/": 4,
+    "https://www.ordenacionjuego.es/en": 3,
+    "https://www.nj.gov/oag/ge/": 2,
+    "https://www.gaming.nv.gov/": 1,
+    "https://gamingcontrolboard.pa.gov/": 2,
+    "https://www.gamstop.co.uk/for-operators": 2,
+    "https://www.legislation.gov.uk/eudr/2016/679/article/6": 1,
+    "https://www.legislation.gov.uk/eudr/2016/679/article/7": 1,
+    "https://www.legislation.gov.uk/eudr/2016/679/article/5": 2,
+    "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Fatf-recommendations.html": 27,
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018L0843": 21,
+    "https://ofac.treasury.gov/sanctions-programs-and-country-information": 1,
+    "https://www.dfs.ny.gov/industry_guidance/virtual_currency_businesses": 1,
+    "https://www.emvco.com/emv-technologies/3d-secure/": 5,
+    "https://eur-lex.europa.eu/eli/reg/2023/1114/oj": 9,
+    "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Guidance-R16-travel-rule.html": 9,
+    "https://www.emvco.com/emv-technologies/3-d-secure/": 5,
+    "https://openid.net/specs/": 1,
+    "https://datatracker.ietf.org/doc/html/rfc7519": 1,
+    "https://datatracker.ietf.org/doc/html/rfc8705": 1,
+    "https://datatracker.ietf.org/doc/html/rfc7636": 1,
+    "https://www.openbanking.org.uk/": 6,
+    "https://openid.net/specs/openid-connect-core-1_0.html": 6,
+    "https://eur-lex.europa.eu/eli/reg/2014/910/oj": 1,
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366": 4,
+    "https://www.styra.com/opa-rego-style-guide/": 1,
+    "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj": 3,
+    "https://www.rbi.org.in/": 1,
+    "https://www.upguard.com/blog/cybersecurity-regulations-financial-industry": 1,
+    "https://www.fincen.gov/msb-state-law-regulatory-framework": 1,
+    "https://www.oaic.gov.au/privacy/notifiable-data-breaches": 1,
+    "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=22.&article=": 2,
+    "https://coag.gov/office-sections/consumer-protection/student-data-privacy/": 1,
+    "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa": 3,
+    "https://portal.ct.gov/AG/Childrens-Issues/Children-Privacy/Student-Privacy": 1,
+    "https://csrc.nist.gov/publications/detail/sp/800-92/final": 1,
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final": 1,
+    "https://studentprivacy.ed.gov/": 3,
+    "https://www.ecfr.gov/current/title-34/part-99/subpart-D": 1,
+    "https://www.ecfr.gov/current/title-34/subtitle-A/part-99": 1,
+    "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&ChapterID=17": 1,
+    "https://egazette.nic.in/WriteReadData/2023/248775.pdf": 1,
+    "https://www.nysed.gov/common/nysed/files/programs/student-data-privacy/2d-law-text.pdf": 1,
+    "https://www.nysed.gov/data-privacy-security/laws-regulations": 1,
+    "https://www.privacy.org.nz/your-rights/privacy-principles/": 1,
+    "https://studentprivacy.ed.gov/resources/ppra-general-guidance": 1,
+    "https://ico.org.uk/for-organisations/childrens-code-design-guidance/": 2,
+    "https://www.gamblingcommission.gov.uk/for-gambling-businesses/for-gambling-businesses/alternative-dispute-resolution-adr": 1,
+    "https://www.gov.uk/government/organisations/competition-and-markets-authority": 1,
+    "https://www.asa.org.uk/codes-and-rulings/advertising-codes.html": 1,
+    "https://www.fatf-gafi.org/": 2,
+    "https://www.nationalcrimeagency.gov.uk/what-we-do/crime-threats/money-laundering/suspicious-activity-reports-sars": 1,
+    "https://www.legislation.gov.au/Series/C2004A00771": 1,
+    "https://www.acma.gov.au/interactive-gambling": 1,
+    "https://ibia.bet/": 2,
+    "https://www.mga.org.mt/": 3,
+    "https://www.agco.ca/igaming": 3,
+    "https://igamingontario.ca/": 1,
+    "https://nt.gov.au/": 1,
+    "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14790.htm": 1,
+    "https://www.coljuegos.gov.co/": 1,
+    "https://www.gluecksspiel-behoerde.de/": 2,
+    "https://www.gra.gov.sg/": 1,
+    "https://kansspelautoriteit.nl/": 3,
+    "https://www.spelinspektionen.se/": 3,
+    "https://www.spillemyndigheden.dk/": 3,
+    "https://sbg.colorado.gov/": 1,
+    "https://gaming.nv.gov/": 1,
+    "https://sportradar.com/": 1,
+    "https://eur-lex.europa.eu/": 1,
+    "https://gaminglabs.com/gli-standards/": 1,
+    "https://sanctionssearch.ofac.treas.gov/": 1,
+    "https://www.eeas.europa.eu/_en": 1,
+    "https://www.gluecksspiel-behoerde.de/de/aufsicht/oasis": 1,
+    "https://www.spillemyndigheden.dk/en/rofus": 1,
+    "https://www.ordenacionjuego.es/en/rgiaj": 1,
+    "https://cruksregister.nl/": 1,
+    "https://igamingontario.ca/en": 1,
+    "https://www.spelpaus.se/": 1,
+    "https://www.anj.fr/": 1,
+    "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-15/Final%20Report%20on%20the%20Guidelines%20on%20the%20use%20of%20remote%20customer%20onboarding%20solutions.pdf": 1,
+    "https://www.legislation.gov.uk/eudr/2015/849/article/13": 4,
+    "https://www.legislation.gov.uk/eudr/2015/849/article/18a": 1,
+    "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L0849": 1,
+    "https://www.legislation.gov.uk/eudr/2015/849/article/20": 1,
+    "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/quality?locale=en": 1,
+    "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list": 1,
+    "https://www.fatf-gafi.org/en/publications/Fatf-recommendations/Bpp-finsanctions-tf-r6.html": 1,
+    "https://www.legislation.gov.uk/eudr/2015/849/article/33": 1,
+    "https://www.legislation.gov.uk/eudr/2015/849/article/3": 1
+  },
+  "link_issues": {}
+}

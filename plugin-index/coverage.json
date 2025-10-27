@@ -1,0 +1,4778 @@
+[
+  {
+    "regulation": "EU AMLD",
+    "version": "5/6",
+    "sections": [
+      {
+        "section": "Article 13",
+        "title": "Customer due diligence",
+        "policies": [
+          {
+            "id": "aml.address_verification",
+            "found": true,
+            "name": "Address verification",
+            "paths": [
+              {
+                "path": "policies/aml/address_verification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/address_verification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "aml.kyc_basic_cdd",
+            "found": true,
+            "name": "Basic customer due diligence (KYC)",
+            "paths": [
+              {
+                "path": "policies/aml/kyc_basic_cdd/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/kyc_basic_cdd/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "aml.minimum_age",
+            "found": true,
+            "name": "Minimum age check",
+            "paths": [
+              {
+                "path": "policies/aml/minimum_age/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/minimum_age/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "aml.ubo_identification",
+            "found": true,
+            "name": "Ultimate Beneficial Owner identification",
+            "paths": [
+              {
+                "path": "policies/aml/ubo_identification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/ubo_identification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Article 18",
+        "title": "Enhanced due diligence",
+        "policies": [
+          {
+            "id": "aml.high_risk_country_edd",
+            "found": true,
+            "name": "Enhanced due diligence for high-risk countries",
+            "paths": [
+              {
+                "path": "policies/aml/high_risk_country_edd/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/high_risk_country_edd/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "aml.sanctions_check",
+            "found": true,
+            "name": "Sanctions list screening",
+            "paths": [
+              {
+                "path": "policies/aml/sanctions_check/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/sanctions_check/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Article 20",
+        "title": "PEP",
+        "policies": [
+          {
+            "id": "aml.pep_screening_required",
+            "found": true,
+            "name": "PEP screening required",
+            "paths": [
+              {
+                "path": "policies/aml/pep_screening_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/pep_screening_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Article 33",
+        "title": "Transaction monitoring",
+        "policies": [
+          {
+            "id": "aml.txn_monitoring_thresholds",
+            "found": true,
+            "name": "Transaction monitoring thresholds",
+            "paths": [
+              {
+                "path": "policies/aml/txn_monitoring_thresholds/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/aml/txn_monitoring_thresholds/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 8,
+      "total": 8
+    }
+  },
+  {
+    "regulation": "Betting (multi-jurisdiction)",
+    "version": "current",
+    "sections": [
+      {
+        "section": "1. Operator Controls",
+        "title": "Licensing, KYC and Core Controls",
+        "policies": [
+          {
+            "id": "betting.adr_provider_listed_uk",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/adr_provider_listed_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/adr_provider_listed_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.affordability_checks_uk",
+            "found": true,
+            "name": "Affordability Checks (UK)",
+            "paths": [
+              {
+                "path": "policies/betting/affordability_checks_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/affordability_checks_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.complaints_process_published",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/complaints_process_published/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/complaints_process_published/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.kyc_onboarding",
+            "found": true,
+            "name": "KYC Onboarding",
+            "paths": [
+              {
+                "path": "policies/betting/kyc_onboarding/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/kyc_onboarding/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.kyc_on_withdrawal",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/kyc_on_withdrawal/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/kyc_on_withdrawal/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_adm_it",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_adm_it/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_adm_it/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_anj_fr",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_anj_fr/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_anj_fr/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_au_nt",
+            "found": true,
+            "name": "License Check — AU Northern Territory",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_au_nt/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_au_nt/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_brazil_14790",
+            "found": true,
+            "name": "License Check — Brazil 14.790/2023",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_brazil_14790/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_brazil_14790/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_ca_on_igaming",
+            "found": true,
+            "name": "License Check — Ontario iGaming",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_ca_on_igaming/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_ca_on_igaming/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_coljuegos_co",
+            "found": true,
+            "name": "License Check — Coljuegos (CO)",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_coljuegos_co/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_coljuegos_co/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_dgoj_es",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_dgoj_es/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_dgoj_es/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_ggl_de",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_ggl_de/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_ggl_de/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_gra_sg",
+            "found": true,
+            "name": "License Check — GRA (SG)",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_gra_sg/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_gra_sg/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_ksa_nl",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_ksa_nl/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_ksa_nl/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_mga",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_mga/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_mga/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_spelinspektionen_se",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_spelinspektionen_se/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_spelinspektionen_se/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_spillemyndigheden_dk",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_spillemyndigheden_dk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_spillemyndigheden_dk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_ukgc",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_ukgc/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_ukgc/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_us_co_division",
+            "found": true,
+            "name": "License Check — CO Division",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_us_co_division/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_us_co_division/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_us_nj_dge",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_us_nj_dge/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_us_nj_dge/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_us_nv_ngcb",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_us_nv_ngcb/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_us_nv_ngcb/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_us_pa_pgcb",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_us_pa_pgcb/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_us_pa_pgcb/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.player_funds_segregation",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/player_funds_segregation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/player_funds_segregation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.source_of_funds_checks",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/source_of_funds_checks/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/source_of_funds_checks/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.source_of_funds_thresholds",
+            "found": true,
+            "name": "Source of Funds — Thresholds",
+            "paths": [
+              {
+                "path": "policies/betting/source_of_funds_thresholds/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/source_of_funds_thresholds/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.license_check_agco_on",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/license_check_agco_on/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/license_check_agco_on/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "2. Market Integrity",
+        "title": "Integrity, Data, and Youth Protection",
+        "policies": [
+          {
+            "id": "betting.ads_bonus_terms_fair_clear",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/ads_bonus_terms_fair_clear/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/ads_bonus_terms_fair_clear/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.ads_no_minors_targeting",
+            "found": true,
+            "name": "Ads — no minors targeting",
+            "paths": [
+              {
+                "path": "policies/betting/ads_no_minors_targeting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/ads_no_minors_targeting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.age_verification_before_gambling_uk",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/age_verification_before_gambling_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/age_verification_before_gambling_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.credit_card_gambling_ban_uk",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/credit_card_gambling_ban_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/credit_card_gambling_ban_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.data_integrity_audits",
+            "found": true,
+            "name": "Data Integrity Audits",
+            "paths": [
+              {
+                "path": "policies/betting/data_integrity_audits/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/data_integrity_audits/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.game_rules_visible_before_play",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/game_rules_visible_before_play/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/game_rules_visible_before_play/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.geofencing_regulated_markets",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/geofencing_regulated_markets/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/geofencing_regulated_markets/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.in_play_delay_controls",
+            "found": true,
+            "name": "In-Play Delay Controls",
+            "paths": [
+              {
+                "path": "policies/betting/in_play_delay_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/in_play_delay_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.market_restrictions_youth",
+            "found": true,
+            "name": "Market Restrictions — Youth/Underage",
+            "paths": [
+              {
+                "path": "policies/betting/market_restrictions_youth/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/market_restrictions_youth/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.match_fixing_monitoring",
+            "found": true,
+            "name": "Match-Fixing Monitoring",
+            "paths": [
+              {
+                "path": "policies/betting/match_fixing_monitoring/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/match_fixing_monitoring/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.no_bets_by_participants",
+            "found": true,
+            "name": "No Bets By Participants",
+            "paths": [
+              {
+                "path": "policies/betting/no_bets_by_participants/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/no_bets_by_participants/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.official_data_only",
+            "found": true,
+            "name": "Official Data Only",
+            "paths": [
+              {
+                "path": "policies/betting/official_data_only/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/official_data_only/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.reverse_withdrawal_ban_uk",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/reverse_withdrawal_ban_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/reverse_withdrawal_ban_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.rng_certification_gli11",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/rng_certification_gli11/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/rng_certification_gli11/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.rtp_disclosure_to_players",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/rtp_disclosure_to_players/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/rtp_disclosure_to_players/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.suspicious_betting_reporting_uk",
+            "found": true,
+            "name": "Suspicious Betting — Reporting (UK)",
+            "paths": [
+              {
+                "path": "policies/betting/suspicious_betting_reporting_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/suspicious_betting_reporting_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.slots_min_spin_speed_uk",
+            "found": true,
+            "name": "Slots Minimum Spin Speed (UK)",
+            "paths": [
+              {
+                "path": "policies/betting/slots_min_spin_speed_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/slots_min_spin_speed_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.slots_no_autoplay_uk",
+            "found": true,
+            "name": "Slots No Autoplay (UK)",
+            "paths": [
+              {
+                "path": "policies/betting/slots_no_autoplay_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/slots_no_autoplay_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.slots_no_losses_disguised_as_wins",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/slots_no_losses_disguised_as_wins/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/slots_no_losses_disguised_as_wins/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "3. AML Monitoring",
+        "title": "Ongoing Monitoring & Anomalies",
+        "policies": [
+          {
+            "id": "betting.aml_high_risk_country_restrictions",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/aml_high_risk_country_restrictions/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/aml_high_risk_country_restrictions/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.aml_sar_reporting_uk",
+            "found": true,
+            "name": "AML SAR Reporting (UK)",
+            "paths": [
+              {
+                "path": "policies/betting/aml_sar_reporting_uk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/aml_sar_reporting_uk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.ongoing_aml_monitoring",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/ongoing_aml_monitoring/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/ongoing_aml_monitoring/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.sanctions_screening_global",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/sanctions_screening_global/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/sanctions_screening_global/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.txn_monitoring_anomalies",
+            "found": true,
+            "name": "Transaction Monitoring — Anomalies",
+            "paths": [
+              {
+                "path": "policies/betting/txn_monitoring_anomalies/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/txn_monitoring_anomalies/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "4. Player Protection & Limits",
+        "title": "Player Protection & Limits",
+        "policies": [
+          {
+            "id": "betting.deposit_limit_controls",
+            "found": true,
+            "name": "Deposit Limit Controls",
+            "paths": [
+              {
+                "path": "policies/betting/deposit_limit_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/deposit_limit_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.loss_limit_controls",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/loss_limit_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/loss_limit_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.reality_checks_elapsed_time",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/reality_checks_elapsed_time/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/reality_checks_elapsed_time/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.safer_gambling_interactions",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/safer_gambling_interactions/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/safer_gambling_interactions/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_de_oasis",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_de_oasis/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_de_oasis/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_dk_rofus",
+            "found": true,
+            "name": "Self-exclusion (ROFUS - Denmark)",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_dk_rofus/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_dk_rofus/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_es_rgiaj",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_es_rgiaj/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_es_rgiaj/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_nl_cruks",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_nl_cruks/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_nl_cruks/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_se_spelpaus",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_se_spelpaus/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_se_spelpaus/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_uk_gamstop",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_uk_gamstop/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_uk_gamstop/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.session_time_limits_controls",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/session_time_limits_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/session_time_limits_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.self_exclusion_on_igaming",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/betting/self_exclusion_on_igaming/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/self_exclusion_on_igaming/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "betting.au_iga_no_prohibited_services",
+            "found": true,
+            "name": "AU IGA No Prohibited Services",
+            "paths": [
+              {
+                "path": "policies/betting/au_iga_no_prohibited_services/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/betting/au_iga_no_prohibited_services/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 64,
+      "total": 64
+    }
+  },
+  {
+    "regulation": "EdTech (multi-jurisdiction)",
+    "version": "current",
+    "sections": [
+      {
+        "section": "US Federal",
+        "title": "US Federal Student Privacy",
+        "policies": [
+          {
+            "id": "edtech.coppa_data_minimization",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/coppa_data_minimization/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/coppa_data_minimization/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.coppa_delete_on_parent_request",
+            "found": true,
+            "name": "COPPA Deletion on Parent Request",
+            "paths": [
+              {
+                "path": "policies/edtech/coppa_delete_on_parent_request/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/coppa_delete_on_parent_request/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.coppa_parental_consent_under_13",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/coppa_parental_consent_under_13/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/coppa_parental_consent_under_13/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ferpa_consent_or_exception_for_disclosure",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ferpa_consent_or_exception_for_disclosure/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ferpa_consent_or_exception_for_disclosure/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ferpa_directory_info_optout_respected",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ferpa_directory_info_optout_respected/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ferpa_directory_info_optout_respected/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ferpa_parent_access_rights",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ferpa_parent_access_rights/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ferpa_parent_access_rights/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ppra_parental_consent_sensitive_surveys",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ppra_parental_consent_sensitive_surveys/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ppra_parental_consent_sensitive_surveys/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "US States",
+        "title": "US State-Level Laws",
+        "policies": [
+          {
+            "id": "edtech.ca_sopipa_no_sale_of_student_data",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ca_sopipa_no_sale_of_student_data/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ca_sopipa_no_sale_of_student_data/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ca_sopipa_no_targeted_advertising",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ca_sopipa_no_targeted_advertising/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ca_sopipa_no_targeted_advertising/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.co_student_data_transparency",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/co_student_data_transparency/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/co_student_data_transparency/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ct_student_data_privacy",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ct_student_data_privacy/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ct_student_data_privacy/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.il_soppa_breach_notification",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/il_soppa_breach_notification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/il_soppa_breach_notification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ny_edlaw2d_encryption_and_contracts",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ny_edlaw2d_encryption_and_contracts/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ny_edlaw2d_encryption_and_contracts/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "International",
+        "title": "International and Non-US Regulations",
+        "policies": [
+          {
+            "id": "edtech.au_app_11_security_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/au_app_11_security_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/au_app_11_security_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.au_app_5_notice_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/au_app_5_notice_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/au_app_5_notice_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.au_ndb_breach_notification_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/au_ndb_breach_notification_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/au_ndb_breach_notification_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.br_lgpd_children_consent_best_interest",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/br_lgpd_children_consent_best_interest/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/br_lgpd_children_consent_best_interest/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.ca_pipeda_consent_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/ca_pipeda_consent_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/ca_pipeda_consent_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.eu_dpia_high_risk_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/eu_dpia_high_risk_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/eu_dpia_high_risk_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.eu_eprivacy_cookie_consent_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/eu_eprivacy_cookie_consent_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/eu_eprivacy_cookie_consent_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.eu_gdpr_minors_consent_education",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/eu_gdpr_minors_consent_education/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/eu_gdpr_minors_consent_education/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.eu_scc_transfers_edplatform",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/eu_scc_transfers_edplatform/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/eu_scc_transfers_edplatform/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.in_dpdpa_children_verifiable_consent",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/in_dpdpa_children_verifiable_consent/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/in_dpdpa_children_verifiable_consent/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.kr_pipa_guardian_consent_under_14",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/kr_pipa_guardian_consent_under_14/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/kr_pipa_guardian_consent_under_14/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.nz_notice_at_collection_edtech",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/nz_notice_at_collection_edtech/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/nz_notice_at_collection_edtech/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.uk_aadc_privacy_by_default",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/uk_aadc_privacy_by_default/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/uk_aadc_privacy_by_default/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.uk_aadc_profiling_and_geolocation_off",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/uk_aadc_profiling_and_geolocation_off/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/uk_aadc_profiling_and_geolocation_off/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Security & Ops",
+        "title": "Security and Operational Baseline",
+        "policies": [
+          {
+            "id": "edtech.edtech_access_least_privilege",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/edtech_access_least_privilege/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/edtech_access_least_privilege/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.edtech_audit_logs_student_record_access",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/edtech_audit_logs_student_record_access/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/edtech_audit_logs_student_record_access/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.edtech_encryption_at_rest",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/edtech_encryption_at_rest/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/edtech_encryption_at_rest/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.edtech_encryption_in_transit",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/edtech_encryption_in_transit/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/edtech_encryption_in_transit/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "edtech.edtech_retention_after_course_completion",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/edtech/edtech_retention_after_course_completion/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/edtech/edtech_retention_after_course_completion/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 32,
+      "total": 32
+    }
+  },
+  {
+    "regulation": "PSD2",
+    "version": "2015/2366",
+    "sections": [
+      {
+        "section": "SCA",
+        "title": "Strong Customer Authentication",
+        "policies": [
+          {
+            "id": "fintech.psd2_sca",
+            "found": true,
+            "name": "PSD2 SCA (Strong Customer Authentication)",
+            "paths": [
+              {
+                "path": "policies/fintech/psd2_sca/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/psd2_sca/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  {
+    "regulation": "RBI eKYC",
+    "version": "placeholder",
+    "sections": [
+      {
+        "section": "High-risk eKYC",
+        "title": "High-risk eKYC controls required",
+        "policies": [
+          {
+            "id": "fintech.rbi_ekyc_risk",
+            "found": true,
+            "name": "RBI eKYC — High-risk controls",
+            "paths": [
+              {
+                "path": "policies/fintech/rbi_ekyc_risk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/rbi_ekyc_risk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  {
+    "regulation": "Fintech Max",
+    "version": "2025-08-17",
+    "sections": [
+      {
+        "section": "AML/KYC Core",
+        "title": "Screening, risk, monitoring",
+        "policies": [
+          {
+            "id": "fintech.aml_account_freeze_on_hit",
+            "found": true,
+            "name": "AML Account Freeze On Sanctions Hit",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_account_freeze_on_hit/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_account_freeze_on_hit/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_adverse_media_screening",
+            "found": true,
+            "name": "AML Adverse Media Screening",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_adverse_media_screening/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_adverse_media_screening/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_customer_risk_tiering",
+            "found": true,
+            "name": "AML Customer Risk Tiering",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_customer_risk_tiering/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_customer_risk_tiering/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_duplicate_account_detection",
+            "found": true,
+            "name": "AML Duplicate Account Detection",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_duplicate_account_detection/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_duplicate_account_detection/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_geolocation_restrictions",
+            "found": true,
+            "name": "AML Geolocation Restrictions",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_geolocation_restrictions/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_geolocation_restrictions/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_ongoing_monitoring",
+            "found": true,
+            "name": "AML Ongoing Monitoring",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_ongoing_monitoring/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_ongoing_monitoring/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_pep_screening",
+            "found": true,
+            "name": "AML PEP Screening",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_pep_screening/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_pep_screening/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_risk_scoring_model",
+            "found": true,
+            "name": "AML Risk Scoring Model",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_risk_scoring_model/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_risk_scoring_model/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_sanctions_rescreening_frequency",
+            "found": true,
+            "name": "AML Sanctions Re-Screening Frequency",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_sanctions_rescreening_frequency/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_sanctions_rescreening_frequency/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_sanctions_screening",
+            "found": true,
+            "name": "AML Sanctions Screening",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_sanctions_screening/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_sanctions_screening/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_transaction_velocity_limits",
+            "found": true,
+            "name": "AML Transaction Velocity Limits",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_transaction_velocity_limits/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_transaction_velocity_limits/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_unusual_activity_alerting",
+            "found": true,
+            "name": "AML Unusual Activity Alerting",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_unusual_activity_alerting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_unusual_activity_alerting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_watchlist_management",
+            "found": true,
+            "name": "AML Watchlist Management",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_watchlist_management/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_watchlist_management/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_pep_periodic_review",
+            "found": true,
+            "name": "AML PEP Periodic Review",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_pep_periodic_review/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_pep_periodic_review/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.aml_manual_review_queue",
+            "found": true,
+            "name": "AML Manual Review Queue",
+            "paths": [
+              {
+                "path": "policies/fintech/aml_manual_review_queue/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/aml_manual_review_queue/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "KYC Process",
+        "title": "Identity verification & lifecycle",
+        "policies": [
+          {
+            "id": "fintech.kyc_biometric_liveness",
+            "found": true,
+            "name": "KYC Biometric Liveness",
+            "paths": [
+              {
+                "path": "policies/fintech/kyc_biometric_liveness/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/kyc_biometric_liveness/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.kyc_document_verification",
+            "found": true,
+            "name": "KYC Document Verification",
+            "paths": [
+              {
+                "path": "policies/fintech/kyc_document_verification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/kyc_document_verification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.kyc_reverification_schedule",
+            "found": true,
+            "name": "KYC Re-Verification Schedule",
+            "paths": [
+              {
+                "path": "policies/fintech/kyc_reverification_schedule/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/kyc_reverification_schedule/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.kyc_source_of_funds",
+            "found": true,
+            "name": "KYC Source of Funds",
+            "paths": [
+              {
+                "path": "policies/fintech/kyc_source_of_funds/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/kyc_source_of_funds/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.kyc_source_of_wealth",
+            "found": true,
+            "name": "KYC Source of Wealth",
+            "paths": [
+              {
+                "path": "policies/fintech/kyc_source_of_wealth/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/kyc_source_of_wealth/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Open Banking / PSD2",
+        "title": "SCA, exemptions, APIs and consent",
+        "policies": [
+          {
+            "id": "fintech.fapi_compliance",
+            "found": true,
+            "name": "FAPI Compliance",
+            "paths": [
+              {
+                "path": "policies/fintech/fapi_compliance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/fapi_compliance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_audit_logging",
+            "found": true,
+            "name": "Open Banking Audit Logging",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_audit_logging/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_audit_logging/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_consent_expiry_90d",
+            "found": true,
+            "name": "Open Banking Consent Expiry 90d",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_consent_expiry_90d/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_consent_expiry_90d/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_consent_revocation",
+            "found": true,
+            "name": "Open Banking Consent Revocation",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_consent_revocation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_consent_revocation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_data_minimization",
+            "found": true,
+            "name": "Open Banking Data Minimization",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_data_minimization/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_data_minimization/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_rate_limits",
+            "found": true,
+            "name": "Open Banking API Rate Limits",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_rate_limits/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_rate_limits/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ob_tpp_eidas_cert_validation",
+            "found": true,
+            "name": "Open Banking TPP eIDAS Validation",
+            "paths": [
+              {
+                "path": "policies/fintech/ob_tpp_eidas_cert_validation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ob_tpp_eidas_cert_validation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.psd2_sca_enforced",
+            "found": true,
+            "name": "PSD2 SCA Enforced",
+            "paths": [
+              {
+                "path": "policies/fintech/psd2_sca_enforced/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/psd2_sca_enforced/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.psd2_sca_exemptions_controls",
+            "found": true,
+            "name": "PSD2 SCA Exemptions Controls",
+            "paths": [
+              {
+                "path": "policies/fintech/psd2_sca_exemptions_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/psd2_sca_exemptions_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.psd2_transaction_risk_analysis",
+            "found": true,
+            "name": "PSD2 Transaction Risk Analysis",
+            "paths": [
+              {
+                "path": "policies/fintech/psd2_transaction_risk_analysis/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/psd2_transaction_risk_analysis/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.xs2a_api_security",
+            "found": true,
+            "name": "Open Banking XS2A API Security",
+            "paths": [
+              {
+                "path": "policies/fintech/xs2a_api_security/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/xs2a_api_security/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Auth & API Security",
+        "title": "Strong auth and secure APIs",
+        "policies": [
+          {
+            "id": "fintech.jwt_expiry_policy",
+            "found": true,
+            "name": "JWT Expiry Policy",
+            "paths": [
+              {
+                "path": "policies/fintech/jwt_expiry_policy/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/jwt_expiry_policy/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.mtls_required",
+            "found": true,
+            "name": "mTLS Required For APIs",
+            "paths": [
+              {
+                "path": "policies/fintech/mtls_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/mtls_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.oauth2_pkce_required",
+            "found": true,
+            "name": "OAuth2 PKCE Required",
+            "paths": [
+              {
+                "path": "policies/fintech/oauth2_pkce_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/oauth2_pkce_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.three_ds_required",
+            "found": true,
+            "name": "3DS Required",
+            "paths": [
+              {
+                "path": "policies/fintech/three_ds_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/three_ds_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "PCI / AppSec",
+        "title": "PCI DSS and application security controls",
+        "policies": [
+          {
+            "id": "fintech.pci_account_lockout",
+            "found": true,
+            "name": "PCI DSS — Account Lockout",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_account_lockout/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_account_lockout/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_default_passwords_changed",
+            "found": true,
+            "name": "PCI DSS — Default Passwords Changed",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_default_passwords_changed/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_default_passwords_changed/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_file_integrity_monitoring",
+            "found": true,
+            "name": "PCI DSS — File Integrity Monitoring",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_file_integrity_monitoring/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_file_integrity_monitoring/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_https_only",
+            "found": true,
+            "name": "PCI DSS — HTTPS Only",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_https_only/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_https_only/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_key_management",
+            "found": true,
+            "name": "PCI DSS — Key Management",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_key_management/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_key_management/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_log_retention",
+            "found": true,
+            "name": "PCI DSS — Log Retention",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_log_retention/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_log_retention/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_malware_protection",
+            "found": true,
+            "name": "PCI DSS — Malware Protection",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_malware_protection/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_malware_protection/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_mfa_required",
+            "found": true,
+            "name": "PCI DSS — MFA Required",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_mfa_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_mfa_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_network_segmentation",
+            "found": true,
+            "name": "PCI DSS — Network Segmentation",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_network_segmentation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_network_segmentation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_pan_masking_in_logs",
+            "found": true,
+            "name": "PCI DSS — PAN Masking in Logs",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_pan_masking_in_logs/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_pan_masking_in_logs/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_secure_coding_practices",
+            "found": true,
+            "name": "PCI DSS — Secure Coding Practices",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_secure_coding_practices/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_secure_coding_practices/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_session_timeout",
+            "found": true,
+            "name": "PCI DSS — Session Timeout",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_session_timeout/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_session_timeout/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_storage_encryption",
+            "found": true,
+            "name": "PCI DSS — Storage Encryption",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_storage_encryption/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_storage_encryption/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_tls_min_version",
+            "found": true,
+            "name": "PCI DSS — TLS Min Version",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_tls_min_version/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_tls_min_version/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pci_vulnerability_scanning",
+            "found": true,
+            "name": "PCI DSS — Vulnerability Scanning",
+            "paths": [
+              {
+                "path": "policies/fintech/pci_vulnerability_scanning/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pci_vulnerability_scanning/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Crypto / VASP",
+        "title": "Virtual asset service provider controls",
+        "policies": [
+          {
+            "id": "fintech.bitlicense_compliance",
+            "found": true,
+            "name": "NYDFS BitLicense Compliance",
+            "paths": [
+              {
+                "path": "policies/fintech/bitlicense_compliance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/bitlicense_compliance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.chain_analysis_risk_controls",
+            "found": true,
+            "name": "Blockchain Analytics Risk Controls",
+            "paths": [
+              {
+                "path": "policies/fintech/chain_analysis_risk_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/chain_analysis_risk_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.cold_storage_ratio",
+            "found": true,
+            "name": "Cold Storage Ratio",
+            "paths": [
+              {
+                "path": "policies/fintech/cold_storage_ratio/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/cold_storage_ratio/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.custody_asset_segregation",
+            "found": true,
+            "name": "Custody Asset Segregation",
+            "paths": [
+              {
+                "path": "policies/fintech/custody_asset_segregation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/custody_asset_segregation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.hot_wallet_limits",
+            "found": true,
+            "name": "Hot Wallet Limits",
+            "paths": [
+              {
+                "path": "policies/fintech/hot_wallet_limits/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/hot_wallet_limits/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.proof_of_reserves_reporting",
+            "found": true,
+            "name": "Proof of Reserves Reporting",
+            "paths": [
+              {
+                "path": "policies/fintech/proof_of_reserves_reporting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/proof_of_reserves_reporting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.stablecoin_reserve_ratio",
+            "found": true,
+            "name": "Stablecoin Reserve Ratio",
+            "paths": [
+              {
+                "path": "policies/fintech/stablecoin_reserve_ratio/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/stablecoin_reserve_ratio/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.travel_rule_compliance",
+            "found": true,
+            "name": "Travel Rule Compliance",
+            "paths": [
+              {
+                "path": "policies/fintech/travel_rule_compliance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/travel_rule_compliance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.vasp_license_required",
+            "found": true,
+            "name": "VASP License Required",
+            "paths": [
+              {
+                "path": "policies/fintech/vasp_license_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/vasp_license_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.withdrawal_address_whitelist",
+            "found": true,
+            "name": "Withdrawal Address Whitelist",
+            "paths": [
+              {
+                "path": "policies/fintech/withdrawal_address_whitelist/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/withdrawal_address_whitelist/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Fraud & Commerce",
+        "title": "Fraud prevention and payments hygiene",
+        "policies": [
+          {
+            "id": "fintech.card_tokenization_required",
+            "found": true,
+            "name": "Card Tokenization Required",
+            "paths": [
+              {
+                "path": "policies/fintech/card_tokenization_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/card_tokenization_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.chargeback_monitoring",
+            "found": true,
+            "name": "Chargeback Monitoring",
+            "paths": [
+              {
+                "path": "policies/fintech/chargeback_monitoring/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/chargeback_monitoring/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.device_fingerprinting",
+            "found": true,
+            "name": "Device Fingerprinting",
+            "paths": [
+              {
+                "path": "policies/fintech/device_fingerprinting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/device_fingerprinting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.fraud_velocity_checks",
+            "found": true,
+            "name": "Fraud Velocity Checks",
+            "paths": [
+              {
+                "path": "policies/fintech/fraud_velocity_checks/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/fraud_velocity_checks/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.geofencing_restricted_markets",
+            "found": true,
+            "name": "Geofencing Restricted Markets",
+            "paths": [
+              {
+                "path": "policies/fintech/geofencing_restricted_markets/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/geofencing_restricted_markets/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.ip_geolocation_consistency",
+            "found": true,
+            "name": "IP Geolocation Consistency",
+            "paths": [
+              {
+                "path": "policies/fintech/ip_geolocation_consistency/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/ip_geolocation_consistency/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.mcc_whitelisting",
+            "found": true,
+            "name": "MCC Whitelisting",
+            "paths": [
+              {
+                "path": "policies/fintech/mcc_whitelisting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/mcc_whitelisting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.pan_masking_in_logs",
+            "found": true,
+            "name": "PAN Masking In Logs",
+            "paths": [
+              {
+                "path": "policies/fintech/pan_masking_in_logs/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/pan_masking_in_logs/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "fintech.transaction_limits_per_risk",
+            "found": true,
+            "name": "Transaction Limits per Risk Tier",
+            "paths": [
+              {
+                "path": "policies/fintech/transaction_limits_per_risk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/transaction_limits_per_risk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 69,
+      "total": 69
+    }
+  },
+  {
+    "regulation": "US FinReg",
+    "version": "MTL",
+    "sections": [
+      {
+        "section": "State MTL",
+        "title": "Money Transmitter Licenses",
+        "policies": [
+          {
+            "id": "fintech.us_mtl_license",
+            "found": true,
+            "name": "US Money Transmitter Licensing (MTL)",
+            "paths": [
+              {
+                "path": "policies/fintech/us_mtl_license/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/fintech/us_mtl_license/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  {
+    "regulation": "GDPR",
+    "version": "2016/679",
+    "sections": [
+      {
+        "section": "Art.5(1)(c)",
+        "title": "Data minimization",
+        "policies": [
+          {
+            "id": "gdpr.data_minimization",
+            "found": true,
+            "name": "Data minimization",
+            "paths": [
+              {
+                "path": "policies/gdpr/data_minimization/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/gdpr/data_minimization/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Art.5(1)(e)",
+        "title": "Storage limitation",
+        "policies": [
+          {
+            "id": "gdpr.data_retention",
+            "found": true,
+            "name": "Storage limitation (data retention)",
+            "paths": [
+              {
+                "path": "policies/gdpr/data_retention/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/gdpr/data_retention/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Art.6",
+        "title": "Lawfulness of processing",
+        "policies": [
+          {
+            "id": "gdpr.consent_required",
+            "found": true,
+            "name": "Consent required",
+            "paths": [
+              {
+                "path": "policies/gdpr/consent_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/gdpr/consent_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 3,
+      "total": 3
+    }
+  },
+  {
+    "regulation": "iGaming (multi-jurisdiction)",
+    "version": "current",
+    "sections": [
+      {
+        "section": "Licensing",
+        "title": "Licensing checks (per regulator)",
+        "policies": [
+          {
+            "id": "igaming.license_check_adm_it",
+            "found": true,
+            "name": "License Check — ADM (IT)",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_adm_it/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_adm_it/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_anj_fr",
+            "found": true,
+            "name": "License Check — ANJ (FR)",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_anj_fr/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_anj_fr/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_dgoj_es",
+            "found": true,
+            "name": "License Check — DGOJ (ES)",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_dgoj_es/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_dgoj_es/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_ukgc",
+            "found": true,
+            "name": "License Check — UKGC",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_ukgc/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_ukgc/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_us_nj_dge",
+            "found": true,
+            "name": "License Check — NJ DGE",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_us_nj_dge/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_us_nj_dge/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_us_nv_ngcb",
+            "found": true,
+            "name": "License Check — NV NGCB",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_us_nv_ngcb/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_us_nv_ngcb/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.license_check_us_pa_pgcb",
+            "found": true,
+            "name": "License Check — PA PGCB",
+            "paths": [
+              {
+                "path": "policies/igaming/license_check_us_pa_pgcb/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/license_check_us_pa_pgcb/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Player Protection",
+        "title": "Responsible gambling controls",
+        "policies": [
+          {
+            "id": "igaming.deposit_limit_controls",
+            "found": true,
+            "name": "Deposit Limits — Controls",
+            "paths": [
+              {
+                "path": "policies/igaming/deposit_limit_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/deposit_limit_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "igaming.self_exclusion_uk_gamstop",
+            "found": true,
+            "name": "Self-Exclusion — GAMSTOP (UK)",
+            "paths": [
+              {
+                "path": "policies/igaming/self_exclusion_uk_gamstop/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/self_exclusion_uk_gamstop/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Market Access & Geo",
+        "title": "Regulated market geofencing",
+        "policies": [
+          {
+            "id": "igaming.geofencing_regulated_markets",
+            "found": true,
+            "name": "Geofencing — Regulated Markets Only",
+            "paths": [
+              {
+                "path": "policies/igaming/geofencing_regulated_markets/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/igaming/geofencing_regulated_markets/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 10,
+      "total": 10
+    }
+  },
+  {
+    "regulation": "Kubernetes Security Baseline",
+    "version": "v1",
+    "sections": [
+      {
+        "section": "Workload hardening",
+        "title": "Restrict privileged escalation and root",
+        "policies": [
+          {
+            "id": "k8s.no_privileged",
+            "found": true,
+            "name": "Disallow privileged pods",
+            "paths": [
+              {
+                "path": "addons/kyverno/policies/no-privileged.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/no_privileged/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/no_privileged/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "k8s.no_run_as_root",
+            "found": true,
+            "name": "Disallow running as root",
+            "paths": [
+              {
+                "path": "addons/k8s-gatekeeper/templates/no-run-as-root.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/no_run_as_root/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/no_run_as_root/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "k8s.limit_capabilities",
+            "found": true,
+            "name": "Limit container capabilities",
+            "paths": [
+              {
+                "path": "addons/k8s-gatekeeper/templates/limit-capabilities.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/limit_capabilities/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/limit_capabilities/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "k8s.ban_hostnetwork",
+            "found": true,
+            "name": "Disallow hostNetwork in Pods",
+            "paths": [
+              {
+                "path": "addons/k8s-gatekeeper/templates/ban-hostnetwork.yaml",
+                "exists": true
+              },
+              {
+                "path": "addons/k8s-gatekeeper/constraints/ban-hostnetwork.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/ban_hostnetwork/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/ban_hostnetwork/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "k8s.block_hostpath",
+            "found": true,
+            "name": "Block hostPath volumes",
+            "paths": [
+              {
+                "path": "addons/kyverno/policies/block-hostpath.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/block_hostpath/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/block_hostpath/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Image & supply chain",
+        "title": "Avoid mutable tags and ensure fresh images",
+        "policies": [
+          {
+            "id": "k8s.disallow_latest",
+            "found": true,
+            "name": "Disallow image tag latest",
+            "paths": [
+              {
+                "path": "addons/kyverno/policies/disallow-latest.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/disallow_latest/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/disallow_latest/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "k8s.require_imagepullpolicy_always",
+            "found": true,
+            "name": "Require imagePullPolicy: Always",
+            "paths": [
+              {
+                "path": "addons/k8s-gatekeeper/templates/require-imagepullpolicy-always.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/require_imagepullpolicy_always/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/require_imagepullpolicy_always/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Resource governance",
+        "title": "Enforce resource requests and limits",
+        "policies": [
+          {
+            "id": "k8s.require_resources",
+            "found": true,
+            "name": "Require resource requests/limits",
+            "paths": [
+              {
+                "path": "addons/kyverno/policies/require-resources.yaml",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/require_resources/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/k8s/require_resources/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 8,
+      "total": 8
+    }
+  },
+  {
+    "regulation": "LegalTech (multi-jurisdiction)",
+    "version": "current",
+    "sections": [
+      {
+        "section": "GDPR Core",
+        "title": "GDPR principles and data subject rights",
+        "policies": [
+          {
+            "id": "legaltech.gdpr_breach_72h",
+            "found": true,
+            "name": "GDPR: Breach 72H",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_breach_72h/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_breach_72h/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_consent_valid",
+            "found": true,
+            "name": "GDPR: Consent Valid",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_consent_valid/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_consent_valid/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_cookie_consent_eprivacy",
+            "found": true,
+            "name": "GDPR: Cookie Consent Eprivacy",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_cookie_consent_eprivacy/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_cookie_consent_eprivacy/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_data_minimization",
+            "found": true,
+            "name": "GDPR: Data Minimization",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_data_minimization/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_data_minimization/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_dpia_required_high_risk",
+            "found": true,
+            "name": "GDPR: Dpia Required High Risk",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_dpia_required_high_risk/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_dpia_required_high_risk/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_dsar_timeline_30d",
+            "found": true,
+            "name": "GDPR: DSAR Timeline 30D",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_dsar_timeline_30d/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_dsar_timeline_30d/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_lawful_basis_required",
+            "found": true,
+            "name": "GDPR: Lawful Basis Required",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_lawful_basis_required/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_lawful_basis_required/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_records_of_processing",
+            "found": true,
+            "name": "GDPR: Records Of Processing",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_records_of_processing/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_records_of_processing/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_retention_limit",
+            "found": true,
+            "name": "GDPR: Retention Limit",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_retention_limit/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_retention_limit/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.gdpr_transfer_scc",
+            "found": true,
+            "name": "GDPR: Transfer Scc",
+            "paths": [
+              {
+                "path": "policies/legaltech/gdpr_transfer_scc/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/gdpr_transfer_scc/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "US (CCPA/CPRA)",
+        "title": "California privacy (CCPA/CPRA)",
+        "policies": [
+          {
+            "id": "legaltech.ccpa_notice_at_collection",
+            "found": true,
+            "name": "CCPA: Notice At Collection",
+            "paths": [
+              {
+                "path": "policies/legaltech/ccpa_notice_at_collection/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ccpa_notice_at_collection/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.ccpa_opt_out_enabled",
+            "found": true,
+            "name": "CCPA: Opt Out Enabled",
+            "paths": [
+              {
+                "path": "policies/legaltech/ccpa_opt_out_enabled/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ccpa_opt_out_enabled/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.ccpa_verification_of_requests",
+            "found": true,
+            "name": "CCPA: Verification Of Requests",
+            "paths": [
+              {
+                "path": "policies/legaltech/ccpa_verification_of_requests/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ccpa_verification_of_requests/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.cpra_sensitive_data_limited_use",
+            "found": true,
+            "name": "CPRA: Sensitive Data Limited Use",
+            "paths": [
+              {
+                "path": "policies/legaltech/cpra_sensitive_data_limited_use/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/cpra_sensitive_data_limited_use/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Security Controls",
+        "title": "Technical and organizational measures",
+        "policies": [
+          {
+            "id": "legaltech.data_residency_requirements_enforced",
+            "found": true,
+            "name": "Data Residency Requirements Enforced",
+            "paths": [
+              {
+                "path": "policies/legaltech/data_residency_requirements_enforced/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/data_residency_requirements_enforced/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.encryption_at_rest_enabled",
+            "found": true,
+            "name": "Encryption At Rest Enabled",
+            "paths": [
+              {
+                "path": "policies/legaltech/encryption_at_rest_enabled/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/encryption_at_rest_enabled/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.encryption_in_transit_enabled",
+            "found": true,
+            "name": "Encryption In Transit Enabled",
+            "paths": [
+              {
+                "path": "policies/legaltech/encryption_in_transit_enabled/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/encryption_in_transit_enabled/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.popia_za_security_measures",
+            "found": true,
+            "name": "POPIA: ZA Security Measures",
+            "paths": [
+              {
+                "path": "policies/legaltech/popia_za_security_measures/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/popia_za_security_measures/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Records & eDiscovery",
+        "title": "Records governance and eDiscovery",
+        "policies": [
+          {
+            "id": "legaltech.ch_fadp_records_of_processing",
+            "found": true,
+            "name": "Ch FADP Records Of Processing",
+            "paths": [
+              {
+                "path": "policies/legaltech/ch_fadp_records_of_processing/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ch_fadp_records_of_processing/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.ediscovery_frcp_26_34_37",
+            "found": true,
+            "name": "eDiscovery — FRCP 26/34/37",
+            "paths": [
+              {
+                "path": "policies/legaltech/ediscovery_frcp_26_34_37/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ediscovery_frcp_26_34_37/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.legal_hold_no_delete_enforced",
+            "found": true,
+            "name": "Legal Hold No Delete Enforced",
+            "paths": [
+              {
+                "path": "policies/legaltech/legal_hold_no_delete_enforced/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/legal_hold_no_delete_enforced/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.records_classification_scheme_applied",
+            "found": true,
+            "name": "Records Classification Scheme Applied",
+            "paths": [
+              {
+                "path": "policies/legaltech/records_classification_scheme_applied/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/records_classification_scheme_applied/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Cross-border Transfers",
+        "title": "International data transfers",
+        "policies": [
+          {
+            "id": "legaltech.id_pdp_cross_border_transfer",
+            "found": true,
+            "name": "ID: Pdp Cross Border Transfer",
+            "paths": [
+              {
+                "path": "policies/legaltech/id_pdp_cross_border_transfer/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/id_pdp_cross_border_transfer/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.pipl_cn_cross_border_assessment",
+            "found": true,
+            "name": "PIPL: CN Cross Border Assessment",
+            "paths": [
+              {
+                "path": "policies/legaltech/pipl_cn_cross_border_assessment/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/pipl_cn_cross_border_assessment/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Children & Minors",
+        "title": "Child-specific consent and protections",
+        "policies": [
+          {
+            "id": "legaltech.uk_gdpr_minor_consent",
+            "found": true,
+            "name": "UK: GDPR Minor Consent",
+            "paths": [
+              {
+                "path": "policies/legaltech/uk_gdpr_minor_consent/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/uk_gdpr_minor_consent/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Country-specific",
+        "title": "National privacy laws",
+        "policies": [
+          {
+            "id": "legaltech.ca_qc_law25_privacy_governance",
+            "found": true,
+            "name": "Ca QC Law25 Privacy Governance",
+            "paths": [
+              {
+                "path": "policies/legaltech/ca_qc_law25_privacy_governance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ca_qc_law25_privacy_governance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.au_app_notice_at_collection",
+            "found": true,
+            "name": "AU: APP Notice At Collection",
+            "paths": [
+              {
+                "path": "policies/legaltech/au_app_notice_at_collection/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/au_app_notice_at_collection/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.ae_pdpl_consent_notice",
+            "found": true,
+            "name": "AE: PDPL Consent Notice",
+            "paths": [
+              {
+                "path": "policies/legaltech/ae_pdpl_consent_notice/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/ae_pdpl_consent_notice/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.kr_pipa_breach_notification",
+            "found": true,
+            "name": "KR: Pipa Breach Notification",
+            "paths": [
+              {
+                "path": "policies/legaltech/kr_pipa_breach_notification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/kr_pipa_breach_notification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.lgpd_brazil_compliance",
+            "found": true,
+            "name": "LGPD: Brazil Compliance",
+            "paths": [
+              {
+                "path": "policies/legaltech/lgpd_brazil_compliance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/lgpd_brazil_compliance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.mx_lfpdppp_notice_at_collection",
+            "found": true,
+            "name": "MX: LFPDPPP Notice At Collection",
+            "paths": [
+              {
+                "path": "policies/legaltech/mx_lfpdppp_notice_at_collection/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/mx_lfpdppp_notice_at_collection/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.my_pdpa_retention_principle",
+            "found": true,
+            "name": "MY: PDPA Retention Principle",
+            "paths": [
+              {
+                "path": "policies/legaltech/my_pdpa_retention_principle/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/my_pdpa_retention_principle/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.nz_breach_notification",
+            "found": true,
+            "name": "NZ: Breach Notification",
+            "paths": [
+              {
+                "path": "policies/legaltech/nz_breach_notification/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/nz_breach_notification/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.pdpa_sg_consent_purposes",
+            "found": true,
+            "name": "PDPA: SG Consent Purposes",
+            "paths": [
+              {
+                "path": "policies/legaltech/pdpa_sg_consent_purposes/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/pdpa_sg_consent_purposes/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.pipeda_ca_consent",
+            "found": true,
+            "name": "PIPEDA: Ca Consent",
+            "paths": [
+              {
+                "path": "policies/legaltech/pipeda_ca_consent/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/pipeda_ca_consent/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.sa_pdpl_breach_notify",
+            "found": true,
+            "name": "SA: PDPL Breach Notify",
+            "paths": [
+              {
+                "path": "policies/legaltech/sa_pdpl_breach_notify/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/sa_pdpl_breach_notify/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.th_pdpa_breach_notify",
+            "found": true,
+            "name": "Th PDPA Breach Notify",
+            "paths": [
+              {
+                "path": "policies/legaltech/th_pdpa_breach_notify/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/th_pdpa_breach_notify/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.tr_kvkk_verbis_registration",
+            "found": true,
+            "name": "TR: KVKK VERBIS Registration",
+            "paths": [
+              {
+                "path": "policies/legaltech/tr_kvkk_verbis_registration/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/tr_kvkk_verbis_registration/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "legaltech.vn_pdpd_notice_and_consent",
+            "found": true,
+            "name": "Vn Pdpd Notice And Consent",
+            "paths": [
+              {
+                "path": "policies/legaltech/vn_pdpd_notice_and_consent/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/vn_pdpd_notice_and_consent/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Professional Conduct",
+        "title": "Legal ethics and confidentiality",
+        "policies": [
+          {
+            "id": "legaltech.aba_model_rule_1_6_confidentiality",
+            "found": true,
+            "name": "ABA Model Rule 1.6 — Confidentiality",
+            "paths": [
+              {
+                "path": "policies/legaltech/aba_model_rule_1_6_confidentiality/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/legaltech/aba_model_rule_1_6_confidentiality/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 40,
+      "total": 40
+    }
+  },
+  {
+    "regulation": "MedTech (multi-jurisdiction)",
+    "version": "current",
+    "sections": [
+      {
+        "section": "HIPAA (US)",
+        "title": "HIPAA Security, Privacy, and Administrative Safeguards",
+        "policies": [
+          {
+            "id": "medtech.hipaa_access_audit_logging",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_access_audit_logging/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_access_audit_logging/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.hipaa_baa_with_vendors",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_baa_with_vendors/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_baa_with_vendors/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.hipaa_mfa_privileged_access",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_mfa_privileged_access/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_mfa_privileged_access/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.hipaa_minimum_necessary",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_minimum_necessary/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_minimum_necessary/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.hipaa_security_admin_safeguards",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_security_admin_safeguards/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_security_admin_safeguards/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.hipaa_security_tech_encryption",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hipaa_security_tech_encryption/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hipaa_security_tech_encryption/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "HITECH (US)",
+        "title": "HITECH Act Requirements",
+        "policies": [
+          {
+            "id": "medtech.hitech_breach_notification_60d",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/hitech_breach_notification_60d/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/hitech_breach_notification_60d/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "FDA (US) — Part 11 and MDR",
+        "title": "FDA 21 CFR Part 11 and Medical Device Reporting (MDR)",
+        "policies": [
+          {
+            "id": "medtech.fda_cybersecurity_524b_sbom",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fda_cybersecurity_524b_sbom/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fda_cybersecurity_524b_sbom/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.fda_mdr_event_reporting",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fda_mdr_event_reporting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fda_mdr_event_reporting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.fda_part11_audit_trail",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fda_part11_audit_trail/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fda_part11_audit_trail/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.fda_part11_esign_linkage",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fda_part11_esign_linkage/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fda_part11_esign_linkage/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.fda_part11_system_validation",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fda_part11_system_validation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fda_part11_system_validation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "EU MDR/IVDR (EU)",
+        "title": "EU Medical Device and IVD Regulations",
+        "policies": [
+          {
+            "id": "medtech.eu_ivdr_clinical_performance",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_ivdr_clinical_performance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_ivdr_clinical_performance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.eu_mdr_ce_marking_and_udi",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_mdr_ce_marking_and_udi/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_mdr_ce_marking_and_udi/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.eu_mdr_clinical_evaluation",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_mdr_clinical_evaluation/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_mdr_clinical_evaluation/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.eu_mdr_eudamed_registration",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_mdr_eudamed_registration/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_mdr_eudamed_registration/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.eu_mdr_pms_psur",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_mdr_pms_psur/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_mdr_pms_psur/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.eu_vigilance_incident_reporting",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/eu_vigilance_incident_reporting/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/eu_vigilance_incident_reporting/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "ONC (US)",
+        "title": "21st Century Cures (ONC) and Information Blocking",
+        "policies": [
+          {
+            "id": "medtech.onc_cures_api_fhir_r4",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/onc_cures_api_fhir_r4/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/onc_cures_api_fhir_r4/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.onc_information_blocking_prohibited",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/onc_information_blocking_prohibited/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/onc_information_blocking_prohibited/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Data Protection & Cross-border",
+        "title": "GDPR Article 9 and Cross-border Transfers",
+        "policies": [
+          {
+            "id": "medtech.gdpr_art9_special_category_safeguards",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/gdpr_art9_special_category_safeguards/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/gdpr_art9_special_category_safeguards/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.health_data_cross_border_controls",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/health_data_cross_border_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/health_data_cross_border_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Standards (ISO/IEC)",
+        "title": "ISO/IEC QMS, Risk, Software Lifecycle, Usability, ISMS",
+        "policies": [
+          {
+            "id": "medtech.iec_62304_scm_prp_processes",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iec_62304_scm_prp_processes/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iec_62304_scm_prp_processes/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.iec_62304_software_safety_class",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iec_62304_software_safety_class/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iec_62304_software_safety_class/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.iec_62366_usability_summative_eval",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iec_62366_usability_summative_eval/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iec_62366_usability_summative_eval/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.iso_13485_document_control",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iso_13485_document_control/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iso_13485_document_control/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.iso_14971_risk_management_file",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iso_14971_risk_management_file/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iso_14971_risk_management_file/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.iso_27001_isms_scope_and_controls",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/iso_27001_isms_scope_and_controls/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/iso_27001_isms_scope_and_controls/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Technical & Operational Controls",
+        "title": "Operational and Technical Controls",
+        "policies": [
+          {
+            "id": "medtech.backup_and_recovery_rto_rpo",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/backup_and_recovery_rto_rpo/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/backup_and_recovery_rto_rpo/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.device_data_integrity_hashing",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/device_data_integrity_hashing/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/device_data_integrity_hashing/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.dicom_network_security_basic",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/dicom_network_security_basic/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/dicom_network_security_basic/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.fhir_smart_app_authz",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/fhir_smart_app_authz/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/fhir_smart_app_authz/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.log_retention_for_clinical_events",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/log_retention_for_clinical_events/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/log_retention_for_clinical_events/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Country/Region-specific",
+        "title": "National and Regional Healthcare Regulations",
+        "policies": [
+          {
+            "id": "medtech.au_myr_health_privacy",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/au_myr_health_privacy/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/au_myr_health_privacy/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.ca_phipa_health_data",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/ca_phipa_health_data/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/ca_phipa_health_data/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.sg_hcsa_pdpa_health_data",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/sg_hcsa_pdpa_health_data/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/sg_hcsa_pdpa_health_data/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.uk_dtac_compliance",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/uk_dtac_compliance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/uk_dtac_compliance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "medtech.uk_mhra_post_market_surveillance",
+            "found": true,
+            "name": "<Policy Title>",
+            "paths": [
+              {
+                "path": "policies/medtech/uk_mhra_post_market_surveillance/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/medtech/uk_mhra_post_market_surveillance/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 38,
+      "total": 38
+    }
+  },
+  {
+    "regulation": "PCI DSS",
+    "version": "4.0",
+    "sections": [
+      {
+        "section": "3.4",
+        "title": "Protect stored cardholder data",
+        "policies": [
+          {
+            "id": "pci.ebs_encryption",
+            "found": true,
+            "name": "EBS volume encryption enabled",
+            "paths": [
+              {
+                "path": "policies/pci/ebs_encryption/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/pci/ebs_encryption/policy_test.rego",
+                "exists": true
+              }
+            ]
+          },
+          {
+            "id": "pci.storage_encryption",
+            "found": true,
+            "name": "Encrypt stored cardholder data",
+            "paths": [
+              {
+                "path": "policies/pci/storage_encryption/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/pci/storage_encryption/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "4.2",
+        "title": "Use strong cryptography for transmission",
+        "policies": [
+          {
+            "id": "pci.https_only",
+            "found": true,
+            "name": "Enforce HTTPS only",
+            "paths": [
+              {
+                "path": "policies/pci/https_only/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/pci/https_only/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "8.2",
+        "title": "Strong authentication",
+        "policies": [
+          {
+            "id": "pci.iam_password_policy",
+            "found": true,
+            "name": "Strong password policy",
+            "paths": [
+              {
+                "path": "policies/pci/iam_password_policy/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/pci/iam_password_policy/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "10.2",
+        "title": "Logging & monitoring",
+        "policies": [
+          {
+            "id": "pci.logging_enabled",
+            "found": true,
+            "name": "Logging enabled",
+            "paths": [
+              {
+                "path": "policies/pci/logging_enabled/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/pci/logging_enabled/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section": "12.10",
+        "title": "Incident response monitoring",
+        "policies": []
+      }
+    ],
+    "totals": {
+      "covered": 5,
+      "total": 5
+    }
+  },
+  {
+    "regulation": "AU iGaming Hosting",
+    "version": "placeholder",
+    "sections": [
+      {
+        "section": "Audit",
+        "title": "Audit trails & secure hosting",
+        "policies": [
+          {
+            "id": "rg.au_audit_trails",
+            "found": true,
+            "name": "AU — Audit trails & secure hosting controls",
+            "paths": [
+              {
+                "path": "policies/rg/au_audit_trails/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/rg/au_audit_trails/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  {
+    "regulation": "UKGC/MGA",
+    "version": "placeholder",
+    "sections": [
+      {
+        "section": "RG-1",
+        "title": "Self-exclusion controls",
+        "policies": [
+          {
+            "id": "rg.self_exclusion_enforced",
+            "found": true,
+            "name": "Responsible Gambling — Self-exclusion enforced",
+            "paths": [
+              {
+                "path": "policies/rg/self_exclusion_enforced/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/rg/self_exclusion_enforced/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  },
+  {
+    "regulation": "UIGEA",
+    "version": "31 USC 5361",
+    "sections": [
+      {
+        "section": "Payments",
+        "title": "Payment blocks for unlawful internet gambling",
+        "policies": [
+          {
+            "id": "rg.uigea_payment_blocks",
+            "found": true,
+            "name": "UIGEA — Payment blocks",
+            "paths": [
+              {
+                "path": "policies/rg/uigea_payment_blocks/policy.rego",
+                "exists": true
+              },
+              {
+                "path": "policies/rg/uigea_payment_blocks/policy_test.rego",
+                "exists": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "covered": 1,
+      "total": 1
+    }
+  }
+]
