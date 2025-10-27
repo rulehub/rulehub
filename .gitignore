@@ -65,7 +65,6 @@ wheelhouse/
 ### Packaging / distribution
 dist/*
 !dist/index.json
-!dist/references-index.json
 dist/*.sig
 dist/*.cert
 dist/*.pem
