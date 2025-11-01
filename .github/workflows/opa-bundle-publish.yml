@@ -84,7 +84,7 @@ jobs:
       skip_supplychain: ${{ steps.flags.outputs.skip }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
 
       # Python is provided by the CI container image
 
@@ -363,7 +363,7 @@ jobs:
       packages: read
     steps:
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
 
       - name: Prepare Python env (venv with baked deps)
         run: |

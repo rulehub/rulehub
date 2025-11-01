@@ -93,7 +93,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           fetch-depth: 0
       - name: Compute change flags
@@ -142,7 +142,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       # Node & Python are provided by the CI container image
       - name: Prepare Python env (venv with baked deps)
         run: |
@@ -171,7 +171,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Record start time
         run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
       # Node & Python are provided by the CI container image
@@ -209,7 +209,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Record start time
         run: echo "JOB_STARTED_TS=$(date +%s)" >> $GITHUB_ENV
       # Node & Python are provided by the CI container image
@@ -247,7 +247,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       # Node & Python are provided by the CI container image
       - name: Prepare Python env (venv with baked deps)
         run: |
@@ -274,7 +274,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       # Ensure Python deps installed in venv before enforcing thresholds
       - name: Enforce thresholds (dual-direction 100%, no multi-rule gaps)
         run: bash .github/scripts/enforce-policy-thresholds.sh
