@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       - name: Enforce non-latest CI image tag
         shell: bash
         env:
@@ -42,7 +42,7 @@ jobs:
       tag: ${{ steps.r.outputs.tag }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [guard, resolve]
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       - name: Prepare classification runtime (Python already on runner)
         run: |
           python3 --version || true
@@ -113,7 +113,7 @@ jobs:
       LYCHEE_TIMEOUT_SEC: "15"
       LYCHEE_RETRIES: "1"
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       - name: Prepare classification runtime (Python already on runner)
         run: |
           python3 --version || true

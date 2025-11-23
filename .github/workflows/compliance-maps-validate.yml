@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Checkout (required for local composite actions)
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
 
       - name: Resolve CI image tag and ref
         id: resolve
@@ -76,7 +76,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
 
       - name: Prepare Python env (venv with baked deps)
         run: |
