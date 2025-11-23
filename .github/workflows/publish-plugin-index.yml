@@ -51,7 +51,7 @@ jobs:
                   shasum -a 256 dist/index.json | awk '{print $1}' > dist/index.json.sha256
 
             - name: Upload artifact (plugin-index dist)
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                   name: plugin-index-dist
                   if-no-files-found: error
