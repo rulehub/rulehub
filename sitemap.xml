@@ -2,106 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://rulehub.github.io/rulehub/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/build-info/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/ci-security/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/compliance-maps/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/coverage/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/documentation-index/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/editorial-checklist/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/getting-started/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/k8s-policies/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/link-quality/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/metadata/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/opa-bundle-format/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/opa-bundle-usage/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/performance/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/plugin-index/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/policy-architecture/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/policy-test-quality/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/policy-title-sync-plan/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/references-index/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/release-guide/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/release-runbook/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/release-versioning/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/security-integrity/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/security-provenance/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/security-threat-model/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
     <url>
          <loc>https://rulehub.github.io/rulehub/integrity/plugin_index_validation/</loc>
-         <lastmod>2025-12-09</lastmod>
+         <lastmod>2025-12-14</lastmod>
     </url>
 </urlset>
