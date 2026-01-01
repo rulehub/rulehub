@@ -25,7 +25,7 @@ jobs:
       is_act: ${{ steps.detect.outputs.is_act }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
@@ -51,7 +51,7 @@ jobs:
       tag: ${{ steps.r.outputs.tag }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -70,7 +70,7 @@ jobs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Try anonymous pull (ci-policy)
         id: probe
         shell: bash
@@ -97,7 +97,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           fetch-depth: 0
 
@@ -123,7 +123,7 @@ jobs:
     if: ${{ needs.guard.outputs.is_act == 'true' || needs.probe-ghcr.outputs.can_pull != 'true' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Setup OPA (host)
         run: |
           set -euo pipefail

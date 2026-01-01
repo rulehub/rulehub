@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -74,7 +74,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
 
       - name: Install dependencies (venv with baked deps)
         run: |
