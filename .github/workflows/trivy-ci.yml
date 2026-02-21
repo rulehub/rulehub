@@ -29,7 +29,7 @@ jobs:
       CI_IMAGE_TAG: ${{ inputs.ci_image_tag != '' && inputs.ci_image_tag || vars.CI_IMAGE_TAG || '' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Enforce non-latest CI image tag
         shell: bash
         run: bash .github/scripts/guard-ci-image-tag.sh "${{ inputs.ci_image_tag }}"
@@ -45,7 +45,7 @@ jobs:
       tag: ${{ steps.r.outputs.tag }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Resolve image
         id: r
         uses: ./.github/actions/resolve-ci-image
@@ -64,7 +64,7 @@ jobs:
       can_pull: ${{ steps.probe.outputs.can_pull }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Try anonymous pull (ci-base)
         id: probe
         shell: bash
@@ -90,7 +90,7 @@ jobs:
       packages: read
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
 
       - name: Trivy IaC via Docker (produce SARIF)
         id: trivy_iac
@@ -138,7 +138,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
 
       - name: Trivy IaC via Docker (produce SARIF)
         id: trivy_iac
@@ -158,7 +158,7 @@ jobs:
       security-events: write
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Trivy IaC (host) produce SARIF
         env:
           TRIVY_VERSION: 0.56.2

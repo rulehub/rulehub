@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Enforce non-latest CI image tag
         shell: bash
         env:
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Resolve CI image tag and ref
         id: resolve
         uses: ./.github/actions/resolve-ci-image
@@ -68,7 +68,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ env.ACT != 'true' }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Login to GHCR (read-only)
         env:
           GHCR_USER: ${{ github.actor }}
@@ -102,7 +102,7 @@ jobs:
       actions: write
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Login to GHCR (read-only)
         env:
           GHCR_USER: ${{ github.actor }}
